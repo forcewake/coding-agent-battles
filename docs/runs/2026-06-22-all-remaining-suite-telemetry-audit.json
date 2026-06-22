@@ -1,0 +1,352 @@
+[
+  {
+    "scenario": "BB-002",
+    "agent": "opencode",
+    "tokens": 105968,
+    "cost": 0.034981,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-002",
+    "agent": "claude-code",
+    "tokens": 158158,
+    "cost": 0.079108,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-002",
+    "agent": "mimo",
+    "tokens": 212952,
+    "cost": 0.075279,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-002",
+    "agent": "pi",
+    "tokens": 25482,
+    "cost": 0.030214,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-002",
+    "agent": "codex-cli",
+    "tokens": 163324,
+    "cost": 0.34516,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-004",
+    "agent": "opencode",
+    "tokens": 103515,
+    "cost": 0.062082,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-004",
+    "agent": "claude-code",
+    "tokens": 169366,
+    "cost": 0.085769,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-004",
+    "agent": "mimo",
+    "tokens": 227270,
+    "cost": 0.094997,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-004",
+    "agent": "pi",
+    "tokens": 62200,
+    "cost": 0.059673,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-004",
+    "agent": "codex-cli",
+    "tokens": 327859,
+    "cost": 0.757551,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-005",
+    "agent": "opencode",
+    "tokens": 53635,
+    "cost": 0.023405,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-005",
+    "agent": "claude-code",
+    "tokens": 153526,
+    "cost": 0.050461,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-005",
+    "agent": "mimo",
+    "tokens": 128828,
+    "cost": 0.041709,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-005",
+    "agent": "pi",
+    "tokens": 34046,
+    "cost": 0.01722,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-005",
+    "agent": "codex-cli",
+    "tokens": 252306,
+    "cost": 0.400477,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-006",
+    "agent": "opencode",
+    "tokens": 51697,
+    "cost": 0.028494,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-006",
+    "agent": "claude-code",
+    "tokens": 175075,
+    "cost": 0.054023,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-006",
+    "agent": "mimo",
+    "tokens": 167589,
+    "cost": 0.050855,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-006",
+    "agent": "pi",
+    "tokens": 16631,
+    "cost": 0.008967,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-006",
+    "agent": "codex-cli",
+    "tokens": 204192,
+    "cost": 0.260009,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-007",
+    "agent": "opencode",
+    "tokens": 64976,
+    "cost": 0.026777,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-007",
+    "agent": "claude-code",
+    "tokens": 183359,
+    "cost": 0.088476,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-007",
+    "agent": "mimo",
+    "tokens": 191087,
+    "cost": 0.059777,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-007",
+    "agent": "pi",
+    "tokens": 40117,
+    "cost": 0.025923,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-007",
+    "agent": "codex-cli",
+    "tokens": 176231,
+    "cost": 0.41806,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-008",
+    "agent": "opencode",
+    "tokens": 86204,
+    "cost": 0.035012,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-008",
+    "agent": "claude-code",
+    "tokens": 124808,
+    "cost": 0.060092,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-008",
+    "agent": "mimo",
+    "tokens": 187931,
+    "cost": 0.055319,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-008",
+    "agent": "pi",
+    "tokens": 22078,
+    "cost": 0.011694,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-008",
+    "agent": "codex-cli",
+    "tokens": 233649,
+    "cost": 0.356317,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-009",
+    "agent": "opencode",
+    "tokens": 87637,
+    "cost": 0.030313,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-009",
+    "agent": "claude-code",
+    "tokens": 153562,
+    "cost": 0.052263,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-009",
+    "agent": "mimo",
+    "tokens": 283029,
+    "cost": 0.097538,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-009",
+    "agent": "pi",
+    "tokens": 19534,
+    "cost": 0.013878,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-009",
+    "agent": "codex-cli",
+    "tokens": 197851,
+    "cost": 0.438998,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-010",
+    "agent": "opencode",
+    "tokens": 81296,
+    "cost": 0.033141,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-010",
+    "agent": "claude-code",
+    "tokens": 157352,
+    "cost": 0.076082,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-010",
+    "agent": "mimo",
+    "tokens": 218039,
+    "cost": 0.073111,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-010",
+    "agent": "pi",
+    "tokens": 22809,
+    "cost": 0.019299,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-010",
+    "agent": "codex-cli",
+    "tokens": 284455,
+    "cost": 0.496041,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-011",
+    "agent": "opencode",
+    "tokens": 53112,
+    "cost": 0.020773,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-011",
+    "agent": "claude-code",
+    "tokens": 177821,
+    "cost": 0.056421,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-011",
+    "agent": "mimo",
+    "tokens": 190265,
+    "cost": 0.05813,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-011",
+    "agent": "pi",
+    "tokens": 30285,
+    "cost": 0.012942,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-011",
+    "agent": "codex-cli",
+    "tokens": 204368,
+    "cost": 0.400817,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  },
+  {
+    "scenario": "BB-012",
+    "agent": "opencode",
+    "tokens": 55799,
+    "cost": 0.023785,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-012",
+    "agent": "claude-code",
+    "tokens": 126638,
+    "cost": 0.042389,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-012",
+    "agent": "mimo",
+    "tokens": 213715,
+    "cost": 0.065665,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-012",
+    "agent": "pi",
+    "tokens": 38848,
+    "cost": 0.015392,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-012",
+    "agent": "codex-cli",
+    "tokens": 167667,
+    "cost": 0.424154,
+    "strategy": "ccusage_codex_session_exact_log_session_id"
+  }
+]

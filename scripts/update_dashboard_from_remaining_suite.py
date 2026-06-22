@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 from collections import defaultdict
 from pathlib import Path
 
@@ -247,3 +248,6 @@ update_site_data(new)
 write_scenario_pages(new)
 patch_home_copy()
 print('wrote reports and dashboard for', len(new), 'new scenarios')
+telemetry_script = ROOT / "scripts" / "extract_bulk_telemetry.py"
+if telemetry_script.exists():
+    subprocess.run(["python", str(telemetry_script)], cwd=ROOT, check=True)

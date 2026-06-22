@@ -8,7 +8,7 @@
   "passCount": 6,
   "agentCount": 6,
   "fastest": "claude-code",
-  "cheapest": null,
+  "cheapest": "pi",
   "processBest": "opencode",
   "agents": [
     {
@@ -18,14 +18,25 @@
       "model": "glm-5.2",
       "verdict": "PASS",
       "wall": 42.59,
-      "tokens": null,
-      "cost": null,
+      "tokens": 86204,
+      "cost": 0.035012,
       "patch": 100,
       "process": 90,
       "red": true,
       "smoke": true,
       "agentExit": 0,
-      "verifyExit": 0
+      "verifyExit": 0,
+      "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+      "telemetry_source": "ccusage opencode session + opencode.log exact directory/session id",
+      "token_breakdown": {
+        "input": 9131,
+        "cache_read": 76544,
+        "cache_creation": 0,
+        "output": 504,
+        "reasoning": 0
+      },
+      "vendorCost": 0.035012,
+      "telemetry_session": "ses_10ff57b2effemrw5kgGFPw94Lx"
     },
     {
       "id": "claude-code",
@@ -34,14 +45,24 @@
       "model": "glm-5.2[1m]",
       "verdict": "PASS",
       "wall": 34.085,
-      "tokens": null,
-      "cost": null,
+      "tokens": 124808,
+      "cost": 0.060092,
       "patch": 100,
       "process": 90,
       "red": true,
       "smoke": true,
       "agentExit": 0,
-      "verifyExit": 0
+      "verifyExit": 0,
+      "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+      "telemetry_source": "agents/claude-code/agent-output.json",
+      "token_breakdown": {
+        "input": 21709,
+        "cache_read": 102400,
+        "cache_creation": 0,
+        "output": 699,
+        "reasoning": 0
+      },
+      "vendorCost": 0.17722
     },
     {
       "id": "mimo",
@@ -50,14 +71,25 @@
       "model": "glm-5.2",
       "verdict": "PASS",
       "wall": 42.267,
-      "tokens": null,
-      "cost": null,
+      "tokens": 187931,
+      "cost": 0.055319,
       "patch": 100,
       "process": 90,
       "red": true,
       "smoke": true,
       "agentExit": 0,
-      "verifyExit": 0
+      "verifyExit": 0,
+      "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+      "telemetry_source": "~/.local/share/mimocode/mimocode.db session.directory + message.tokens",
+      "token_breakdown": {
+        "input": 3979,
+        "cache_read": 183488,
+        "cache_creation": 0,
+        "output": 452,
+        "reasoning": 12
+      },
+      "vendorCost": 0.0,
+      "telemetry_session": "ses_10ff5bfa6ffe5edPmpX1BGXNHR"
     },
     {
       "id": "pi",
@@ -66,14 +98,25 @@
       "model": "glm-5.2",
       "verdict": "PASS",
       "wall": 54.993,
-      "tokens": null,
-      "cost": null,
+      "tokens": 22078,
+      "cost": 0.011694,
       "patch": 100,
       "process": 90,
       "red": true,
       "smoke": true,
       "agentExit": 0,
-      "verifyExit": 0
+      "verifyExit": 0,
+      "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+      "telemetry_source": "ccusage pi session exact projectPath",
+      "token_breakdown": {
+        "input": 1722,
+        "cache_read": 19392,
+        "cache_creation": 0,
+        "output": 964,
+        "reasoning": 0
+      },
+      "vendorCost": 0.0,
+      "telemetry_session": "019ef00b-643a-7c8b-a60f-5951bef8ba2e"
     },
     {
       "id": "codex-cli",
@@ -82,14 +125,25 @@
       "model": "gpt-5.5",
       "verdict": "PASS",
       "wall": 82.653,
-      "tokens": null,
-      "cost": null,
+      "tokens": 233649,
+      "cost": 0.356317,
       "patch": 100,
       "process": 90,
       "red": true,
       "smoke": true,
       "agentExit": 0,
-      "verifyExit": 0
+      "verifyExit": 0,
+      "telemetry_strategy": "ccusage_codex_session_exact_log_session_id",
+      "telemetry_source": "ccusage codex session + agents/codex-cli/agent.log session id",
+      "token_breakdown": {
+        "input": 35337,
+        "cache_read": 195584,
+        "cache_creation": 0,
+        "output": 2728,
+        "reasoning": 891
+      },
+      "vendorCost": 0.356317,
+      "telemetry_session": "2026/06/22/rollout-2026-06-22T17-55-25-019ef00b-2fc4-7da3-ae48-6e3757630ea0"
     },
     {
       "id": "agy",
@@ -105,7 +159,8 @@
       "red": true,
       "smoke": true,
       "agentExit": 0,
-      "verifyExit": 0
+      "verifyExit": 0,
+      "telemetry_strategy": "unavailable"
     }
   ],
   "links": {
