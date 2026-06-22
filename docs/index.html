@@ -3,108 +3,264 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Coding Agent Battles — Aggregate Dashboard</title>
-  <meta name="description" content="Aggregate public dashboard for evidence-first coding-agent benchmark scenarios." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Coding Agent Battles — Benchmark Briefing</title>
+  <meta name="description" content="Evidence-first coding-agent benchmark results. Six agents, two scenarios, all claims traceable to committed logs." />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="grid-bg"></div>
-  <header class="hero shell">
-    <nav class="topnav" aria-label="Primary navigation">
-      <a class="brand" href="./"><span class="brand-mark">CAB</span><span>Coding Agent Battles</span></a>
-      <div class="navlinks">
-        <a href="#matrix">Matrix</a>
-        <a href="#agents">Agents</a>
-        <a href="#scenario-detail">Latest run</a>
-        <a href="#method">Method</a>
-        <a href="https://github.com/forcewake/coding-agent-battles">GitHub</a>
-      </div>
+
+  <!-- ══ NAV ══════════════════════════════════════════════════════════════ -->
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="brand" href="./" aria-label="Coding Agent Battles home">
+        <span class="brand-badge">CAB</span>
+        <span class="brand-name">Coding Agent Battles</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#decision">Decision</a></li>
+        <li><a href="#scenarios">Scenarios</a></li>
+        <li><a href="#agents">Agents</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="https://github.com/forcewake/coding-agent-battles" class="nav-gh" target="_blank" rel="noopener">GitHub ↗</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
-    <section class="hero-panel">
-      <div class="hero-copy">
-        <p class="eyebrow">Evidence-first coding-agent benchmark</p>
-        <h1>From one run to a benchmark cockpit.</h1>
-        <p class="lede">The dashboard now aggregates multiple scenarios. BB-001 proves the harness; BB-003 adds a real feature task. Every cell links back to committed logs, diffs, metrics, and independent verification.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#matrix">Open the scenario matrix</a>
-          <a class="button ghost" href="https://github.com/forcewake/coding-agent-battles/tree/main/runs">Browse raw runs</a>
-        </div>
-      </div>
-      <aside class="decision-card">
-        <div class="card-kicker">Corpus status</div>
-        <div id="heroPass" class="big-number">—</div>
-        <p id="heroSummary">Loading benchmark corpus…</p>
-        <div id="heroMini" class="mini-grid"></div>
-      </aside>
-    </section>
+    <div id="mobile-nav" class="mobile-nav" hidden>
+      <a href="#decision">Decision</a>
+      <a href="#scenarios">Scenarios</a>
+      <a href="#agents">Agents</a>
+      <a href="#method">Method</a>
+      <a href="https://github.com/forcewake/coding-agent-battles" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
   </header>
 
+  <!-- ══ ABOVE THE FOLD ════════════════════════════════════════════════════ -->
+  <section class="atf-shell" id="decision">
+    <div class="atf-left">
+      <p class="label-overline" id="atf-dateline">Loading…</p>
+      <h1 class="atf-headline">Six agents.<br>Two scenarios.<br>All claims verified.</h1>
+      <p class="atf-body">
+        An evidence-first coding-agent benchmark. Every number links to committed logs, diffs, and machine-readable metrics.
+        Cost figures are normalized public estimates via <a class="inline-link" href="#method">ccusage methodology</a>.
+      </p>
+      <div class="atf-ctas">
+        <a class="btn-primary" href="#scenarios">Explore scenarios</a>
+        <a class="btn-ghost" href="https://github.com/forcewake/coding-agent-battles/tree/main/runs" target="_blank" rel="noopener">Raw runs ↗</a>
+      </div>
+    </div>
+    <div class="atf-right">
+      <div class="verdict-card">
+        <p class="label-overline">Corpus status</p>
+        <div class="verdict-headline" id="verdict-score">—</div>
+        <p class="verdict-sub" id="verdict-sub">Loading…</p>
+        <div class="verdict-stats" id="verdict-stats">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ KPI STRIP ═════════════════════════════════════════════════════════ -->
+  <section class="kpi-strip" aria-label="Headline metrics">
+    <div class="kpi-shell">
+      <div class="kpi-card">
+        <span class="kpi-value" id="kpi-scenarios">—</span>
+        <span class="kpi-label">Scenarios</span>
+        <span class="kpi-sub">committed benchmark cases</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value" id="kpi-runs">—</span>
+        <span class="kpi-label">Agent runs</span>
+        <span class="kpi-sub">six-agent matrix</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value" id="kpi-pass">—</span>
+        <span class="kpi-label">Pass rate</span>
+        <span class="kpi-sub">Hermes-verified</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value" id="kpi-cost">—</span>
+        <span class="kpi-label">Total public cost</span>
+        <span class="kpi-sub">normalized estimate</span>
+      </div>
+    </div>
+  </section>
+
   <main>
-    <section class="shell section metrics-strip" aria-label="Portfolio headline metrics">
-      <article><span>Scenarios</span><strong id="kpiScenarios">—</strong><small>committed benchmark cases</small></article>
-      <article><span>Agent runs</span><strong id="kpiRuns">—</strong><small>six-agent matrix</small></article>
-      <article><span>Pass rate</span><strong id="kpiPass">—</strong><small>Hermes-verified</small></article>
-      <article><span>Public cost</span><strong id="kpiCost">—</strong><small>normalized where tokens exist</small></article>
+
+    <!-- ══ SCENARIOS ═══════════════════════════════════════════════════════ -->
+    <section class="content-section" id="scenarios">
+      <div class="section-header">
+        <div>
+          <p class="label-overline">Benchmark scenarios</p>
+          <h2 class="section-title">Agent × Scenario results</h2>
+        </div>
+        <p class="section-desc">
+          All six agents attempted every scenario in isolated workspaces. Pass/fail is binary, verified by Hermes. Cost is normalized public-price estimate.
+        </p>
+      </div>
+
+      <!-- Scenario tabs -->
+      <div class="tab-bar" role="tablist" aria-label="Scenario selector" id="scenario-tabs">
+        <!-- filled by JS -->
+      </div>
+
+      <!-- Scenario detail panel (swapped by JS) -->
+      <div id="scenario-panel" class="scenario-panel">
+        <!-- filled by JS -->
+      </div>
     </section>
 
-    <section id="matrix" class="shell section">
-      <div class="section-head">
-        <div><p class="eyebrow">Home aggregate</p><h2>Agent × Scenario matrix.</h2></div>
-        <p>This is the shape of the benchmark when all scenarios land: one corpus view first, detail pages second.</p>
+    <!-- ══ AGENTS ═══════════════════════════════════════════════════════════ -->
+    <section class="content-section" id="agents">
+      <div class="section-header">
+        <div>
+          <p class="label-overline">Agent profiles</p>
+          <h2 class="section-title">Pass rate is tied. Operating profile is not.</h2>
+        </div>
+        <p class="section-desc">
+          Aggregate across all scenarios. Speed, process discipline, token burn, and cost coverage differentiate what a 100% pass rate conceals.
+        </p>
       </div>
-      <div class="matrix-wrap"><table id="scenarioMatrix"><thead></thead><tbody></tbody></table></div>
-      <div id="scenarioCards" class="scenario-grid"></div>
+      <div id="agent-table" class="agent-table-wrap">
+        <!-- filled by JS -->
+      </div>
     </section>
 
-    <section id="agents" class="shell section">
-      <div class="section-head">
-        <div><p class="eyebrow">Agent profiles</p><h2>Pass rate is tied; operating profile is not.</h2></div>
-        <p>Aggregate profile cards show speed, process discipline, token/cost availability, and where each agent currently sits.</p>
+    <!-- ══ PARETO ════════════════════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <div>
+          <p class="label-overline">Decision lens</p>
+          <h2 class="section-title">Cost vs. process quality frontier</h2>
+        </div>
+        <p class="section-desc">
+          Lower cost and higher process score is better. Agents without cost telemetry appear at the right edge at their actual process score.
+        </p>
       </div>
-      <div id="agentProfiles" class="agent-profile-grid"></div>
+      <div class="chart-card">
+        <svg id="paretoChart" role="img" aria-label="Scatter plot of average cost versus average process score"></svg>
+      </div>
     </section>
 
-    <section class="shell section">
-      <div class="section-head">
-        <div><p class="eyebrow">Pareto lens</p><h2>Cost vs process frontier.</h2></div>
-        <p>Lower cost and higher process quality is better. Missing-cost agents stay visible but outside the numeric frontier.</p>
+    <!-- ══ LATEST DETAIL ═════════════════════════════════════════════════════ -->
+    <section class="content-section" id="latest-detail">
+      <div class="section-header">
+        <div>
+          <p class="label-overline">Latest scenario detail</p>
+          <h2 class="section-title" id="detail-title">—</h2>
+        </div>
+        <p class="section-desc" id="detail-summary">—</p>
       </div>
-      <article class="viz-card wide full"><svg id="paretoChart" role="img" aria-label="Cost versus process score scatter"></svg></article>
-    </section>
-
-    <section id="scenario-detail" class="shell section">
-      <div class="section-head">
-        <div><p class="eyebrow">Latest scenario detail</p><h2 id="detailTitle">Latest run</h2></div>
-        <p id="detailSummary">Run detail charts for the newest scenario.</p>
-      </div>
-      <div class="viz-grid">
-        <article class="viz-card wide">
-          <div class="viz-title"><h3>Latency vs total token burn</h3><span>latest scenario</span></div>
+      <div class="detail-grid">
+        <div class="detail-chart-card wide">
+          <p class="chart-label">Latency vs token burn</p>
           <svg id="frontierChart" role="img" aria-label="Scatter plot of wall-clock seconds versus token count"></svg>
-        </article>
-        <article class="viz-card"><div class="viz-title"><h3>Wall-clock</h3><span>seconds</span></div><div id="timeBars" class="bar-stack"></div></article>
-        <article class="viz-card"><div class="viz-title"><h3>Process quality</h3><span>0–100 rubric</span></div><div id="qualityBars" class="bar-stack compact"></div></article>
-        <article class="viz-card"><div class="viz-title"><h3>Normalized public cost</h3><span>USD estimate</span></div><div id="costBars" class="bar-stack cost"></div></article>
+        </div>
+        <div class="detail-bars-group">
+          <div class="detail-chart-card">
+            <p class="chart-label">Wall-clock <span class="chart-unit">seconds</span></p>
+            <div id="timeBars" class="bar-list"></div>
+          </div>
+          <div class="detail-chart-card">
+            <p class="chart-label">Process quality <span class="chart-unit">0–100 rubric</span></p>
+            <div id="qualityBars" class="bar-list"></div>
+          </div>
+          <div class="detail-chart-card">
+            <p class="chart-label">Normalized public cost <span class="chart-unit">USD estimate</span></p>
+            <div id="costBars" class="bar-list"></div>
+          </div>
+        </div>
       </div>
-      <div class="table-wrap"><table id="scoreTable"><thead><tr><th>Agent</th><th>Wall</th><th>Tokens</th><th>Cost</th><th>Patch</th><th>Process</th><th>Evidence</th></tr></thead><tbody></tbody></table></div>
+
+      <!-- Full results table -->
+      <details class="evidence-details" id="score-table-details">
+        <summary class="evidence-summary">Full metrics table</summary>
+        <div class="table-wrap">
+          <table id="scoreTable" aria-label="Full metrics for latest scenario">
+            <thead>
+              <tr>
+                <th>Agent</th>
+                <th>Wall (s)</th>
+                <th>Tokens</th>
+                <th>Cost</th>
+                <th>Patch %</th>
+                <th>Process</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
-    <section id="method" class="shell section narrative-grid">
-      <article class="story-card accent"><p class="eyebrow">Interpretation</p><h2>BB-001 calibrates; BB-003 starts the real corpus.</h2><p>Two scenarios are still not a final leaderboard. But the dashboard now demonstrates how future tasks become a portfolio: matrix, scenario cards, agent profiles, public-cost estimates, and raw evidence links.</p></article>
-      <article class="story-card"><h3>What changed</h3><ul class="checklist"><li>Added BB-003 JSON-export task and fixture.</li><li>Ran all six agents in isolated workspaces.</li><li>Verified pytest and JSON CLI smoke independently.</li><li>Promoted Pages from run detail to corpus dashboard.</li></ul></article>
-      <article class="story-card"><h3>Still explicit gaps</h3><ul class="xlist"><li>ccusage is the preferred collector for Claude/Codex/OpenCode/Hermes/Pi/Gemini; direct extraction is fallback when run attribution is missing.</li><li>agy still has no reliable token export because Antigravity transcripts are not Gemini CLI ccusage logs.</li><li>More scenarios are needed before claiming broad capability rankings.</li><li>Vendor-reported cost and public-price estimates remain separate.</li></ul></article>
+    <!-- ══ METHOD ════════════════════════════════════════════════════════════ -->
+    <section class="content-section" id="method">
+      <div class="section-header">
+        <div>
+          <p class="label-overline">Methodology &amp; interpretation</p>
+          <h2 class="section-title">How to read these results</h2>
+        </div>
+      </div>
+
+      <div class="method-grid">
+        <article class="method-card accent">
+          <h3 class="method-card-title">BB-001 calibrates. BB-003 starts the real corpus.</h3>
+          <p>Two scenarios are not a final leaderboard. BB-001 proves the harness (argparse bugfix), BB-003 adds a real feature task (JSON export). Together they establish the matrix shape and telemetry pipeline for future scenarios.</p>
+        </article>
+        <article class="method-card">
+          <h3 class="method-card-title">What changed</h3>
+          <ul class="check-list">
+            <li>Added BB-003 JSON-export task and fixture.</li>
+            <li>Ran all six agents in isolated workspaces.</li>
+            <li>Verified pytest and JSON CLI smoke independently.</li>
+            <li>Promoted Pages from run detail to corpus dashboard.</li>
+          </ul>
+        </article>
+        <article class="method-card">
+          <h3 class="method-card-title">Known gaps</h3>
+          <ul class="dash-list">
+            <li>ccusage is the preferred collector; direct extraction is fallback only when run attribution is missing.</li>
+            <li>agy has no reliable token export — Antigravity transcripts are not Gemini CLI ccusage logs.</li>
+            <li>More scenarios needed before claiming broad capability rankings.</li>
+            <li>Vendor-reported cost ≠ normalized public-price estimates.</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- ccusage methodology accordion -->
+      <details class="evidence-details" id="ccusage-detail">
+        <summary class="evidence-summary">ccusage methodology &amp; pricing basis</summary>
+        <div class="method-body" id="method-body">
+          <!-- filled by JS -->
+        </div>
+      </details>
     </section>
 
-    <section class="shell section artifact-section">
-      <div class="section-head"><div><p class="eyebrow">Evidence</p><h2>Trace every aggregate claim back to files.</h2></div></div>
-      <div id="artifactGrid" class="artifact-grid"></div>
+    <!-- ══ EVIDENCE ═══════════════════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <div>
+          <p class="label-overline">Evidence</p>
+          <h2 class="section-title">Trace every claim back to committed files</h2>
+        </div>
+      </div>
+      <div id="artifactGrid" class="artifact-grid">
+        <!-- filled by JS -->
+      </div>
     </section>
+
   </main>
 
-  <footer class="shell footer"><span>Built from committed benchmark artifacts.</span><a href="https://github.com/forcewake/coding-agent-battles">forcewake/coding-agent-battles</a></footer>
+  <!-- ══ FOOTER ════════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <span>Built from committed benchmark artifacts.</span>
+    <a href="https://github.com/forcewake/coding-agent-battles" target="_blank" rel="noopener">forcewake/coding-agent-battles ↗</a>
+  </footer>
+
   <script src="./app.js" defer></script>
 </body>
 </html>
