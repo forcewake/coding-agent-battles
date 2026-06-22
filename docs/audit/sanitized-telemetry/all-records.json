@@ -1,0 +1,2018 @@
+[
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+    "scenarioId": "BB-001",
+    "scenarioName": "Broken CLI argument",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 94.645,
+    "tokens": 195887,
+    "cost": 0.065351,
+    "vendorCost": 0.065351,
+    "token_breakdown": {
+      "input": 6828,
+      "cache_read": 187456,
+      "cache_creation": 0,
+      "output": 1278,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+    "scenarioId": "BB-001",
+    "scenarioName": "Broken CLI argument",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 53.025,
+    "tokens": 208020,
+    "cost": 0.066573,
+    "vendorCost": 0.161804,
+    "token_breakdown": {
+      "input": 7170,
+      "cache_read": 199808,
+      "cache_creation": 0,
+      "output": 1042,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+    "scenarioId": "BB-001",
+    "scenarioName": "Broken CLI argument",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 64.559,
+    "tokens": 262659,
+    "cost": 0.088933,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 14762,
+      "cache_read": 246976,
+      "cache_creation": 0,
+      "output": 836,
+      "reasoning": 85
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+    "scenarioId": "BB-001",
+    "scenarioName": "Broken CLI argument",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 119.437,
+    "tokens": 69756,
+    "cost": 0.032009,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 6057,
+      "cache_read": 62016,
+      "cache_creation": 0,
+      "output": 1683,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+    "scenarioId": "BB-001",
+    "scenarioName": "Broken CLI argument",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 147.902,
+    "tokens": 455504,
+    "cost": 0.644985,
+    "vendorCost": 0.610605,
+    "token_breakdown": {
+      "input": 55467,
+      "cache_read": 395520,
+      "cache_creation": 0,
+      "output": 4517,
+      "reasoning": 1146
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+    "scenarioId": "BB-001",
+    "scenarioName": "Broken CLI argument",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 51.705,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+    "scenarioId": "BB-002",
+    "scenarioName": "CSV edge-case parser",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 80.638,
+    "tokens": 105968,
+    "cost": 0.034981,
+    "vendorCost": 0.034981,
+    "token_breakdown": {
+      "input": 3419,
+      "cache_read": 101696,
+      "cache_creation": 0,
+      "output": 721,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+    "scenarioId": "BB-002",
+    "scenarioName": "CSV edge-case parser",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 93.744,
+    "tokens": 158158,
+    "cost": 0.079108,
+    "vendorCost": 0.249154,
+    "token_breakdown": {
+      "input": 24363,
+      "cache_read": 131328,
+      "cache_creation": 0,
+      "output": 2467,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+    "scenarioId": "BB-002",
+    "scenarioName": "CSV edge-case parser",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 66.505,
+    "tokens": 212952,
+    "cost": 0.075279,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 13798,
+      "cache_read": 198144,
+      "cache_creation": 0,
+      "output": 644,
+      "reasoning": 366
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+    "scenarioId": "BB-002",
+    "scenarioName": "CSV edge-case parser",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 125.715,
+    "tokens": 25482,
+    "cost": 0.030214,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 7872,
+      "cache_read": 14080,
+      "cache_creation": 0,
+      "output": 3530,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+    "scenarioId": "BB-002",
+    "scenarioName": "CSV edge-case parser",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 101.812,
+    "tokens": 163324,
+    "cost": 0.3877,
+    "vendorCost": 0.34516,
+    "token_breakdown": {
+      "input": 37184,
+      "cache_read": 122880,
+      "cache_creation": 0,
+      "output": 3260,
+      "reasoning": 1418
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+    "scenarioId": "BB-002",
+    "scenarioName": "CSV edge-case parser",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 202.767,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+    "scenarioId": "BB-003",
+    "scenarioName": "JSON export for existing CLI",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 69.014,
+    "tokens": 149410,
+    "cost": 0.051976,
+    "vendorCost": 0.051976,
+    "token_breakdown": {
+      "input": 6622,
+      "cache_read": 141440,
+      "cache_creation": 0,
+      "output": 1182,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+    "scenarioId": "BB-003",
+    "scenarioName": "JSON export for existing CLI",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 80.125,
+    "tokens": 164894,
+    "cost": 0.062663,
+    "vendorCost": 0.17937,
+    "token_breakdown": {
+      "input": 8989,
+      "cache_read": 153600,
+      "cache_creation": 0,
+      "output": 2305,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+    "scenarioId": "BB-003",
+    "scenarioName": "JSON export for existing CLI",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 63.405,
+    "tokens": 159098,
+    "cost": 0.054476,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 6750,
+      "cache_read": 151040,
+      "cache_creation": 0,
+      "output": 1141,
+      "reasoning": 167
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+    "scenarioId": "BB-003",
+    "scenarioName": "JSON export for existing CLI",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 94.955,
+    "tokens": 50657,
+    "cost": 0.030755,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 5754,
+      "cache_read": 42240,
+      "cache_creation": 0,
+      "output": 2663,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+    "scenarioId": "BB-003",
+    "scenarioName": "JSON export for existing CLI",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 103.024,
+    "tokens": 187021,
+    "cost": 0.395188,
+    "vendorCost": 0.359008,
+    "token_breakdown": {
+      "input": 36822,
+      "cache_read": 146816,
+      "cache_creation": 0,
+      "output": 3383,
+      "reasoning": 1206
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+    "scenarioId": "BB-003",
+    "scenarioName": "JSON export for existing CLI",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 19.505,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+    "scenarioId": "BB-004",
+    "scenarioName": "Markdown table normalizer",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 167.03,
+    "tokens": 103515,
+    "cost": 0.062082,
+    "vendorCost": 0.062082,
+    "token_breakdown": {
+      "input": 8540,
+      "cache_read": 88832,
+      "cache_creation": 0,
+      "output": 1057,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+    "scenarioId": "BB-004",
+    "scenarioName": "Markdown table normalizer",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 169.013,
+    "tokens": 169366,
+    "cost": 0.085769,
+    "vendorCost": 0.305302,
+    "token_breakdown": {
+      "input": 11732,
+      "cache_read": 150784,
+      "cache_creation": 0,
+      "output": 6850,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+    "scenarioId": "BB-004",
+    "scenarioName": "Markdown table normalizer",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 190.22,
+    "tokens": 227270,
+    "cost": 0.094997,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 9766,
+      "cache_read": 211520,
+      "cache_creation": 0,
+      "output": 1023,
+      "reasoning": 4961
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+    "scenarioId": "BB-004",
+    "scenarioName": "Markdown table normalizer",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 247.114,
+    "tokens": 62200,
+    "cost": 0.059673,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 9070,
+      "cache_read": 45120,
+      "cache_creation": 0,
+      "output": 8010,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+    "scenarioId": "BB-004",
+    "scenarioName": "Markdown table normalizer",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 219.382,
+    "tokens": 327859,
+    "cost": 0.933381,
+    "vendorCost": 0.757551,
+    "token_breakdown": {
+      "input": 69507,
+      "cache_read": 248832,
+      "cache_creation": 0,
+      "output": 9520,
+      "reasoning": 5861
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+    "scenarioId": "BB-004",
+    "scenarioName": "Markdown table normalizer",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 113.3,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+    "scenarioId": "BB-005",
+    "scenarioName": "FastAPI auth middleware bug",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 43.633,
+    "tokens": 53635,
+    "cost": 0.023405,
+    "vendorCost": 0.023405,
+    "token_breakdown": {
+      "input": 5771,
+      "cache_read": 47168,
+      "cache_creation": 0,
+      "output": 602,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+    "scenarioId": "BB-005",
+    "scenarioName": "FastAPI auth middleware bug",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 47.969,
+    "tokens": 153526,
+    "cost": 0.050461,
+    "vendorCost": 0.12447,
+    "token_breakdown": {
+      "input": 6540,
+      "cache_read": 146240,
+      "cache_creation": 0,
+      "output": 746,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+    "scenarioId": "BB-005",
+    "scenarioName": "FastAPI auth middleware bug",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 46.894,
+    "tokens": 128828,
+    "cost": 0.041709,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 4852,
+      "cache_read": 123328,
+      "cache_creation": 0,
+      "output": 583,
+      "reasoning": 65
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+    "scenarioId": "BB-005",
+    "scenarioName": "FastAPI auth middleware bug",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 87.805,
+    "tokens": 34046,
+    "cost": 0.01722,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 3037,
+      "cache_read": 29824,
+      "cache_creation": 0,
+      "output": 1185,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+    "scenarioId": "BB-005",
+    "scenarioName": "FastAPI auth middleware bug",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 100.38,
+    "tokens": 252306,
+    "cost": 0.431287,
+    "vendorCost": 0.400477,
+    "token_breakdown": {
+      "input": 40855,
+      "cache_read": 208384,
+      "cache_creation": 0,
+      "output": 3067,
+      "reasoning": 1027
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+    "scenarioId": "BB-005",
+    "scenarioName": "FastAPI auth middleware bug",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "FAIL",
+    "wall": 47.22,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-006-react-filter-search-ui",
+    "scenarioId": "BB-006",
+    "scenarioName": "React filter/search UI",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 34.886,
+    "tokens": 51697,
+    "cost": 0.028494,
+    "vendorCost": 0.028494,
+    "token_breakdown": {
+      "input": 11036,
+      "cache_read": 40064,
+      "cache_creation": 0,
+      "output": 506,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-006-react-filter-search-ui",
+    "scenarioId": "BB-006",
+    "scenarioName": "React filter/search UI",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 93.299,
+    "tokens": 175075,
+    "cost": 0.054023,
+    "vendorCost": 0.125467,
+    "token_breakdown": {
+      "input": 5516,
+      "cache_read": 169024,
+      "cache_creation": 0,
+      "output": 535,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-006-react-filter-search-ui",
+    "scenarioId": "BB-006",
+    "scenarioName": "React filter/search UI",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 39.162,
+    "tokens": 167589,
+    "cost": 0.050855,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 4071,
+      "cache_read": 162880,
+      "cache_creation": 0,
+      "output": 516,
+      "reasoning": 122
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-006-react-filter-search-ui",
+    "scenarioId": "BB-006",
+    "scenarioName": "React filter/search UI",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 54.147,
+    "tokens": 16631,
+    "cost": 0.008967,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 1531,
+      "cache_read": 14400,
+      "cache_creation": 0,
+      "output": 700,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-006-react-filter-search-ui",
+    "scenarioId": "BB-006",
+    "scenarioName": "React filter/search UI",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 79.096,
+    "tokens": 204192,
+    "cost": 0.293369,
+    "vendorCost": 0.260009,
+    "token_breakdown": {
+      "input": 15471,
+      "cache_read": 185728,
+      "cache_creation": 0,
+      "output": 2993,
+      "reasoning": 1112
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-006-react-filter-search-ui",
+    "scenarioId": "BB-006",
+    "scenarioName": "React filter/search UI",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 37.526,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+    "scenarioId": "BB-007",
+    "scenarioName": "SQLite migration with rollback",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 48.124,
+    "tokens": 64976,
+    "cost": 0.026777,
+    "vendorCost": 0.026777,
+    "token_breakdown": {
+      "input": 3705,
+      "cache_read": 59904,
+      "cache_creation": 0,
+      "output": 837,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+    "scenarioId": "BB-007",
+    "scenarioName": "SQLite migration with rollback",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 86.768,
+    "tokens": 183359,
+    "cost": 0.088476,
+    "vendorCost": 0.270455,
+    "token_breakdown": {
+      "input": 27908,
+      "cache_read": 153280,
+      "cache_creation": 0,
+      "output": 2171,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+    "scenarioId": "BB-007",
+    "scenarioName": "SQLite migration with rollback",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 82.405,
+    "tokens": 191087,
+    "cost": 0.059777,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 5002,
+      "cache_read": 185024,
+      "cache_creation": 0,
+      "output": 727,
+      "reasoning": 334
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+    "scenarioId": "BB-007",
+    "scenarioName": "SQLite migration with rollback",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 137.179,
+    "tokens": 40117,
+    "cost": 0.025923,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 4006,
+      "cache_read": 33472,
+      "cache_creation": 0,
+      "output": 2639,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+    "scenarioId": "BB-007",
+    "scenarioName": "SQLite migration with rollback",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 122.86,
+    "tokens": 176231,
+    "cost": 0.5011,
+    "vendorCost": 0.41806,
+    "token_breakdown": {
+      "input": 40694,
+      "cache_read": 130560,
+      "cache_creation": 0,
+      "output": 4977,
+      "reasoning": 2768
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+    "scenarioId": "BB-007",
+    "scenarioName": "SQLite migration with rollback",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 74.759,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+    "scenarioId": "BB-008",
+    "scenarioName": "Monorepo dependency upgrade",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 42.59,
+    "tokens": 86204,
+    "cost": 0.035012,
+    "vendorCost": 0.035012,
+    "token_breakdown": {
+      "input": 9131,
+      "cache_read": 76544,
+      "cache_creation": 0,
+      "output": 504,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+    "scenarioId": "BB-008",
+    "scenarioName": "Monorepo dependency upgrade",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 34.085,
+    "tokens": 124808,
+    "cost": 0.060092,
+    "vendorCost": 0.17722,
+    "token_breakdown": {
+      "input": 21709,
+      "cache_read": 102400,
+      "cache_creation": 0,
+      "output": 699,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+    "scenarioId": "BB-008",
+    "scenarioName": "Monorepo dependency upgrade",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 42.267,
+    "tokens": 187931,
+    "cost": 0.055319,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 3979,
+      "cache_read": 183488,
+      "cache_creation": 0,
+      "output": 452,
+      "reasoning": 12
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+    "scenarioId": "BB-008",
+    "scenarioName": "Monorepo dependency upgrade",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 54.993,
+    "tokens": 22078,
+    "cost": 0.011694,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 1722,
+      "cache_read": 19392,
+      "cache_creation": 0,
+      "output": 964,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+    "scenarioId": "BB-008",
+    "scenarioName": "Monorepo dependency upgrade",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 82.653,
+    "tokens": 233649,
+    "cost": 0.383047,
+    "vendorCost": 0.356317,
+    "token_breakdown": {
+      "input": 35337,
+      "cache_read": 195584,
+      "cache_creation": 0,
+      "output": 2728,
+      "reasoning": 891
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+    "scenarioId": "BB-008",
+    "scenarioName": "Monorepo dependency upgrade",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 34.446,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-009-observability-instrumentation",
+    "scenarioId": "BB-009",
+    "scenarioName": "Observability instrumentation",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 58.357,
+    "tokens": 87637,
+    "cost": 0.030313,
+    "vendorCost": 0.030313,
+    "token_breakdown": {
+      "input": 3349,
+      "cache_read": 83392,
+      "cache_creation": 0,
+      "output": 711,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-009-observability-instrumentation",
+    "scenarioId": "BB-009",
+    "scenarioName": "Observability instrumentation",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 89.627,
+    "tokens": 153562,
+    "cost": 0.052263,
+    "vendorCost": 0.135138,
+    "token_breakdown": {
+      "input": 6522,
+      "cache_read": 145856,
+      "cache_creation": 0,
+      "output": 1184,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-009-observability-instrumentation",
+    "scenarioId": "BB-009",
+    "scenarioName": "Observability instrumentation",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 91.989,
+    "tokens": 283029,
+    "cost": 0.097538,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 15097,
+      "cache_read": 266304,
+      "cache_creation": 0,
+      "output": 1011,
+      "reasoning": 617
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-009-observability-instrumentation",
+    "scenarioId": "BB-009",
+    "scenarioName": "Observability instrumentation",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 68.88,
+    "tokens": 19534,
+    "cost": 0.013878,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 2562,
+      "cache_read": 15552,
+      "cache_creation": 0,
+      "output": 1420,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-009-observability-instrumentation",
+    "scenarioId": "BB-009",
+    "scenarioName": "Observability instrumentation",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 100.717,
+    "tokens": 197851,
+    "cost": 0.479018,
+    "vendorCost": 0.438998,
+    "token_breakdown": {
+      "input": 52660,
+      "cache_read": 141696,
+      "cache_creation": 0,
+      "output": 3495,
+      "reasoning": 1334
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-009-observability-instrumentation",
+    "scenarioId": "BB-009",
+    "scenarioName": "Observability instrumentation",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "FAIL",
+    "wall": 43.784,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+    "scenarioId": "BB-010",
+    "scenarioName": "DOCX extraction quality fix",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 67.775,
+    "tokens": 81296,
+    "cost": 0.033141,
+    "vendorCost": 0.033141,
+    "token_breakdown": {
+      "input": 4676,
+      "cache_read": 75008,
+      "cache_creation": 0,
+      "output": 666,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+    "scenarioId": "BB-010",
+    "scenarioName": "DOCX extraction quality fix",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 69.886,
+    "tokens": 157352,
+    "cost": 0.076082,
+    "vendorCost": 0.233464,
+    "token_breakdown": {
+      "input": 23748,
+      "cache_read": 131648,
+      "cache_creation": 0,
+      "output": 1956,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+    "scenarioId": "BB-010",
+    "scenarioName": "DOCX extraction quality fix",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 336.866,
+    "tokens": 218039,
+    "cost": 0.073111,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 6437,
+      "cache_read": 209408,
+      "cache_creation": 0,
+      "output": 768,
+      "reasoning": 1426
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+    "scenarioId": "BB-010",
+    "scenarioName": "DOCX extraction quality fix",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 79.757,
+    "tokens": 22809,
+    "cost": 0.019299,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 3527,
+      "cache_read": 17024,
+      "cache_creation": 0,
+      "output": 2258,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+    "scenarioId": "BB-010",
+    "scenarioName": "DOCX extraction quality fix",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 129.014,
+    "tokens": 284455,
+    "cost": 0.530691,
+    "vendorCost": 0.496041,
+    "token_breakdown": {
+      "input": 55825,
+      "cache_read": 225152,
+      "cache_creation": 0,
+      "output": 3478,
+      "reasoning": 1155
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+    "scenarioId": "BB-010",
+    "scenarioName": "DOCX extraction quality fix",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 103.864,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-011-greenfield-mini-product",
+    "scenarioId": "BB-011",
+    "scenarioName": "Greenfield mini-product",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 47.141,
+    "tokens": 53112,
+    "cost": 0.020773,
+    "vendorCost": 0.020773,
+    "token_breakdown": {
+      "input": 3585,
+      "cache_read": 48832,
+      "cache_creation": 0,
+      "output": 603,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-011-greenfield-mini-product",
+    "scenarioId": "BB-011",
+    "scenarioName": "Greenfield mini-product",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 95.167,
+    "tokens": 177821,
+    "cost": 0.056421,
+    "vendorCost": 0.135709,
+    "token_breakdown": {
+      "input": 6006,
+      "cache_read": 171008,
+      "cache_creation": 0,
+      "output": 807,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-011-greenfield-mini-product",
+    "scenarioId": "BB-011",
+    "scenarioName": "Greenfield mini-product",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 49.366,
+    "tokens": 190265,
+    "cost": 0.05813,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 4787,
+      "cache_read": 184704,
+      "cache_creation": 0,
+      "output": 659,
+      "reasoning": 115
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-011-greenfield-mini-product",
+    "scenarioId": "BB-011",
+    "scenarioName": "Greenfield mini-product",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 71.199,
+    "tokens": 30285,
+    "cost": 0.012942,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 2038,
+      "cache_read": 27584,
+      "cache_creation": 0,
+      "output": 663,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-011-greenfield-mini-product",
+    "scenarioId": "BB-011",
+    "scenarioName": "Greenfield mini-product",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 101.535,
+    "tokens": 204368,
+    "cost": 0.438527,
+    "vendorCost": 0.400817,
+    "token_breakdown": {
+      "input": 44487,
+      "cache_read": 156544,
+      "cache_creation": 0,
+      "output": 3337,
+      "reasoning": 1257
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-011-greenfield-mini-product",
+    "scenarioId": "BB-011",
+    "scenarioName": "Greenfield mini-product",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 50.5,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+    "scenarioId": "BB-012",
+    "scenarioName": "Unknown repo leverage task",
+    "agentId": "opencode",
+    "agentLabel": "OpenCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 52.259,
+    "tokens": 55799,
+    "cost": 0.023785,
+    "vendorCost": 0.023785,
+    "token_breakdown": {
+      "input": 3784,
+      "cache_read": 50816,
+      "cache_creation": 0,
+      "output": 744,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+    "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+    "scenarioId": "BB-012",
+    "scenarioName": "Unknown repo leverage task",
+    "agentId": "claude-code",
+    "agentLabel": "Claude Code / GLM-5.2",
+    "model": "glm-5.2[1m]",
+    "verdict": "PASS",
+    "wall": 43.71,
+    "tokens": 126638,
+    "cost": 0.042389,
+    "vendorCost": 0.106426,
+    "token_breakdown": {
+      "input": 5741,
+      "cache_read": 120192,
+      "cache_creation": 0,
+      "output": 705,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+    "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+    "scenarioId": "BB-012",
+    "scenarioName": "Unknown repo leverage task",
+    "agentId": "mimo",
+    "agentLabel": "MiMoCode / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 64.967,
+    "tokens": 213715,
+    "cost": 0.065665,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 4962,
+      "cache_read": 207680,
+      "cache_creation": 0,
+      "output": 701,
+      "reasoning": 372
+    },
+    "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+    "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+    "scenarioId": "BB-012",
+    "scenarioName": "Unknown repo leverage task",
+    "agentId": "pi",
+    "agentLabel": "Pi Coding Agent / GLM-5.2",
+    "model": "glm-5.2",
+    "verdict": "PASS",
+    "wall": 86.329,
+    "tokens": 38848,
+    "cost": 0.015392,
+    "vendorCost": 0.0,
+    "token_breakdown": {
+      "input": 2034,
+      "cache_read": 36096,
+      "cache_creation": 0,
+      "output": 718,
+      "reasoning": 0
+    },
+    "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+    "scenarioId": "BB-012",
+    "scenarioName": "Unknown repo leverage task",
+    "agentId": "codex-cli",
+    "agentLabel": "Codex CLI / GPT-5.5",
+    "model": "gpt-5.5",
+    "verdict": "PASS",
+    "wall": 90.124,
+    "tokens": 167667,
+    "cost": 0.451874,
+    "vendorCost": 0.424154,
+    "token_breakdown": {
+      "input": 54944,
+      "cache_read": 109568,
+      "cache_creation": 0,
+      "output": 3155,
+      "reasoning": 924
+    },
+    "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+    "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  },
+  {
+    "schema": "cab.sanitized_telemetry.v1",
+    "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+    "scenarioId": "BB-012",
+    "scenarioName": "Unknown repo leverage task",
+    "agentId": "agy",
+    "agentLabel": "Antigravity agy / Gemini 3.5 Flash Medium",
+    "model": "Gemini 3.5 Flash Medium",
+    "verdict": "PASS",
+    "wall": 102.463,
+    "tokens": null,
+    "cost": null,
+    "vendorCost": null,
+    "token_breakdown": null,
+    "telemetry_strategy": "unavailable",
+    "telemetry_source_sanitized": "",
+    "telemetry_note": null,
+    "limitations": [
+      "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+      "Local paths and private provider-store identifiers are redacted or generalized.",
+      "Use alongside committed agent evidence for verdict/wall/diff verification."
+    ]
+  }
+]

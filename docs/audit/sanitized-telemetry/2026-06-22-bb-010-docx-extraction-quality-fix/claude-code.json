@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+  "scenarioId": "BB-010",
+  "scenarioName": "DOCX extraction quality fix",
+  "agentId": "claude-code",
+  "agentLabel": "Claude Code / GLM-5.2",
+  "model": "glm-5.2[1m]",
+  "verdict": "PASS",
+  "wall": 69.886,
+  "tokens": 157352,
+  "cost": 0.076082,
+  "vendorCost": 0.233464,
+  "token_breakdown": {
+    "input": 23748,
+    "cache_read": 131648,
+    "cache_creation": 0,
+    "output": 1956,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+  "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

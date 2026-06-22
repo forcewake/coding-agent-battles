@@ -1,6 +1,0 @@
-agent=pi
-workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/pi/workspace
-exit_code=0
-timed_out=False
-wall_seconds=70.733
-command=/home/forcewake/.nvm/versions/node/v24.15.0/bin/pi --provider zai-coding-cn --model glm-5.2 --thinking xhigh --mode json --no-context-files --approve --tools read,write,edit,bash,grep,find,ls -p <PROMPT>

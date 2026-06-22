@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+  "scenarioId": "BB-003",
+  "scenarioName": "JSON export for existing CLI",
+  "agentId": "opencode",
+  "agentLabel": "OpenCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 69.014,
+  "tokens": 149410,
+  "cost": 0.051976,
+  "vendorCost": 0.051976,
+  "token_breakdown": {
+    "input": 6622,
+    "cache_read": 141440,
+    "cache_creation": 0,
+    "output": 1182,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+  "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

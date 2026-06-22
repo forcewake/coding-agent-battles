@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+  "scenarioId": "BB-003",
+  "scenarioName": "JSON export for existing CLI",
+  "agentId": "pi",
+  "agentLabel": "Pi Coding Agent / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 94.955,
+  "tokens": 50657,
+  "cost": 0.030755,
+  "vendorCost": 0.0,
+  "token_breakdown": {
+    "input": 5754,
+    "cache_read": 42240,
+    "cache_creation": 0,
+    "output": 2663,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+  "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

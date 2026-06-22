@@ -72,6 +72,18 @@ function bestProcessLabel(agents, fallbackId) {
   return safe(tied[0].short, agentDisplay(tied[0].id));
 }
 
+function bestProcessAgents(agents) {
+  const known = (agents || []).filter(a => knownNumber(a.process));
+  if (!known.length) return [];
+  const max = Math.max(...known.map(a => a.process));
+  return known.filter(a => a.process === max);
+}
+
+function missingCostNote(agentOrAgents) {
+  const list = Array.isArray(agentOrAgents) ? agentOrAgents : [agentOrAgents];
+  return list.some(a => a && (a.cost == null || a.telemetry_strategy === 'unavailable')) ? 'no cost telemetry' : '';
+}
+
 function markdownToHtml(markdown) {
   const lines = String(markdown || '').split(/\r?\n/);
   const out = [];
@@ -515,16 +527,19 @@ function renderScenarioDetail(data, scenarioId) {
   setText('detail-summary', safe(s.summary));
 
   const agents = s.agents || [];
+  const byId = Object.fromEntries(agents.map(a => [a.id, a]));
+  const bestAgents = bestProcessAgents(agents);
 
   // Winners
   const winnersHtml = [
-    { label: 'Fastest passing', value: agentDisplay(s.fastest) },
-    { label: 'Cheapest passing', value: s.cheapest ? agentDisplay(s.cheapest) : 'n/a — no cost telemetry' },
-    { label: 'Best execution', value: bestProcessLabel(agents, s.processBest) },
+    { label: 'Fastest passing', value: agentDisplay(s.fastest), note: missingCostNote(byId[s.fastest]) },
+    { label: 'Cheapest passing', value: s.cheapest ? agentDisplay(s.cheapest) : 'n/a — no cost telemetry', note: '' },
+    { label: 'Best execution', value: bestProcessLabel(agents, s.processBest), note: missingCostNote(bestAgents) },
   ].map(w => `
     <div class="winner-badge">
       <span class="winner-badge-label">${w.label}</span>
       <span class="winner-badge-value">${safe(w.value)}</span>
+      ${w.note ? `<span class="winner-badge-note">${safe(w.note)}</span>` : ''}
     </div>
   `).join('');
 

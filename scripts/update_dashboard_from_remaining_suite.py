@@ -18,7 +18,9 @@ AGENTS = [
     ("agy", "agy", "Antigravity agy / Gemini 3.5 Flash Medium", "Gemini 3.5 Flash Medium"),
 ]
 META = {
+    "BB-001": ("Broken CLI argument", "CLI bugfix", "L0", "Fix wordfreq --min-length parsing while preserving default word count output."),
     "BB-002": ("CSV edge-case parser", "Library bugfix", "L0", "CSV parser edge cases: quoted commas, escaped quotes, blank rows, deterministic grouping."),
+    "BB-003": ("JSON export for existing CLI", "CLI feature", "L1", "Feature addition: add stable JSON export while preserving text UX."),
     "BB-004": ("Markdown table normalizer", "Text processing", "L1", "Normalize Markdown pipe tables with padded columns and idempotent output."),
     "BB-005": ("FastAPI auth middleware bug", "Backend debugging", "L2", "Fix FastAPI auth dependency so admin is protected while health remains public."),
     "BB-006": ("React filter/search UI", "Frontend behavior", "L2", "Browser-visible search/filter state model with stable empty-state copy."),

@@ -22,6 +22,7 @@
       "cost": 0.023785,
       "patch": 100,
       "process": 99,
+      "processLabel": "execution-quality composite",
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -44,8 +45,7 @@
         "independent_verify": 15,
         "agent_exit": 5,
         "speed": 8.54
-      },
-      "processLabel": "execution-quality composite"
+      }
     },
     {
       "id": "claude-code",
@@ -58,6 +58,7 @@
       "cost": 0.042389,
       "patch": 100,
       "process": 100,
+      "processLabel": "execution-quality composite",
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -79,8 +80,7 @@
         "independent_verify": 15,
         "agent_exit": 5,
         "speed": 10.0
-      },
-      "processLabel": "execution-quality composite"
+      }
     },
     {
       "id": "mimo",
@@ -93,6 +93,7 @@
       "cost": 0.065665,
       "patch": 100,
       "process": 96,
+      "processLabel": "execution-quality composite",
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -115,8 +116,7 @@
         "independent_verify": 15,
         "agent_exit": 5,
         "speed": 6.38
-      },
-      "processLabel": "execution-quality composite"
+      }
     },
     {
       "id": "pi",
@@ -129,6 +129,7 @@
       "cost": 0.015392,
       "patch": 100,
       "process": 93,
+      "processLabel": "execution-quality composite",
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -151,8 +152,7 @@
         "independent_verify": 15,
         "agent_exit": 5,
         "speed": 2.75
-      },
-      "processLabel": "execution-quality composite"
+      }
     },
     {
       "id": "codex-cli",
@@ -165,6 +165,7 @@
       "cost": 0.451874,
       "patch": 100,
       "process": 92,
+      "processLabel": "execution-quality composite",
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -187,8 +188,7 @@
         "independent_verify": 15,
         "agent_exit": 5,
         "speed": 2.1
-      },
-      "processLabel": "execution-quality composite"
+      }
     },
     {
       "id": "agy",
@@ -201,6 +201,7 @@
       "cost": null,
       "patch": 100,
       "process": 90,
+      "processLabel": "execution-quality composite",
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -213,8 +214,7 @@
         "independent_verify": 15,
         "agent_exit": 5,
         "speed": 0.0
-      },
-      "processLabel": "execution-quality composite"
+      }
     }
   ],
   "links": {

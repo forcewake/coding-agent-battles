@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+  "scenarioId": "BB-012",
+  "scenarioName": "Unknown repo leverage task",
+  "agentId": "mimo",
+  "agentLabel": "MiMoCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 64.967,
+  "tokens": 213715,
+  "cost": 0.065665,
+  "vendorCost": 0.0,
+  "token_breakdown": {
+    "input": 4962,
+    "cache_read": 207680,
+    "cache_creation": 0,
+    "output": 701,
+    "reasoning": 372
+  },
+  "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+  "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

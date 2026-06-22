@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+  "scenarioId": "BB-012",
+  "scenarioName": "Unknown repo leverage task",
+  "agentId": "opencode",
+  "agentLabel": "OpenCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 52.259,
+  "tokens": 55799,
+  "cost": 0.023785,
+  "vendorCost": 0.023785,
+  "token_breakdown": {
+    "input": 3784,
+    "cache_read": 50816,
+    "cache_creation": 0,
+    "output": 744,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+  "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

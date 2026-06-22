@@ -1,28 +1,55 @@
 # Coding Agent Battles — cross-check summary
 
-## Verdict
+## Verdict after current reruns
 
 - Deterministic audit: **PASS_WITH_WARNINGS**
-- Gemini 3.1 Pro High adversarial review: **APPROVE_WITH_NOTES**
-- Blockers: **0**
 - Deterministic failures: **0**
+- Blockers: **0**
+- Major warnings: **0**
+- Remaining warnings: **12 minor OpenCode accounting notes**
 
-## What was fixed during cross-check
+## What changed in this closure pass
 
-1. Codex normalized public cost now includes reasoning tokens as output tokens; `vendorCost` preserves native/ccusage value separately.
-2. Execution quality no longer mixes token/cost telemetry into the score; efficiency remains visible in separate token/cost panels.
-3. Public wording no longer claims every number is raw-backed by committed logs; telemetry caveats are explicit.
-4. `docs/audit/telemetry-provenance.json` and `.md` publish evidence levels for all 72 rows.
-5. BB-001 and BB-003 now show a visible legacy provenance warning on scenario pages.
+1. **BB-001 and BB-003 were rerun with the current harness** for all six agents.
+   - New run IDs:
+     - `2026-06-22-bb-001-broken-cli-argument-current-rerun`
+     - `2026-06-22-bb-003-json-export-cli-current-rerun`
+   - Each now has per-agent `result.json`, `verify.log`, `agent.log`, `diff.patch`, `metrics.json`, `metrics.md`, and `results.md`.
+   - Both reruns are **6/6 PASS**.
+2. Added deterministic `verify.py` files to the BB-001 and BB-003 fixtures so they can be replayed through the same harness as BB-002 and BB-004–BB-012.
+3. Removed stale public/raw legacy BB-001 and BB-003 run directories that conflicted with the authoritative current reruns.
+4. Recovered token/cost telemetry for all non-agy rows, including BB-001 and BB-003 current reruns.
+5. Added sanitized row-level telemetry exports under `docs/audit/sanitized-telemetry/`.
+6. Rebuilt telemetry provenance, execution scores, site data, public run mirrors, and claim ledger.
+
+## Current deterministic counts
+
+```json
+{
+  "PASS": 824,
+  "WARN": 12,
+  "FAIL": 0
+}
+```
+
+## Telemetry status
+
+| Category | Rows | Status |
+|---|---:|---|
+| OpenCode | 12 | exact ccusage/opencode directory attribution; minor provider-accounting total-vs-breakdown warnings |
+| Claude Code | 12 | committed raw `agent-output.json` usage |
+| MiMo | 12 | local MiMoCode SQLite exact directory/session extraction, sanitized export published |
+| Pi | 12 | ccusage exact projectPath extraction, sanitized export published |
+| Codex CLI | 12 | ccusage exact session-id extraction, sanitized export published |
+| agy | 12 | unavailable; `ccusage gemini` returned 0 sessions and `tokscale antigravity status` reports 0 cached sessions |
 
 ## Remaining accepted notes
 
 | Severity | Issue | Decision |
 |---|---|---|
-| Major | BB-001/BB-003 lack per-agent `result.json` | Accepted as legacy early-run artifact gap; visible scenario warning added. Rerun if strict uniform artifact schema is required. |
-| Major | BB-001/BB-003 cost rows lack row-level telemetry provenance | Accepted as legacy published metrics; visible warning and manifest caveat added. Rerun if full provenance is required. |
-| Minor | OpenCode token breakdown does not exactly sum to total | Documented provider-accounting nuance; total/cost use ccusage reported total. |
-| Minor | Some telemetry is not raw-replayable from public files | Documented in telemetry provenance manifest; raw local provider stores are intentionally not committed. |
+| Minor | OpenCode token breakdown does not exactly sum to ccusage total | Documented provider-accounting nuance; total/cost use ccusage reported total. |
+| Minor | agy token/cost telemetry unavailable | Explicitly marked unavailable for all 12 agy rows after focused `ccusage gemini` and `tokscale antigravity` probes. |
+| Minor | Sanitized telemetry exports are not raw provider DB/log dumps | Intentional: local provider stores are not committed; row-level sanitized records expose extracted metrics and attribution without private paths. |
 
 ## Artifacts
 
@@ -30,23 +57,10 @@
 - `docs/audit/claim-ledger.md`
 - `docs/audit/telemetry-provenance.json`
 - `docs/audit/telemetry-provenance.md`
+- `docs/audit/sanitized-telemetry/index.json`
+- `docs/audit/sanitized-telemetry/all-records.json`
 - `docs/audit/llm-review-prompt.md`
-- `docs/audit/gemini-3.1-pro-high-review-final2.json`
 
-## Deterministic counts
+## Interpretation boundary
 
-```json
-{
-  "PASS": 788,
-  "WARN": 32,
-  "FAIL": 0
-}
-```
-
-## Gemini final methodology notes
-
-- Dashboard correctly claims 12 scenarios, 72 runs, 70 passes, and 2 fails (verified in site-data.json and raw runs).
-- Fastest, cheapest, and best execution claims are correctly aggregated from the underlying wall-clock, cost, and process scores.
-- Execution quality is fully transparent and explicitly excludes token/cost efficiency, which are evaluated separately.
-- Normalized public cost is clearly separated from vendorCost throughout the dataset.
-- The UI is careful not to overclaim, explicitly pointing users to the audit pack for provenance caveats instead of claiming fully raw-backed telemetry for all rows.
+The benchmark remains a **scaffold + configured model** comparison, not a scaffold-only leaderboard. It is now uniform across all 12 scenarios for verdict/wall/diff/verification artifacts; token/cost is complete for 5/6 agents and explicitly unavailable for agy.

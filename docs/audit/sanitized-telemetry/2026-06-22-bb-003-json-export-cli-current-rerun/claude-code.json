@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+  "scenarioId": "BB-003",
+  "scenarioName": "JSON export for existing CLI",
+  "agentId": "claude-code",
+  "agentLabel": "Claude Code / GLM-5.2",
+  "model": "glm-5.2[1m]",
+  "verdict": "PASS",
+  "wall": 80.125,
+  "tokens": 164894,
+  "cost": 0.062663,
+  "vendorCost": 0.17937,
+  "token_breakdown": {
+    "input": 8989,
+    "cache_read": 153600,
+    "cache_creation": 0,
+    "output": 2305,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+  "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

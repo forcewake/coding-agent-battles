@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+  "task": "BB-003-json-export-cli",
+  "agent": "opencode",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 69.014,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

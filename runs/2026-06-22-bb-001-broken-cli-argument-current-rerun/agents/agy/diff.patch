@@ -1,0 +1,13 @@
+diff --git a/bb001_wordfreq/cli.py b/bb001_wordfreq/cli.py
+index a4e6b29..402b7d3 100644
+--- a/bb001_wordfreq/cli.py
++++ b/bb001_wordfreq/cli.py
+@@ -23,7 +23,7 @@ def build_parser() -> argparse.ArgumentParser:
+     parser.add_argument("path", help="Text file to analyze")
+     parser.add_argument(
+         "--min-length",
+-        action="store_true",
++        type=int,
+         default=0,
+         help="Only include words with at least this many characters",
+     )

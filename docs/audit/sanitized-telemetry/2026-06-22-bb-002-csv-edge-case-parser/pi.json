@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+  "scenarioId": "BB-002",
+  "scenarioName": "CSV edge-case parser",
+  "agentId": "pi",
+  "agentLabel": "Pi Coding Agent / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 125.715,
+  "tokens": 25482,
+  "cost": 0.030214,
+  "vendorCost": 0.0,
+  "token_breakdown": {
+    "input": 7872,
+    "cache_read": 14080,
+    "cache_creation": 0,
+    "output": 3530,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+  "telemetry_source_sanitized": "ccusage pi session exact projectPath",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

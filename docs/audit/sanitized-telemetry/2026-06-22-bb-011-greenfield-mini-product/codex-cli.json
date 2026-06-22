@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-011-greenfield-mini-product",
+  "scenarioId": "BB-011",
+  "scenarioName": "Greenfield mini-product",
+  "agentId": "codex-cli",
+  "agentLabel": "Codex CLI / GPT-5.5",
+  "model": "gpt-5.5",
+  "verdict": "PASS",
+  "wall": 101.535,
+  "tokens": 204368,
+  "cost": 0.438527,
+  "vendorCost": 0.400817,
+  "token_breakdown": {
+    "input": 44487,
+    "cache_read": 156544,
+    "cache_creation": 0,
+    "output": 3337,
+    "reasoning": 1257
+  },
+  "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+  "telemetry_source_sanitized": "ccusage codex session + agents/codex-cli/agent.log session id",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

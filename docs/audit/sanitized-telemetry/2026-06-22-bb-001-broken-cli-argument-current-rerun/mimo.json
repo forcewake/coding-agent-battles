@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+  "scenarioId": "BB-001",
+  "scenarioName": "Broken CLI argument",
+  "agentId": "mimo",
+  "agentLabel": "MiMoCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 64.559,
+  "tokens": 262659,
+  "cost": 0.088933,
+  "vendorCost": 0.0,
+  "token_breakdown": {
+    "input": 14762,
+    "cache_read": 246976,
+    "cache_creation": 0,
+    "output": 836,
+    "reasoning": 85
+  },
+  "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+  "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

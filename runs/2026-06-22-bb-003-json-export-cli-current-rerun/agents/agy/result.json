@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+  "task": "BB-003-json-export-cli",
+  "agent": "agy",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 19.505,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

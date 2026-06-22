@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-011-greenfield-mini-product",
+  "scenarioId": "BB-011",
+  "scenarioName": "Greenfield mini-product",
+  "agentId": "claude-code",
+  "agentLabel": "Claude Code / GLM-5.2",
+  "model": "glm-5.2[1m]",
+  "verdict": "PASS",
+  "wall": 95.167,
+  "tokens": 177821,
+  "cost": 0.056421,
+  "vendorCost": 0.135709,
+  "token_breakdown": {
+    "input": 6006,
+    "cache_read": 171008,
+    "cache_creation": 0,
+    "output": 807,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+  "telemetry_source_sanitized": "agents/claude-code/agent-output.json",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

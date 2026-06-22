@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-006-react-filter-search-ui",
+  "scenarioId": "BB-006",
+  "scenarioName": "React filter/search UI",
+  "agentId": "opencode",
+  "agentLabel": "OpenCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 34.886,
+  "tokens": 51697,
+  "cost": 0.028494,
+  "vendorCost": 0.028494,
+  "token_breakdown": {
+    "input": 11036,
+    "cache_read": 40064,
+    "cache_creation": 0,
+    "output": 506,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+  "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

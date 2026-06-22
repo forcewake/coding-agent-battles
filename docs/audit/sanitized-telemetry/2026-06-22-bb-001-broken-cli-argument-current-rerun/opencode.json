@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+  "scenarioId": "BB-001",
+  "scenarioName": "Broken CLI argument",
+  "agentId": "opencode",
+  "agentLabel": "OpenCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 94.645,
+  "tokens": 195887,
+  "cost": 0.065351,
+  "vendorCost": 0.065351,
+  "token_breakdown": {
+    "input": 6828,
+    "cache_read": 187456,
+    "cache_creation": 0,
+    "output": 1278,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+  "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

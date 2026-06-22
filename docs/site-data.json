@@ -7,7 +7,7 @@
     "agentRuns": 72,
     "passes": 70,
     "passRate": 0.9722222222222222,
-    "normalizedPublicCost": 9.00368,
+    "normalizedPublicCost": 8.174332,
     "costCoverage": 0.8333333333333334
   },
   "pricingBasis": {
@@ -48,15 +48,15 @@
     {
       "id": "BB-001",
       "name": "Broken CLI argument",
-      "runId": "2026-06-22-bb-001-broken-cli-argument-telemetry-rerun",
+      "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
       "type": "CLI bugfix",
       "difficulty": "L0",
-      "summary": "Calibration bugfix: one broken argparse flag; proves red baseline, isolation, telemetry and verification plumbing.",
+      "summary": "Fix wordfreq --min-length parsing while preserving default word count output.",
       "passCount": 6,
       "agentCount": 6,
-      "fastest": "opencode",
+      "fastest": "agy",
       "cheapest": "pi",
-      "processBest": "pi",
+      "processBest": "claude-code",
       "agents": [
         {
           "id": "opencode",
@@ -64,22 +64,35 @@
           "label": "OpenCode / GLM-5.2",
           "model": "glm-5.2",
           "verdict": "PASS",
-          "wall": 35.587,
-          "tokens": 63995,
-          "cost": 0.025004,
+          "wall": 94.645,
+          "tokens": 195887,
+          "cost": 0.065351,
           "patch": 100,
-          "process": 65,
-          "red": false,
+          "process": 96,
+          "processLabel": "execution-quality composite",
+          "red": true,
           "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
-            "baseline_red": 0,
+            "baseline_red": 15,
             "smoke": 15,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 10.0
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 5.54
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+          "telemetry_source": "ccusage opencode session + opencode.log exact directory/session id",
+          "token_breakdown": {
+            "input": 6828,
+            "cache_read": 187456,
+            "cache_creation": 0,
+            "output": 1278,
+            "reasoning": 0
+          },
+          "vendorCost": 0.065351,
+          "telemetry_session": "ses_10eea2c5effeN3Bfkyt3I5ZFIX"
         },
         {
           "id": "claude-code",
@@ -87,22 +100,34 @@
           "label": "Claude Code / GLM-5.2",
           "model": "glm-5.2[1m]",
           "verdict": "PASS",
-          "wall": 40.68,
-          "tokens": 126008,
-          "cost": 0.04304,
+          "wall": 53.025,
+          "tokens": 208020,
+          "cost": 0.066573,
           "patch": 100,
-          "process": 50,
-          "red": false,
-          "smoke": null,
+          "process": 100,
+          "processLabel": "execution-quality composite",
+          "red": true,
+          "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
-            "baseline_red": 0,
-            "smoke": 0,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 9.67
+            "baseline_red": 15,
+            "smoke": 15,
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 9.86
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+          "telemetry_source": "agents/claude-code/agent-output.json",
+          "token_breakdown": {
+            "input": 7170,
+            "cache_read": 199808,
+            "cache_creation": 0,
+            "output": 1042,
+            "reasoning": 0
+          },
+          "vendorCost": 0.161804
         },
         {
           "id": "mimo",
@@ -110,22 +135,35 @@
           "label": "MiMoCode / GLM-5.2",
           "model": "glm-5.2",
           "verdict": "PASS",
-          "wall": 63.621,
-          "tokens": 128610,
-          "cost": 0.063052,
+          "wall": 64.559,
+          "tokens": 262659,
+          "cost": 0.088933,
           "patch": 100,
-          "process": 48,
-          "red": false,
-          "smoke": null,
+          "process": 99,
+          "processLabel": "execution-quality composite",
+          "red": true,
+          "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
-            "baseline_red": 0,
-            "smoke": 0,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 8.21
+            "baseline_red": 15,
+            "smoke": 15,
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 8.66
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+          "telemetry_source": "local MiMoCode SQLite store session.directory + message.tokens",
+          "token_breakdown": {
+            "input": 14762,
+            "cache_read": 246976,
+            "cache_creation": 0,
+            "output": 836,
+            "reasoning": 85
+          },
+          "vendorCost": 0.0,
+          "telemetry_session": "ses_10eea2bfeffePoqDg1NkW1Y8C5"
         },
         {
           "id": "pi",
@@ -133,22 +171,35 @@
           "label": "Pi Coding Agent / GLM-5.2",
           "model": "glm-5.2",
           "verdict": "PASS",
-          "wall": 70.733,
-          "tokens": 25910,
-          "cost": 0.015809,
+          "wall": 119.437,
+          "tokens": 69756,
+          "cost": 0.032009,
           "patch": 100,
-          "process": 78,
+          "process": 93,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
             "baseline_red": 15,
             "smoke": 15,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 7.75
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 2.96
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+          "telemetry_source": "ccusage pi session exact projectPath",
+          "token_breakdown": {
+            "input": 6057,
+            "cache_read": 62016,
+            "cache_creation": 0,
+            "output": 1683,
+            "reasoning": 0
+          },
+          "vendorCost": 0.0,
+          "telemetry_session": "019ef116-a414-7248-a3a6-a2b0b2cbc628"
         },
         {
           "id": "codex-cli",
@@ -156,22 +207,35 @@
           "label": "Codex CLI / GPT-5.5",
           "model": "gpt-5.5",
           "verdict": "PASS",
-          "wall": 114.752,
-          "tokens": 318536,
-          "cost": 0.509121,
+          "wall": 147.902,
+          "tokens": 455504,
+          "cost": 0.644985,
           "patch": 100,
-          "process": 60,
+          "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
-          "smoke": null,
+          "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
             "baseline_red": 15,
-            "smoke": 0,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 4.93
+            "smoke": 15,
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 0.0
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+          "telemetry_source": "ccusage codex session + agents/codex-cli/agent.log session id",
+          "token_breakdown": {
+            "input": 55467,
+            "cache_read": 395520,
+            "cache_creation": 0,
+            "output": 4517,
+            "reasoning": 1146
+          },
+          "vendorCost": 0.610605,
+          "telemetry_session": "2026/06/22/rollout-2026-06-22T22-47-31-019ef116-9dfa-7803-b44a-580b680d7fdf"
         },
         {
           "id": "agy",
@@ -179,36 +243,33 @@
           "label": "Antigravity agy / Gemini 3.5 Flash Medium",
           "model": "Gemini 3.5 Flash Medium",
           "verdict": "PASS",
-          "wall": 191.826,
+          "wall": 51.705,
           "tokens": null,
           "cost": null,
           "patch": 100,
-          "process": 55,
+          "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
-          "smoke": null,
+          "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
             "baseline_red": 15,
-            "smoke": 0,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 0.0
+            "smoke": 15,
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 10.0
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "unavailable"
         }
       ],
       "links": {
-        "results": "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/results.md",
-        "metrics": "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.md",
-        "json": "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "results": "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/results.md",
+        "metrics": "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.md",
+        "json": "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       },
-      "slug": "bb-001",
-      "provenanceWarnings": [
-        {
-          "label": "Legacy evidence gap",
-          "detail": "This early run predates row-level result.json and telemetry provenance. Verdicts are backed by metrics/results/verify logs; token/cost rows are legacy published metrics without per-row provenance."
-        }
-      ]
+      "slug": "bb-001"
     },
     {
       "id": "BB-002",
@@ -234,6 +295,7 @@
           "cost": 0.034981,
           "patch": 100,
           "process": 99,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -256,8 +318,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 8.96
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -270,6 +331,7 @@
           "cost": 0.079108,
           "patch": 100,
           "process": 98,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -291,8 +353,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 8.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -305,6 +366,7 @@
           "cost": 0.075279,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -327,8 +389,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -341,6 +402,7 @@
           "cost": 0.030214,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -363,8 +425,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 5.65
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -377,6 +438,7 @@
           "cost": 0.3877,
           "patch": 100,
           "process": 97,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -399,8 +461,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 7.41
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -413,6 +474,7 @@
           "cost": null,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -425,8 +487,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -439,15 +500,15 @@
     {
       "id": "BB-003",
       "name": "JSON export for existing CLI",
-      "runId": "2026-06-22-bb-003-json-export-cli",
+      "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
       "type": "CLI feature",
       "difficulty": "L1",
-      "summary": "Feature addition: add stable JSON export while preserving text UX; differentiates process and implementation discipline more than BB-001.",
+      "summary": "Feature addition: add stable JSON export while preserving text UX.",
       "passCount": 6,
       "agentCount": 6,
-      "fastest": "claude-code",
+      "fastest": "agy",
       "cheapest": "pi",
-      "processBest": "codex-cli",
+      "processBest": "agy",
       "agents": [
         {
           "id": "opencode",
@@ -455,22 +516,35 @@
           "label": "OpenCode / GLM-5.2",
           "model": "glm-5.2",
           "verdict": "PASS",
-          "wall": 66.732,
-          "tokens": 149488,
-          "cost": 0.051295,
+          "wall": 69.014,
+          "tokens": 149410,
+          "cost": 0.051976,
           "patch": 100,
-          "process": 64,
-          "red": false,
+          "process": 94,
+          "processLabel": "execution-quality composite",
+          "red": true,
           "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
-            "baseline_red": 0,
+            "baseline_red": 15,
             "smoke": 15,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 8.54
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 4.07
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+          "telemetry_source": "ccusage opencode session + opencode.log exact directory/session id",
+          "token_breakdown": {
+            "input": 6622,
+            "cache_read": 141440,
+            "cache_creation": 0,
+            "output": 1182,
+            "reasoning": 0
+          },
+          "vendorCost": 0.051976,
+          "telemetry_session": "ses_10ee8b76affem1oEoDUJNnh5ii"
         },
         {
           "id": "claude-code",
@@ -478,22 +552,34 @@
           "label": "Claude Code / GLM-5.2",
           "model": "glm-5.2[1m]",
           "verdict": "PASS",
-          "wall": 52.901,
-          "tokens": 156994,
-          "cost": 0.072912,
+          "wall": 80.125,
+          "tokens": 164894,
+          "cost": 0.062663,
           "patch": 100,
-          "process": 65,
-          "red": false,
+          "process": 93,
+          "processLabel": "execution-quality composite",
+          "red": true,
           "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
-            "baseline_red": 0,
+            "baseline_red": 15,
             "smoke": 15,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 10.0
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 2.74
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "claude_json_usage_normalized_public_cost",
+          "telemetry_source": "agents/claude-code/agent-output.json",
+          "token_breakdown": {
+            "input": 8989,
+            "cache_read": 153600,
+            "cache_creation": 0,
+            "output": 2305,
+            "reasoning": 0
+          },
+          "vendorCost": 0.17937
         },
         {
           "id": "mimo",
@@ -501,22 +587,35 @@
           "label": "MiMoCode / GLM-5.2",
           "model": "glm-5.2",
           "verdict": "PASS",
-          "wall": 94.151,
-          "tokens": 330730,
-          "cost": 0.108728,
+          "wall": 63.405,
+          "tokens": 159098,
+          "cost": 0.054476,
           "patch": 100,
-          "process": 61,
-          "red": false,
+          "process": 95,
+          "processLabel": "execution-quality composite",
+          "red": true,
           "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
-            "baseline_red": 0,
+            "baseline_red": 15,
             "smoke": 15,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 5.65
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 4.74
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+          "telemetry_source": "local MiMoCode SQLite store session.directory + message.tokens",
+          "token_breakdown": {
+            "input": 6750,
+            "cache_read": 151040,
+            "cache_creation": 0,
+            "output": 1141,
+            "reasoning": 167
+          },
+          "vendorCost": 0.0,
+          "telemetry_session": "ses_10ee92c49ffejfOggjgua0UDvg"
         },
         {
           "id": "pi",
@@ -524,22 +623,35 @@
           "label": "Pi Coding Agent / GLM-5.2",
           "model": "glm-5.2",
           "verdict": "PASS",
-          "wall": 56.314,
-          "tokens": 5512,
-          "cost": 0.002751,
+          "wall": 94.955,
+          "tokens": 50657,
+          "cost": 0.030755,
           "patch": 100,
-          "process": 65,
-          "red": false,
+          "process": 91,
+          "processLabel": "execution-quality composite",
+          "red": true,
           "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
-            "baseline_red": 0,
+            "baseline_red": 15,
             "smoke": 15,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 9.64
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 0.97
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "ccusage_pi_exact_project_path_normalized_public_cost",
+          "telemetry_source": "ccusage pi session exact projectPath",
+          "token_breakdown": {
+            "input": 5754,
+            "cache_read": 42240,
+            "cache_creation": 0,
+            "output": 2663,
+            "reasoning": 0
+          },
+          "vendorCost": 0.0,
+          "telemetry_session": "019ef118-7985-723f-b0db-69ab78a432ff"
         },
         {
           "id": "codex-cli",
@@ -547,22 +659,35 @@
           "label": "Codex CLI / GPT-5.5",
           "model": "gpt-5.5",
           "verdict": "PASS",
-          "wall": 104.966,
-          "tokens": 242829,
-          "cost": 1.430545,
+          "wall": 103.024,
+          "tokens": 187021,
+          "cost": 0.395188,
           "patch": 100,
-          "process": 75,
+          "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
             "baseline_red": 15,
             "smoke": 15,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 4.51
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 0.0
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
+          "telemetry_source": "ccusage codex session + agents/codex-cli/agent.log session id",
+          "token_breakdown": {
+            "input": 36822,
+            "cache_read": 146816,
+            "cache_creation": 0,
+            "output": 3383,
+            "reasoning": 1206
+          },
+          "vendorCost": 0.359008,
+          "telemetry_session": "2026/06/22/rollout-2026-06-22T22-49-24-019ef118-553d-7d50-932e-8f7bfb49e330"
         },
         {
           "id": "agy",
@@ -570,36 +695,33 @@
           "label": "Antigravity agy / Gemini 3.5 Flash Medium",
           "model": "Gemini 3.5 Flash Medium",
           "verdict": "PASS",
-          "wall": 147.78,
+          "wall": 19.505,
           "tokens": null,
           "cost": null,
           "patch": 100,
-          "process": 55,
-          "red": false,
+          "process": 100,
+          "processLabel": "execution-quality composite",
+          "red": true,
           "smoke": true,
+          "agentExit": 0,
+          "verifyExit": 0,
           "processComponents": {
             "correctness": 40,
-            "baseline_red": 0,
+            "baseline_red": 15,
             "smoke": 15,
-            "independent_verify": 0,
-            "agent_exit": 0,
-            "speed": 0.0
+            "independent_verify": 15,
+            "agent_exit": 5,
+            "speed": 10.0
           },
-          "processLabel": "execution-quality composite"
+          "telemetry_strategy": "unavailable"
         }
       ],
       "links": {
-        "results": "runs/2026-06-22-bb-003-json-export-cli/results.md",
-        "metrics": "runs/2026-06-22-bb-003-json-export-cli/metrics.md",
-        "json": "runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "results": "runs/2026-06-22-bb-003-json-export-cli-current-rerun/results.md",
+        "metrics": "runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.md",
+        "json": "runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       },
-      "slug": "bb-003",
-      "provenanceWarnings": [
-        {
-          "label": "Legacy evidence gap",
-          "detail": "This early run predates row-level result.json and telemetry provenance. Verdicts are backed by metrics/results/verify logs; token/cost rows are legacy published metrics without per-row provenance."
-        }
-      ]
+      "slug": "bb-003"
     },
     {
       "id": "BB-004",
@@ -625,6 +747,7 @@
           "cost": 0.062082,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -647,8 +770,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 5.98
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -661,6 +783,7 @@
           "cost": 0.085769,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -682,8 +805,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 5.84
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -696,6 +818,7 @@
           "cost": 0.094997,
           "patch": 100,
           "process": 94,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -718,8 +841,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 4.25
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -732,6 +854,7 @@
           "cost": 0.059673,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -754,8 +877,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -768,6 +890,7 @@
           "cost": 0.933381,
           "patch": 100,
           "process": 92,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -790,8 +913,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 2.07
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -804,6 +926,7 @@
           "cost": null,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -816,8 +939,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -851,6 +973,7 @@
           "cost": 0.023405,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -873,8 +996,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -887,6 +1009,7 @@
           "cost": 0.050461,
           "patch": 100,
           "process": 99,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -908,8 +1031,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.24
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -922,6 +1044,7 @@
           "cost": 0.041709,
           "patch": 100,
           "process": 99,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -944,8 +1067,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.43
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -958,6 +1080,7 @@
           "cost": 0.01722,
           "patch": 100,
           "process": 92,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -980,8 +1103,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 2.22
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -994,6 +1116,7 @@
           "cost": 0.431287,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1016,8 +1139,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -1030,6 +1152,7 @@
           "cost": null,
           "patch": 0,
           "process": 29,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": false,
           "agentExit": 0,
@@ -1042,8 +1165,7 @@
             "independent_verify": 0,
             "agent_exit": 5,
             "speed": 9.37
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -1077,6 +1199,7 @@
           "cost": 0.028494,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1099,8 +1222,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -1113,6 +1235,7 @@
           "cost": 0.054023,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1134,8 +1257,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -1148,6 +1270,7 @@
           "cost": 0.050855,
           "patch": 100,
           "process": 99,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1170,8 +1293,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.27
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -1184,6 +1306,7 @@
           "cost": 0.008967,
           "patch": 100,
           "process": 97,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1206,8 +1329,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 6.7
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -1220,6 +1342,7 @@
           "cost": 0.293369,
           "patch": 100,
           "process": 92,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1242,8 +1365,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 2.43
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -1256,6 +1378,7 @@
           "cost": null,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1268,8 +1391,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.55
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -1303,6 +1425,7 @@
           "cost": 0.026777,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1325,8 +1448,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -1339,6 +1461,7 @@
           "cost": 0.088476,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1360,8 +1483,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 5.66
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -1374,6 +1496,7 @@
           "cost": 0.059777,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1396,8 +1519,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 6.15
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -1410,6 +1532,7 @@
           "cost": 0.025923,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1432,8 +1555,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -1446,6 +1568,7 @@
           "cost": 0.5011,
           "patch": 100,
           "process": 92,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1468,8 +1591,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 1.61
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -1482,6 +1604,7 @@
           "cost": null,
           "patch": 100,
           "process": 97,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1494,8 +1617,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 7.01
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -1529,6 +1651,7 @@
           "cost": 0.035012,
           "patch": 100,
           "process": 98,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1551,8 +1674,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 8.25
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -1565,6 +1687,7 @@
           "cost": 0.060092,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1586,8 +1709,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -1600,6 +1722,7 @@
           "cost": 0.055319,
           "patch": 100,
           "process": 98,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1622,8 +1745,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 8.32
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -1636,6 +1758,7 @@
           "cost": 0.011694,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1658,8 +1781,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 5.7
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -1672,6 +1794,7 @@
           "cost": 0.383047,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1694,8 +1817,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -1708,6 +1830,7 @@
           "cost": null,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1720,8 +1843,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.93
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -1755,6 +1877,7 @@
           "cost": 0.030313,
           "patch": 100,
           "process": 97,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1777,8 +1900,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 7.44
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -1791,6 +1913,7 @@
           "cost": 0.052263,
           "patch": 100,
           "process": 92,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1812,8 +1935,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 1.95
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -1826,6 +1948,7 @@
           "cost": 0.097538,
           "patch": 100,
           "process": 92,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1848,8 +1971,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 1.53
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -1862,6 +1984,7 @@
           "cost": 0.013878,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1884,8 +2007,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 5.59
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -1898,6 +2020,7 @@
           "cost": 0.479018,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -1920,8 +2043,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -1934,6 +2056,7 @@
           "cost": null,
           "patch": 0,
           "process": 30,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": false,
           "agentExit": 0,
@@ -1946,8 +2069,7 @@
             "independent_verify": 0,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -1981,6 +2103,7 @@
           "cost": 0.033141,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2003,8 +2126,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -2017,6 +2139,7 @@
           "cost": 0.076082,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2038,8 +2161,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.92
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -2052,6 +2174,7 @@
           "cost": 0.073111,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2074,8 +2197,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -2088,6 +2210,7 @@
           "cost": 0.019299,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2110,8 +2233,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.55
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -2124,6 +2246,7 @@
           "cost": 0.530691,
           "patch": 100,
           "process": 98,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2146,8 +2269,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 7.72
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -2160,6 +2282,7 @@
           "cost": null,
           "patch": 100,
           "process": 99,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2172,8 +2295,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 8.66
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -2207,6 +2329,7 @@
           "cost": 0.020773,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2229,8 +2352,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -2243,6 +2365,7 @@
           "cost": 0.056421,
           "patch": 100,
           "process": 91,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2264,8 +2387,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 1.17
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -2278,6 +2400,7 @@
           "cost": 0.05813,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2300,8 +2423,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.59
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -2314,6 +2436,7 @@
           "cost": 0.012942,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2336,8 +2459,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 5.58
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -2350,6 +2472,7 @@
           "cost": 0.438527,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2372,8 +2495,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -2386,6 +2508,7 @@
           "cost": null,
           "patch": 100,
           "process": 99,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2398,8 +2521,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 9.38
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -2433,6 +2555,7 @@
           "cost": 0.023785,
           "patch": 100,
           "process": 99,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2455,8 +2578,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 8.54
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "claude-code",
@@ -2469,6 +2591,7 @@
           "cost": 0.042389,
           "patch": 100,
           "process": 100,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2490,8 +2613,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 10.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "mimo",
@@ -2504,6 +2626,7 @@
           "cost": 0.065665,
           "patch": 100,
           "process": 96,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2526,8 +2649,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 6.38
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "pi",
@@ -2540,6 +2662,7 @@
           "cost": 0.015392,
           "patch": 100,
           "process": 93,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2562,8 +2685,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 2.75
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "codex-cli",
@@ -2576,6 +2698,7 @@
           "cost": 0.451874,
           "patch": 100,
           "process": 92,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2598,8 +2721,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 2.1
-          },
-          "processLabel": "execution-quality composite"
+          }
         },
         {
           "id": "agy",
@@ -2612,6 +2734,7 @@
           "cost": null,
           "patch": 100,
           "process": 90,
+          "processLabel": "execution-quality composite",
           "red": true,
           "smoke": true,
           "agentExit": 0,
@@ -2624,8 +2747,7 @@
             "independent_verify": 15,
             "agent_exit": 5,
             "speed": 0.0
-          },
-          "processLabel": "execution-quality composite"
+          }
         }
       ],
       "links": {
@@ -2645,10 +2767,10 @@
       "runs": 12,
       "passes": 12,
       "passRate": 1.0,
-      "avgWall": 62.063,
-      "avgProcess": 93.2,
-      "avgCost": 0.032922,
-      "totalTokens": 957322,
+      "avgWall": 67.174,
+      "avgProcess": 98.2,
+      "avgCost": 0.036341,
+      "totalTokens": 1089136,
       "telemetryCoverage": 1.0
     },
     {
@@ -2659,10 +2781,10 @@
       "runs": 12,
       "passes": 12,
       "passRate": 1.0,
-      "avgWall": 76.404,
-      "avgProcess": 89.8,
-      "avgCost": 0.06342,
-      "totalTokens": 1862667,
+      "avgWall": 79.702,
+      "avgProcess": 96.2,
+      "avgCost": 0.064527,
+      "totalTokens": 1952579,
       "telemetryCoverage": 1.0
     },
     {
@@ -2673,10 +2795,10 @@
       "runs": 12,
       "passes": 12,
       "passRate": 1.0,
-      "avgWall": 97.368,
-      "avgProcess": 89.4,
-      "avgCost": 0.070347,
-      "totalTokens": 2480045,
+      "avgWall": 94.884,
+      "avgProcess": 96.5,
+      "avgCost": 0.067982,
+      "totalTokens": 2442462,
       "telemetryCoverage": 1.0
     },
     {
@@ -2687,10 +2809,10 @@
       "runs": 12,
       "passes": 12,
       "passRate": 1.0,
-      "avgWall": 95.014,
-      "avgProcess": 90.8,
-      "avgCost": 0.01948,
-      "totalTokens": 343452,
+      "avgWall": 102.293,
+      "avgProcess": 94.2,
+      "avgCost": 0.023164,
+      "totalTokens": 432443,
       "telemetryCoverage": 1.0
     },
     {
@@ -2701,10 +2823,10 @@
       "runs": 12,
       "passes": 12,
       "passRate": 1.0,
-      "avgWall": 112.274,
-      "avgProcess": 88.2,
-      "avgCost": 0.564138,
-      "totalTokens": 2773267,
+      "avgWall": 114.875,
+      "avgProcess": 91.9,
+      "avgCost": 0.489181,
+      "totalTokens": 2854427,
       "telemetryCoverage": 1.0
     },
     {
@@ -2715,8 +2837,8 @@
       "runs": 12,
       "passes": 10,
       "passRate": 0.8333333333333334,
-      "avgWall": 95.853,
-      "avgProcess": 78.7,
+      "avgWall": 73.487,
+      "avgProcess": 86.2,
       "avgCost": null,
       "totalTokens": null,
       "telemetryCoverage": 0.0
@@ -2971,7 +3093,7 @@
     "agy_note": "ccusage gemini supports Gemini CLI logs, not necessarily Antigravity agy transcripts under ~/.gemini/antigravity-cli/brain; agy token/cost remains unavailable in these runs.",
     "bulkSuiteExtraction": {
       "date": "2026-06-22",
-      "updatedAgentRuns": 50,
+      "updatedAgentRuns": 60,
       "coverage": "50/60 bulk runs; agy remains unavailable",
       "sources": [
         "ccusage codex exact session id from agent.log; normalized public cost recomputed from input/cache/output/reasoning tokens, vendorCost preserves ccusage native cost",

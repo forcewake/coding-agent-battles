@@ -1,0 +1,7 @@
+{
+  "schema": "cab.sanitized_telemetry_index.v1",
+  "records": 72,
+  "runs": 12,
+  "description": "Sanitized row-level token/cost telemetry exports for public audit. These intentionally omit raw provider DBs/logs and private local paths.",
+  "records_file": "all-records.json"
+}

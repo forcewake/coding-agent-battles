@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+  "task": "BB-001-broken-cli-argument",
+  "agent": "opencode",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 94.645,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

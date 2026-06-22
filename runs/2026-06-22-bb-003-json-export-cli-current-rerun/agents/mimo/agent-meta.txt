@@ -1,0 +1,7 @@
+agent=mimo
+run_id=2026-06-22-bb-003-json-export-cli-current-rerun
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/workspace
+exit_code=0
+timed_out=False
+wall_seconds=63.405
+command=mimo run --dir /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/workspace --dangerously-skip-permissions <PROMPT>

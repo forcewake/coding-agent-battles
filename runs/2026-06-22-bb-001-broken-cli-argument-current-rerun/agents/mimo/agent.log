@@ -1,0 +1,79 @@
+[0m
+> build · glm-5.2
+[0m
+I'll explore the fixture first to understand the codebase.
+[0m$ [0mls -la tasks/BB-001-broken-cli-argument/fixture/
+ls: cannot access 'tasks/BB-001-broken-cli-argument/fixture/': No such file or directory
+[0m
+[0m$ [0mls -la
+total 36
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 22:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 22:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 22:44 bb001_wordfreq
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 22:46 .git
+-rw------- 1 forcewake forcewake   66 Jun 22 13:44 .gitignore
+-rw------- 1 forcewake forcewake  300 Jun 22 13:43 pyproject.toml
+-rw------- 1 forcewake forcewake   46 Jun 22 13:43 sample.txt
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 22:44 tests
+-rw------- 1 forcewake forcewake  730 Jun 22 22:44 verify.py
+[0m
+[0m→ [0mRead bb001_wordfreq
+[0m→ [0mRead bb001_wordfreq/cli.py
+Found the bug — `--min-length` uses `action="store_true"` (boolean flag) instead of accepting an integer. Let me check the tests and other files.
+[0m→ [0mRead bb001_wordfreq/__main__.py
+[0m→ [0mRead tests
+[0m→ [0mRead tests/test_cli.py
+[0m→ [0mRead verify.py
+Now I'll fix the bug — change `action="store_true"` to `type=int`.
+[0m
+[0m← [0mEdit bb001_wordfreq/cli.py
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/workspace/bb001_wordfreq/cli.py
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/workspace/bb001_wordfreq/cli.py
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/workspace/bb001_wordfreq/cli.py
+@@ -22,9 +22,9 @@
+ parser = argparse.ArgumentParser(prog="wordfreq")
+ parser.add_argument("path", help="Text file to analyze")
+ parser.add_argument(
+     "--min-length",
+-    action="store_true",
++    type=int,
+     default=0,
+     help="Only include words with at least this many characters",
+ )
+ return parser
+
+[0m
+Now I'll set up the venv, install deps, and run the verification.
+[0m$ [0mpython -m venv .venv && . .venv/bin/activate && pip install -e . pytest -q 2>&1 | tail -5
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+[0m
+[0m$ [0m. .venv/bin/activate && python verify.py
+$ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/workspace/.venv/bin/python -m pytest -q
+..                                                                       [100%]
+2 passed in 0.09s
+$ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/workspace/.venv/bin/python -m bb001_wordfreq --min-length 4 sample.txt
+beta	2
+elephant	2
+alpha	1
+$ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/workspace/.venv/bin/python -m bb001_wordfreq sample.txt
+beta	2
+elephant	2
+alpha	1
+cat	1
+dog	1
+fox	1
+[0m
+All checks pass.
+
+## Summary
+
+**Changed files:** `bb001_wordfreq/cli.py` — replaced `action="store_true"` with `type=int` on the `--min-length` argument so it accepts an integer value instead of acting as a boolean flag. The existing `count_words` logic (which already filters by `min_length`) now receives the parsed integer.
+
+**Verification (`python verify.py`, exit 0):**
+- `pytest -q` → 2 passed
+- `python -m bb001_wordfreq --min-length 4 sample.txt` → exit 0, outputs `word<TAB>count` sorted by count desc then word asc
+- Default (no flag) → all 6 words included
+
+Diff is a single keyword change; no tests or output format were touched.

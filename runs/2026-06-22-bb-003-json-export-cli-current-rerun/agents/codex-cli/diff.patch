@@ -1,0 +1,30 @@
+diff --git a/bb003_logstats/cli.py b/bb003_logstats/cli.py
+index fab4ec6..6d375a2 100644
+--- a/bb003_logstats/cli.py
++++ b/bb003_logstats/cli.py
+@@ -1,6 +1,7 @@
+ from __future__ import annotations
+ 
+ import argparse
++import json
+ from collections import Counter
+ from pathlib import Path
+ from typing import Iterable, NamedTuple
+@@ -53,6 +54,7 @@ def render_text(summary: dict[str, object]) -> str:
+ 
+ def build_parser() -> argparse.ArgumentParser:
+     parser = argparse.ArgumentParser(description="Summarize a tiny access log")
++    parser.add_argument("--json", action="store_true", help="Write JSON output")
+     parser.add_argument("logfile", type=Path, help="Path to access log")
+     return parser
+ 
+@@ -62,5 +64,8 @@ def main(argv: list[str] | None = None) -> int:
+     args = parser.parse_args(argv)
+     requests = parse_requests(args.logfile.read_text(encoding="utf-8").splitlines())
+     summary = summarize(requests)
+-    print(render_text(summary))
++    if args.json:
++        print(json.dumps(summary))
++    else:
++        print(render_text(summary))
+     return 0

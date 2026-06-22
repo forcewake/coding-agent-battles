@@ -1,18 +1,18 @@
 {
-  "generated_at_utc": "2026-06-22T20:25:03.608905+00:00",
+  "generated_at_utc": "2026-06-22T21:12:45.658164+00:00",
   "repo": "forcewake/coding-agent-battles",
-  "commit": "49ac381a1f86ede7c0f82168d9012b15f14b5549",
+  "commit": "bfdf7c6ef4ab5fc85adf4bd42ece3245c7b0b6d4",
   "commit_note": "This is the source revision observed when the audit files were generated. A commit that contains regenerated audit files necessarily has a different SHA; compare non-audit files for data changes.",
   "public_base_url": "https://forcewake.github.io/coding-agent-battles",
   "status_counts": {
-    "PASS": 792,
-    "WARN": 32,
+    "PASS": 824,
+    "WARN": 12,
     "FAIL": 0
   },
   "severity_counts": {
     "blocker": 0,
-    "major": 22,
-    "minor": 10,
+    "major": 0,
+    "minor": 12,
     "info": 0
   },
   "overall_status": "PASS_WITH_WARNINGS",
@@ -63,7 +63,7 @@
       "severity": "info",
       "claim": "BB-001 public docs/runs mirror exists",
       "evidence": [
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun"
       ],
       "details": ""
     },
@@ -73,7 +73,7 @@
       "severity": "info",
       "claim": "BB-001 raw run directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun"
       ],
       "details": ""
     },
@@ -83,7 +83,7 @@
       "severity": "info",
       "claim": "BB-001 metrics.json exists",
       "evidence": [
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -93,7 +93,7 @@
       "severity": "info",
       "claim": "BB-001 metrics.md exists",
       "evidence": [
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.md"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.md"
       ],
       "details": ""
     },
@@ -103,7 +103,7 @@
       "severity": "info",
       "claim": "BB-001 results.md exists",
       "evidence": [
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/results.md"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/results.md"
       ],
       "details": ""
     },
@@ -113,7 +113,7 @@
       "severity": "info",
       "claim": "BB-001 raw metrics.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -123,7 +123,7 @@
       "severity": "info",
       "claim": "BB-001 raw results.md exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/results.md"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/results.md"
       ],
       "details": ""
     },
@@ -134,7 +134,7 @@
       "claim": "BB-001 site-data scenario fields match docs metrics.json",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -145,7 +145,7 @@
       "claim": "BB-001 site-data agent rows match docs metrics.json",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -155,8 +155,8 @@
       "severity": "info",
       "claim": "BB-001 raw metrics.json equals public docs metrics.json",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json",
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json",
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -166,7 +166,7 @@
       "severity": "info",
       "claim": "BB-001 results.md table matches site-data verdict/wall/exits/patch/execution",
       "evidence": [
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/results.md",
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/results.md",
         "docs/site-data.json"
       ],
       "details": ""
@@ -177,7 +177,7 @@
       "severity": "info",
       "claim": "BB-001 red-baseline evidence exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/evidence/baseline-failure.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/evidence/baseline-failure.log"
       ],
       "details": ""
     },
@@ -189,7 +189,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "expected=opencode, actual=opencode"
+      "details": "expected=agy, actual=agy"
     },
     {
       "id": "BB-001.cheapest",
@@ -209,7 +209,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "expected=pi, actual=pi"
+      "details": "expected=claude-code, actual=claude-code"
     },
     {
       "id": "BB-001.opencode.agent_dir",
@@ -217,20 +217,19 @@
       "severity": "info",
       "claim": "BB-001/opencode raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/opencode"
       ],
       "details": ""
     },
     {
       "id": "BB-001.opencode.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/opencode legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/opencode result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode/result.json",
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/opencode/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-001.opencode.verify.log.exists",
@@ -238,7 +237,7 @@
       "severity": "info",
       "claim": "BB-001/opencode verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/opencode/verify.log"
       ],
       "details": ""
     },
@@ -248,7 +247,7 @@
       "severity": "info",
       "claim": "BB-001/opencode agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode/agent.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/opencode/agent.log"
       ],
       "details": ""
     },
@@ -258,20 +257,42 @@
       "severity": "info",
       "claim": "BB-001/opencode diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode/diff.patch"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/opencode/diff.patch"
       ],
       "details": ""
     },
     {
-      "id": "BB-001.opencode.telemetry_provenance",
+      "id": "BB-001.opencode.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/opencode result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/opencode/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-001.opencode.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/opencode verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/opencode/result.json",
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/opencode/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
+      "id": "BB-001.opencode.telemetry_breakdown_total",
       "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/opencode legacy token/cost values lack per-row telemetry provenance",
+      "severity": "minor",
+      "claim": "BB-001/opencode telemetry has exact provenance but token breakdown does not sum exactly to total",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=63995 cost=0.025004"
+      "details": "strategy=ccusage_opencode_exact_directory_session source=ccusage opencode session + opencode.log exact directory/session id token_total_candidates=[195562, 195562] tokens=195887"
     },
     {
       "id": "BB-001.opencode.execution_components",
@@ -281,7 +302,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=65 process=65"
+      "details": "component_sum=96 process=96"
     },
     {
       "id": "BB-001.claude-code.agent_dir",
@@ -289,20 +310,19 @@
       "severity": "info",
       "claim": "BB-001/claude-code raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/claude-code"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code"
       ],
       "details": ""
     },
     {
       "id": "BB-001.claude-code.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/claude-code legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/claude-code result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/claude-code/result.json",
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/claude-code/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-001.claude-code.verify.log.exists",
@@ -310,7 +330,7 @@
       "severity": "info",
       "claim": "BB-001/claude-code verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/claude-code/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code/verify.log"
       ],
       "details": ""
     },
@@ -320,7 +340,7 @@
       "severity": "info",
       "claim": "BB-001/claude-code agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/claude-code/agent.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code/agent.log"
       ],
       "details": ""
     },
@@ -330,20 +350,42 @@
       "severity": "info",
       "claim": "BB-001/claude-code diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/claude-code/diff.patch"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code/diff.patch"
       ],
       "details": ""
     },
     {
+      "id": "BB-001.claude-code.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/claude-code result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-001.claude-code.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/claude-code verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code/result.json",
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
       "id": "BB-001.claude-code.telemetry_provenance",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/claude-code legacy token/cost values lack per-row telemetry provenance",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/claude-code token/cost telemetry has provenance and plausible token breakdown",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=126008 cost=0.04304"
+      "details": "strategy=claude_json_usage_normalized_public_cost source=agents/claude-code/agent-output.json token_total_candidates=[208020, 208020] tokens=208020"
     },
     {
       "id": "BB-001.claude-code.execution_components",
@@ -353,7 +395,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=50 process=50"
+      "details": "component_sum=100 process=100"
     },
     {
       "id": "BB-001.mimo.agent_dir",
@@ -361,20 +403,19 @@
       "severity": "info",
       "claim": "BB-001/mimo raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/mimo"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo"
       ],
       "details": ""
     },
     {
       "id": "BB-001.mimo.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/mimo legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/mimo result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/mimo/result.json",
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/mimo/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-001.mimo.verify.log.exists",
@@ -382,7 +423,7 @@
       "severity": "info",
       "claim": "BB-001/mimo verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/mimo/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/verify.log"
       ],
       "details": ""
     },
@@ -392,7 +433,7 @@
       "severity": "info",
       "claim": "BB-001/mimo agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/mimo/agent.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/agent.log"
       ],
       "details": ""
     },
@@ -402,20 +443,42 @@
       "severity": "info",
       "claim": "BB-001/mimo diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/mimo/diff.patch"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/diff.patch"
       ],
       "details": ""
     },
     {
+      "id": "BB-001.mimo.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/mimo result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-001.mimo.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/mimo verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/result.json",
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
       "id": "BB-001.mimo.telemetry_provenance",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/mimo legacy token/cost values lack per-row telemetry provenance",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/mimo token/cost telemetry has provenance and plausible token breakdown",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=128610 cost=0.063052"
+      "details": "strategy=mimocode_sqlite_session_exact_directory_normalized_public_cost source=local MiMoCode SQLite store session.directory + message.tokens token_total_candidates=[262574, 262659] tokens=262659"
     },
     {
       "id": "BB-001.mimo.execution_components",
@@ -425,7 +488,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=48 process=48"
+      "details": "component_sum=99 process=99"
     },
     {
       "id": "BB-001.pi.agent_dir",
@@ -433,20 +496,19 @@
       "severity": "info",
       "claim": "BB-001/pi raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/pi"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/pi"
       ],
       "details": ""
     },
     {
       "id": "BB-001.pi.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/pi legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/pi result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/pi/result.json",
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/pi/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/pi/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-001.pi.verify.log.exists",
@@ -454,7 +516,7 @@
       "severity": "info",
       "claim": "BB-001/pi verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/pi/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/pi/verify.log"
       ],
       "details": ""
     },
@@ -464,7 +526,7 @@
       "severity": "info",
       "claim": "BB-001/pi agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/pi/agent.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/pi/agent.log"
       ],
       "details": ""
     },
@@ -474,20 +536,42 @@
       "severity": "info",
       "claim": "BB-001/pi diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/pi/diff.patch"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/pi/diff.patch"
       ],
       "details": ""
     },
     {
+      "id": "BB-001.pi.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/pi result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/pi/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-001.pi.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/pi verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/pi/result.json",
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/pi/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
       "id": "BB-001.pi.telemetry_provenance",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/pi legacy token/cost values lack per-row telemetry provenance",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/pi token/cost telemetry has provenance and plausible token breakdown",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=25910 cost=0.015809"
+      "details": "strategy=ccusage_pi_exact_project_path_normalized_public_cost source=ccusage pi session exact projectPath token_total_candidates=[69756, 69756] tokens=69756"
     },
     {
       "id": "BB-001.pi.execution_components",
@@ -497,7 +581,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=78 process=78"
+      "details": "component_sum=93 process=93"
     },
     {
       "id": "BB-001.codex-cli.agent_dir",
@@ -505,20 +589,19 @@
       "severity": "info",
       "claim": "BB-001/codex-cli raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/codex-cli"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/codex-cli"
       ],
       "details": ""
     },
     {
       "id": "BB-001.codex-cli.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/codex-cli legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/codex-cli result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/codex-cli/result.json",
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/codex-cli/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/codex-cli/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-001.codex-cli.verify.log.exists",
@@ -526,7 +609,7 @@
       "severity": "info",
       "claim": "BB-001/codex-cli verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/codex-cli/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/codex-cli/verify.log"
       ],
       "details": ""
     },
@@ -536,7 +619,7 @@
       "severity": "info",
       "claim": "BB-001/codex-cli agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/codex-cli/agent.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/codex-cli/agent.log"
       ],
       "details": ""
     },
@@ -546,20 +629,42 @@
       "severity": "info",
       "claim": "BB-001/codex-cli diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/codex-cli/diff.patch"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/codex-cli/diff.patch"
       ],
       "details": ""
     },
     {
+      "id": "BB-001.codex-cli.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/codex-cli result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/codex-cli/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-001.codex-cli.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/codex-cli verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/codex-cli/result.json",
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/codex-cli/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
       "id": "BB-001.codex-cli.telemetry_provenance",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/codex-cli legacy token/cost values lack per-row telemetry provenance",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/codex-cli token/cost telemetry has provenance and plausible token breakdown",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
+        "docs/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=318536 cost=0.509121"
+      "details": "strategy=ccusage_codex_session_exact_log_session_id_normalized_public_cost source=ccusage codex session + agents/codex-cli/agent.log session id token_total_candidates=[455504, 456650] tokens=455504"
     },
     {
       "id": "BB-001.codex-cli.execution_components",
@@ -569,7 +674,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=60 process=60"
+      "details": "component_sum=90 process=90"
     },
     {
       "id": "BB-001.agy.agent_dir",
@@ -577,20 +682,19 @@
       "severity": "info",
       "claim": "BB-001/agy raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/agy"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy"
       ],
       "details": ""
     },
     {
       "id": "BB-001.agy.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-001/agy legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/agy result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/agy/result.json",
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/agy/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-001.agy.verify.log.exists",
@@ -598,7 +702,7 @@
       "severity": "info",
       "claim": "BB-001/agy verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/agy/verify.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy/verify.log"
       ],
       "details": ""
     },
@@ -608,7 +712,7 @@
       "severity": "info",
       "claim": "BB-001/agy agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/agy/agent.log"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy/agent.log"
       ],
       "details": ""
     },
@@ -618,9 +722,31 @@
       "severity": "info",
       "claim": "BB-001/agy diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/agy/diff.patch"
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy/diff.patch"
       ],
       "details": ""
+    },
+    {
+      "id": "BB-001.agy.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/agy result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-001.agy.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-001/agy verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy/result.json",
+        "runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
     },
     {
       "id": "BB-001.agy.telemetry_na",
@@ -630,7 +756,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "strategy=None tokens=None cost=None"
+      "details": "strategy=unavailable tokens=None cost=None"
     },
     {
       "id": "BB-001.agy.execution_components",
@@ -640,18 +766,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=55 process=55"
-    },
-    {
-      "id": "BB-001.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-001 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-001.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-001.html"
-      ],
-      "details": ""
+      "details": "component_sum=100 process=100"
     },
     {
       "id": "BB-002.docs_run_exists",
@@ -1365,23 +1480,12 @@
       "details": "component_sum=90 process=90"
     },
     {
-      "id": "BB-002.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-002 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-002.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-002.html"
-      ],
-      "details": ""
-    },
-    {
       "id": "BB-003.docs_run_exists",
       "status": "PASS",
       "severity": "info",
       "claim": "BB-003 public docs/runs mirror exists",
       "evidence": [
-        "docs/runs/2026-06-22-bb-003-json-export-cli"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun"
       ],
       "details": ""
     },
@@ -1391,7 +1495,7 @@
       "severity": "info",
       "claim": "BB-003 raw run directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun"
       ],
       "details": ""
     },
@@ -1401,7 +1505,7 @@
       "severity": "info",
       "claim": "BB-003 metrics.json exists",
       "evidence": [
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -1411,7 +1515,7 @@
       "severity": "info",
       "claim": "BB-003 metrics.md exists",
       "evidence": [
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.md"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.md"
       ],
       "details": ""
     },
@@ -1421,7 +1525,7 @@
       "severity": "info",
       "claim": "BB-003 results.md exists",
       "evidence": [
-        "docs/runs/2026-06-22-bb-003-json-export-cli/results.md"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/results.md"
       ],
       "details": ""
     },
@@ -1431,7 +1535,7 @@
       "severity": "info",
       "claim": "BB-003 raw metrics.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -1441,7 +1545,7 @@
       "severity": "info",
       "claim": "BB-003 raw results.md exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/results.md"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/results.md"
       ],
       "details": ""
     },
@@ -1452,7 +1556,7 @@
       "claim": "BB-003 site-data scenario fields match docs metrics.json",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -1463,7 +1567,7 @@
       "claim": "BB-003 site-data agent rows match docs metrics.json",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -1473,8 +1577,8 @@
       "severity": "info",
       "claim": "BB-003 raw metrics.json equals public docs metrics.json",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/metrics.json",
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json",
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
       "details": ""
     },
@@ -1484,7 +1588,7 @@
       "severity": "info",
       "claim": "BB-003 results.md table matches site-data verdict/wall/exits/patch/execution",
       "evidence": [
-        "docs/runs/2026-06-22-bb-003-json-export-cli/results.md",
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/results.md",
         "docs/site-data.json"
       ],
       "details": ""
@@ -1495,7 +1599,7 @@
       "severity": "info",
       "claim": "BB-003 red-baseline evidence exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/evidence/baseline-failure.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/evidence/baseline-failure.log"
       ],
       "details": ""
     },
@@ -1507,7 +1611,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "expected=claude-code, actual=claude-code"
+      "details": "expected=agy, actual=agy"
     },
     {
       "id": "BB-003.cheapest",
@@ -1527,7 +1631,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "expected=codex-cli, actual=codex-cli"
+      "details": "expected=agy, actual=agy"
     },
     {
       "id": "BB-003.opencode.agent_dir",
@@ -1535,20 +1639,19 @@
       "severity": "info",
       "claim": "BB-003/opencode raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/opencode"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/opencode"
       ],
       "details": ""
     },
     {
       "id": "BB-003.opencode.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/opencode legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/opencode result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/opencode/result.json",
-        "runs/2026-06-22-bb-003-json-export-cli/agents/opencode/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/opencode/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-003.opencode.verify.log.exists",
@@ -1556,7 +1659,7 @@
       "severity": "info",
       "claim": "BB-003/opencode verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/opencode/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/opencode/verify.log"
       ],
       "details": ""
     },
@@ -1566,7 +1669,7 @@
       "severity": "info",
       "claim": "BB-003/opencode agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/opencode/agent.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/opencode/agent.log"
       ],
       "details": ""
     },
@@ -1576,20 +1679,42 @@
       "severity": "info",
       "claim": "BB-003/opencode diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/opencode/diff.patch"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/opencode/diff.patch"
       ],
       "details": ""
     },
     {
-      "id": "BB-003.opencode.telemetry_provenance",
+      "id": "BB-003.opencode.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/opencode result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/opencode/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-003.opencode.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/opencode verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/opencode/result.json",
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/opencode/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
+      "id": "BB-003.opencode.telemetry_breakdown_total",
       "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/opencode legacy token/cost values lack per-row telemetry provenance",
+      "severity": "minor",
+      "claim": "BB-003/opencode telemetry has exact provenance but token breakdown does not sum exactly to total",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=149488 cost=0.051295"
+      "details": "strategy=ccusage_opencode_exact_directory_session source=ccusage opencode session + opencode.log exact directory/session id token_total_candidates=[149244, 149244] tokens=149410"
     },
     {
       "id": "BB-003.opencode.execution_components",
@@ -1599,7 +1724,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=64 process=64"
+      "details": "component_sum=94 process=94"
     },
     {
       "id": "BB-003.claude-code.agent_dir",
@@ -1607,20 +1732,19 @@
       "severity": "info",
       "claim": "BB-003/claude-code raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/claude-code"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/claude-code"
       ],
       "details": ""
     },
     {
       "id": "BB-003.claude-code.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/claude-code legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/claude-code result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/claude-code/result.json",
-        "runs/2026-06-22-bb-003-json-export-cli/agents/claude-code/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/claude-code/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-003.claude-code.verify.log.exists",
@@ -1628,7 +1752,7 @@
       "severity": "info",
       "claim": "BB-003/claude-code verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/claude-code/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/claude-code/verify.log"
       ],
       "details": ""
     },
@@ -1638,7 +1762,7 @@
       "severity": "info",
       "claim": "BB-003/claude-code agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/claude-code/agent.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/claude-code/agent.log"
       ],
       "details": ""
     },
@@ -1648,20 +1772,42 @@
       "severity": "info",
       "claim": "BB-003/claude-code diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/claude-code/diff.patch"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/claude-code/diff.patch"
       ],
       "details": ""
     },
     {
+      "id": "BB-003.claude-code.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/claude-code result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/claude-code/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-003.claude-code.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/claude-code verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/claude-code/result.json",
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/claude-code/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
       "id": "BB-003.claude-code.telemetry_provenance",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/claude-code legacy token/cost values lack per-row telemetry provenance",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/claude-code token/cost telemetry has provenance and plausible token breakdown",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=156994 cost=0.072912"
+      "details": "strategy=claude_json_usage_normalized_public_cost source=agents/claude-code/agent-output.json token_total_candidates=[164894, 164894] tokens=164894"
     },
     {
       "id": "BB-003.claude-code.execution_components",
@@ -1671,7 +1817,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=65 process=65"
+      "details": "component_sum=93 process=93"
     },
     {
       "id": "BB-003.mimo.agent_dir",
@@ -1679,20 +1825,19 @@
       "severity": "info",
       "claim": "BB-003/mimo raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/mimo"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo"
       ],
       "details": ""
     },
     {
       "id": "BB-003.mimo.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/mimo legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/mimo result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/mimo/result.json",
-        "runs/2026-06-22-bb-003-json-export-cli/agents/mimo/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-003.mimo.verify.log.exists",
@@ -1700,7 +1845,7 @@
       "severity": "info",
       "claim": "BB-003/mimo verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/mimo/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/verify.log"
       ],
       "details": ""
     },
@@ -1710,7 +1855,7 @@
       "severity": "info",
       "claim": "BB-003/mimo agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/mimo/agent.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/agent.log"
       ],
       "details": ""
     },
@@ -1720,20 +1865,42 @@
       "severity": "info",
       "claim": "BB-003/mimo diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/mimo/diff.patch"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/diff.patch"
       ],
       "details": ""
     },
     {
+      "id": "BB-003.mimo.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/mimo result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-003.mimo.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/mimo verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/result.json",
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/mimo/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
       "id": "BB-003.mimo.telemetry_provenance",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/mimo legacy token/cost values lack per-row telemetry provenance",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/mimo token/cost telemetry has provenance and plausible token breakdown",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=330730 cost=0.108728"
+      "details": "strategy=mimocode_sqlite_session_exact_directory_normalized_public_cost source=local MiMoCode SQLite store session.directory + message.tokens token_total_candidates=[158931, 159098] tokens=159098"
     },
     {
       "id": "BB-003.mimo.execution_components",
@@ -1743,7 +1910,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=61 process=61"
+      "details": "component_sum=95 process=95"
     },
     {
       "id": "BB-003.pi.agent_dir",
@@ -1751,20 +1918,19 @@
       "severity": "info",
       "claim": "BB-003/pi raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/pi"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/pi"
       ],
       "details": ""
     },
     {
       "id": "BB-003.pi.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/pi legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/pi result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/pi/result.json",
-        "runs/2026-06-22-bb-003-json-export-cli/agents/pi/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/pi/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-003.pi.verify.log.exists",
@@ -1772,7 +1938,7 @@
       "severity": "info",
       "claim": "BB-003/pi verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/pi/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/pi/verify.log"
       ],
       "details": ""
     },
@@ -1782,7 +1948,7 @@
       "severity": "info",
       "claim": "BB-003/pi agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/pi/agent.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/pi/agent.log"
       ],
       "details": ""
     },
@@ -1792,20 +1958,42 @@
       "severity": "info",
       "claim": "BB-003/pi diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/pi/diff.patch"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/pi/diff.patch"
       ],
       "details": ""
     },
     {
+      "id": "BB-003.pi.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/pi result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/pi/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-003.pi.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/pi verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/pi/result.json",
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/pi/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
       "id": "BB-003.pi.telemetry_provenance",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/pi legacy token/cost values lack per-row telemetry provenance",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/pi token/cost telemetry has provenance and plausible token breakdown",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=5512 cost=0.002751"
+      "details": "strategy=ccusage_pi_exact_project_path_normalized_public_cost source=ccusage pi session exact projectPath token_total_candidates=[50657, 50657] tokens=50657"
     },
     {
       "id": "BB-003.pi.execution_components",
@@ -1815,7 +2003,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=65 process=65"
+      "details": "component_sum=91 process=91"
     },
     {
       "id": "BB-003.codex-cli.agent_dir",
@@ -1823,20 +2011,19 @@
       "severity": "info",
       "claim": "BB-003/codex-cli raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/codex-cli"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/codex-cli"
       ],
       "details": ""
     },
     {
       "id": "BB-003.codex-cli.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/codex-cli legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/codex-cli result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/codex-cli/result.json",
-        "runs/2026-06-22-bb-003-json-export-cli/agents/codex-cli/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/codex-cli/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-003.codex-cli.verify.log.exists",
@@ -1844,7 +2031,7 @@
       "severity": "info",
       "claim": "BB-003/codex-cli verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/codex-cli/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/codex-cli/verify.log"
       ],
       "details": ""
     },
@@ -1854,7 +2041,7 @@
       "severity": "info",
       "claim": "BB-003/codex-cli agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/codex-cli/agent.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/codex-cli/agent.log"
       ],
       "details": ""
     },
@@ -1864,20 +2051,42 @@
       "severity": "info",
       "claim": "BB-003/codex-cli diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/codex-cli/diff.patch"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/codex-cli/diff.patch"
       ],
       "details": ""
     },
     {
+      "id": "BB-003.codex-cli.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/codex-cli result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/codex-cli/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-003.codex-cli.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/codex-cli verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/codex-cli/result.json",
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/codex-cli/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
+    },
+    {
       "id": "BB-003.codex-cli.telemetry_provenance",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/codex-cli legacy token/cost values lack per-row telemetry provenance",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/codex-cli token/cost telemetry has provenance and plausible token breakdown",
       "evidence": [
         "docs/site-data.json",
-        "docs/runs/2026-06-22-bb-003-json-export-cli/metrics.json"
+        "docs/runs/2026-06-22-bb-003-json-export-cli-current-rerun/metrics.json"
       ],
-      "details": "strategy=None source=None tokens=242829 cost=1.430545"
+      "details": "strategy=ccusage_codex_session_exact_log_session_id_normalized_public_cost source=ccusage codex session + agents/codex-cli/agent.log session id token_total_candidates=[187021, 188227] tokens=187021"
     },
     {
       "id": "BB-003.codex-cli.execution_components",
@@ -1887,7 +2096,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=75 process=75"
+      "details": "component_sum=90 process=90"
     },
     {
       "id": "BB-003.agy.agent_dir",
@@ -1895,20 +2104,19 @@
       "severity": "info",
       "claim": "BB-003/agy raw agent directory exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/agy"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy"
       ],
       "details": ""
     },
     {
       "id": "BB-003.agy.result.json.exists",
-      "status": "WARN",
-      "severity": "major",
-      "claim": "BB-003/agy legacy run lacks result.json; verdict is supported by metrics/results/verify.log instead",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/agy result.json exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/agy/result.json",
-        "runs/2026-06-22-bb-003-json-export-cli/agents/agy/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy/result.json"
       ],
-      "details": "legacy early-scenario artifact gap"
+      "details": ""
     },
     {
       "id": "BB-003.agy.verify.log.exists",
@@ -1916,7 +2124,7 @@
       "severity": "info",
       "claim": "BB-003/agy verify.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/agy/verify.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy/verify.log"
       ],
       "details": ""
     },
@@ -1926,7 +2134,7 @@
       "severity": "info",
       "claim": "BB-003/agy agent.log exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/agy/agent.log"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy/agent.log"
       ],
       "details": ""
     },
@@ -1936,9 +2144,31 @@
       "severity": "info",
       "claim": "BB-003/agy diff.patch exists",
       "evidence": [
-        "runs/2026-06-22-bb-003-json-export-cli/agents/agy/diff.patch"
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy/diff.patch"
       ],
       "details": ""
+    },
+    {
+      "id": "BB-003.agy.result_json_matches_site",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/agy result.json supports UI verdict/exits/wall",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy/result.json",
+        "docs/site-data.json"
+      ],
+      "details": ""
+    },
+    {
+      "id": "BB-003.agy.verdict_vs_verify_exit",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "BB-003/agy verdict is consistent with verifier exit code",
+      "evidence": [
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy/result.json",
+        "runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy/verify.log"
+      ],
+      "details": "verdict=PASS verifyExit=0"
     },
     {
       "id": "BB-003.agy.telemetry_na",
@@ -1948,7 +2178,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "strategy=None tokens=None cost=None"
+      "details": "strategy=unavailable tokens=None cost=None"
     },
     {
       "id": "BB-003.agy.execution_components",
@@ -1958,18 +2188,7 @@
       "evidence": [
         "docs/site-data.json"
       ],
-      "details": "component_sum=55 process=55"
-    },
-    {
-      "id": "BB-003.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-003 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-003.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-003.html"
-      ],
-      "details": ""
+      "details": "component_sum=100 process=100"
     },
     {
       "id": "BB-004.docs_run_exists",
@@ -2683,17 +2902,6 @@
       "details": "component_sum=100 process=100"
     },
     {
-      "id": "BB-004.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-004 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-004.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-004.html"
-      ],
-      "details": ""
-    },
-    {
       "id": "BB-005.docs_run_exists",
       "status": "PASS",
       "severity": "info",
@@ -3403,17 +3611,6 @@
         "docs/site-data.json"
       ],
       "details": "component_sum=29 process=29"
-    },
-    {
-      "id": "BB-005.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-005 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-005.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-005.html"
-      ],
-      "details": ""
     },
     {
       "id": "BB-006.docs_run_exists",
@@ -4127,17 +4324,6 @@
       "details": "component_sum=100 process=100"
     },
     {
-      "id": "BB-006.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-006 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-006.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-006.html"
-      ],
-      "details": ""
-    },
-    {
       "id": "BB-007.docs_run_exists",
       "status": "PASS",
       "severity": "info",
@@ -4847,17 +5033,6 @@
         "docs/site-data.json"
       ],
       "details": "component_sum=97 process=97"
-    },
-    {
-      "id": "BB-007.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-007 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-007.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-007.html"
-      ],
-      "details": ""
     },
     {
       "id": "BB-008.docs_run_exists",
@@ -5571,17 +5746,6 @@
       "details": "component_sum=100 process=100"
     },
     {
-      "id": "BB-008.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-008 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-008.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-008.html"
-      ],
-      "details": ""
-    },
-    {
       "id": "BB-009.docs_run_exists",
       "status": "PASS",
       "severity": "info",
@@ -6291,17 +6455,6 @@
         "docs/site-data.json"
       ],
       "details": "component_sum=30 process=30"
-    },
-    {
-      "id": "BB-009.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-009 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-009.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-009.html"
-      ],
-      "details": ""
     },
     {
       "id": "BB-010.docs_run_exists",
@@ -7015,17 +7168,6 @@
       "details": "component_sum=99 process=99"
     },
     {
-      "id": "BB-010.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-010 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-010.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-010.html"
-      ],
-      "details": ""
-    },
-    {
       "id": "BB-011.docs_run_exists",
       "status": "PASS",
       "severity": "info",
@@ -7737,17 +7879,6 @@
       "details": "component_sum=99 process=99"
     },
     {
-      "id": "BB-011.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-011 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-011.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-011.html"
-      ],
-      "details": ""
-    },
-    {
       "id": "BB-012.docs_run_exists",
       "status": "PASS",
       "severity": "info",
@@ -8457,17 +8588,6 @@
         "docs/site-data.json"
       ],
       "details": "component_sum=90 process=90"
-    },
-    {
-      "id": "BB-012.public_render",
-      "status": "PASS",
-      "severity": "info",
-      "claim": "BB-012 public scenario page renders current UI without exposing artifact viewer by default",
-      "evidence": [
-        "/tmp/cab_public_bb-012.html",
-        "https://forcewake.github.io/coding-agent-battles/scenarios/bb-012.html"
-      ],
-      "details": ""
     },
     {
       "id": "runs.no_orphan_run_dirs",

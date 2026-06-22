@@ -1,0 +1,18 @@
+I will begin by listing the contents of the workspace directory to understand the project structure.
+I'll list the contents of the `bb003_logstats` directory.
+I'll list the contents of the `tests` directory to see the existing test files.
+I'll view `bb003_logstats/cli.py` to see the current implementation of the CLI.
+I will view the main file `bb003_logstats/__main__.py`.
+I'll view `verify.py` to see what checks are run to verify the task.
+I will view `tests/test_cli.py` to see the current tests and how tests verify behavior.
+I'll execute `python verify.py` to see the current test suite status.
+I'll edit `bb003_logstats/cli.py` to import `json`, add the `--json` command-line argument, and serialize the summary output to JSON if the argument is provided.
+I will run the verification script to check if the tests pass and the new option works.
+I have successfully resolved the issue by introducing the `--json` option to the existing CLI. 
+
+### Summary of Changes:
+- Modified [cli.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-003-json-export-cli-current-rerun/agents/agy/workspace/bb003_logstats/cli.py) to:
+  1. Import the standard library `json` module.
+  2. Add the `--json` option flag to the command-line argument parser in `build_parser()`.
+  3. Update `main()` to serialize the summary data to JSON using `json.dumps()` if `--json` is provided, while continuing to fallback to the default text output if not.
+- Verified that all unit tests pass and that `python verify.py` successfully exits with code `0`.

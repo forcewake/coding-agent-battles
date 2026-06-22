@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+  "scenarioId": "BB-005",
+  "scenarioName": "FastAPI auth middleware bug",
+  "agentId": "opencode",
+  "agentLabel": "OpenCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 43.633,
+  "tokens": 53635,
+  "cost": 0.023405,
+  "vendorCost": 0.023405,
+  "token_breakdown": {
+    "input": 5771,
+    "cache_read": 47168,
+    "cache_creation": 0,
+    "output": 602,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+  "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

@@ -5,7 +5,7 @@
 - Type: Tooling / monorepo
 - Difficulty: L3
 - Pass count: 6/6
-- Execution score: deterministic composite from correctness, red-baseline capture, smoke evidence, independent verification, exit code, telemetry coverage, scenario-local speed percentile, and scenario-local token-efficiency percentile.
+- Execution score: deterministic composite from correctness, red-baseline capture, smoke evidence, independent verification, clean agent exit, and scenario-local speed percentile. Token/cost telemetry is reported separately and is not part of execution quality.
 
 ## Agent metrics
 

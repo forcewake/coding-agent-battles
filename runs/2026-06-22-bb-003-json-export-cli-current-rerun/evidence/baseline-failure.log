@@ -1,0 +1,20 @@
+$ /home/forcewake/.hermes/hermes-agent/venv/bin/python -m pytest -q
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+_______________ test_json_export_is_machine_readable_and_stable ________________
+
+    def test_json_export_is_machine_readable_and_stable() -> None:
+        result = run_cli("--json", str(SAMPLE))
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: usage: __main__.py [-h] logfile
+E         __main__.py: error: unrecognized arguments: --json
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/home/forcewake/.hermes/hermes-agent/venv/bin/python', '-m', 'bb003_logstats', '--json', '/hom...eturncode=2, stdout='', stderr='usage: __main__.py [-h] logfile\n__main__.py: error: unrecognized arguments: --json\n').returncode
+
+tests/test_cli.py:42: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_json_export_is_machine_readable_and_stable - A...
+1 failed, 1 passed in 0.10s
+
+[exit] 1

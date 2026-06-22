@@ -1,0 +1,130 @@
+{
+  "tasks": 2,
+  "agents": 6,
+  "runs": 12,
+  "passes": 12,
+  "fails": 0,
+  "errors": 0,
+  "results": [
+    {
+      "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+      "task": "BB-001-broken-cli-argument",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 51.705,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+      "task": "BB-001-broken-cli-argument",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 53.025,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+      "task": "BB-001-broken-cli-argument",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 64.559,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+      "task": "BB-001-broken-cli-argument",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 94.645,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+      "task": "BB-003-json-export-cli",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 63.405,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+      "task": "BB-003-json-export-cli",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 19.505,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+      "task": "BB-003-json-export-cli",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 69.014,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+      "task": "BB-001-broken-cli-argument",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 119.437,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-001-broken-cli-argument-current-rerun",
+      "task": "BB-001-broken-cli-argument",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 147.902,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+      "task": "BB-003-json-export-cli",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 80.125,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+      "task": "BB-003-json-export-cli",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 103.024,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-003-json-export-cli-current-rerun",
+      "task": "BB-003-json-export-cli",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 94.955,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    }
+  ]
+}

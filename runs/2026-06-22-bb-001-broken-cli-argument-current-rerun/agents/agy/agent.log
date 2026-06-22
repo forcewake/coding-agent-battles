@@ -1,0 +1,44 @@
+I will list the contents of the workspace directory to understand the project structure.
+I will list the contents of the `bb001_wordfreq` directory to see the codebase structure.
+I will list the contents of the `tests` directory to see the available test files.
+I will view the `verify.py` script to see what checks it executes and what the criteria for a successful run are.
+I will view `bb001_wordfreq/cli.py` to understand the CLI implementation.
+I will view `tests/test_cli.py` to see the current tests and understand what behavior they verify.
+I will view `bb001_wordfreq/__init__.py` to see its contents.
+I will view `bb001_wordfreq/__main__.py` to see its contents.
+I will run `pytest -q` to see the current state of tests in the workspace.
+I will modify `bb001_wordfreq/cli.py` to change `--min-length` from `action="store_true"` to `type=int`. This allows the CLI to accept an integer value for the `--min-length` argument, while keeping its default value at 0.
+I will run `pytest -q` now to verify if our changes fixed the tests.
+I will run `python verify.py` to verify that all the acceptance criteria are met, as requested.
+I will run `git status` and `git diff` to ensure our changes are minimal and correct.
+I have successfully resolved the issue by modifying `bb001_wordfreq/cli.py` to correctly parse `--min-length` as an integer option.
+
+### Summary of Changes
+
+* **[cli.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/agy/workspace/bb001_wordfreq/cli.py#L24-L29)**: Changed `--min-length` argument parser configuration from `action="store_true"` to `type=int`.
+
+### Verification Output
+
+Both the test suite and the verification script pass successfully.
+
+```
+$ pytest -q
+..                                                                       [100%]
+2 passed in 0.08s
+
+$ python verify.py
+$ /home/forcewake/.hermes/hermes-agent/venv/bin/python -m pytest -q
+..                                                                       [100%]
+2 passed in 0.10s
+$ /home/forcewake/.hermes/hermes-agent/venv/bin/python -m bb001_wordfreq --min-length 4 sample.txt
+beta	2
+elephant	2
+alpha	1
+$ /home/forcewake/.hermes/hermes-agent/venv/bin/python -m bb001_wordfreq sample.txt
+beta	2
+elephant	2
+alpha	1
+cat	1
+dog	1
+fox	1
+```

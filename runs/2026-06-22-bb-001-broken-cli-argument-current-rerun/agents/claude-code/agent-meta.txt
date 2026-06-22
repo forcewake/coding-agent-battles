@@ -1,0 +1,7 @@
+agent=claude-code
+run_id=2026-06-22-bb-001-broken-cli-argument-current-rerun
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/claude-code/workspace
+exit_code=0
+timed_out=False
+wall_seconds=53.025
+command=claude --print --output-format json --dangerously-skip-permissions --no-session-persistence --max-budget-usd 3.00 <PROMPT>

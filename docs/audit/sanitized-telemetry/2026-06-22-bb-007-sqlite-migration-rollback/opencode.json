@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+  "scenarioId": "BB-007",
+  "scenarioName": "SQLite migration with rollback",
+  "agentId": "opencode",
+  "agentLabel": "OpenCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 48.124,
+  "tokens": 64976,
+  "cost": 0.026777,
+  "vendorCost": 0.026777,
+  "token_breakdown": {
+    "input": 3705,
+    "cache_read": 59904,
+    "cache_creation": 0,
+    "output": 837,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+  "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

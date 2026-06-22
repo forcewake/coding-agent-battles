@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+  "scenarioId": "BB-008",
+  "scenarioName": "Monorepo dependency upgrade",
+  "agentId": "mimo",
+  "agentLabel": "MiMoCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 42.267,
+  "tokens": 187931,
+  "cost": 0.055319,
+  "vendorCost": 0.0,
+  "token_breakdown": {
+    "input": 3979,
+    "cache_read": 183488,
+    "cache_creation": 0,
+    "output": 452,
+    "reasoning": 12
+  },
+  "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+  "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

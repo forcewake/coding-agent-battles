@@ -1,6 +1,0 @@
-agent=claude-code
-workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/claude-code/workspace
-exit_code=0
-timed_out=False
-wall_seconds=40.680
-command=claude --print --output-format json --dangerously-skip-permissions --no-session-persistence --max-budget-usd 1.00 <PROMPT>

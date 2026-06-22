@@ -1,5 +1,40 @@
 [
   {
+    "scenario": "BB-001",
+    "agent": "opencode",
+    "tokens": 195887,
+    "cost": 0.065351,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-001",
+    "agent": "claude-code",
+    "tokens": 208020,
+    "cost": 0.066573,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-001",
+    "agent": "mimo",
+    "tokens": 262659,
+    "cost": 0.088933,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-001",
+    "agent": "pi",
+    "tokens": 69756,
+    "cost": 0.032009,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-001",
+    "agent": "codex-cli",
+    "tokens": 455504,
+    "cost": 0.644985,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
+  },
+  {
     "scenario": "BB-002",
     "agent": "opencode",
     "tokens": 105968,
@@ -32,6 +67,41 @@
     "agent": "codex-cli",
     "tokens": 163324,
     "cost": 0.3877,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-003",
+    "agent": "opencode",
+    "tokens": 149410,
+    "cost": 0.051976,
+    "strategy": "ccusage_opencode_exact_directory_session"
+  },
+  {
+    "scenario": "BB-003",
+    "agent": "claude-code",
+    "tokens": 164894,
+    "cost": 0.062663,
+    "strategy": "claude_json_usage_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-003",
+    "agent": "mimo",
+    "tokens": 159098,
+    "cost": 0.054476,
+    "strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-003",
+    "agent": "pi",
+    "tokens": 50657,
+    "cost": 0.030755,
+    "strategy": "ccusage_pi_exact_project_path_normalized_public_cost"
+  },
+  {
+    "scenario": "BB-003",
+    "agent": "codex-cli",
+    "tokens": 187021,
+    "cost": 0.395188,
     "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {

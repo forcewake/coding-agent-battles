@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATE = "2026-06-22"
-BULK_IDS = {"BB-002", "BB-004", "BB-005", "BB-006", "BB-007", "BB-008", "BB-009", "BB-010", "BB-011", "BB-012"}
+BULK_IDS = {"BB-001", "BB-002", "BB-003", "BB-004", "BB-005", "BB-006", "BB-007", "BB-008", "BB-009", "BB-010", "BB-011", "BB-012"}
 
 ZAI_PRICING = {"input": 1.4, "cache": 0.26, "output": 4.4}
 GPT55_PRICING = {"input": 5.0, "cache": 0.5, "output": 30.0}

@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+  "scenarioId": "BB-007",
+  "scenarioName": "SQLite migration with rollback",
+  "agentId": "mimo",
+  "agentLabel": "MiMoCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 82.405,
+  "tokens": 191087,
+  "cost": 0.059777,
+  "vendorCost": 0.0,
+  "token_breakdown": {
+    "input": 5002,
+    "cache_read": 185024,
+    "cache_creation": 0,
+    "output": 727,
+    "reasoning": 334
+  },
+  "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+  "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

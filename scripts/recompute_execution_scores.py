@@ -85,7 +85,7 @@ def update_run_markdown(run_dir: Path, scenario: dict) -> None:
 - Type: {scenario['type']}
 - Difficulty: {scenario['difficulty']}
 - Pass count: {scenario['passCount']}/{scenario['agentCount']}
-- Execution score: deterministic composite from correctness, red-baseline capture, smoke evidence, independent verification, exit code, telemetry coverage, scenario-local speed percentile, and scenario-local token-efficiency percentile.
+- Execution score: deterministic composite from correctness, red-baseline capture, smoke evidence, independent verification, clean agent exit, and scenario-local speed percentile. Token/cost telemetry is reported separately and is not part of execution quality.
 
 ## Agent metrics
 

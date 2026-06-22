@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+  "scenarioId": "BB-004",
+  "scenarioName": "Markdown table normalizer",
+  "agentId": "mimo",
+  "agentLabel": "MiMoCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 190.22,
+  "tokens": 227270,
+  "cost": 0.094997,
+  "vendorCost": 0.0,
+  "token_breakdown": {
+    "input": 9766,
+    "cache_read": 211520,
+    "cache_creation": 0,
+    "output": 1023,
+    "reasoning": 4961
+  },
+  "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+  "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

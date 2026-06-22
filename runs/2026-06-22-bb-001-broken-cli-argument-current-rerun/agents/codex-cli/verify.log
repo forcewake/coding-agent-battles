@@ -1,0 +1,14 @@
+$ /home/forcewake/.hermes/hermes-agent/venv/bin/python -m pytest -q
+..                                                                       [100%]
+2 passed in 0.10s
+$ /home/forcewake/.hermes/hermes-agent/venv/bin/python -m bb001_wordfreq --min-length 4 sample.txt
+beta	2
+elephant	2
+alpha	1
+$ /home/forcewake/.hermes/hermes-agent/venv/bin/python -m bb001_wordfreq sample.txt
+beta	2
+elephant	2
+alpha	1
+cat	1
+dog	1
+fox	1

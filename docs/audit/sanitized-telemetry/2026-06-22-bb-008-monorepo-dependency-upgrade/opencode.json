@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+  "scenarioId": "BB-008",
+  "scenarioName": "Monorepo dependency upgrade",
+  "agentId": "opencode",
+  "agentLabel": "OpenCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 42.59,
+  "tokens": 86204,
+  "cost": 0.035012,
+  "vendorCost": 0.035012,
+  "token_breakdown": {
+    "input": 9131,
+    "cache_read": 76544,
+    "cache_creation": 0,
+    "output": 504,
+    "reasoning": 0
+  },
+  "telemetry_strategy": "ccusage_opencode_exact_directory_session",
+  "telemetry_source_sanitized": "ccusage opencode session + opencode.log exact directory/session id",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}

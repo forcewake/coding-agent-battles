@@ -1,0 +1,7 @@
+agent=mimo
+run_id=2026-06-22-bb-001-broken-cli-argument-current-rerun
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/workspace
+exit_code=0
+timed_out=False
+wall_seconds=64.559
+command=mimo run --dir /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-current-rerun/agents/mimo/workspace --dangerously-skip-permissions <PROMPT>

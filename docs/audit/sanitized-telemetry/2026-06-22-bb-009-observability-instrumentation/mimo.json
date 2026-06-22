@@ -1,0 +1,29 @@
+{
+  "schema": "cab.sanitized_telemetry.v1",
+  "runId": "2026-06-22-bb-009-observability-instrumentation",
+  "scenarioId": "BB-009",
+  "scenarioName": "Observability instrumentation",
+  "agentId": "mimo",
+  "agentLabel": "MiMoCode / GLM-5.2",
+  "model": "glm-5.2",
+  "verdict": "PASS",
+  "wall": 91.989,
+  "tokens": 283029,
+  "cost": 0.097538,
+  "vendorCost": 0.0,
+  "token_breakdown": {
+    "input": 15097,
+    "cache_read": 266304,
+    "cache_creation": 0,
+    "output": 1011,
+    "reasoning": 617
+  },
+  "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
+  "telemetry_source_sanitized": "local MiMoCode SQLite store session.directory + message.tokens",
+  "telemetry_note": null,
+  "limitations": [
+    "This is a sanitized extracted telemetry record, not a raw provider database/log dump.",
+    "Local paths and private provider-store identifiers are redacted or generalized.",
+    "Use alongside committed agent evidence for verdict/wall/diff verification."
+  ]
+}
