@@ -14,6 +14,12 @@ const moneyFull = (v) => (v == null) ? 'n/a' : `$${Number(v).toFixed(v < 0.01 ? 
 const sec    = (v) => (v == null) ? 'n/a' : `${Number(v).toFixed(1)}s`;
 const toks   = (v) => (v == null) ? 'n/a' : fmt.format(v);
 const safe   = (v, fallback = 'n/a') => (v == null || v === '' || v === 'n/a') ? fallback : v;
+const escapeHtml = (v) => String(v ?? '')
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;')
+  .replaceAll('"', '&quot;')
+  .replaceAll("'", '&#039;');
 
 const AGENT_DISPLAY = {
   'opencode':   'OpenCode',
@@ -58,6 +64,38 @@ function bestProcessLabel(agents, fallbackId) {
   const tied = known.filter(a => a.process === max);
   if (tied.length > 1) return `${tied.length} tied (${max})`;
   return safe(tied[0].short, agentDisplay(tied[0].id));
+}
+
+function markdownToHtml(markdown) {
+  const lines = String(markdown || '').split(/\r?\n/);
+  const out = [];
+  let inList = false;
+  let inTable = false;
+  const closeList = () => { if (inList) { out.push('</ul>'); inList = false; } };
+  const closeTable = () => { if (inTable) { out.push('</tbody></table></div>'); inTable = false; } };
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim()) { closeList(); closeTable(); continue; }
+    if (/^\|.+\|$/.test(line.trim())) {
+      closeList();
+      const cells = line.trim().slice(1, -1).split('|').map(c => escapeHtml(c.trim()));
+      const isSep = cells.every(c => /^:?-{3,}:?$/.test(c));
+      if (isSep) continue;
+      if (!inTable) { out.push('<div class="artifact-table-wrap"><table class="artifact-table"><tbody>'); inTable = true; }
+      const tag = lines[i + 1] && /^\|\s*:?-{3,}:?/.test(lines[i + 1]) ? 'th' : 'td';
+      out.push(`<tr>${cells.map(c => `<${tag}>${c}</${tag}>`).join('')}</tr>`);
+      continue;
+    }
+    closeTable();
+    const h = line.match(/^(#{1,3})\s+(.+)$/);
+    if (h) { closeList(); out.push(`<h${h[1].length + 2}>${escapeHtml(h[2])}</h${h[1].length + 2}>`); continue; }
+    const li = line.match(/^[-*]\s+(.+)$/);
+    if (li) { if (!inList) { out.push('<ul>'); inList = true; } out.push(`<li>${escapeHtml(li[1])}</li>`); continue; }
+    closeList();
+    out.push(`<p>${escapeHtml(line)}</p>`);
+  }
+  closeList(); closeTable();
+  return out.join('');
 }
 
 /* ── Data loader ────────────────────────────────────────────────────────── */
@@ -107,7 +145,7 @@ function renderVerdict(data) {
   const stats = [
     { label: 'Fastest avg',   value: fastest  ? fastest.short  : 'n/a' },
     { label: 'Cheapest avg',  value: cheapest ? cheapest.short : 'n/a' },
-    { label: 'Best process',  value: bestProc ? bestProc.short : 'n/a' },
+    { label: 'Best execution',  value: bestProc ? bestProc.short : 'n/a' },
     { label: 'Cost coverage', value: pct(k.costCoverage) },
   ];
 
@@ -209,7 +247,7 @@ function renderAgentTable(data) {
         <tr>
           <th>Agent</th>
           <th>Avg wall</th>
-          <th>Avg process</th>
+          <th>Avg execution</th>
           <th>Avg cost (est.)</th>
           <th>Total tokens</th>
           <th>Telemetry</th>
@@ -239,13 +277,14 @@ function drawD3Scatter(svgId, points, xKey, yKey, opts = {}) {
     return;
   }
 
-  const W = container.clientWidth || 680;
-  const defaultHeight = svgId === 'frontierChart' ? 260 : 340;
+  const W = container.clientWidth || 820;
+  const defaultHeight = svgId === 'frontierChart'
+    ? Math.max(440, container.clientHeight || 0)
+    : 360;
   const H = defaultHeight;
-  // Keep generous right gutter: D3 point labels are part of the story,
-  // and unavailable-cost agents are deliberately shown as an explicit
-  // "n/a" lane rather than clipped outside the plot.
-  const pad = { top: 20, right: 145, bottom: 50, left: 60 };
+  const pad = svgId === 'frontierChart'
+    ? { top: 22, right: 150, bottom: 68, left: 92 }
+    : { top: 20, right: 145, bottom: 54, left: 68 };
   const innerW = W - pad.left - pad.right;
   const innerH = H - pad.top - pad.bottom;
 
@@ -255,9 +294,9 @@ function drawD3Scatter(svgId, points, xKey, yKey, opts = {}) {
     .attr('viewBox', `0 0 ${W} ${H}`)
     .style('overflow', 'visible');
 
-  const maxX = known.length ? d3.max(known, d => d[xKey]) * 1.15 : 1;
-  const maxY = known.length ? d3.max(known, d => d[yKey]) * 1.15 : 1;
-  const minY = known.length ? d3.min(known, d => d[yKey]) * 0.9 : 0;
+  const maxX = known.length ? d3.max(known, d => d[xKey]) * 1.12 : 1;
+  const maxY = known.length ? d3.max(known, d => d[yKey]) * 1.12 : 1;
+  const minY = known.length ? Math.max(0, d3.min(known, d => d[yKey]) * 0.78) : 0;
 
   const xScale = d3.scaleLinear()
     .domain([0, maxX])
@@ -270,23 +309,37 @@ function drawD3Scatter(svgId, points, xKey, yKey, opts = {}) {
   const axisColor = '#2a3a58';
   const textColor = '#5a6a88';
 
-  // Axes
-  const xAxis = d3.axisBottom(xScale).ticks(5).tickSizeOuter(0);
-  const yAxis = d3.axisLeft(yScale).ticks(5).tickSizeOuter(0);
+  // Axes + grid
+  const xAxis = d3.axisBottom(xScale).ticks(6).tickSizeOuter(0);
+  const yAxis = d3.axisLeft(yScale).ticks(6).tickSizeOuter(0).tickFormat(d => d >= 1000 ? `${fmt.format(Math.round(d / 1000))}k` : fmt.format(d));
+
+  svg.append('g')
+    .attr('class', 'chart-grid')
+    .attr('transform', `translate(0,${pad.top + innerH})`)
+    .call(d3.axisBottom(xScale).ticks(6).tickSize(-innerH).tickFormat(''))
+    .call(g => g.select('.domain').remove())
+    .call(g => g.selectAll('line').attr('stroke', 'rgba(138,154,184,.10)'));
+
+  svg.append('g')
+    .attr('class', 'chart-grid')
+    .attr('transform', `translate(${pad.left},0)`)
+    .call(d3.axisLeft(yScale).ticks(6).tickSize(-innerW).tickFormat(''))
+    .call(g => g.select('.domain').remove())
+    .call(g => g.selectAll('line').attr('stroke', 'rgba(138,154,184,.10)'));
 
   svg.append('g')
     .attr('transform', `translate(0,${pad.top + innerH})`)
     .call(xAxis)
     .call(g => g.select('.domain').attr('stroke', axisColor))
     .call(g => g.selectAll('line').attr('stroke', axisColor))
-    .call(g => g.selectAll('text').attr('fill', textColor).attr('font-family', 'var(--font-sans)'));
+    .call(g => g.selectAll('text').attr('fill', textColor).attr('font-family', 'var(--font-sans)').attr('font-size', '12px').attr('font-weight', '650'));
 
   svg.append('g')
     .attr('transform', `translate(${pad.left},0)`)
     .call(yAxis)
     .call(g => g.select('.domain').attr('stroke', axisColor))
     .call(g => g.selectAll('line').attr('stroke', axisColor))
-    .call(g => g.selectAll('text').attr('fill', textColor).attr('font-family', 'var(--font-sans)'));
+    .call(g => g.selectAll('text').attr('fill', textColor).attr('font-family', 'var(--font-sans)').attr('font-size', '12px').attr('font-weight', '650'));
 
   // Labels
   svg.append('text')
@@ -357,7 +410,7 @@ function drawPareto(data) {
   }));
   drawD3Scatter('paretoChart', points, 'cost', 'process', {
     xLabel: 'Avg Normalized Public Cost (USD)',
-    yLabel: 'Avg Process Score (0–100)',
+    yLabel: 'Avg Execution Score (0–100)',
     missingXLabel: 'cost n/a',
   });
 }
@@ -371,7 +424,7 @@ function drawLatencyProcessChart(data) {
   }));
   drawD3Scatter('latencyProcessChart', points, 'wall', 'process', {
     xLabel: 'Avg Wall-Clock Time (s)',
-    yLabel: 'Avg Process Score (0–100)',
+    yLabel: 'Avg Execution Score (0–100)',
     missingXLabel: 'wall n/a',
   });
 }
@@ -393,7 +446,7 @@ function renderScenarioDetail(data, scenarioId) {
   const winnersHtml = [
     { label: 'Fastest',      value: agentDisplay(s.fastest) },
     { label: 'Cheapest',     value: s.cheapest ? agentDisplay(s.cheapest) : 'n/a — no cost telemetry' },
-    { label: 'Best process', value: bestProcessLabel(agents, s.processBest) },
+    { label: 'Best execution', value: bestProcessLabel(agents, s.processBest) },
   ].map(w => `
     <div class="winner-badge">
       <span class="winner-badge-label">${w.label}</span>
@@ -419,7 +472,7 @@ function renderScenarioDetail(data, scenarioId) {
             <span class="spa-metric-value">${sec(a.wall)}</span>
           </div>
           <div class="spa-metric">
-            <span class="spa-metric-label">Process</span>
+            <span class="spa-metric-label">Execution</span>
             <span class="spa-metric-value">${safe(a.process, 'n/a')}</span>
           </div>
           <div class="spa-metric">
@@ -437,11 +490,14 @@ function renderScenarioDetail(data, scenarioId) {
   }).join('');
 
   const links = s.links || {};
-  const linksHtml = [
-    links.results ? `<a class="sp-link" href="../${links.results}">Results →</a>` : '',
-    links.metrics ? `<a class="sp-link" href="../${links.metrics}">Metrics →</a>` : '',
-    links.json    ? `<a class="sp-link" href="../${links.json}">JSON →</a>` : '',
-  ].filter(Boolean).join('');
+  const artifactButtons = [
+    links.results ? { kind: 'results', label: 'Results', href: `../${links.results}` } : null,
+    links.metrics ? { kind: 'metrics', label: 'Metrics', href: `../${links.metrics}` } : null,
+    links.json    ? { kind: 'json',    label: 'JSON',    href: `../${links.json}` } : null,
+  ].filter(Boolean);
+  const linksHtml = artifactButtons.map((b, i) => `
+    <button class="sp-link sp-link-button" type="button" data-artifact-kind="${b.kind}" data-artifact-href="${b.href}" aria-pressed="${i === 0 ? 'true' : 'false'}">${b.label}</button>
+  `).join('');
 
   setHTML('scenario-panel', `
     <div class="sp-header">
@@ -457,8 +513,16 @@ function renderScenarioDetail(data, scenarioId) {
       <span><b class="pill pill-red">red✓</b> agent captured failing baseline</span>
       <span><b class="pill pill-smoke">smoke✓</b> agent ran user-visible smoke</span>
     </div>
-    <div class="sp-links">${linksHtml}</div>
+    <div class="sp-links" role="tablist" aria-label="Scenario evidence artifacts">${linksHtml}</div>
+    <section class="artifact-viewer" id="artifactViewer" aria-live="polite">
+      <div class="artifact-viewer-head">
+        <span id="artifactViewerTitle">Evidence artifact</span>
+        <a id="artifactViewerRaw" class="inline-link" href="#" target="_blank" rel="noopener">Open raw ↗</a>
+      </div>
+      <div class="artifact-viewer-body" id="artifactViewerBody">Select Results, Metrics, or JSON.</div>
+    </section>
   `);
+  initArtifactViewer(artifactButtons);
 
   // Bar charts
   const maxWall  = Math.max(...agents.map(a => a.wall  || 0), 1);
@@ -473,10 +537,10 @@ function renderScenarioDetail(data, scenarioId) {
   renderBarList('qualityBars', [...agents].sort((a,b) => (b.process||0)-(a.process||0)),
     a => ({ label: safe(a.short, a.id), val: a.process, max: 100, suffix: '', colorClass: 'bar-fill-quality' }),
     {
-      emptyTitle: 'Process scores unavailable',
-      emptyBody: 'No process rubric values were recorded for this scenario.',
+      emptyTitle: 'Execution scores unavailable',
+      emptyBody: 'No execution composite values were recorded for this scenario.',
       note: processValues.length === 1
-        ? `All ${knownProcess.length} agents share the same process score (${processValues[0]}). Compare wall-clock and evidence links instead.`
+        ? `All ${knownProcess.length} agents share the same execution score (${processValues[0]}). Compare wall-clock, tokens, and evidence links instead.`
         : ''
     }
   );
@@ -506,6 +570,41 @@ function renderScenarioDetail(data, scenarioId) {
 
   // Score table
   renderScoreTable(agents, s.links || {});
+}
+
+async function loadArtifactIntoViewer(button) {
+  const titleEl = document.getElementById('artifactViewerTitle');
+  const rawEl = document.getElementById('artifactViewerRaw');
+  const bodyEl = document.getElementById('artifactViewerBody');
+  if (!button || !bodyEl) return;
+  document.querySelectorAll('[data-artifact-href]').forEach(b => b.setAttribute('aria-pressed', b === button ? 'true' : 'false'));
+  const href = button.dataset.artifactHref;
+  const kind = button.dataset.artifactKind;
+  if (titleEl) titleEl.textContent = `${button.textContent} artifact`;
+  if (rawEl) rawEl.href = href;
+  bodyEl.innerHTML = '<div class="viz-empty-body">Loading artifact…</div>';
+  try {
+    const res = await fetch(href, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const text = await res.text();
+    if (kind === 'json') {
+      const obj = JSON.parse(text);
+      bodyEl.innerHTML = `<pre class="artifact-code">${escapeHtml(JSON.stringify(obj, null, 2))}</pre>`;
+    } else {
+      bodyEl.innerHTML = `<div class="artifact-markdown">${markdownToHtml(text)}</div>`;
+    }
+  } catch (err) {
+    bodyEl.innerHTML = `<div class="viz-empty"><div class="viz-empty-title">Could not load artifact</div><div class="viz-empty-body">${escapeHtml(err.message || err)}</div></div>`;
+  }
+}
+
+function initArtifactViewer(buttons) {
+  const viewer = document.getElementById('artifactViewer');
+  const nodes = [...document.querySelectorAll('[data-artifact-href]')];
+  if (!viewer || !nodes.length) return;
+  nodes.forEach(btn => btn.addEventListener('click', () => loadArtifactIntoViewer(btn)));
+  const first = nodes[0];
+  if (first) loadArtifactIntoViewer(first);
 }
 
 function renderBarList(containerId, agents, mapper, opts = {}) {

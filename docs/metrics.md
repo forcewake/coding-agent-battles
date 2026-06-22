@@ -9,7 +9,7 @@ This repo treats a coding-agent run as an end-to-end engineering attempt, not ju
 | Identity | agent, CLI version, model/provider, invocation | Reproducibility; separates scaffold from model | `agent-meta.txt`, CLI `--version`, DB/session logs |
 | Outcome | pass/fail/partial, accepted change count | Comparable pass@1 style result | Hermes verification logs |
 | Correctness | baseline red, tests pass, smoke pass, hidden/extra checks if available | Avoids trusting agent self-report | `baseline-failure.log`, `verify.log`, browser/CLI/API smoke |
-| Quality | final patch quality, process quality, evidence transparency | Distinguishes identical green patches from sloppy execution | `diff.patch`, agent log, reviewer rubric |
+| Quality | final patch quality, execution-quality composite, evidence transparency | Distinguishes identical green patches from sloppy or expensive execution | `diff.patch`, verification logs, telemetry, wall-clock |
 | Efficiency | wall-clock, turns/messages, tool calls, retries | Agent/scaffold productivity and latency | `agent-meta.txt`, session DB/JSONL/transcript |
 | Tokens | input, output, reasoning, cache read/write, total | Primary resource consumption | local session logs/DBs, `ccusage`, `tokscale`, vendor JSON |
 | Cost | actual billed cost if available; otherwise explicit estimate/unavailable | Cost-per-accepted-change and budget control | vendor JSON, LiteLLM/ccusage/tokscale estimates |
@@ -29,15 +29,20 @@ Use two scores so we do not hide a perfect one-line patch behind bad/opaque proc
 | Minimality / maintainability | 20 |
 | Safety / no unrelated side effects | 15 |
 
-### Process quality score, 0–100
+### Execution-quality composite, 0–100
 
 | Dimension | Weight |
 |---|---:|
-| Agent-owned verification discipline | 35 |
-| Root-cause clarity | 20 |
-| Evidence transparency / raw logs | 20 |
-| Efficiency relative to task complexity | 15 |
-| Autonomy / no human intervention | 10 |
+| Correct final result (`PASS`) | 30 |
+| Captured failing baseline (`red✓`) | 10 |
+| Ran scenario smoke / user-visible proof (`smoke✓`) | 10 |
+| Independent verifier passed | 10 |
+| Agent process exited cleanly | 5 |
+| Token/cost telemetry attributed | 5 |
+| Scenario-local speed percentile | 15 |
+| Scenario-local token-efficiency percentile | 15 |
+
+This replaces the old placeholder `PASS=90 / FAIL=25` score. Speed and token efficiency are normalized within each scenario, so the score separates agents that all passed the same task without pretending different task sizes are directly comparable.
 
 ## Cost and token collection notes
 

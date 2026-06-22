@@ -5,15 +5,15 @@
 - Type: Data migration
 - Difficulty: L2
 - Pass count: 6/6
-- Token/cost extraction: ccusage-first where available, then direct CLI/SQLite fallback with exact per-run attribution.
+- Execution score: deterministic composite from correctness, red-baseline capture, smoke evidence, independent verification, exit code, telemetry coverage, scenario-local speed percentile, and scenario-local token-efficiency percentile.
 
 ## Agent metrics
 
-| Agent | Verdict | Wall | Tokens | Normalized public cost | Telemetry source | Notes |
-|---|---:|---:|---:|---:|---|---|
-| OpenCode | PASS | 48.124s | 64,976 | $0.026777 | ccusage_opencode_exact_directory_session | Telemetry exact; independent verify passed |
-| Claude | PASS | 86.768s | 183,359 | $0.088476 | claude_json_usage_normalized_public_cost | Telemetry exact; independent verify passed |
-| MiMo | PASS | 82.405s | 191,087 | $0.059777 | mimocode_sqlite_session_exact_directory_normalized_public_cost | Telemetry exact; independent verify passed |
-| Pi | PASS | 137.179s | 40,117 | $0.025923 | ccusage_pi_exact_project_path_normalized_public_cost | Telemetry exact; independent verify passed |
-| Codex | PASS | 122.860s | 176,231 | $0.418060 | ccusage_codex_session_exact_log_session_id | Telemetry exact; independent verify passed |
-| agy | PASS | 74.759s | n/a | n/a | unavailable | Telemetry unavailable |
+| Agent | Verdict | Wall | Tokens | Normalized public cost | Patch | Execution score | Notes |
+|---|---:|---:|---:|---:|---:|---:|---|
+| OpenCode | PASS | 48.124s | 64,976 | $0.026777 | 100 | 98 | execution-quality composite |
+| Claude | PASS | 86.768s | 183,359 | $0.088476 | 100 | 79 | execution-quality composite |
+| MiMo | PASS | 82.405s | 191,087 | $0.059777 | 100 | 79 | execution-quality composite |
+| Pi | PASS | 137.179s | 40,117 | $0.025923 | 100 | 85 | execution-quality composite |
+| Codex | PASS | 122.860s | 176,231 | $0.418060 | 100 | 74 | execution-quality composite |
+| agy | PASS | 74.759s | n/a | n/a | 100 | 79 | execution-quality composite |

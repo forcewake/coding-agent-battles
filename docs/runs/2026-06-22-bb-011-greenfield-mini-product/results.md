@@ -4,14 +4,14 @@ Build a tiny FastAPI benchmark registry from tests/spec.
 
 ## Verification summary
 
-| Agent | Verdict | Wall | Agent exit | Verify exit | Patch | Process |
+| Agent | Verdict | Wall | Agent exit | Verify exit | Patch | Execution |
 |---|---:|---:|---:|---:|---:|---:|
-| OpenCode | PASS | 47.141s | 0 | 0 | 100 | 90 |
-| Claude | PASS | 95.167s | 0 | 0 | 100 | 90 |
-| MiMo | PASS | 49.366s | 0 | 0 | 100 | 90 |
-| Pi | PASS | 71.199s | 0 | 0 | 100 | 90 |
-| Codex | PASS | 101.535s | 0 | 0 | 100 | 90 |
-| agy | PASS | 50.500s | 0 | 0 | 100 | 90 |
+| OpenCode | PASS | 47.141s | 0 | 0 | 100 | 98 |
+| Claude | PASS | 95.167s | 0 | 0 | 100 | 74 |
+| MiMo | PASS | 49.366s | 0 | 0 | 100 | 86 |
+| Pi | PASS | 71.199s | 0 | 0 | 100 | 93 |
+| Codex | PASS | 101.535s | 0 | 0 | 100 | 70 |
+| agy | PASS | 50.500s | 0 | 0 | 100 | 83 |
 
 ## Evidence
 

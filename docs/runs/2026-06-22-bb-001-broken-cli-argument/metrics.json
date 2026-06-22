@@ -207,7 +207,7 @@
       "quality": {
         "final_patch_score": 100,
         "process_quality_score": 91,
-        "notes": "Best process evidence among GLM-based agents: red test, green test, and CLI smoke; slower and far more cached-token-heavy than OpenCode."
+        "notes": "Best execution evidence among GLM-based agents: red test, green test, and CLI smoke; slower and far more cached-token-heavy than OpenCode."
       }
     },
     "agy": {

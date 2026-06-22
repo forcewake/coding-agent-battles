@@ -4,14 +4,14 @@ Normalize Markdown pipe tables with padded columns and idempotent output.
 
 ## Verification summary
 
-| Agent | Verdict | Wall | Agent exit | Verify exit | Patch | Process |
+| Agent | Verdict | Wall | Agent exit | Verify exit | Patch | Execution |
 |---|---:|---:|---:|---:|---:|---:|
-| OpenCode | PASS | 167.030s | 0 | 0 | 100 | 90 |
-| Claude | PASS | 169.013s | 0 | 0 | 100 | 90 |
-| MiMo | PASS | 190.220s | 0 | 0 | 100 | 90 |
-| Pi | PASS | 247.114s | 0 | 0 | 100 | 90 |
-| Codex | PASS | 219.382s | 0 | 0 | 100 | 90 |
-| agy | PASS | 113.300s | 0 | 0 | 100 | 90 |
+| OpenCode | PASS | 167.030s | 0 | 0 | 100 | 92 |
+| Claude | PASS | 169.013s | 0 | 0 | 100 | 88 |
+| MiMo | PASS | 190.220s | 0 | 0 | 100 | 82 |
+| Pi | PASS | 247.114s | 0 | 0 | 100 | 85 |
+| Codex | PASS | 219.382s | 0 | 0 | 100 | 73 |
+| agy | PASS | 113.300s | 0 | 0 | 100 | 84 |
 
 ## Evidence
 

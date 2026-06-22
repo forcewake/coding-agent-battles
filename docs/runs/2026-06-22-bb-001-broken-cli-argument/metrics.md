@@ -18,12 +18,12 @@ Detailed schema: [`../../docs/metrics.md`](../../docs/metrics.md)
 
 ## BB-001 scoreboard
 
-| Rank by time | Agent | Wall-clock | Tokens total | Cost | Final patch | Process quality | Notes |
+| Rank by time | Agent | Wall-clock | Tokens total | Cost | Final patch | Execution quality | Notes |
 |---:|---|---:|---:|---:|---:|---:|---|
 | 1 | OpenCode / GLM-5.2 | 46.130s | 63,462 | $0.00 vendor-reported | 100 | 86 | Fastest; pytest + CLI smoke; no red-test capture |
 | 2 | Claude Code | 68.772s | n/a | n/a | 100 | 72 | Correct patch; original run lacks structured telemetry/raw steps |
 | 3 | Codex CLI / GPT-5.5 | 116.323s | 257,358 | ~$0.55–$0.59 estimated | 100 | 84 | Strong red-green; high token overhead from skills/context |
-| 4 | MiMoCode / GLM-5.2 | 129.528s | 281,974 | $0.00 vendor-reported | 100 | 91 | Best process evidence: red + green + CLI smoke |
+| 4 | MiMoCode / GLM-5.2 | 129.528s | 281,974 | $0.00 vendor-reported | 100 | 91 | Best execution evidence: red + green + CLI smoke |
 | 5 | agy / Gemini 3.5 Flash Medium | 332.324s | n/a | n/a | 100 | 78 | Correct and red-green; no reliable token/cost extraction |
 
 ## Token details

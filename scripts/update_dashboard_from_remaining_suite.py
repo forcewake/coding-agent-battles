@@ -66,7 +66,8 @@ def write_run_reports(grouped):
                 "tokens": None,
                 "cost": None,
                 "patch": 100 if passed else 0,
-                "process": 90 if passed else 25,
+                "process": None,
+                "processLabel": "execution-quality composite pending recompute",
                 "red": True,
                 "smoke": passed,
                 "agentExit": match["agentExit"],
@@ -215,8 +216,8 @@ def write_scenario_pages(scenarios):
     <section class="content-section" id="scenario-detail">
       <div class="section-header"><div><p class="label-overline">Scenario detail</p><h2 class="section-title" id="detail-title">Loading...</h2></div><p class="section-desc" id="detail-summary">—</p></div>
       <div id="scenario-panel" class="scenario-panel" style="margin-bottom:40px"></div>
-      <div class="detail-grid"><div class="detail-chart-card wide"><p class="chart-label">Latency vs token burn</p><div id="frontierChart" role="img" aria-label="Scatter plot of wall-clock seconds versus token count"></div></div><div class="detail-bars-group"><div class="detail-chart-card"><p class="chart-label">Wall-clock <span class="chart-unit">seconds</span></p><div id="timeBars" class="bar-list"></div></div><div class="detail-chart-card"><p class="chart-label">Process quality <span class="chart-unit">0–100 rubric</span></p><div id="qualityBars" class="bar-list"></div></div><div class="detail-chart-card"><p class="chart-label">Normalized public cost <span class="chart-unit">USD estimate</span></p><div id="costBars" class="bar-list"></div></div></div></div>
-      <details class="evidence-details" id="score-table-details" open><summary class="evidence-summary">Full metrics table</summary><div class="table-wrap"><table id="scoreTable" aria-label="Full metrics for scenario"><thead><tr><th>Agent</th><th>Wall (s)</th><th>Tokens</th><th>Cost</th><th>Patch %</th><th>Process</th><th>Evidence</th></tr></thead><tbody></tbody></table></div></details>
+      <div class="detail-grid"><div class="detail-chart-card wide"><p class="chart-label">Latency vs token burn</p><div id="frontierChart" role="img" aria-label="Scatter plot of wall-clock seconds versus token count"></div></div><div class="detail-bars-group"><div class="detail-chart-card"><p class="chart-label">Wall-clock <span class="chart-unit">seconds</span></p><div id="timeBars" class="bar-list"></div></div><div class="detail-chart-card"><p class="chart-label">Execution quality <span class="chart-unit">0–100 composite</span></p><div id="qualityBars" class="bar-list"></div></div><div class="detail-chart-card"><p class="chart-label">Normalized public cost <span class="chart-unit">USD estimate</span></p><div id="costBars" class="bar-list"></div></div></div></div>
+      <details class="evidence-details" id="score-table-details" open><summary class="evidence-summary">Full metrics table</summary><div class="table-wrap"><table id="scoreTable" aria-label="Full metrics for scenario"><thead><tr><th>Agent</th><th>Wall (s)</th><th>Tokens</th><th>Cost</th><th>Patch %</th><th>Execution</th><th>Evidence</th></tr></thead><tbody></tbody></table></div></details>
     </section>
   </main>
   <footer class="site-footer"><span>Built from committed benchmark artifacts.</span><a href="https://github.com/forcewake/coding-agent-battles" target="_blank" rel="noopener">forcewake/coding-agent-battles ↗</a></footer>
@@ -251,3 +252,6 @@ print('wrote reports and dashboard for', len(new), 'new scenarios')
 telemetry_script = ROOT / "scripts" / "extract_bulk_telemetry.py"
 if telemetry_script.exists():
     subprocess.run(["python", str(telemetry_script)], cwd=ROOT, check=True)
+score_script = ROOT / "scripts" / "recompute_execution_scores.py"
+if score_script.exists():
+    subprocess.run(["python", str(score_script)], cwd=ROOT, check=True)

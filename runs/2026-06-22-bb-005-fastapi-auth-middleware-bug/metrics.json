@@ -21,7 +21,7 @@
       "tokens": 53635,
       "cost": 0.023405,
       "patch": 100,
-      "process": 90,
+      "process": 99,
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -36,7 +36,18 @@
         "reasoning": 0
       },
       "vendorCost": 0.023405,
-      "telemetry_session": "ses_10ff8e1ecffeargVXb45iNqSOv"
+      "telemetry_session": "ses_10ff8e1ecffeargVXb45iNqSOv",
+      "processComponents": {
+        "correctness": 30,
+        "baseline_red": 10,
+        "smoke": 10,
+        "independent_verify": 10,
+        "agent_exit": 5,
+        "telemetry": 5,
+        "speed": 15.0,
+        "token_efficiency": 13.65
+      },
+      "processLabel": "execution-quality composite"
     },
     {
       "id": "claude-code",
@@ -48,7 +59,7 @@
       "tokens": 153526,
       "cost": 0.050461,
       "patch": 100,
-      "process": 90,
+      "process": 91,
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -62,7 +73,18 @@
         "output": 746,
         "reasoning": 0
       },
-      "vendorCost": 0.12447
+      "vendorCost": 0.12447,
+      "processComponents": {
+        "correctness": 30,
+        "baseline_red": 10,
+        "smoke": 10,
+        "independent_verify": 10,
+        "agent_exit": 5,
+        "telemetry": 5,
+        "speed": 13.85,
+        "token_efficiency": 6.79
+      },
+      "processLabel": "execution-quality composite"
     },
     {
       "id": "mimo",
@@ -74,7 +96,7 @@
       "tokens": 128828,
       "cost": 0.041709,
       "patch": 100,
-      "process": 90,
+      "process": 93,
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -89,7 +111,18 @@
         "reasoning": 65
       },
       "vendorCost": 0.0,
-      "telemetry_session": "ses_10ff98254ffetylkuzstqCDzNl"
+      "telemetry_session": "ses_10ff98254ffetylkuzstqCDzNl",
+      "processComponents": {
+        "correctness": 30,
+        "baseline_red": 10,
+        "smoke": 10,
+        "independent_verify": 10,
+        "agent_exit": 5,
+        "telemetry": 5,
+        "speed": 14.14,
+        "token_efficiency": 8.49
+      },
+      "processLabel": "execution-quality composite"
     },
     {
       "id": "pi",
@@ -101,7 +134,7 @@
       "tokens": 34046,
       "cost": 0.01722,
       "patch": 100,
-      "process": 90,
+      "process": 88,
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -116,7 +149,18 @@
         "reasoning": 0
       },
       "vendorCost": 0.0,
-      "telemetry_session": "019ef007-ecdd-7ee6-aa9a-7d5208d4742a"
+      "telemetry_session": "019ef007-ecdd-7ee6-aa9a-7d5208d4742a",
+      "processComponents": {
+        "correctness": 30,
+        "baseline_red": 10,
+        "smoke": 10,
+        "independent_verify": 10,
+        "agent_exit": 5,
+        "telemetry": 5,
+        "speed": 3.32,
+        "token_efficiency": 15.0
+      },
+      "processLabel": "execution-quality composite"
     },
     {
       "id": "codex-cli",
@@ -128,7 +172,7 @@
       "tokens": 252306,
       "cost": 0.400477,
       "patch": 100,
-      "process": 90,
+      "process": 70,
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -143,7 +187,18 @@
         "reasoning": 1027
       },
       "vendorCost": 0.400477,
-      "telemetry_session": "2026/06/22/rollout-2026-06-22T17-51-20-019ef007-72d9-7a73-a570-4446e6c0d676"
+      "telemetry_session": "2026/06/22/rollout-2026-06-22T17-51-20-019ef007-72d9-7a73-a570-4446e6c0d676",
+      "processComponents": {
+        "correctness": 30,
+        "baseline_red": 10,
+        "smoke": 10,
+        "independent_verify": 10,
+        "agent_exit": 5,
+        "telemetry": 5,
+        "speed": 0.0,
+        "token_efficiency": 0.0
+      },
+      "processLabel": "execution-quality composite"
     },
     {
       "id": "agy",
@@ -155,12 +210,23 @@
       "tokens": null,
       "cost": null,
       "patch": 0,
-      "process": 25,
+      "process": 33,
       "red": true,
       "smoke": false,
       "agentExit": 0,
       "verifyExit": 1,
-      "telemetry_strategy": "unavailable"
+      "telemetry_strategy": "unavailable",
+      "processComponents": {
+        "correctness": 0,
+        "baseline_red": 10,
+        "smoke": 0,
+        "independent_verify": 0,
+        "agent_exit": 5,
+        "telemetry": 0,
+        "speed": 14.05,
+        "token_efficiency": 3.75
+      },
+      "processLabel": "execution-quality composite"
     }
   ],
   "links": {
