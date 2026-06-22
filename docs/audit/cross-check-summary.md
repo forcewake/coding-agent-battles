@@ -64,3 +64,17 @@
 ## Interpretation boundary
 
 The benchmark remains a **scaffold + configured model** comparison, not a scaffold-only leaderboard. It is now uniform across all 12 scenarios for verdict/wall/diff/verification artifacts; token/cost is complete for 5/6 agents and explicitly unavailable for agy.
+
+
+## Final clean-context review on current rerun commit
+
+| Reviewer | Verdict | Blockers | Major | Minor | Notes |
+|---|---:|---:|---:|---:|---|
+| Gemini 3.1 Pro High | APPROVE_WITH_NOTES | 0 | 0 | 12 | Only known OpenCode total-vs-breakdown accounting warnings. |
+| MiMO / GLM-5.2 max | APPROVE_WITH_NOTES | 0 | 0 | 2 | Same OpenCode accounting note plus optional best-execution tie-display nit. |
+
+Final review artifacts:
+
+- `docs/audit/gemini-3.1-pro-high-final-clean-current-rerun.json`
+- `docs/audit/mimo-final-clean-current-rerun.json`
+- `docs/audit/mimo-final-clean-current-rerun-text.txt`

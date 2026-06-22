@@ -1,0 +1,25 @@
+{
+  "verdict": "APPROVE_WITH_NOTES",
+  "summary": {
+    "blockers": 0,
+    "major": 0,
+    "minor": 12
+  },
+  "issues": [
+    {
+      "severity": "minor",
+      "claim": "BB-001 through BB-012 OpenCode telemetry has exact provenance but token breakdown does not sum exactly to total",
+      "location": "docs/audit/claim-ledger.json",
+      "expected_evidence": "Token breakdown sum exactly matches the total tokens field.",
+      "actual_evidence": "The ccusage total tokens field is slightly higher than the sum of the breakdown categories for OpenCode runs.",
+      "recommendation": "Accept as-is. This is a known, non-actionable provider accounting quirk that is correctly and transparently documented in the docs/site-data.json limitations section."
+    }
+  ],
+  "methodology_notes": [
+    "The new BB-001 and BB-003 current-rerun artifacts correctly provide row-level provenance for non-agy agents, resolving prior legacy run issues. Legacy wording is entirely removed from provenance docs.",
+    "metrics.md execution score prose has been updated to precisely separate correctness, red-baseline, smoke, independent verification, clean agent exit, and speed from token/cost telemetry.",
+    "Scenario winner badges dynamically show a 'no cost telemetry' note for agents like agy via missingCostNote.",
+    "No submodules or gitlinks were found.",
+    "All telemetry limitations are clearly documented, including agy's missing export."
+  ]
+}

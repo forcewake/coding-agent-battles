@@ -1,0 +1,41 @@
+{
+  "verdict": "APPROVE_WITH_NOTES",
+  "summary": {
+    "blockers": 0,
+    "major": 0,
+    "minor": 2
+  },
+  "issues": [
+    {
+      "severity": "minor",
+      "claim": "OpenCode telemetry token breakdown sums exactly to the published total (12 scenarios)",
+      "location": "docs/audit/claim-ledger.md (12 WARN rows); docs/runs/*/metrics.json",
+      "expected_evidence": "token_breakdown{input+cache_read+cache_creation+output+reasoning} == tokens",
+      "actual_evidence": "Breakdowns under-sum the total by 0.02\u20135.0% (e.g. BB-001 opencode: breakdown=195562 vs total=195887, \u0394325; BB-004: breakdown=98429 vs total=103515, \u03945086). Already self-flagged by the deterministic ledger as minor WARN; documented as a ccusage total-vs-breakdown reconciliation artifact.",
+      "recommendation": "Add a one-line footnote in metrics.md / telemetry-provenance.md stating the total is ccusage's authoritative row total and the breakdown is a sub-component view that may exclude unattributed tokens, so the discrepancy is not read as an error."
+    },
+    {
+      "severity": "minor",
+      "claim": "processBest winner badge identifies the single best-execution agent",
+      "location": "docs/site-data.json (BB-001, BB-006, BB-008 processBest); docs/app.js:537",
+      "expected_evidence": "Badge reflects sole top scorer, or surfaces the tie.",
+      "actual_evidence": "In BB-001, BB-006, BB-008, agy ties at process=100 with claude-code/opencode but the badge resolves to the non-agy agent. This is conservative (favors cost-telemetry agents) and not an overclaim, but the tie is invisible at badge level (only visible in the full metrics table). No note is shown because agy is not the displayed winner.",
+      "recommendation": "Optional: when processBest resolves a tie, render a '(tied)' marker on the Best execution badge so co-leaders (including agy) are visible without requiring the table."
+    }
+  ],
+  "methodology_notes": [
+    "Dashboard-level KPIs verified exact against docs/site-data.json: 12 scenarios, 72 runs, 70 PASS / 2 FAIL, passRate 97.22%, costCoverage 83.33% (60/72 = all non-agy runs).",
+    "Verdict cross-check: all 72 site-data verdicts match runs/**/agents/*/result.json exactly (0 mismatches); both FAILs (BB-005/agy, BB-009/agy) have verifyExit=1 with genuine pytest failures in verify.log and agentExit=0 (clean agent exit), so PASS/FAIL is fairly represented.",
+    "Wall-clock cross-check: all 72 wall values in site-data match raw result.json (0 mismatches).",
+    "Per-scenario fastest/cheapest/processBest recomputed from agent rows for all 12 scenarios \u2014 all claims consistent with the data.",
+    "Focus verification PASS: BB-001/BB-003 legacy provenance wording removed from telemetry-provenance.{md,json}; both now carry current-rerun runIds with row-level provenance and result.json present for all 12 agents (previously missing result.json, now resolved).",
+    "Focus verification PASS: all 12 docs/runs/*/metrics.md files contain the exact required execution-score prose listing 'correctness, red-baseline capture, smoke evidence, independent verification, clean agent exit, and scenario-local speed percentile' plus the explicit statement that token/cost telemetry is separate and excluded from execution quality.",
+    "Focus verification PASS: scenario winner badges apply missingCostNote() (docs/app.js:84) returning 'no cost telemetry' when cost==null or telemetry_strategy=='unavailable'; this fires for agy winners in BB-001 (fastest), BB-003 (fastest + best execution), BB-004 (fastest + best execution).",
+    "Focus verification PASS: no .gitmodules and no mode-160000 gitlinks; only -current-rerun variants of BB-001/BB-003 exist in runs/ and docs/runs/ (no stale legacy dirs).",
+    "Execution quality composite is transparent: site-data.json scoreBasis publishes the exact weights (40 correctness + 15 red-baseline + 15 smoke + 15 independent verify + 5 clean agent exit + 10 speed percentile) and explicitly states token/cost is excluded \u2014 not misleading.",
+    "Normalized public cost is clearly separated from vendor/native cost: cost column labeled 'Normalized public cost (USD estimate)'; app.js vendorCostNote() renders 'native $X' sub-label only when vendorCost differs; index.html known-gaps states 'Vendor-reported cost \u2260 normalized public-price estimates'; pricingBasis publishes per-model input/cached/output rates with source URLs.",
+    "agy telemetry gap is disclosed in README, index.html known-gaps, telemetry-provenance.md limitations, and the 83% cost-coverage KPI \u2014 no implication that agy cost is measured.",
+    "Historical LLM-review JSON files (docs/audit/gemini-*-review*.json, mimo-clean-context.json) retain 'legacy' wording but these are frozen snapshots of prior review passes describing earlier commit states, not current claims; authoritative telemetry-provenance.{md,json} are clean.",
+    "Deterministic ledger: 836 checks, 12 non-pass (all minor WARN, same opencode-breakdown class), 0 blocker/major/fail \u2014 consistent with this auditor's independent findings."
+  ]
+}
