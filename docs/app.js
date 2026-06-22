@@ -523,12 +523,12 @@ function renderScenarioDetail(data, scenarioId) {
       <span><b class="pill pill-smoke">smoke✓</b> agent ran user-visible smoke</span>
     </div>
     <div class="sp-links" role="tablist" aria-label="Scenario evidence artifacts">${linksHtml}</div>
-    <section class="artifact-viewer" id="artifactViewer" aria-live="polite">
+    <section class="artifact-viewer" id="artifactViewer" aria-live="polite" hidden>
       <div class="artifact-viewer-head">
         <span id="artifactViewerTitle">Evidence artifact</span>
         <a id="artifactViewerRaw" class="inline-link" href="#" target="_blank" rel="noopener">Open raw ↗</a>
       </div>
-      <div class="artifact-viewer-body" id="artifactViewerBody">Select Results, Metrics, or JSON.</div>
+      <div class="artifact-viewer-body" id="artifactViewerBody"></div>
     </section>
   `);
   initArtifactViewer(artifactButtons);
@@ -585,8 +585,11 @@ async function loadArtifactIntoViewer(button) {
   const titleEl = document.getElementById('artifactViewerTitle');
   const rawEl = document.getElementById('artifactViewerRaw');
   const bodyEl = document.getElementById('artifactViewerBody');
-  if (!button || !bodyEl) return;
+  const viewer = document.getElementById('artifactViewer');
+  if (!button || !titleEl || !rawEl || !bodyEl || !viewer) return;
+  viewer.hidden = false;
   document.querySelectorAll('[data-artifact-href]').forEach(b => b.setAttribute('aria-pressed', b === button ? 'true' : 'false'));
+
   const href = button.dataset.artifactHref;
   const kind = button.dataset.artifactKind;
   if (titleEl) titleEl.textContent = `${button.textContent} artifact`;
@@ -612,8 +615,6 @@ function initArtifactViewer(buttons) {
   const nodes = [...document.querySelectorAll('[data-artifact-href]')];
   if (!viewer || !nodes.length) return;
   nodes.forEach(btn => btn.addEventListener('click', () => loadArtifactIntoViewer(btn)));
-  const first = nodes[0];
-  if (first) loadArtifactIntoViewer(first);
 }
 
 function renderBarList(containerId, agents, mapper, opts = {}) {
