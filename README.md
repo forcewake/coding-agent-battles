@@ -9,6 +9,7 @@ Public logbook for honest head-to-head comparisons of coding agents.
 - Antigravity `agy` / Google AI Pro
 - Claude Code
 - Codex CLI
+- Pi Coding Agent
 
 ## What gets compared
 
@@ -46,6 +47,7 @@ runs/YYYY-MM-DD-task-slug/
     agy/
     claude-code/
     codex-cli/
+    pi/
   evidence/
 ```
 

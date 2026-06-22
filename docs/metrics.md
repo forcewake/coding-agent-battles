@@ -45,7 +45,8 @@ Use two scores so we do not hide a perfect one-line patch behind bad/opaque proc
 - **MiMoCode** stores compatible session data in `~/.local/share/mimocode/mimocode.db`; use direct SQLite extraction until a stable JSON stats endpoint exists.
 - **Codex CLI** stores JSONL under `~/.codex/sessions/`; `ccusage codex session --json` and Tokscale can estimate tokens/cost from those logs.
 - **Claude Code** can emit structured per-run JSON with `claude --print --output-format json`; if a run was executed as plain text with `--no-session-persistence`, per-run cost/tokens are not recoverable afterwards.
-- **Antigravity agy** currently exposes rich local transcripts under `~/.gemini/antigravity-cli/brain/...`, but this run did not expose reliable token/cost fields. Mark unavailable instead of estimating from transcript size.
+- **Pi Coding Agent** can emit JSONL with `pi --mode json`; Tokscale recognizes Pi sessions under client `pi`, so use both Pi JSONL and Tokscale as cross-checks.
+- **Antigravity agy** currently exposes rich local transcripts under `~/.gemini/antigravity-cli/brain/...`, but this run did not expose reliable token/cost fields. `tokscale antigravity sync` returned zero sessions even when run repeatedly during an active CLI run; mark unavailable instead of estimating from transcript size.
 
 ## Source inspiration
 

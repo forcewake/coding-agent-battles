@@ -1,0 +1,55 @@
+[0m
+> build · glm-5.2
+[0m
+[0m→ [0mRead .
+[0m→ [0mRead bb001_wordfreq
+[0m→ [0mRead tests
+[0m→ [0mRead pyproject.toml
+[0m→ [0mRead sample.txt
+[0m→ [0mRead bb001_wordfreq/cli.py
+[0m→ [0mRead bb001_wordfreq/__main__.py
+[0m→ [0mRead bb001_wordfreq/__init__.py
+[0m→ [0mRead tests/test_cli.py
+The bug: `--min-length` uses `action="store_true"` (a boolean flag) instead of accepting an integer. Fix it to take an int.
+[0m
+[0m← [0mEdit bb001_wordfreq/cli.py
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode/workspace/bb001_wordfreq/cli.py
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode/workspace/bb001_wordfreq/cli.py
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/opencode/workspace/bb001_wordfreq/cli.py
+@@ -22,9 +22,9 @@
+ parser = argparse.ArgumentParser(prog="wordfreq")
+ parser.add_argument("path", help="Text file to analyze")
+ parser.add_argument(
+     "--min-length",
+-    action="store_true",
++    type=int,
+     default=0,
+     help="Only include words with at least this many characters",
+ )
+ return parser
+
+[0m
+Now run the test suite:
+[0m$ [0mpytest -q
+..                                                                       [100%]
+2 passed in 0.07s
+[0m
+Both tests pass. Quick sanity check against `sample.txt`:
+[0m$ [0mpython -m bb001_wordfreq sample.txt && echo "---" && python -m bb001_wordfreq --min-length 4 sample.txt
+beta	2
+elephant	2
+alpha	1
+cat	1
+dog	1
+fox	1
+---
+beta	2
+elephant	2
+alpha	1
+[0m
+## Summary
+
+**Changed file:** `bb001_wordfreq/cli.py:24-29` — replaced `action="store_true"` (boolean flag, took no value) with `type=int` on `--min-length`. `default=0` already preserved the no-flag behavior (no filtering).
+
+**Verification:** `pytest -q` → `2 passed in 0.07s`. Manual runs confirm omitted flag keeps all words, and `--min-length 4` filters out words shorter than 4 chars.

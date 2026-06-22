@@ -1,0 +1,9 @@
+You are in a small Python CLI repository. Fix BB-001.
+
+Goal: make the `wordfreq` CLI accept `--min-length N` as an integer option. It should filter out words shorter than N. Preserve current behavior when the flag is omitted. Do not rewrite the project or change the public output format.
+
+Constraints:
+- Keep the change minimal.
+- Run the test suite with `pytest -q` before finishing.
+- If you add or change tests, keep them focused on the CLI behavior.
+- Return a short summary of changed files and verification command output.
