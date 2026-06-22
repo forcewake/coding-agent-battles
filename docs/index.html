@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coding Agent Battles — BB-001 Telemetry Rerun</title>
+  <meta name="description" content="A public, evidence-first coding-agent battle logbook with wall-clock, tokens, cost, process quality, and raw verification artifacts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <header class="hero shell">
+    <nav class="topnav" aria-label="Primary navigation">
+      <a class="brand" href="./"><span class="brand-mark">CAB</span><span>Coding Agent Battles</span></a>
+      <div class="navlinks">
+        <a href="#scoreboard">Scoreboard</a>
+        <a href="#method">Method</a>
+        <a href="#telemetry">Telemetry</a>
+        <a href="https://github.com/forcewake/coding-agent-battles">GitHub</a>
+      </div>
+    </nav>
+    <section class="hero-panel">
+      <div class="hero-copy">
+        <p class="eyebrow">Evidence-first coding-agent benchmark</p>
+        <h1>Same bug. Same prompt. Six agents. Measured like an engineering run.</h1>
+        <p class="lede">BB-001 is intentionally small: a broken Python CLI flag. The point is not to crown a model from a one-line patch — it is to prove the harness: isolated workspaces, red baseline, independent verification, raw diffs, tokens, cost, and process telemetry.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#scoreboard">Explore the scoreboard</a>
+          <a class="button ghost" href="https://github.com/forcewake/coding-agent-battles/tree/main/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun">Open raw artifacts</a>
+        </div>
+      </div>
+      <aside class="decision-card">
+        <div class="card-kicker">Calibration result</div>
+        <div class="big-number">6/6 PASS</div>
+        <p>All agents reached the same minimal patch. Differentiation comes from speed, token burn, telemetry completeness, and agent-owned verification.</p>
+        <div class="mini-grid">
+          <div><span>Fastest</span><strong>OpenCode</strong></div>
+          <div><span>Best telemetry/process</span><strong>Pi</strong></div>
+          <div><span>Cost fixed</span><strong>Claude JSON</strong></div>
+          <div><span>Still opaque</span><strong>agy tokens</strong></div>
+        </div>
+      </aside>
+    </section>
+  </header>
+
+  <main>
+    <section class="shell section metrics-strip" aria-label="Run headline metrics">
+      <article><span>Baseline</span><strong>RED</strong><small>pytest exit 1 before agents</small></article>
+      <article><span>Accepted change</span><strong>1 line</strong><small><code>action="store_true"</code> → <code>type=int</code></small></article>
+      <article><span>Verification</span><strong>Fresh</strong><small>Hermes reran pytest + CLI smoke</small></article>
+      <article><span>Artifacts</span><strong>Raw</strong><small>logs, diffs, JSON telemetry, workspaces</small></article>
+    </section>
+
+    <section id="scoreboard" class="shell section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Scoreboard</p>
+          <h2>Outcome is tied; process economics are not.</h2>
+        </div>
+        <p>The final patch is identical for every participant, so the meaningful comparison is the operational surface around that patch.</p>
+      </div>
+      <div class="viz-grid">
+        <article class="viz-card wide">
+          <div class="viz-title"><h3>Latency vs total token burn</h3><span>Lower-left is better</span></div>
+          <svg id="frontierChart" role="img" aria-label="Scatter plot of wall-clock seconds versus token count"></svg>
+        </article>
+        <article class="viz-card">
+          <div class="viz-title"><h3>Wall-clock</h3><span>seconds</span></div>
+          <div id="timeBars" class="bar-stack"></div>
+        </article>
+        <article class="viz-card">
+          <div class="viz-title"><h3>Process quality</h3><span>0–100 rubric</span></div>
+          <div id="qualityBars" class="bar-stack compact"></div>
+        </article>
+      </div>
+      <div class="table-wrap">
+        <table id="scoreTable">
+          <thead><tr><th>Agent</th><th>Wall</th><th>Tokens</th><th>Cost</th><th>Patch</th><th>Process</th><th>Evidence</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="shell section narrative-grid">
+      <article class="story-card accent">
+        <p class="eyebrow">Interpretation</p>
+        <h2>BB-001 is a harness test, not a leaderboard final.</h2>
+        <p>Because the code change is trivial, pass/fail alone is useless. A serious benchmark records the cost of arriving at the patch: how many tool calls, whether the agent proved the bug red first, whether it ran smoke tests, how much context it burned, and whether telemetry can be independently reconstructed.</p>
+      </article>
+      <article class="story-card">
+        <h3>What the run proves</h3>
+        <ul class="checklist">
+          <li>Each agent ran in a separate copied workspace.</li>
+          <li>Baseline was captured red before agents touched code.</li>
+          <li>Hermes verified every final workspace independently.</li>
+          <li>Raw logs and diffs were committed, not summarized from memory.</li>
+          <li>Token/cost gaps are marked unavailable instead of invented.</li>
+        </ul>
+      </article>
+      <article class="story-card">
+        <h3>What it does not prove</h3>
+        <ul class="xlist">
+          <li>It does not rank deep coding ability.</li>
+          <li>It does not measure long-horizon planning.</li>
+          <li>It does not cover UI, architecture, flaky tests, or repo-scale refactors.</li>
+          <li>It does not treat subscription-plan <code>$0</code> as free compute.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="method" class="shell section">
+      <div class="section-head">
+        <div><p class="eyebrow">Method</p><h2>The control plane behind the battle.</h2></div>
+        <p>A benchmark run is modeled as a production change attempt, not a chatbot answer.</p>
+      </div>
+      <div class="pipeline" aria-label="Benchmark pipeline">
+        <div><span>01</span><strong>Canonical fixture</strong><small>same broken repo</small></div>
+        <div><span>02</span><strong>Shared prompt</strong><small>same constraints</small></div>
+        <div><span>03</span><strong>Isolated agents</strong><small>separate workspaces</small></div>
+        <div><span>04</span><strong>Raw evidence</strong><small>logs + diffs</small></div>
+        <div><span>05</span><strong>Fresh verification</strong><small>pytest + CLI smoke</small></div>
+        <div><span>06</span><strong>Economics</strong><small>tokens + cost source</small></div>
+      </div>
+      <pre class="diff-card"><code>-        action="store_true",
++        type=int,</code></pre>
+    </section>
+
+    <section id="telemetry" class="shell section telemetry-section">
+      <div class="section-head">
+        <div><p class="eyebrow">Telemetry</p><h2>Every agent has a different economics surface.</h2></div>
+        <p>The hardest part is not collecting logs. It is knowing which logs are trustworthy and comparable.</p>
+      </div>
+      <div id="telemetryCards" class="telemetry-grid"></div>
+    </section>
+
+    <section class="shell section artifact-section">
+      <div class="section-head">
+        <div><p class="eyebrow">Evidence</p><h2>Trace the claims back to files.</h2></div>
+      </div>
+      <div class="artifact-grid">
+        <a href="../runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/results.md"><strong>Results report</strong><span>wall-clock, verification, diff pattern</span></a>
+        <a href="../runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.md"><strong>Metrics narrative</strong><span>scoreboard + interpretation</span></a>
+        <a href="../runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"><strong>Metrics JSON</strong><span>machine-readable benchmark facts</span></a>
+        <a href="../runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/evidence/telemetry-extraction.md"><strong>Telemetry extraction</strong><span>Claude fix, Pi addition, agy caveats</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell footer">
+    <span>Built from committed benchmark artifacts.</span>
+    <a href="https://github.com/forcewake/coding-agent-battles">forcewake/coding-agent-battles</a>
+  </footer>
+  <script src="./app.js" defer></script>
+</body>
+</html>

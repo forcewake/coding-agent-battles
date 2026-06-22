@@ -25,6 +25,11 @@ Each battle should keep the task, constraints and verification identical across 
 | Economics | Input/output/reasoning/cache tokens, actual/estimated cost, cost-per-accepted-change |
 | Review | Hermes independent verification notes and final verdict |
 
+## Live Pages
+
+- GitHub Pages dashboard: <https://forcewake.github.io/coding-agent-battles/>
+- Latest run visual: BB-001 telemetry rerun with charts, method, and raw evidence links.
+
 ## Repository layout
 
 ```text
