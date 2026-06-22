@@ -1,28 +1,41 @@
 # Coding Agent Battles
 
-Public logbook for honest head-to-head comparisons of coding agents.
+Public logbook for honest head-to-head comparisons of coding-agent **scaffold + model** configurations.
 
-## Initial participants
+## Current corpus
 
-- MiMoCode / GLM-5.2
-- OpenCode / GLM-5.2
-- Antigravity `agy` / Google AI Pro
-- Claude Code
-- Codex CLI
-- Pi Coding Agent
+- Live dashboard: <https://forcewake.github.io/coding-agent-battles/>
+- Corpus: **12 scenarios** (`BB-001` through `BB-012`)
+- Matrix: **6 agents × 12 scenarios = 72 runs**
+- Current aggregate: **70 PASS / 2 FAIL**
+- Latest scenario page: <https://forcewake.github.io/coding-agent-battles/scenarios/bb-012.html>
+- Audit pack: <https://forcewake.github.io/coding-agent-battles/audit/cross-check-summary.md>
+
+## Participants
+
+| Agent | Model / runtime label | Notes |
+|---|---|---|
+| OpenCode | GLM-5.2 | Z.AI coding model via OpenCode scaffold |
+| Claude Code | GLM-5.2 `[1m]` | Claude Code scaffold configured against GLM-5.2 |
+| MiMoCode | GLM-5.2 | Xiaomi MiMoCode scaffold configured against GLM-5.2 |
+| Pi Coding Agent | GLM-5.2 | Pi scaffold configured against GLM-5.2 |
+| Codex CLI | GPT-5.5 | OpenAI Codex CLI scaffold/model pair |
+| Antigravity `agy` | Gemini 3.5 Flash Medium | Antigravity scaffold/model pair; token/cost telemetry unavailable in this corpus |
+
+Interpretation caveat: these are **scaffold + model** comparisons. Four agents share GLM-5.2, while Codex and agy use different model families. Cost and pass/fail should not be read as scaffold-only conclusions until a model-controlled sweep exists.
 
 ## What gets compared
 
-Each battle should keep the task, constraints and verification identical across agents.
+Each battle keeps the task, constraints and verification identical across agents.
 
 | Dimension | Evidence to store |
 |---|---|
 | Task | Prompt, starting repo/commit, allowed tools, timebox |
 | Output | Final diff, branch/commit, generated artifacts |
 | Correctness | Tests, lint, typecheck, CLI/browser smoke, screenshots where useful |
-| Quality | Final patch score, process quality score, evidence transparency notes |
+| Quality | Final patch score, execution-quality score, evidence transparency notes |
 | Efficiency | Wall-clock, messages/turns, tool calls, retries |
-| Economics | Input/output/reasoning/cache tokens, actual/estimated cost, cost-per-accepted-change |
+| Economics | Input/output/reasoning/cache tokens, normalized public estimate, native/vendor cost where available |
 | Review | Hermes independent verification notes and final verdict |
 
 ## Telemetry collection
@@ -38,21 +51,16 @@ npx --yes ccusage@latest pi session --json
 npx --yes ccusage@latest gemini session --json
 ```
 
-Per-run reports may still use direct JSON/JSONL/SQLite extraction when ccusage cannot map a focused row back to the benchmark workspace/session. Those direct extracts are fallback/cross-check evidence, not a replacement for ccusage where ccusage has reliable run attribution.
-
-## Live Pages
-
-- GitHub Pages dashboard: <https://forcewake.github.io/coding-agent-battles/>
-- Current view: aggregate home dashboard across BB-001 + BB-003, with Agent × Scenario matrix, agent profiles, Pareto lens, and latest-run detail.
-- Latest scenario: BB-003 JSON export for existing CLI — <runs/2026-06-22-bb-003-json-export-cli/results.md>
-- Previous calibration: BB-001 telemetry rerun — <runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/results.md>
+Per-run reports may still use direct JSON/JSONL/SQLite extraction when ccusage cannot map a focused row back to the benchmark workspace/session. Those direct extracts are fallback/cross-check evidence, not a replacement for ccusage where ccusage has reliable run attribution. Public telemetry limitations are documented in `docs/audit/telemetry-provenance.md`.
 
 ## Repository layout
 
 ```text
 tasks/                 Candidate battle tasks and task specs
-templates/             Reusable task/run report templates
 runs/                  One folder per executed battle
+docs/                  GitHub Pages dashboard and public run artifacts
+docs/audit/            Deterministic ledger, telemetry provenance, LLM review outputs
+scripts/               Dashboard, telemetry, and audit generation scripts
 ```
 
 Suggested run folder format:

@@ -212,12 +212,21 @@ function renderAgentTable(data) {
     const covLabel = a.telemetryCoverage >= 1 ? '100% telemetry'
                    : a.telemetryCoverage  > 0 ? `${pct(a.telemetryCoverage)} telemetry`
                    : 'no telemetry';
+    const passRateW = knownNumber(a.passRate) ? a.passRate * 100 : 0;
 
     return `
       <tr>
         <td>
           <div class="at-name">${safe(a.short, a.id)}</div>
           <div class="at-model">${safe(a.label)}</div>
+        </td>
+        <td>
+          <div class="bar-mini-wrap">
+            <div class="bar-mini-track">
+              <div class="bar-mini-fill bar-fill-process" style="width:${passRateW.toFixed(1)}%"></div>
+            </div>
+            <span class="bar-mini-value">${safe(a.passes, 0)}/${safe(a.runs, 0)} · ${pct(a.passRate)}</span>
+          </div>
         </td>
         <td>
           <div class="bar-mini-wrap">
@@ -261,6 +270,7 @@ function renderAgentTable(data) {
       <thead>
         <tr>
           <th>Agent</th>
+          <th>Pass rate</th>
           <th>Avg wall</th>
           <th>Avg execution</th>
           <th>Avg cost (est.)</th>
@@ -508,8 +518,8 @@ function renderScenarioDetail(data, scenarioId) {
 
   // Winners
   const winnersHtml = [
-    { label: 'Fastest',      value: agentDisplay(s.fastest) },
-    { label: 'Cheapest',     value: s.cheapest ? agentDisplay(s.cheapest) : 'n/a — no cost telemetry' },
+    { label: 'Fastest passing', value: agentDisplay(s.fastest) },
+    { label: 'Cheapest passing', value: s.cheapest ? agentDisplay(s.cheapest) : 'n/a — no cost telemetry' },
     { label: 'Best execution', value: bestProcessLabel(agents, s.processBest) },
   ].map(w => `
     <div class="winner-badge">
@@ -576,6 +586,7 @@ function renderScenarioDetail(data, scenarioId) {
         <div class="sp-id">${s.id} · ${safe(s.type)} · ${safe(s.difficulty)}</div>
         <div class="sp-name">${safe(s.name)}</div>
         <div class="sp-summary">${safe(s.summary)}</div>
+        <div class="sp-method-note">Cost winners use each agent’s configured model price; this is scaffold+model economics, not a pure scaffold-only price comparison.</div>
       </div>
       <div class="sp-winners">${winnersHtml}</div>
     </div>

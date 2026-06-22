@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -62,9 +63,11 @@ def main() -> None:
                 ),
             })
     counts = Counter(r["evidence_level"] for r in records)
+    source_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, capture_output=True).stdout.strip()
     manifest = {
         "scope": "Public telemetry provenance manifest for Coding Agent Battles",
-        "source_commit": data.get("commit") or None,
+        "source_commit": source_commit,
+        "source_commit_note": "Revision observed when this manifest was generated; containing commit may differ because manifest contents change the final SHA.",
         "records": records,
         "counts_by_evidence_level": dict(counts),
         "important_limitations": [
@@ -80,6 +83,8 @@ def main() -> None:
         "# Telemetry provenance manifest",
         "",
         "This file exists because token/cost evidence must not be implied to be fully raw-replayable from public files when the source was a local provider store or `ccusage` database.",
+        "",
+        f"Generated from source revision `{source_commit}`. The commit that contains this generated manifest can differ because the manifest content itself changes the final SHA.",
         "",
         "## Counts by evidence level",
         "",

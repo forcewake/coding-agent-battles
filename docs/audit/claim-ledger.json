@@ -1,10 +1,11 @@
 {
-  "generated_at_utc": "2026-06-22T19:20:06.884935+00:00",
+  "generated_at_utc": "2026-06-22T20:25:03.608905+00:00",
   "repo": "forcewake/coding-agent-battles",
-  "commit": "b88b155f18132bb893412a8c285c463ffcdefc51",
+  "commit": "49ac381a1f86ede7c0f82168d9012b15f14b5549",
+  "commit_note": "This is the source revision observed when the audit files were generated. A commit that contains regenerated audit files necessarily has a different SHA; compare non-audit files for data changes.",
   "public_base_url": "https://forcewake.github.io/coding-agent-battles",
   "status_counts": {
-    "PASS": 788,
+    "PASS": 792,
     "WARN": 32,
     "FAIL": 0
   },
@@ -8465,6 +8466,46 @@
       "evidence": [
         "/tmp/cab_public_bb-012.html",
         "https://forcewake.github.io/coding-agent-battles/scenarios/bb-012.html"
+      ],
+      "details": ""
+    },
+    {
+      "id": "runs.no_orphan_run_dirs",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "runs has no unreferenced public/conflicting run directories",
+      "evidence": [
+        "runs"
+      ],
+      "details": ""
+    },
+    {
+      "id": "docs.runs.no_orphan_run_dirs",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "docs.runs has no unreferenced public/conflicting run directories",
+      "evidence": [
+        "docs/runs"
+      ],
+      "details": ""
+    },
+    {
+      "id": "site.latestScenario",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "latestScenario points at the newest scenario in the corpus",
+      "evidence": [
+        "docs/site-data.json"
+      ],
+      "details": "latest=BB-012 expected=BB-012"
+    },
+    {
+      "id": "agents_page.pass_rate_copy",
+      "status": "PASS",
+      "severity": "info",
+      "claim": "Agents page copy does not imply all agents have 100% pass rate",
+      "evidence": [
+        "docs/agents.html"
       ],
       "details": ""
     }

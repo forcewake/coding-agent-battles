@@ -1,9 +1,10 @@
 # Coding Agent Battles — claim ledger audit
 
-- Generated: `2026-06-22T19:20:06.884935+00:00`
-- Commit: `b88b155f18132bb893412a8c285c463ffcdefc51`
+- Generated: `2026-06-22T20:25:03.608905+00:00`
+- Commit observed during generation: `49ac381a1f86ede7c0f82168d9012b15f14b5549`
+- Commit note: This is the source revision observed when the audit files were generated. A commit that contains regenerated audit files necessarily has a different SHA; compare non-audit files for data changes.
 - Overall: **PASS_WITH_WARNINGS**
-- Counts: `{'PASS': 788, 'WARN': 32, 'FAIL': 0}`
+- Counts: `{'PASS': 792, 'WARN': 32, 'FAIL': 0}`
 - Non-pass severities: `{'blocker': 0, 'major': 22, 'minor': 10, 'info': 0}`
 
 ## Failed / warning checks

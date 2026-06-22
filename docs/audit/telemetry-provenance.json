@@ -1,6 +1,7 @@
 {
   "scope": "Public telemetry provenance manifest for Coding Agent Battles",
-  "source_commit": null,
+  "source_commit": "49ac381a1f86ede7c0f82168d9012b15f14b5549",
+  "source_commit_note": "Revision observed when this manifest was generated; containing commit may differ because manifest contents change the final SHA.",
   "records": [
     {
       "scenario": "BB-001",

@@ -5,7 +5,8 @@ You are an adversarial benchmark auditor. Do not praise. Find unsupported claims
 ## Inputs to inspect
 
 - Repository: `forcewake/coding-agent-battles`
-- Commit: `b88b155f18132bb893412a8c285c463ffcdefc51`
+- Commit observed during generation: `49ac381a1f86ede7c0f82168d9012b15f14b5549`
+- Commit note: This is the source revision observed when the audit files were generated. A commit that contains regenerated audit files necessarily has a different SHA; compare non-audit files for data changes.
 - Public site: `https://forcewake.github.io/coding-agent-battles/`
 - Deterministic audit ledger: `docs/audit/claim-ledger.json`
 - Telemetry provenance manifest: `docs/audit/telemetry-provenance.json` and `docs/audit/telemetry-provenance.md`

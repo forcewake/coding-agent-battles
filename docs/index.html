@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Coding Agent Battles — Benchmark Briefing</title>
   <meta name="description" content="Evidence-first coding-agent benchmark results." />
-  <link rel="stylesheet" href="./styles.css?v=20260622-audit-final" />
+  <link rel="stylesheet" href="./styles.css?v=20260622-cleanreview-fixes" />
   <script src="./vendor/d3.v7.min.js"></script>
 </head>
 <body data-page="home">
@@ -76,7 +76,7 @@
       <div class="kpi-card">
         <span class="kpi-value" id="kpi-cost">—</span>
         <span class="kpi-label">Total public cost</span>
-        <span class="kpi-sub">normalized estimate</span>
+        <span class="kpi-sub">normalized estimate · configured model prices</span>
       </div>
     </div>
   </section>
@@ -91,7 +91,7 @@
           <h2 class="section-title">Agent × Scenario results</h2>
         </div>
         <p class="section-desc">
-          All six agents attempted every scenario in isolated workspaces. Pass/fail is binary, verified by Hermes.
+          All six agents attempted every scenario in isolated workspaces. Pass/fail is binary and Hermes-verified; outcome and efficiency compare scaffold+model configurations, not scaffold-only performance.
         </p>
       </div>
 
@@ -167,6 +167,6 @@
     <a href="https://github.com/forcewake/coding-agent-battles" target="_blank" rel="noopener">forcewake/coding-agent-battles ↗</a>
   </footer>
 
-  <script src="./app.js?v=20260622-audit-final" type="module"></script>
+  <script src="./app.js?v=20260622-cleanreview-fixes" type="module"></script>
 </body>
 </html>

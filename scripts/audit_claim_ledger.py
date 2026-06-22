@@ -241,12 +241,27 @@ def audit(public: bool = False, base_url: str = "https://forcewake.github.io/cod
             public_ok = code == 0 and "Scenario rail" in dom and "Best execution" in dom and "Execution quality" in dom and 'id="artifactViewer" aria-live="polite" hidden=""' in dom
             add(checks, f"{sid}.public_render", public_ok, f"{sid} public scenario page renders current UI without exposing artifact viewer by default", [out, f"{base_url.rstrip('/')}/scenarios/{s['slug']}.html"], err.strip()[:1000], "blocker")
 
+    referenced_run_ids = {s["runId"] for s in scenarios}
+    for root, label in [(RUNS, "runs"), (DOCS / "runs", "docs.runs")]:
+        if root.exists():
+            orphan_dirs = sorted(p.name for p in root.iterdir() if p.is_dir() and p.name not in referenced_run_ids)
+            add(checks, f"{label}.no_orphan_run_dirs", not orphan_dirs, f"{label} has no unreferenced public/conflicting run directories", [root], ", ".join(orphan_dirs), "major")
+
+    latest = data.get("latestScenario") or {}
+    expected_latest = scenarios[-1]["id"] if scenarios else None
+    add(checks, "site.latestScenario", latest.get("id") == expected_latest, "latestScenario points at the newest scenario in the corpus", [site_path], f"latest={latest.get('id')} expected={expected_latest}", "minor")
+
+    agents_html = (DOCS / "agents.html").read_text(encoding="utf-8") if (DOCS / "agents.html").exists() else ""
+    bad_agent_copy = "Pass rate is tied" in agents_html or "100% pass rate conceals" in agents_html
+    add(checks, "agents_page.pass_rate_copy", not bad_agent_copy, "Agents page copy does not imply all agents have 100% pass rate", [DOCS / "agents.html"], "", "major")
+
     status_counts = {k: sum(1 for c in checks if c.status == k) for k in ["PASS", "WARN", "FAIL"]}
     severity_counts = {k: sum(1 for c in checks if c.status != "PASS" and c.severity == k) for k in ["blocker", "major", "minor", "info"]}
     return {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "repo": "forcewake/coding-agent-battles",
         "commit": subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, capture_output=True).stdout.strip(),
+        "commit_note": "This is the source revision observed when the audit files were generated. A commit that contains regenerated audit files necessarily has a different SHA; compare non-audit files for data changes.",
         "public_base_url": base_url,
         "status_counts": status_counts,
         "severity_counts": severity_counts,
@@ -260,7 +275,8 @@ def write_markdown(ledger: dict[str, Any]) -> str:
         "# Coding Agent Battles — claim ledger audit",
         "",
         f"- Generated: `{ledger['generated_at_utc']}`",
-        f"- Commit: `{ledger['commit']}`",
+        f"- Commit observed during generation: `{ledger['commit']}`",
+        f"- Commit note: {ledger['commit_note']}",
         f"- Overall: **{ledger['overall_status']}**",
         f"- Counts: `{ledger['status_counts']}`",
         f"- Non-pass severities: `{ledger['severity_counts']}`",
@@ -302,7 +318,8 @@ You are an adversarial benchmark auditor. Do not praise. Find unsupported claims
 ## Inputs to inspect
 
 - Repository: `forcewake/coding-agent-battles`
-- Commit: `{ledger['commit']}`
+- Commit observed during generation: `{ledger['commit']}`
+- Commit note: {ledger['commit_note']}
 - Public site: `https://forcewake.github.io/coding-agent-battles/`
 - Deterministic audit ledger: `docs/audit/claim-ledger.json`
 - Telemetry provenance manifest: `docs/audit/telemetry-provenance.json` and `docs/audit/telemetry-provenance.md`

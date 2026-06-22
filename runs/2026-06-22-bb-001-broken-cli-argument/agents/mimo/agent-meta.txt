@@ -1,6 +1,0 @@
-agent=mimo
-workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument/agents/mimo/workspace
-exit_code=0
-timed_out=False
-wall_seconds=129.528
-command=mimo run --dir /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument/agents/mimo/workspace --dangerously-skip-permissions

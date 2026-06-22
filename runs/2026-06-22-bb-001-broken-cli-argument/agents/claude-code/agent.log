@@ -1,7 +1,0 @@
-Done. 2 passed.
-
-**Changed files:** `bb001_wordfreq/cli.py` — swapped `action="store_true"` for `type=int` on `--min-length` so it parses `N` as an integer (default `0` preserved → omitted flag keeps current behavior). `count_words` already filtered correctly, so no logic change needed.
-
-**Skipped:** new tests — existing `test_min_length_filters_short_words` + `test_default_counts_all_words` already cover the CLI behavior.
-
-**Verification:** `pytest -q` → `2 passed in 0.09s`.

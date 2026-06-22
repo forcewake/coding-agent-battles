@@ -639,6 +639,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   margin-bottom: 6px;
 }
 .sp-summary { font-size: 14px; color: var(--ink-muted); line-height: 1.6; }
+.sp-method-note {
+  margin-top: 8px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
 
 .sp-winners {
   display: flex;

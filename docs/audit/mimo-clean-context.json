@@ -1,0 +1,92 @@
+{
+  "reviewer": "MiMO",
+  "verdict": "REQUEST_CHANGES",
+  "summary": {
+    "blockers": 0,
+    "major": 4,
+    "minor": 4
+  },
+  "issues": [
+    {
+      "severity": "major",
+      "claim": "Static UI headline: “Pass rate is tied” and “what a 100% pass rate conceals”.",
+      "location": "docs/agents.html:38,41 (section-title and section-desc for the agent-profiles page); corroborated by docs/site-data.json agentProfiles (agy passRate=0.8333) and docs/app.js renderAgentTable thead (no pass-rate column).",
+      "expected_evidence": "Either all six agents at 100% pass, or a headline that reflects the real distribution.",
+      "actual_evidence": "Five agents are 12/12 (100%); agy is 10/12 (83.3%, FAIL on BB-005 and BB-009, verifyExit=1, backed by runs/…/agents/agy/verify.log + result.json). The agents.html table has columns Agent/Avg wall/Avg execution/Avg cost/Total tokens/Telemetry and NO pass-rate column, so a visitor to that page sees only the false “tied / 100%” framing with no visible correction.",
+      "recommendation": "Rewrite the static headline to state that 5/6 agents are tied at 100% while agy is 10/12, or add a Pass-rate column to the agent table and let the headline reflect the data. This is the single most benchmark-distorting claim on the site and it is not covered by the deterministic ledger (which only checks site-data/run artifacts, not static HTML)."
+    },
+    {
+      "severity": "major",
+      "claim": "A second, conflicting BB-001 dataset is publicly served alongside the authoritative one, and it references private provider stores/logs that are not committed.",
+      "location": "docs/runs/2026-06-22-bb-001-broken-cli-argument/metrics.json (orphan, schema_version 0.1) vs docs/runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json (authoritative, used by docs/site-data.json runId).",
+      "expected_evidence": "Exactly one publicly served BB-001 metrics dataset whose numbers match site-data.json, and no references to uncommitted private databases.",
+      "actual_evidence": "The orphan diverges materially from the rerun used by the dashboard — e.g. mimo wall_seconds 129.528 vs 63.621 and tokens 281974 vs 128610; opencode wall 46.13 vs 35.587; codex-cli tokens 257358 vs 318536; claude-code tokens null vs 126008. Its sources.local_extractors list ~/.local/share/opencode/opencode.db, ~/.local/share/mimocode/mimocode.db, ~/.codex/sessions/…/rollout-….jsonl, and ~/.gemini/antigravity-cli/brain/…/transcript_full.jsonl — none of which are committed or replayable. Both dirs live under docs/runs/ (the Pages root) so both are public.",
+      "recommendation": "Delete or clearly mark-as-superseded the non-rerun BB-001 dir in both runs/ and docs/runs/, or reconcile the numbers and document which is authoritative. Do not leave two public BB-001 datasets with different wall/token figures. This was missed by both the deterministic ledger and the prior Gemini review."
+    },
+    {
+      "severity": "major",
+      "claim": "README describes the project accurately to a first-time visitor.",
+      "location": "README.md:5-12, 46-47.",
+      "expected_evidence": "README corpus description matching the published 12-scenario dashboard and correct agent/model attribution.",
+      "actual_evidence": "README says “Current view: aggregate home dashboard across BB-001 + BB-003” and “Latest scenario: BB-003” while the dashboard ships 12 scenarios (BB-001–BB-012) and site-data latestScenario/runtime goes through BB-012. README lists “Antigravity agy / Google AI Pro” but agentProfiles label the same agent “Gemini 3.5 Flash Medium”. README lists Claude Code and Codex CLI with no model, hiding that 4 of 6 agents run the same GLM-5.2 model.",
+      "recommendation": "Update README to the 12-scenario corpus, fix the agy model label, and state the shared-model configuration (4 agents on GLM-5.2, codex on GPT-5.5, agy on Gemini 3.5 Flash)."
+    },
+    {
+      "severity": "major",
+      "claim": "Per-scenario “Cheapest” and home-page “Total public cost” are presented as agent comparisons.",
+      "location": "docs/index.html KPI strip (“Total public cost”), docs/app.js:511 scenario winners (“Cheapest”), docs/site-data.json pricingBasis.models.",
+      "expected_evidence": "Cost rankings that are comparable across agents, or an explicit up-front caveat that price-per-token differs by model.",
+      "actual_evidence": "pi is “cheapest” in 12/12 scenarios and the Total public cost is $9.00, but 4 agents are priced at GLM-5.2 rates (input $1.4 / output $4.4), codex-cli at GPT-5.5 rates (input $5 / output $30, ~10× output), and agy has no cost at all. codex-cli alone is $6.77 of the $9.00 total purely because of GPT-5.5 pricing. The model heterogeneity is disclosed in per-agent labels and the pricingBasis detail accordion, but not in the KPI strip or the “Cheapest” winner badge, so a casual reader attributes cost differences to the scaffold rather than to the chosen model price.",
+      "recommendation": "Add a one-line caveat next to “Total public cost” and the “Cheapest” badge (e.g. “costs reflect each agent’s configured model price; not a pure scaffold comparison”), or hold the model constant across agents before ranking by cost."
+    },
+    {
+      "severity": "minor",
+      "claim": "Scenario card “Fastest” reflects the fastest run.",
+      "location": "docs/site-data.json scenarios[BB-009].fastest=“opencode”; docs/app.js:511; ledger check BB-009.fastest.",
+      "expected_evidence": "“Fastest” either means fastest overall or is explicitly labelled “fastest passing”.",
+      "actual_evidence": "For BB-009, agy finished in 43.784s (lowest) but verdict=FAIL; the card shows “Fastest: opencode” at 58.357s. The ledger defines fastest as “minimum wall-clock among passing runs”, so the value is internally consistent — but that definition is not surfaced on the card, and BB-004 (where fastest=agy and agy passed) gives no hint that failed runs are excluded elsewhere.",
+      "recommendation": "Label the badge “Fastest passing”, or add a footnote when the literally-fastest attempt failed."
+    },
+    {
+      "severity": "minor",
+      "claim": "The audit ledger provenance points at the commit being published.",
+      "location": "docs/audit/claim-ledger.md:4 (Commit: b88b155…) and docs/audit/claim-ledger.json commit=b88b155… vs HEAD=49ac381; docs/audit/telemetry-provenance.json source_commit=null.",
+      "expected_evidence": "Ledger commit field equals the published commit, or an explicit note that HEAD is an audit-only refresh over unchanged data.",
+      "actual_evidence": "HEAD (49ac381) differs from the audited commit (b88b155). git diff b88b155..HEAD touches only the three audit files themselves (5 lines), so no benchmark data changed and no claims are invalidated — but the embedded commit pointer is stale and telemetry-provenance.json leaves source_commit null.",
+      "recommendation": "Either regenerate the ledger at 49ac381 or add a one-line note that 49ac381 is an audit-pack refresh with identical underlying data, and populate telemetry-provenance.json source_commit."
+    },
+    {
+      "severity": "minor",
+      "claim": "site-data.json latestScenario points at the most recent scenario.",
+      "location": "docs/site-data.json latestScenario.id = “BB-003 JSON export for existing CLI”; README.md:47.",
+      "expected_evidence": "latestScenario reflecting the newest run in the corpus.",
+      "actual_evidence": "The corpus runs BB-001 through BB-012 (all dated 2026-06-22), yet latestScenario and the README both call BB-003 the latest.",
+      "recommendation": "Update latestScenario to the actual newest scenario (BB-012) or rename the field if it means something else."
+    },
+    {
+      "severity": "minor",
+      "claim": "Pass/fail and efficiency are attributable to the agent scaffold.",
+      "location": "docs/site-data.json agentProfiles (models: 4× glm-5.2, codex=gpt-5.5, agy=Gemini 3.5 Flash Medium); both failures are agy (BB-005, BB-009).",
+      "expected_evidence": "Either a held-constant model or an explicit scaffold-vs-model caveat on outcome claims.",
+      "actual_evidence": "Because every agent runs a different model configuration (and the two failures belong to the only Gemini-Flash agent), the benchmark cannot separate scaffold quality from model capability. This is inherent to the design and disclosed per-agent, but not called out where pass/fail is summarized.",
+      "recommendation": "Add a methodology note that outcome/efficiency are scaffold+model composite signals, not scaffold-only, until a model-controlled sweep is run."
+    }
+  ],
+  "missing_before_publication_grade": [
+    "Resolve the duplicate BB-001 dataset: remove or supersede docs/runs/2026-06-22-bb-001-broken-cli-argument/ (and its mirror under runs/) so only the authoritative rerun is public, and remove/scrub references to uncommitted private provider DBs and logs.",
+    "Fix the false agents.html “Pass rate is tied / 100% pass rate” headline (agy is 10/12) and surface real per-agent pass rates on that page.",
+    "Refresh README to the 12-scenario corpus, correct the agy model label, and disclose the shared-model configuration.",
+    "Add an up-front model-pricing caveat to the cost KPI and “Cheapest” badge so cost rankings are not read as pure scaffold comparisons.",
+    "Regenerate or re-stamp the claim ledger and telemetry-provenance manifest at the published commit (populate source_commit).",
+    "Commit sanitized exports (ccusage JSON / provider extracts) for the rows currently marked *_not_raw_committed so the 50 non-raw cost/token rows become third-party-validatable from public files; today only 10/72 rows are committed_raw_agent_json.",
+    "Optional: label “Fastest = fastest passing” on scenario cards and clarify BB-009 where the fastest-finishing attempt failed."
+  ],
+  "methodology_notes": [
+    "Core dataset integrity is strong and re-verified here: 12 scenarios, 72 runs, 70 PASS / 2 FAIL (both agy, BB-005 and BB-009, each backed by result.json + verify.log); KPI normalizedPublicCost=9.00368 equals the sum of the 60 cost-bearing rows; costCoverage=60/72=0.833; per-agent avgWall/avgCost/totalTokens/passRate all match agentProfiles; every superlative (fastest/cheapest/processBest) matches the ledger’s declared aggregation rule.",
+    "All 72 agent runs carry diff.patch, verify.log, agent.log and agent-meta.txt, so the ATF claim that pass/fail, wall-clock, diffs and verifier outputs are committed-backed holds at the run-artifact level (BB-001/BB-003 lack only result.json, which the ledger already WARNs about and the scenario pages flag via provenanceWarnings).",
+    "The execution-quality 0–100 composite is transparent: weights are published in docs/metrics.md and docs/site-data.json scoreBasis, and every agent row exposes its processComponents breakdown; it deliberately excludes token/cost, which is sound and avoids penalizing agy for its missing telemetry.",
+    "Normalized public cost vs vendorCost is correctly separated and rendered (app.js vendorCostNote shows a “native $X” sub-label whenever they differ, e.g. Claude Code BB-002 cost 0.079 / native 0.249).",
+    "Telemetry provenance is the weakest link by design: of 72 rows only 10 are committed_raw_agent_json; 30 are local ccusage/provider-store extracts (not raw-committed), 10 are legacy BB-001/BB-003 rows with no row-level provenance, and 12 (all agy) are unavailable. This is documented in telemetry-provenance.json, but it means the majority of cost/token claims cannot be independently replayed from public files.",
+    "The deterministic ledger (788 PASS / 32 WARN / 0 FAIL) is internally consistent, but it validates site-data.json and run artifacts only — it does not check static HTML narrative (where the false “pass rate tied” claim lives) nor orphaned run directories (where the conflicting BB-001 dataset lives), which is why both real issues were missed."
+  ]
+}

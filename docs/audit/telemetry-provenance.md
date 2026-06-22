@@ -2,6 +2,8 @@
 
 This file exists because token/cost evidence must not be implied to be fully raw-replayable from public files when the source was a local provider store or `ccusage` database.
 
+Generated from source revision `49ac381a1f86ede7c0f82168d9012b15f14b5549`. The commit that contains this generated manifest can differ because the manifest content itself changes the final SHA.
+
 ## Counts by evidence level
 
 | Evidence level | Rows |
