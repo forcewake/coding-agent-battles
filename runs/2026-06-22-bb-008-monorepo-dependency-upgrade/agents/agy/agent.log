@@ -1,0 +1,21 @@
+I will start by listing the contents of the workspace directory to understand the project structure and locate the files.
+I will now list the contents of the `packages` directory to see what packages are defined.
+I'll view `verify.py` to understand how the correctness of the project is verified.
+I will list the contents of the `packages/shared` directory.
+I will view `packages/shared/index.mjs` to see the current API of the shared package.
+I will list the contents of the `packages/app` directory.
+I will view `packages/app/index.mjs` to see how it uses `slugify`.
+I will list the contents of the `packages/app/test` directory.
+I will view `packages/app/test/app.test.mjs` to check the test scenarios and requirements.
+I will run `python verify.py` to see the current error output.
+I will modify `packages/app/index.mjs` to import and use the new `makeSlug` API from the shared package instead of the old `slugify`.
+I will run `python verify.py` to confirm that the verification checks now succeed.
+I will check the `git status` to ensure only the expected files are modified.
+I will view the git diff to ensure the patch is minimal and focused.
+I have successfully updated the app package to use the new shared `makeSlug` API and confirmed that all requirements are met.
+
+### Summary of Changes
+- Updated [packages/app/index.mjs](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-008-monorepo-dependency-upgrade/agents/agy/workspace/packages/app/index.mjs) to import and call `makeSlug` instead of `slugify`.
+- Verified that stable slugs are preserved (lowercase, trim, non-alphanumerics collapsed to a single dash).
+- Confirmed that the old `slugify` export has not been reintroduced.
+- Ran `python verify.py`, which passed successfully with exit code `0`.

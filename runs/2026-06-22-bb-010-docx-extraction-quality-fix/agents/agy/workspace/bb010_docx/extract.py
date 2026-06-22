@@ -1,0 +1,55 @@
+import xml.etree.ElementTree as ET
+from pathlib import Path
+from zipfile import ZipFile
+
+
+def extract_docx_text(path: str | Path) -> str:
+    with ZipFile(path) as zf:
+        xml_bytes = zf.read('word/document.xml')
+
+    root = ET.fromstring(xml_bytes)
+
+    def extract_from_element(element) -> list[str]:
+        tag_local = element.tag.split('}')[-1] if '}' in element.tag else element.tag
+        if tag_local == 'Fallback':
+            return []
+
+        if tag_local == 'p':
+            t_texts = []
+            def collect_t(node):
+                node_local = node.tag.split('}')[-1] if '}' in node.tag else node.tag
+                if node_local == 'txbxContent':
+                    return
+                if node_local == 't':
+                    if node.text is not None:
+                        t_texts.append(node.text)
+                elif node_local == 'br':
+                    t_texts.append('\n')
+                elif node_local == 'tab':
+                    t_texts.append('\t')
+                for child in node:
+                    collect_t(child)
+
+            collect_t(element)
+
+            nested_paragraphs = []
+            def collect_nested_p(node):
+                node_local = node.tag.split('}')[-1] if '}' in node.tag else node.tag
+                if node_local == 'txbxContent':
+                    for child in node:
+                        nested_paragraphs.extend(extract_from_element(child))
+                    return
+                for child in node:
+                    collect_nested_p(child)
+
+            collect_nested_p(element)
+            return [''.join(t_texts)] + nested_paragraphs
+
+        results = []
+        for child in element:
+            results.extend(extract_from_element(child))
+        return results
+
+    paragraphs = extract_from_element(root)
+    return '\n'.join(paragraphs)
+

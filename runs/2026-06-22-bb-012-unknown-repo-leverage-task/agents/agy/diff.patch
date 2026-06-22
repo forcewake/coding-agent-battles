@@ -1,0 +1,28 @@
+diff --git a/bb012_leverage/summary.py b/bb012_leverage/summary.py
+index fda9ed8..d0357f8 100644
+--- a/bb012_leverage/summary.py
++++ b/bb012_leverage/summary.py
+@@ -1,6 +1,19 @@
++from vendor import textkit
++
+ def summarize(text: str):
+-    # BUG: whitespace split keeps punctuation/case and stopwords.
++    # Use vendor.textkit.words for punctuation/case handling
++    all_words = textkit.words(text)
++    
++    # Ignore stopwords from vendor.textkit.STOPWORDS
++    filtered_words = [w for w in all_words if w not in textkit.STOPWORDS]
++    
++    # Count frequencies
+     counts = {}
+-    for token in text.split():
+-        counts[token] = counts.get(token, 0) + 1
+-    return [{'word': w, 'count': c} for w, c in counts.items()][:3]
++    for w in filtered_words:
++        counts[w] = counts.get(w, 0) + 1
++        
++    # Sort: count descending, then word ascending
++    sorted_words = sorted(counts.items(), key=lambda item: (-item[1], item[0]))
++    
++    # Return at most 3 entries as list of {word, count} dicts
++    return [{'word': w, 'count': c} for w, c in sorted_words][:3]

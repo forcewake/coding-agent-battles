@@ -1,0 +1,9 @@
+I will list the files in the current workspace directory to understand the project structure.
+I will list the contents of the `bb009_observe` directory to see the source files.
+I will view `verify.py` to see how the verification is done and what testing/run script is executed.
+I will view `pyproject.toml` to see the dependencies of the application.
+I will view the `bb009_observe/app.py` file.
+I will list files in the `tests` directory.
+I will view `tests/test_observe.py` to see the current tests and assertions.
+I will run the verify script to see the current state of tests.
+I will wait for the verification command to finish.

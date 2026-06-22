@@ -1,0 +1,58 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:52 .git
+-rw-r--r-- 1 forcewake forcewake   14 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake   73 Jun 22 17:39 package.json
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 src
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 tests
+-rw-r--r-- 1 forcewake forcewake  265 Jun 22 17:39 verify.py
+[0m
+[0m$ [0mls -la src tests
+src:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  234 Jun 22 17:39 filter.mjs
+
+tests:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake 1000 Jun 22 17:39 filter.test.mjs
+[0m
+[0m→ [0mRead verify.py
+[0m→ [0mRead package.json
+[0m→ [0mRead src/filter.mjs
+[0m→ [0mRead tests/filter.test.mjs
+[0m
+[0m← [0mWrite src/filter.mjs
+Wrote file successfully.
+[0m
+[0m$ [0mpython verify.py
+✔ query searches title and description case-insensitively (1.171178ms)
+✔ tag filter combines with query and keeps order (0.156081ms)
+✔ empty state copy is product quality (0.131812ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 51.913894
+[verify_exit_code] 0
+[0m
+All 3 tests pass and `verify.py` exits 0.
+
+Changes to `src/filter.mjs`:
+- Lowercased query/title/description for case-insensitive matching across both fields.
+- Added tag filtering (`tag === 'all'` disables it), combined with query via AND.
+- Empty query returns all items (filtered only by tag).
+- `emptyStateText()` now returns `No matching agents`.
+
+`Array.filter` preserves original order, so stability holds.

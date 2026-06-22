@@ -1,0 +1,8 @@
+[project]
+name = "bb011-miniproduct"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["fastapi", "httpx"]
+
+[tool.setuptools.packages.find]
+include = ["bb011_miniproduct*"]

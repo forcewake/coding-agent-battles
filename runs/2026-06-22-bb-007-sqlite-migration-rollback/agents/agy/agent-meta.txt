@@ -1,0 +1,7 @@
+agent=agy
+run_id=2026-06-22-bb-007-sqlite-migration-rollback
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/agy/workspace
+exit_code=0
+timed_out=False
+wall_seconds=74.759
+command=agy --prompt <PROMPT> --model 'Gemini 3.5 Flash (Medium)' --dangerously-skip-permissions --print-timeout 15m --log-file /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/agy/agy-cli.log

@@ -1,0 +1,7 @@
+agent=opencode
+run_id=2026-06-22-bb-002-csv-edge-case-parser
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/opencode/workspace
+exit_code=0
+timed_out=False
+wall_seconds=80.638
+command=opencode run --dir /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/opencode/workspace --dangerously-skip-permissions <PROMPT>

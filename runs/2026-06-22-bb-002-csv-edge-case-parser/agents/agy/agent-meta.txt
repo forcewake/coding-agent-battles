@@ -1,0 +1,7 @@
+agent=agy
+run_id=2026-06-22-bb-002-csv-edge-case-parser
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/agy/workspace
+exit_code=0
+timed_out=False
+wall_seconds=202.767
+command=agy --prompt <PROMPT> --model 'Gemini 3.5 Flash (Medium)' --dangerously-skip-permissions --print-timeout 15m --log-file /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/agy/agy-cli.log

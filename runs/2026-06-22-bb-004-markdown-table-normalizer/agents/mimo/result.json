@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+  "task": "BB-004-markdown-table-normalizer",
+  "agent": "mimo",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 190.22,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

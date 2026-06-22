@@ -1,0 +1,69 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:52 .git
+-rw-r--r-- 1 forcewake forcewake   14 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake   73 Jun 22 17:39 package.json
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 src
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 tests
+-rw-r--r-- 1 forcewake forcewake  265 Jun 22 17:39 verify.py
+[0m
+[0m→ [0mRead verify.py
+[0m
+[0m$ [0mls src/ tests/
+src/:
+filter.mjs
+
+tests/:
+filter.test.mjs
+[0m
+[0m→ [0mRead src/filter.mjs
+[0m→ [0mRead tests/filter.test.mjs
+[0m
+[0m← [0mEdit src/filter.mjs
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-006-react-filter-search-ui/agents/mimo/workspace/src/filter.mjs
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-006-react-filter-search-ui/agents/mimo/workspace/src/filter.mjs
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-006-react-filter-search-ui/agents/mimo/workspace/src/filter.mjs
+@@ -1,5 +1,11 @@
+ export function filterItems(items, query = '', tag = 'all') {
+-  // BUG: title-only, case-sensitive, ignores tag.
+-  return items.filter(item => item.title.includes(query));
++  const q = (query || '').toLowerCase();
++  return items.filter(item => {
++    const matchesQuery = !q ||
++      String(item.title).toLowerCase().includes(q) ||
++      String(item.description).toLowerCase().includes(q);
++    const matchesTag = tag === 'all' || (item.tags || []).includes(tag);
++    return matchesQuery && matchesTag;
++  });
+ }
+-export function emptyStateText() { return 'Nothing here'; }
++export function emptyStateText() { return 'No matching agents'; }
+
+[0m
+[0m$ [0mpython verify.py
+✔ query searches title and description case-insensitively (1.503514ms)
+✔ tag filter combines with query and keeps order (0.179801ms)
+✔ empty state copy is product quality (0.152429ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 63.85239
+[verify_exit_code] 0
+[0m
+All 3 tests pass and `verify.py` exits 0.
+
+Fix in `src/filter.mjs:1`:
+- Case-insensitive query matching against both `title` and `description`.
+- `tag === 'all'` disables tag filtering; otherwise filters on `item.tags`.
+- `Array.prototype.filter` preserves input order (stable).
+- `emptyStateText()` now returns `'No matching agents'`.

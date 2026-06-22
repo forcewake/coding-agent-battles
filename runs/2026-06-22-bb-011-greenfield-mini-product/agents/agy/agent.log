@@ -1,0 +1,10 @@
+I will list the contents of the workspace directory to understand the layout of the project.
+I will view the `verify.py` script to understand what tests/verification checks we are expected to pass.
+I will list the files inside `tests` and `bb011_miniproduct` to see where the source files and test files are located.
+I will list the contents of the `tests` directory.
+I will view `pyproject.toml` to see dependencies and how the package is structured.
+I will view `tests/test_app.py` to examine the expected endpoints, behavior, request schemas, and responses.
+I will view `bb011_miniproduct/app.py` to see what is currently defined there.
+I will write the FastAPI application implementation to `bb011_miniproduct/app.py`. It implements the required `/healthz`, `/scenarios` (POST and GET) endpoints and sorts the scenarios by level then id. We store the scenarios in-memory using a dictionary scope-bound to `create_app()` to avoid cross-test contamination.
+I will now run `python verify.py` using the `run_command` tool to install dependencies and execute the pytest suite.
+I will wait for the verification command to complete.

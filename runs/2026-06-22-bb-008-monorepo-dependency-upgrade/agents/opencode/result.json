@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+  "task": "BB-008-monorepo-dependency-upgrade",
+  "agent": "opencode",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 42.59,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

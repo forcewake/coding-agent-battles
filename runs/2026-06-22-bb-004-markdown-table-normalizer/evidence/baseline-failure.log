@@ -1,0 +1,26 @@
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-004-markdown-table-normalizer/fixture/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/tasks/BB-004-markdown-table-normalizer/fixture/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-004-markdown-table-normalizer/fixture/.venv/bin/python -m pytest -q
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+___________________ test_normalizes_table_and_preserves_text ___________________
+
+    def test_normalizes_table_and_preserves_text():
+>       assert normalize_markdown_tables(INPUT) == EXPECTED
+E       AssertionError: assert 'Intro\n\n| n... |\n\nOutro\n' == 'Intro\n\n| n... |\n\nOutro\n'
+E         
+E           Intro
+E           
+E         - | name     | score |
+E         ?       ----- -
+E         + | name|score |
+E         - | ---      | ---   |...
+E         
+E         ...Full output truncated (8 lines hidden), use '-vv' to show
+
+tests/test_normalizer.py:25: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_normalizer.py::test_normalizes_table_and_preserves_text - A...
+1 failed, 1 passed in 0.02s

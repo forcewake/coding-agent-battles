@@ -1,0 +1,11 @@
+✔ scenario path uses upgraded shared slug API (1.573294ms)
+✔ old slugify API is not reintroduced (0.154873ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58.549221
+[verify_exit_code] 0

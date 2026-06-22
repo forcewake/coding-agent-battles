@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+  "task": "BB-007-sqlite-migration-rollback",
+  "agent": "opencode",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 48.124,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

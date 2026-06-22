@@ -1,0 +1,41 @@
+diff --git a/bb011_miniproduct/app.py b/bb011_miniproduct/app.py
+index 192280a..9683902 100644
+--- a/bb011_miniproduct/app.py
++++ b/bb011_miniproduct/app.py
+@@ -1,3 +1,33 @@
+-# Intentionally incomplete greenfield product.
+-def create_app():
+-    raise NotImplementedError('build the API')
++from fastapi import FastAPI, HTTPException
++from pydantic import BaseModel
++
++
++class Scenario(BaseModel):
++    id: str
++    name: str
++    level: int
++
++
++def create_app() -> FastAPI:
++    app = FastAPI()
++    scenarios: dict[str, Scenario] = {}
++
++    @app.get("/healthz")
++    def healthz():
++        return {"status": "ok"}
++
++    @app.post("/scenarios", status_code=201)
++    def create_scenario(scenario: Scenario):
++        if scenario.id in scenarios:
++            raise HTTPException(status_code=409, detail="Scenario already exists")
++        scenarios[scenario.id] = scenario
++        return scenario
++
++    @app.get("/scenarios")
++    def list_scenarios():
++        return sorted(
++            (s.model_dump() for s in scenarios.values()),
++            key=lambda s: (s["level"], s["id"]),
++        )
++
++    return app

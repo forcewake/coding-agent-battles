@@ -1,0 +1,25 @@
+file:///home/forcewake/coding-agent-battles-init/tasks/BB-008-monorepo-dependency-upgrade/fixture/packages/app/index.mjs:1
+import { slugify } from '../shared/index.mjs';
+         ^^^^^^^
+SyntaxError: The requested module '../shared/index.mjs' does not provide an export named 'slugify'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:326:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:429:5)
+    at async node:internal/modules/esm/loader:639:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.15.0
+✖ packages/app/test/app.test.mjs (35.350698ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 42.15913
+
+✖ failing tests:
+
+test at packages/app/test/app.test.mjs:1:1
+✖ packages/app/test/app.test.mjs (35.350698ms)
+  'test failed'

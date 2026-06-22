@@ -1,0 +1,7 @@
+agent=pi
+run_id=2026-06-22-bb-002-csv-edge-case-parser
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/pi/workspace
+exit_code=0
+timed_out=False
+wall_seconds=125.715
+command=/home/forcewake/.nvm/versions/node/v24.15.0/bin/pi --provider zai-coding-cn --model glm-5.2 --thinking xhigh --mode json --no-context-files --approve --tools read,write,edit,bash,grep,find,ls -p <PROMPT>

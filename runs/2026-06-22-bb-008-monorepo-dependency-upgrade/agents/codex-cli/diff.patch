@@ -1,0 +1,11 @@
+diff --git a/packages/app/index.mjs b/packages/app/index.mjs
+index 038f60e..f93bde4 100644
+--- a/packages/app/index.mjs
++++ b/packages/app/index.mjs
+@@ -1,4 +1,4 @@
+-import { slugify } from '../shared/index.mjs';
++import { makeSlug } from '../shared/index.mjs';
+ export function scenarioPath(name) {
+-  return `/scenarios/${slugify(name)}.html`;
++  return `/scenarios/${makeSlug(name, { lower: true })}.html`;
+ }

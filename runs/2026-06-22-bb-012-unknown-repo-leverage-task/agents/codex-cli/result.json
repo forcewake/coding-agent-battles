@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+  "task": "BB-012-unknown-repo-leverage-task",
+  "agent": "codex-cli",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 90.124,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

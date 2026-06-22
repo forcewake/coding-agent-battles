@@ -1,0 +1,46 @@
+[0m
+> build · glm-5.2
+[0m
+I'll explore the workspace to understand the structure.
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 bb004_mdtable
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:47 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  158 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 tests
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+[0m
+[0m$ [0mls bb004_mdtable tests
+bb004_mdtable:
+__init__.py
+normalizer.py
+
+tests:
+test_normalizer.py
+[0m
+[0m→ [0mRead verify.py
+[0m→ [0mRead bb004_mdtable/normalizer.py
+[0m→ [0mRead tests/test_normalizer.py
+[0m→ [0mRead bb004_mdtable/__init__.py
+[0m→ [0mRead pyproject.toml
+Now I understand the task. Let me analyze the expected transformation: parse pipe-table cells, compute per-column widths from content, pad cells left-aligned, normalize the separator to `---`. Let me write the normalizer.
+[0m
+[0m← [0mWrite bb004_mdtable/normalizer.py
+Wrote file successfully.
+[0m
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-004-markdown-table-normalizer/agents/mimo/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-004-markdown-table-normalizer/agents/mimo/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-004-markdown-table-normalizer/agents/mimo/workspace/.venv/bin/python -m pytest -q
+..                                                                       [100%]
+2 passed in 0.01s
+[verify_exit_code] 0
+[0m
+`python verify.py` passes (2 tests, exit 0).
+
+The normalizer in `bb004_mdtable/normalizer.py:1` detects pipe-table blocks (consecutive `|`-leading lines whose second row is a separator), computes per-column widths from header+data cells, then re-emits each row with `| cell-padded |` formatting and normalizes every separator cell to `---`. Non-table lines pass through untouched, and the output is idempotent since re-normalizing yields identical widths and cells.

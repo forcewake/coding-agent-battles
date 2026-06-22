@@ -1,0 +1,70 @@
+[0m
+> build · glm-5.2
+[0m
+I'll explore the workspace to understand the structure and the failing fixture.
+[0m$ [0mls -la && git status && git log --oneline -5 2>/dev/null
+total 36
+drwxr-xr-x 6 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 bb012_leverage
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 18:00 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  160 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 tests
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:44 vendor
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+On branch master
+nothing to commit, working tree clean
+c62bc4d baseline broken fixture
+[0m
+[0m$ [0mls bb012_leverage vendor tests && echo "---PYPROJECT---" && cat pyproject.toml
+bb012_leverage:
+__init__.py
+summary.py
+
+tests:
+test_summary.py
+
+vendor:
+__init__.py
+textkit.py
+---PYPROJECT---
+[project]
+name = "bb012-leverage"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["bb012_leverage*"]
+[0m
+[0m→ [0mRead bb012_leverage/summary.py
+[0m→ [0mRead vendor/textkit.py
+[0m→ [0mRead tests/test_summary.py
+[0m→ [0mRead verify.py
+The fix is clear. I'll use `vendor.textkit.words` and `STOPWORDS`, count, and sort by count desc then word asc.
+[0m
+[0m← [0mWrite bb012_leverage/summary.py
+Wrote file successfully.
+[0m
+Now I need to verify `vendor` is importable. Let me check the `__init__.py` files and confirm the import path works before running verify.
+[0m$ [0mcat vendor/__init__.py bb012_leverage/__init__.py; echo "---"; python3 -c "from vendor.textkit import STOPWORDS, words; print(words('The agent, agent; AGENT! cost-of-change and process process to verify.'))"
+from .summary import summarize
+__all__ = ['summarize']
+---
+['the', 'agent', 'agent', 'agent', 'cost', 'of', 'change', 'and', 'process', 'process', 'to', 'verify']
+[0m
+Import works. Now running `verify.py`.
+[0m$ [0mpython3 verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/mimo/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/mimo/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/mimo/workspace/.venv/bin/python -m pytest -q
+.                                                                        [100%]
+1 passed in 0.01s
+[verify_exit_code] 0
+[0m
+`verify.py` exits 0 — the test passes.
+
+The fix in `bb012_leverage/summary.py:1` now delegates tokenization to `vendor.textkit.words` (which handles lowercasing and strips punctuation) and skips `vendor.textkit.STOPWORDS`, then sorts by count desc / word asc and returns the top 3.

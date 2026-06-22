@@ -1,0 +1,58 @@
+def _split_row(line: str) -> list[str]:
+    s = line.strip()
+    if s.startswith("|"):
+        s = s[1:]
+    if s.endswith("|"):
+        s = s[:-1]
+    return [c.strip() for c in s.split("|")]
+
+
+def _is_delimiter(cells: list[str]) -> bool:
+    if not cells:
+        return False
+    for c in cells:
+        if not c or "-" not in c or any(ch not in "-:" for ch in c):
+            return False
+    return True
+
+
+def _normalize_table(rows: list[str]) -> list[str]:
+    parsed = [_split_row(r) for r in rows]
+    ncol = max(len(r) for r in parsed)
+    parsed = [r + [""] * (ncol - len(r)) for r in parsed]
+    widths = [3] * ncol  # ponytail: min 3 so "---" separator fits
+    for ri, r in enumerate(parsed):
+        for ci in range(ncol):
+            content = "---" if ri == 1 else r[ci]
+            widths[ci] = max(widths[ci], len(content))
+    out = []
+    for ri, r in enumerate(parsed):
+        cells = [
+            " " + ("---" if ri == 1 else r[ci]).ljust(widths[ci]) + " "
+            for ci in range(ncol)
+        ]
+        out.append("|" + "|".join(cells) + "|")
+    return out
+
+
+def normalize_markdown_tables(markdown: str) -> str:
+    lines = markdown.split("\n")
+    result: list[str] = []
+    i, n = 0, len(lines)
+    while i < n:
+        if (
+            i + 1 < n
+            and "|" in lines[i]
+            and _is_delimiter(_split_row(lines[i + 1]))
+        ):
+            table = [lines[i], lines[i + 1]]
+            j = i + 2
+            while j < n and "|" in lines[j]:
+                table.append(lines[j])
+                j += 1
+            result.extend(_normalize_table(table))
+            i = j
+        else:
+            result.append(lines[i])
+            i += 1
+    return "\n".join(result)

@@ -1,0 +1,18 @@
+I will start by listing the contents of the workspace directory to find the relevant python files, migration scripts, and `verify.py`.
+I'll list the contents of the `bb007_migrate` directory to see the migration implementation files.
+I will view the contents of [verify.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/agy/workspace/verify.py) to see how the verify script runs and validates the migration.
+I'll list the contents of the `tests` directory.
+I will view the migration logic in [bb007_migrate/migration.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/agy/workspace/bb007_migrate/migration.py) to see how it's currently implemented.
+I'll view the tests in [tests/test_migration.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/agy/workspace/tests/test_migration.py) to see how the tests verify upgrade and downgrade.
+I will run `python verify.py` to see the current test failures and also build the virtual environment.
+I'll check if the version of SQLite3 supports `ALTER TABLE DROP COLUMN` using python.
+I will now update [bb007_migrate/migration.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/agy/workspace/bb007_migrate/migration.py) using the `replace_file_content` tool. I'll make the upgrade safe against duplicate runs by checking if the `email` column already exists, and fix the downgrade to use `ALTER TABLE users DROP COLUMN email` when the column is present, which preserves the table data.
+I will now run `python verify.py` to check if all tests pass.
+I'll check the git status to verify the exact changes.
+I'll run a git diff to verify the modifications.
+I have successfully completed the migration rollback safety fix.
+
+### Summary of Changes
+1. **Idempotence on Upgrade**: Updated [bb007_migrate/migration.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/agy/workspace/bb007_migrate/migration.py) to check the table info schema via `PRAGMA table_info(users)` before attempting to add the `email` column, avoiding failure on consecutive upgrade calls.
+2. **Non-destructive Downgrade**: Replaced the destructive `DROP TABLE users` logic in `downgrade(conn)` with a safe `ALTER TABLE users DROP COLUMN email` statement, first checking if the column exists to ensure idempotence. This preserves all existing rows and non-dropped columns (`id` and `name`).
+3. **Verification**: Ran `python verify.py` which passes all the tests with exit code `0`.

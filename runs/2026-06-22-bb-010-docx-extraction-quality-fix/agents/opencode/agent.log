@@ -1,0 +1,53 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:44 bb010_docx
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:57 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  152 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 tests
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+[0m
+[0m$ [0mls -la bb010_docx tests
+bb010_docx:
+total 16
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:44 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  373 Jun 22 17:44 extract.py
+-rw-r--r-- 1 forcewake forcewake   71 Jun 22 17:39 __init__.py
+
+tests:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  737 Jun 22 17:42 test_extract.py
+[0m
+[0m→ [0mRead bb010_docx/extract.py
+[0m→ [0mRead tests/test_extract.py
+[0m→ [0mRead verify.py
+[0m→ [0mRead bb010_docx/__init__.py
+Now I understand the issue. The current implementation uses regex, which misses tables and doesn't decode entities. I'll rewrite it to use `xml.etree.ElementTree`, which handles entity decoding and lets me walk paragraphs (including those inside table cells) in document order.
+[0m
+[0m← [0mWrite bb010_docx/extract.py
+Wrote file successfully.
+[0m
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/opencode/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/opencode/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/opencode/workspace/.venv/bin/python -m pytest -q
+.                                                                        [100%]
+1 passed in 0.01s
+[verify_exit_code] 0
+[0m
+`python verify.py` exits 0.
+
+The fix replaces regex-based extraction with `xml.etree.ElementTree`:
+- Walks all `<w:p>` elements in document order (including those nested in `<w:tbl>/<w:tr>/<w:tc>`), preserving paragraph/table reading order.
+- Concatenates descendant `<w:t>` text per paragraph, with entities automatically decoded (`&amp;` → `&`).
+- Joins paragraph texts with `\n`.

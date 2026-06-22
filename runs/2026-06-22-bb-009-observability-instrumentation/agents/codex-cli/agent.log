@@ -1,0 +1,1090 @@
+OpenAI Codex v0.137.0
+--------
+workdir: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 019ef00c-68ab-7902-8172-7cc54d65e837
+--------
+user
+You are fixing a benchmark fixture in an isolated git workspace.
+
+# BB-009 — Observability instrumentation
+
+Add request logging middleware with safe structured logs.
+
+## Requirements
+- Every request appends one JSON line to `app.state.events`.
+- Event fields: `method`, `path`, `status_code`, `duration_ms`, `correlation_id`.
+- Use incoming `x-correlation-id` when present; otherwise generate a non-empty id.
+- Do not log authorization headers or request bodies.
+- `python verify.py` must pass.
+
+
+Rules:
+- Work only in the current workspace.
+- Do not use network unless package installation is already required by verify.py.
+- Run `python verify.py` before finishing.
+- Keep the patch minimal and focused on the requested behavior.
+- Do not edit tests unless the production code cannot reasonably satisfy them; if you edit tests, explain why in your final output.
+- Do not print secrets or local credentials.
+
+Expected final state: `python verify.py` exits 0.
+exec
+/bin/bash -lc "sed -n '1,220p' /home/forcewake/.codex/plugins/cache/openai-curated/superpowers/202e9242/skills/using-superpowers/SKILL.md" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+---
+name: using-superpowers
+description: Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions
+---
+
+<SUBAGENT-STOP>
+If you were dispatched as a subagent to execute a specific task, skip this skill.
+</SUBAGENT-STOP>
+
+<EXTREMELY-IMPORTANT>
+If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
+
+IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
+
+This is not negotiable. This is not optional. You cannot rationalize your way out of this.
+</EXTREMELY-IMPORTANT>
+
+## Instruction Priority
+
+Superpowers skills override default system prompt behavior, but **user instructions always take precedence**:
+
+1. **User's explicit instructions** (CLAUDE.md, GEMINI.md, AGENTS.md, direct requests) — highest priority
+2. **Superpowers skills** — override default system behavior where they conflict
+3. **Default system prompt** — lowest priority
+
+If CLAUDE.md, GEMINI.md, or AGENTS.md says "don't use TDD" and a skill says "always use TDD," follow the user's instructions. The user is in control.
+
+## How to Access Skills
+
+**In Claude Code:** Use the `Skill` tool. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the Read tool on skill files.
+
+**In Copilot CLI:** Use the `skill` tool. Skills are auto-discovered from installed plugins. The `skill` tool works the same as Claude Code's `Skill` tool.
+
+**In Gemini CLI:** Skills activate via the `activate_skill` tool. Gemini loads skill metadata at session start and activates the full content on demand.
+
+**In other environments:** Check your platform's documentation for how skills are loaded.
+
+## Platform Adaptation
+
+Skills use Claude Code tool names. Non-CC platforms: see `references/copilot-tools.md` (Copilot CLI), `references/codex-tools.md` (Codex) for tool equivalents. Gemini CLI users get the tool mapping loaded automatically via GEMINI.md.
+
+# Using Skills
+
+## The Rule
+
+**Invoke relevant or requested skills BEFORE any response or action.** Even a 1% chance a skill might apply means that you should invoke the skill to check. If an invoked skill turns out to be wrong for the situation, you don't need to use it.
+
+```dot
+digraph skill_flow {
+    "User message received" [shape=doublecircle];
+    "About to EnterPlanMode?" [shape=doublecircle];
+    "Already brainstormed?" [shape=diamond];
+    "Invoke brainstorming skill" [shape=box];
+    "Might any skill apply?" [shape=diamond];
+    "Invoke Skill tool" [shape=box];
+    "Announce: 'Using [skill] to [purpose]'" [shape=box];
+    "Has checklist?" [shape=diamond];
+    "Create TodoWrite todo per item" [shape=box];
+    "Follow skill exactly" [shape=box];
+    "Respond (including clarifications)" [shape=doublecircle];
+
+    "About to EnterPlanMode?" -> "Already brainstormed?";
+    "Already brainstormed?" -> "Invoke brainstorming skill" [label="no"];
+    "Already brainstormed?" -> "Might any skill apply?" [label="yes"];
+    "Invoke brainstorming skill" -> "Might any skill apply?";
+
+    "User message received" -> "Might any skill apply?";
+    "Might any skill apply?" -> "Invoke Skill tool" [label="yes, even 1%"];
+    "Might any skill apply?" -> "Respond (including clarifications)" [label="definitely not"];
+    "Invoke Skill tool" -> "Announce: 'Using [skill] to [purpose]'";
+    "Announce: 'Using [skill] to [purpose]'" -> "Has checklist?";
+    "Has checklist?" -> "Create TodoWrite todo per item" [label="yes"];
+    "Has checklist?" -> "Follow skill exactly" [label="no"];
+    "Create TodoWrite todo per item" -> "Follow skill exactly";
+}
+```
+
+## Red Flags
+
+These thoughts mean STOP—you're rationalizing:
+
+| Thought | Reality |
+|---------|---------|
+| "This is just a simple question" | Questions are tasks. Check for skills. |
+| "I need more context first" | Skill check comes BEFORE clarifying questions. |
+| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
+| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
+| "Let me gather information first" | Skills tell you HOW to gather information. |
+| "This doesn't need a formal skill" | If a skill exists, use it. |
+| "I remember this skill" | Skills evolve. Read current version. |
+| "This doesn't count as a task" | Action = task. Check for skills. |
+| "The skill is overkill" | Simple things become complex. Use it. |
+| "I'll just do this one thing first" | Check BEFORE doing anything. |
+| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
+| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## Skill Priority
+
+When multiple skills could apply, use this order:
+
+1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task
+2. **Implementation skills second** (frontend-design, mcp-builder) - these guide execution
+
+"Let's build X" → brainstorming first, then implementation skills.
+"Fix this bug" → debugging first, then domain-specific skills.
+
+## Skill Types
+
+**Rigid** (TDD, debugging): Follow exactly. Don't adapt away discipline.
+
+**Flexible** (patterns): Adapt principles to context.
+
+The skill itself tells you which.
+
+## User Instructions
+
+Instructions say WHAT, not HOW. "Add X" or "Fix Y" doesn't mean skip workflows.
+
+exec
+/bin/bash -lc "sed -n '1,220p' /home/forcewake/.codex/plugins/cache/openai-curated/superpowers/202e9242/skills/test-driven-development/SKILL.md" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+---
+name: test-driven-development
+description: Use when implementing any feature or bugfix, before writing implementation code
+---
+
+# Test-Driven Development (TDD)
+
+## Overview
+
+Write the test first. Watch it fail. Write minimal code to pass.
+
+**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
+
+**Violating the letter of the rules is violating the spirit of the rules.**
+
+## When to Use
+
+**Always:**
+- New features
+- Bug fixes
+- Refactoring
+- Behavior changes
+
+**Exceptions (ask your human partner):**
+- Throwaway prototypes
+- Generated code
+- Configuration files
+
+Thinking "skip TDD just this once"? Stop. That's rationalization.
+
+## The Iron Law
+
+```
+NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+```
+
+Write code before the test? Delete it. Start over.
+
+**No exceptions:**
+- Don't keep it as "reference"
+- Don't "adapt" it while writing tests
+- Don't look at it
+- Delete means delete
+
+Implement fresh from tests. Period.
+
+## Red-Green-Refactor
+
+```dot
+digraph tdd_cycle {
+    rankdir=LR;
+    red [label="RED\nWrite failing test", shape=box, style=filled, fillcolor="#ffcccc"];
+    verify_red [label="Verify fails\ncorrectly", shape=diamond];
+    green [label="GREEN\nMinimal code", shape=box, style=filled, fillcolor="#ccffcc"];
+    verify_green [label="Verify passes\nAll green", shape=diamond];
+    refactor [label="REFACTOR\nClean up", shape=box, style=filled, fillcolor="#ccccff"];
+    next [label="Next", shape=ellipse];
+
+    red -> verify_red;
+    verify_red -> green [label="yes"];
+    verify_red -> red [label="wrong\nfailure"];
+    green -> verify_green;
+    verify_green -> refactor [label="yes"];
+    verify_green -> green [label="no"];
+    refactor -> verify_green [label="stay\ngreen"];
+    verify_green -> next;
+    next -> red;
+}
+```
+
+### RED - Write Failing Test
+
+Write one minimal test showing what should happen.
+
+<Good>
+```typescript
+test('retries failed operations 3 times', async () => {
+  let attempts = 0;
+  const operation = () => {
+    attempts++;
+    if (attempts < 3) throw new Error('fail');
+    return 'success';
+  };
+
+  const result = await retryOperation(operation);
+
+  expect(result).toBe('success');
+  expect(attempts).toBe(3);
+});
+```
+Clear name, tests real behavior, one thing
+</Good>
+
+<Bad>
+```typescript
+test('retry works', async () => {
+  const mock = jest.fn()
+    .mockRejectedValueOnce(new Error())
+    .mockRejectedValueOnce(new Error())
+    .mockResolvedValueOnce('success');
+  await retryOperation(mock);
+  expect(mock).toHaveBeenCalledTimes(3);
+});
+```
+Vague name, tests mock not code
+</Bad>
+
+**Requirements:**
+- One behavior
+- Clear name
+- Real code (no mocks unless unavoidable)
+
+### Verify RED - Watch It Fail
+
+**MANDATORY. Never skip.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test fails (not errors)
+- Failure message is expected
+- Fails because feature missing (not typos)
+
+**Test passes?** You're testing existing behavior. Fix test.
+
+**Test errors?** Fix error, re-run until it fails correctly.
+
+### GREEN - Minimal Code
+
+Write simplest code to pass the test.
+
+<Good>
+```typescript
+async function retryOperation<T>(fn: () => Promise<T>): Promise<T> {
+  for (let i = 0; i < 3; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i === 2) throw e;
+    }
+  }
+  throw new Error('unreachable');
+}
+```
+Just enough to pass
+</Good>
+
+<Bad>
+```typescript
+async function retryOperation<T>(
+  fn: () => Promise<T>,
+  options?: {
+    maxRetries?: number;
+    backoff?: 'linear' | 'exponential';
+    onRetry?: (attempt: number) => void;
+  }
+): Promise<T> {
+  // YAGNI
+}
+```
+Over-engineered
+</Bad>
+
+Don't add features, refactor other code, or "improve" beyond the test.
+
+### Verify GREEN - Watch It Pass
+
+**MANDATORY.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test passes
+- Other tests still pass
+- Output pristine (no errors, warnings)
+
+**Test fails?** Fix code, not test.
+
+**Other tests fail?** Fix now.
+
+### REFACTOR - Clean Up
+
+After green only:
+- Remove duplication
+- Improve names
+- Extract helpers
+
+Keep tests green. Don't add behavior.
+
+### Repeat
+
+Next failing test for next feature.
+
+## Good Tests
+
+| Quality | Good | Bad |
+|---------|------|-----|
+| **Minimal** | One thing. "and" in name? Split it. | `test('validates email and domain and whitespace')` |
+| **Clear** | Name describes behavior | `test('test1')` |
+| **Shows intent** | Demonstrates desired API | Obscures what code should do |
+
+## Why Order Matters
+
+**"I'll write tests after to verify it works"**
+
+Tests written after code pass immediately. Passing immediately proves nothing:
+- Might test wrong thing
+- Might test implementation, not behavior
+- Might miss edge cases you forgot
+- You never saw it catch the bug
+
+Test-first forces you to see the test fail, proving it actually tests something.
+
+**"I already manually tested all the edge cases"**
+
+Manual testing is ad-hoc. You think you tested everything but:
+
+exec
+/bin/bash -lc "sed -n '1,220p' /home/forcewake/.codex/plugins/cache/openai-curated/superpowers/202e9242/skills/verification-before-completion/SKILL.md" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+---
+name: verification-before-completion
+description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+---
+
+# Verification Before Completion
+
+## Overview
+
+Claiming work is complete without verification is dishonesty, not efficiency.
+
+**Core principle:** Evidence before claims, always.
+
+**Violating the letter of this rule is violating the spirit of this rule.**
+
+## The Iron Law
+
+```
+NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
+```
+
+If you haven't run the verification command in this message, you cannot claim it passes.
+
+## The Gate Function
+
+```
+BEFORE claiming any status or expressing satisfaction:
+
+1. IDENTIFY: What command proves this claim?
+2. RUN: Execute the FULL command (fresh, complete)
+3. READ: Full output, check exit code, count failures
+4. VERIFY: Does output confirm the claim?
+   - If NO: State actual status with evidence
+   - If YES: State claim WITH evidence
+5. ONLY THEN: Make the claim
+
+Skip any step = lying, not verifying
+```
+
+## Common Failures
+
+| Claim | Requires | Not Sufficient |
+|-------|----------|----------------|
+| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
+| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
+| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
+| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
+| Regression test works | Red-green cycle verified | Test passes once |
+| Agent completed | VCS diff shows changes | Agent reports "success" |
+| Requirements met | Line-by-line checklist | Tests passing |
+
+## Red Flags - STOP
+
+- Using "should", "probably", "seems to"
+- Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
+- About to commit/push/PR without verification
+- Trusting agent success reports
+- Relying on partial verification
+- Thinking "just this once"
+- Tired and wanting work over
+- **ANY wording implying success without having run verification**
+
+## Rationalization Prevention
+
+| Excuse | Reality |
+|--------|---------|
+| "Should work now" | RUN the verification |
+| "I'm confident" | Confidence ≠ evidence |
+| "Just this once" | No exceptions |
+| "Linter passed" | Linter ≠ compiler |
+| "Agent said success" | Verify independently |
+| "I'm tired" | Exhaustion ≠ excuse |
+| "Partial check is enough" | Partial proves nothing |
+| "Different words so rule doesn't apply" | Spirit over letter |
+
+## Key Patterns
+
+**Tests:**
+```
+✅ [Run test command] [See: 34/34 pass] "All tests pass"
+❌ "Should pass now" / "Looks correct"
+```
+
+**Regression tests (TDD Red-Green):**
+```
+✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)
+❌ "I've written a regression test" (without red-green verification)
+```
+
+**Build:**
+```
+✅ [Run build] [See: exit 0] "Build passes"
+❌ "Linter passed" (linter doesn't check compilation)
+```
+
+**Requirements:**
+```
+✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
+❌ "Tests pass, phase complete"
+```
+
+**Agent delegation:**
+```
+✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
+❌ Trust agent report
+```
+
+## Why This Matters
+
+From 24 failure memories:
+- your human partner said "I don't believe you" - trust broken
+- Undefined functions shipped - would crash
+- Missing requirements shipped - incomplete features
+- Time wasted on false completion → redirect → rework
+- Violates: "Honesty is a core value. If you lie, you'll be replaced."
+
+## When To Apply
+
+**ALWAYS before:**
+- ANY variation of success/completion claims
+- ANY expression of satisfaction
+- ANY positive statement about work state
+- Committing, PR creation, task completion
+- Moving to next task
+- Delegating to agents
+
+**Rule applies to:**
+- Exact phrases
+- Paraphrases and synonyms
+- Implications of success
+- ANY communication suggesting completion/correctness
+
+## The Bottom Line
+
+**No shortcuts for verification.**
+
+Run the command. Read the output. THEN claim the result.
+
+This is non-negotiable.
+
+codex
+Using `using-superpowers`, `brainstorming`, `test-driven-development`, and `verification-before-completion` because this is a behavior change that must be verified with `python verify.py`. I’ll keep the process small: understand the fixture, add/confirm a failing behavior test if needed, implement the middleware, then run the verifier.
+exec
+/bin/bash -lc "sed -n '1,240p' /home/forcewake/.codex/plugins/cache/openai-curated/superpowers/202e9242/skills/brainstorming/SKILL.md" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+---
+name: brainstorming
+description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation."
+---
+
+# Brainstorming Ideas Into Designs
+
+Help turn ideas into fully formed designs and specs through natural collaborative dialogue.
+
+Start by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and get user approval.
+
+<HARD-GATE>
+Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.
+</HARD-GATE>
+
+## Anti-Pattern: "This Is Too Simple To Need A Design"
+
+Every project goes through this process. A todo list, a single-function utility, a config change — all of them. "Simple" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.
+
+## Checklist
+
+You MUST create a task for each of these items and complete them in order:
+
+1. **Explore project context** — check files, docs, recent commits
+2. **Offer visual companion** (if topic will involve visual questions) — this is its own message, not combined with a clarifying question. See the Visual Companion section below.
+3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
+4. **Propose 2-3 approaches** — with trade-offs and your recommendation
+5. **Present design** — in sections scaled to their complexity, get user approval after each section
+6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
+7. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
+8. **User reviews written spec** — ask user to review the spec file before proceeding
+9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+
+## Process Flow
+
+```dot
+digraph brainstorming {
+    "Explore project context" [shape=box];
+    "Visual questions ahead?" [shape=diamond];
+    "Offer Visual Companion\n(own message, no other content)" [shape=box];
+    "Ask clarifying questions" [shape=box];
+    "Propose 2-3 approaches" [shape=box];
+    "Present design sections" [shape=box];
+    "User approves design?" [shape=diamond];
+    "Write design doc" [shape=box];
+    "Spec self-review\n(fix inline)" [shape=box];
+    "User reviews spec?" [shape=diamond];
+    "Invoke writing-plans skill" [shape=doublecircle];
+
+    "Explore project context" -> "Visual questions ahead?";
+    "Visual questions ahead?" -> "Offer Visual Companion\n(own message, no other content)" [label="yes"];
+    "Visual questions ahead?" -> "Ask clarifying questions" [label="no"];
+    "Offer Visual Companion\n(own message, no other content)" -> "Ask clarifying questions";
+    "Ask clarifying questions" -> "Propose 2-3 approaches";
+    "Propose 2-3 approaches" -> "Present design sections";
+    "Present design sections" -> "User approves design?";
+    "User approves design?" -> "Present design sections" [label="no, revise"];
+    "User approves design?" -> "Write design doc" [label="yes"];
+    "Write design doc" -> "Spec self-review\n(fix inline)";
+    "Spec self-review\n(fix inline)" -> "User reviews spec?";
+    "User reviews spec?" -> "Write design doc" [label="changes requested"];
+    "User reviews spec?" -> "Invoke writing-plans skill" [label="approved"];
+}
+```
+
+**The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.
+
+## The Process
+
+**Understanding the idea:**
+
+- Check out the current project state first (files, docs, recent commits)
+- Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.
+- If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
+- For appropriately-scoped projects, ask questions one at a time to refine the idea
+- Prefer multiple choice questions when possible, but open-ended is fine too
+- Only one question per message - if a topic needs more exploration, break it into multiple questions
+- Focus on understanding: purpose, constraints, success criteria
+
+**Exploring approaches:**
+
+- Propose 2-3 different approaches with trade-offs
+- Present options conversationally with your recommendation and reasoning
+- Lead with your recommended option and explain why
+
+**Presenting the design:**
+
+- Once you believe you understand what you're building, present the design
+- Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
+- Ask after each section whether it looks right so far
+- Cover: architecture, components, data flow, error handling, testing
+- Be ready to go back and clarify if something doesn't make sense
+
+**Design for isolation and clarity:**
+
+- Break the system into smaller units that each have one clear purpose, communicate through well-defined interfaces, and can be understood and tested independently
+- For each unit, you should be able to answer: what does it do, how do you use it, and what does it depend on?
+- Can someone understand what a unit does without reading its internals? Can you change the internals without breaking consumers? If not, the boundaries need work.
+- Smaller, well-bounded units are also easier for you to work with - you reason better about code you can hold in context at once, and your edits are more reliable when files are focused. When a file grows large, that's often a signal that it's doing too much.
+
+**Working in existing codebases:**
+
+- Explore the current structure before proposing changes. Follow existing patterns.
+- Where existing code has problems that affect the work (e.g., a file that's grown too large, unclear boundaries, tangled responsibilities), include targeted improvements as part of the design - the way a good developer improves code they're working in.
+- Don't propose unrelated refactoring. Stay focused on what serves the current goal.
+
+## After the Design
+
+**Documentation:**
+
+- Write the validated design (spec) to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
+  - (User preferences for spec location override this default)
+- Use elements-of-style:writing-clearly-and-concisely skill if available
+- Commit the design document to git
+
+**Spec Self-Review:**
+After writing the spec document, look at it with fresh eyes:
+
+1. **Placeholder scan:** Any "TBD", "TODO", incomplete sections, or vague requirements? Fix them.
+2. **Internal consistency:** Do any sections contradict each other? Does the architecture match the feature descriptions?
+3. **Scope check:** Is this focused enough for a single implementation plan, or does it need decomposition?
+4. **Ambiguity check:** Could any requirement be interpreted two different ways? If so, pick one and make it explicit.
+
+Fix any issues inline. No need to re-review — just fix and move on.
+
+**User Review Gate:**
+After the spec review loop passes, ask the user to review the written spec before proceeding:
+
+> "Spec written and committed to `<path>`. Please review it and let me know if you want to make any changes before we start writing out the implementation plan."
+
+Wait for the user's response. If they request changes, make them and re-run the spec review loop. Only proceed once the user approves.
+
+**Implementation:**
+
+- Invoke the writing-plans skill to create a detailed implementation plan
+- Do NOT invoke any other skill. writing-plans is the next step.
+
+## Key Principles
+
+- **One question at a time** - Don't overwhelm with multiple questions
+- **Multiple choice preferred** - Easier to answer than open-ended when possible
+- **YAGNI ruthlessly** - Remove unnecessary features from all designs
+- **Explore alternatives** - Always propose 2-3 approaches before settling
+- **Incremental validation** - Present design, get approval before moving on
+- **Be flexible** - Go back and clarify when something doesn't make sense
+
+## Visual Companion
+
+A browser-based companion for showing mockups, diagrams, and visual options during brainstorming. Available as a tool — not a mode. Accepting the companion means it's available for questions that benefit from visual treatment; it does NOT mean every question goes through the browser.
+
+**Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), offer it once for consent:
+> "Some of what we're working on might be easier to explain if I can show it to you in a web browser. I can put together mockups, diagrams, comparisons, and other visuals as we go. This feature is still new and can be token-intensive. Want to try it? (Requires opening a local URL)"
+
+**This offer MUST be its own message.** Do not combine it with clarifying questions, context summaries, or any other content. The message should contain ONLY the offer above and nothing else. Wait for the user's response before continuing. If they decline, proceed with text-only brainstorming.
+
+**Per-question decision:** Even after the user accepts, decide FOR EACH QUESTION whether to use the browser or the terminal. The test: **would the user understand this better by seeing it than reading it?**
+
+- **Use the browser** for content that IS visual — mockups, wireframes, layout comparisons, architecture diagrams, side-by-side visual designs
+- **Use the terminal** for content that is text — requirements questions, conceptual choices, tradeoff lists, A/B/C/D text options, scope decisions
+
+A question about a UI topic is not automatically a visual question. "What does personality mean in this context?" is a conceptual question — use the terminal. "Which wizard layout works better?" is a visual question — use the browser.
+
+If they agree to the companion, read the detailed guide before proceeding:
+`skills/brainstorming/visual-companion.md`
+
+codex
+I’m reading the fixture shape and verifier now. The full brainstorming spec/doc flow would add unrelated files, so I’m keeping only the design check from that skill to honor the benchmark’s minimal-patch rule.
+exec
+/bin/bash -lc 'git status --short' in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+exec
+/bin/bash -lc 'rg --files' in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+ succeeded in 0ms:
+pyproject.toml
+verify.py
+tests/test_observe.py
+bb009_observe/__init__.py
+bb009_observe/app.py
+
+exec
+/bin/bash -lc "sed -n '1,240p' verify.py" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+#!/usr/bin/env python3
+from __future__ import annotations
+import json, os, subprocess, sys, venv
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent
+VENV = ROOT / ".venv"
+if not VENV.exists():
+    venv.EnvBuilder(with_pip=True).create(VENV)
+py = VENV / "bin" / "python"
+def run(cmd, **kw):
+    print("[run]", " ".join(map(str, cmd)), flush=True)
+    return subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, **kw)
+r = run([str(py), "-m", "pip", "install", "-q", "-e", ".", "pytest"])
+print(r.stdout, end="")
+if r.returncode: sys.exit(r.returncode)
+r = run([str(py), "-m", "pytest", "-q"])
+print(r.stdout, end="")
+if r.returncode: sys.exit(r.returncode)
+
+print("[verify_exit_code] 0")
+
+codex
+The verifier installs the package in a local venv and runs pytest. I’m going to run it once before editing so we have the required red signal from the existing tests.
+exec
+/bin/bash -lc "sed -n '1,240p' bb009_observe/app.py" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+from fastapi import FastAPI
+app = FastAPI()
+app.state.events = []
+
+@app.get('/items/{item_id}')
+def get_item(item_id: str):
+    return {'item_id': item_id}
+
+exec
+/bin/bash -lc "sed -n '1,260p' tests/test_observe.py" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+from fastapi.testclient import TestClient
+from bb009_observe.app import app
+
+def test_structured_request_event_without_secrets():
+    app.state.events.clear()
+    c = TestClient(app)
+    r = c.get('/items/42', headers={'x-correlation-id': 'corr-123', 'authorization': 'Bearer SECRET'})
+    assert r.status_code == 200
+    assert len(app.state.events) == 1
+    event = app.state.events[0]
+    assert event['method'] == 'GET'
+    assert event['path'] == '/items/42'
+    assert event['status_code'] == 200
+    assert event['correlation_id'] == 'corr-123'
+    assert isinstance(event['duration_ms'], (int, float)) and event['duration_ms'] >= 0
+    assert 'authorization' not in event and 'SECRET' not in repr(event)
+
+def test_generates_correlation_id():
+    app.state.events.clear()
+    c = TestClient(app)
+    c.get('/items/99')
+    assert app.state.events[0]['correlation_id']
+
+exec
+/bin/bash -lc "sed -n '1,200p' pyproject.toml" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+[project]
+name = "bb009-observe"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["fastapi", "httpx"]
+
+[tool.setuptools.packages.find]
+include = ["bb009_observe*"]
+
+exec
+/bin/bash -lc "sed -n '1,120p' bb009_observe/__init__.py" in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+codex
+The existing tests already encode the required behavior, so I won’t add or edit tests. The implementation should live entirely in `bb009_observe/app.py`: a FastAPI middleware that measures time, selects or creates the correlation ID, and appends only the allowed structured fields.
+exec
+/bin/bash -lc 'python verify.py' in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ exited 1 in 8452ms:
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/.venv/bin/python -m pytest -q
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+________________ test_structured_request_event_without_secrets _________________
+
+    def test_structured_request_event_without_secrets():
+        app.state.events.clear()
+        c = TestClient(app)
+        r = c.get('/items/42', headers={'x-correlation-id': 'corr-123', 'authorization': 'Bearer SECRET'})
+        assert r.status_code == 200
+>       assert len(app.state.events) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+E        +    where [] = <starlette.datastructures.State object at 0x7a90661e7890>.events
+E        +      where <starlette.datastructures.State object at 0x7a90661e7890> = app.state
+
+tests/test_observe.py:9: AssertionError
+________________________ test_generates_correlation_id _________________________
+
+    def test_generates_correlation_id():
+        app.state.events.clear()
+        c = TestClient(app)
+        c.get('/items/99')
+>       assert app.state.events[0]['correlation_id']
+               ^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+tests/test_observe.py:22: IndexError
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/fastapi/testclient.py:1
+  /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_observe.py::test_structured_request_event_without_secrets
+FAILED tests/test_observe.py::test_generates_correlation_id - IndexError: lis...
+2 failed, 1 warning in 0.30s
+
+codex
+The red run failed for the expected reason: no events are appended. I’m making the minimal middleware change now, without touching tests or adding fields that could carry headers or bodies.
+apply patch
+patch: completed
+/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/bb009_observe/app.py
+diff --git a/bb009_observe/app.py b/bb009_observe/app.py
+index 94cfdb9c442811bd3b0bf9d1f62fe96265f185b3..b8e3ab8e38cc87c4bf6a7dcd1c82364ed2a0018f
+--- a/bb009_observe/app.py
++++ b/bb009_observe/app.py
+@@ -1,7 +1,29 @@
++import time
++import uuid
++
+ from fastapi import FastAPI
++
+ app = FastAPI()
+ app.state.events = []
+ 
++@app.middleware("http")
++async def log_request(request, call_next):
++    start = time.perf_counter()
++    correlation_id = request.headers.get("x-correlation-id") or uuid.uuid4().hex
++    status_code = 500
++    try:
++        response = await call_next(request)
++        status_code = response.status_code
++        return response
++    finally:
++        app.state.events.append({
++            "method": request.method,
++            "path": request.url.path,
++            "status_code": status_code,
++            "duration_ms": (time.perf_counter() - start) * 1000,
++            "correlation_id": correlation_id,
++        })
++
+ @app.get('/items/{item_id}')
+ def get_item(item_id: str):
+     return {'item_id': item_id}
+
+diff --git a/bb009_observe/app.py b/bb009_observe/app.py
+index 94cfdb9c442811bd3b0bf9d1f62fe96265f185b3..b8e3ab8e38cc87c4bf6a7dcd1c82364ed2a0018f
+--- a/bb009_observe/app.py
++++ b/bb009_observe/app.py
+@@ -1,7 +1,29 @@
++import time
++import uuid
++
+ from fastapi import FastAPI
++
+ app = FastAPI()
+ app.state.events = []
+ 
++@app.middleware("http")
++async def log_request(request, call_next):
++    start = time.perf_counter()
++    correlation_id = request.headers.get("x-correlation-id") or uuid.uuid4().hex
++    status_code = 500
++    try:
++        response = await call_next(request)
++        status_code = response.status_code
++        return response
++    finally:
++        app.state.events.append({
++            "method": request.method,
++            "path": request.url.path,
++            "status_code": status_code,
++            "duration_ms": (time.perf_counter() - start) * 1000,
++            "correlation_id": correlation_id,
++        })
++
+ @app.get('/items/{item_id}')
+ def get_item(item_id: str):
+     return {'item_id': item_id}
+
+codex
+The middleware now records the fixed event shape in a `finally` block so normal responses and raised errors both append an event. I’m running the full verifier next, as required.
+exec
+/bin/bash -lc 'python verify.py' in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+diff --git a/bb009_observe/app.py b/bb009_observe/app.py
+index 94cfdb9c442811bd3b0bf9d1f62fe96265f185b3..b8e3ab8e38cc87c4bf6a7dcd1c82364ed2a0018f
+--- a/bb009_observe/app.py
++++ b/bb009_observe/app.py
+@@ -1,7 +1,29 @@
++import time
++import uuid
++
+ from fastapi import FastAPI
++
+ app = FastAPI()
+ app.state.events = []
+ 
++@app.middleware("http")
++async def log_request(request, call_next):
++    start = time.perf_counter()
++    correlation_id = request.headers.get("x-correlation-id") or uuid.uuid4().hex
++    status_code = 500
++    try:
++        response = await call_next(request)
++        status_code = response.status_code
++        return response
++    finally:
++        app.state.events.append({
++            "method": request.method,
++            "path": request.url.path,
++            "status_code": status_code,
++            "duration_ms": (time.perf_counter() - start) * 1000,
++            "correlation_id": correlation_id,
++        })
++
+ @app.get('/items/{item_id}')
+ def get_item(item_id: str):
+     return {'item_id': item_id}
+
+ succeeded in 2837ms:
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/.venv/bin/python -m pytest -q
+..                                                                       [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/fastapi/testclient.py:1
+  /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 1 warning in 0.36s
+[verify_exit_code] 0
+
+codex
+`python verify.py` exited 0 with both tests passing. I’m checking the final diff so the close-out only reports the files actually touched.
+exec
+/bin/bash -lc 'git diff -- bb009_observe/app.py' in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+diff --git a/bb009_observe/app.py b/bb009_observe/app.py
+index 94cfdb9..b8e3ab8 100644
+--- a/bb009_observe/app.py
++++ b/bb009_observe/app.py
+@@ -1,7 +1,29 @@
++import time
++import uuid
++
+ from fastapi import FastAPI
++
+ app = FastAPI()
+ app.state.events = []
+ 
++@app.middleware("http")
++async def log_request(request, call_next):
++    start = time.perf_counter()
++    correlation_id = request.headers.get("x-correlation-id") or uuid.uuid4().hex
++    status_code = 500
++    try:
++        response = await call_next(request)
++        status_code = response.status_code
++        return response
++    finally:
++        app.state.events.append({
++            "method": request.method,
++            "path": request.url.path,
++            "status_code": status_code,
++            "duration_ms": (time.perf_counter() - start) * 1000,
++            "correlation_id": correlation_id,
++        })
++
+ @app.get('/items/{item_id}')
+ def get_item(item_id: str):
+     return {'item_id': item_id}
+
+exec
+/bin/bash -lc 'git status --short' in /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace
+ succeeded in 0ms:
+ M bb009_observe/app.py
+
+diff --git a/bb009_observe/app.py b/bb009_observe/app.py
+index 94cfdb9c442811bd3b0bf9d1f62fe96265f185b3..b8e3ab8e38cc87c4bf6a7dcd1c82364ed2a0018f
+--- a/bb009_observe/app.py
++++ b/bb009_observe/app.py
+@@ -1,7 +1,29 @@
++import time
++import uuid
++
+ from fastapi import FastAPI
++
+ app = FastAPI()
+ app.state.events = []
+ 
++@app.middleware("http")
++async def log_request(request, call_next):
++    start = time.perf_counter()
++    correlation_id = request.headers.get("x-correlation-id") or uuid.uuid4().hex
++    status_code = 500
++    try:
++        response = await call_next(request)
++        status_code = response.status_code
++        return response
++    finally:
++        app.state.events.append({
++            "method": request.method,
++            "path": request.url.path,
++            "status_code": status_code,
++            "duration_ms": (time.perf_counter() - start) * 1000,
++            "correlation_id": correlation_id,
++        })
++
+ @app.get('/items/{item_id}')
+ def get_item(item_id: str):
+     return {'item_id': item_id}
+
+codex
+Implemented request logging middleware in [bb009_observe/app.py](/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/bb009_observe/app.py:8).
+
+It now appends one safe structured event per request with `method`, `path`, `status_code`, `duration_ms`, and `correlation_id`, using incoming `x-correlation-id` or generating a UUID. It does not log headers or bodies.
+
+Verification: `python verify.py` exits 0 (`2 passed, 1 warning`). Tests were not edited.
+diff --git a/bb009_observe/app.py b/bb009_observe/app.py
+index 94cfdb9c442811bd3b0bf9d1f62fe96265f185b3..b8e3ab8e38cc87c4bf6a7dcd1c82364ed2a0018f
+--- a/bb009_observe/app.py
++++ b/bb009_observe/app.py
+@@ -1,7 +1,29 @@
++import time
++import uuid
++
+ from fastapi import FastAPI
++
+ app = FastAPI()
+ app.state.events = []
+ 
++@app.middleware("http")
++async def log_request(request, call_next):
++    start = time.perf_counter()
++    correlation_id = request.headers.get("x-correlation-id") or uuid.uuid4().hex
++    status_code = 500
++    try:
++        response = await call_next(request)
++        status_code = response.status_code
++        return response
++    finally:
++        app.state.events.append({
++            "method": request.method,
++            "path": request.url.path,
++            "status_code": status_code,
++            "duration_ms": (time.perf_counter() - start) * 1000,
++            "correlation_id": correlation_id,
++        })
++
+ @app.get('/items/{item_id}')
+ def get_item(item_id: str):
+     return {'item_id': item_id}
+
+tokens used
+56,155
+Implemented request logging middleware in [bb009_observe/app.py](/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/codex-cli/workspace/bb009_observe/app.py:8).
+
+It now appends one safe structured event per request with `method`, `path`, `status_code`, `duration_ms`, and `correlation_id`, using incoming `x-correlation-id` or generating a UUID. It does not log headers or bodies.
+
+Verification: `python verify.py` exits 0 (`2 passed, 1 warning`). Tests were not edited.

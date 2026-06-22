@@ -1,0 +1,41 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 bb002_csvedge
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:46 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  158 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 tests
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+[0m
+[0m→ [0mRead verify.py
+[0m→ [0mRead bb002_csvedge
+[0m→ [0mRead bb002_csvedge/parser.py
+[0m→ [0mRead bb002_csvedge/__init__.py
+[0m→ [0mRead tests
+[0m✗ [0mRead /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-cvarious-edge-case-parser/agents/opencode/workspace/tests/test_parser.py failed
+[91m[1mError: [0mFile not found: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-cvarious-edge-case-parser/agents/opencode/workspace/tests/test_parser.py
+[0m→ [0mRead tests/test_parser.py
+[0m→ [0mRead pyproject.toml
+Now I'll rewrite the parser to use Python's standard `csv` module which handles quoted commas, escaped quotes properly.
+[0m
+[0m← [0mWrite bb002_csvedge/parser.py
+Wrote file successfully.
+[0m
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/opencode/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/opencode/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/opencode/workspace/.venv/bin/python -m pytest -q
+.                                                                        [100%]
+1 passed in 0.01s
+[verify_exit_code] 0
+[0m
+`python verify.py` exits 0.
+
+The fix replaced the naive `str.split(',')` with Python's standard `csv.DictReader`, which correctly handles quoted commas (`"Doe, Jane"`), escaped quotes (`""quoted""`), and skips the blank row. Public API `summarize_people_csv(text: str) -> dict` is preserved, with deterministic sorted city keys.

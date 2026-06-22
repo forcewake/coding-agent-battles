@@ -1,0 +1,75 @@
+diff --git a/bb004_mdtable/normalizer.py b/bb004_mdtable/normalizer.py
+index 6f97e16..713880f 100644
+--- a/bb004_mdtable/normalizer.py
++++ b/bb004_mdtable/normalizer.py
+@@ -1,2 +1,69 @@
+ def normalize_markdown_tables(markdown: str) -> str:
+-    return markdown
++    lines = markdown.split('\n')
++    result = []
++    i = 0
++    n = len(lines)
++    while i < n:
++        if _is_table_row(lines[i]):
++            start = i
++            while i < n and _is_table_row(lines[i]):
++                i += 1
++            block = lines[start:i]
++            if len(block) >= 2 and _is_separator_row(block[1]):
++                result.extend(_normalize_table(block))
++            else:
++                result.extend(block)
++        else:
++            result.append(lines[i])
++            i += 1
++    return '\n'.join(result)
++
++
++def _is_table_row(line: str) -> bool:
++    return line.lstrip().startswith('|')
++
++
++def _parse_row(line: str):
++    s = line.strip()
++    if s.startswith('|'):
++        s = s[1:]
++    if s.endswith('|'):
++        s = s[:-1]
++    return [c.strip() for c in s.split('|')]
++
++
++def _is_separator_row(line: str) -> bool:
++    cells = _parse_row(line)
++    if not cells:
++        return False
++    for c in cells:
++        if not c or not set(c) <= set('-:'):
++            return False
++        if '-' not in c:
++            return False
++    return True
++
++
++def _normalize_table(block):
++    rows = [_parse_row(line) for line in block]
++    n_cols = max(len(r) for r in rows)
++    for r in rows:
++        while len(r) < n_cols:
++            r.append('')
++    widths = []
++    for col in range(n_cols):
++        content_max = max(
++            len(r[col])
++            for idx, r in enumerate(rows)
++            if not _is_separator_row(block[idx])
++        )
++        widths.append(max(content_max, 3))
++    out = []
++    for idx, r in enumerate(rows):
++        is_sep = _is_separator_row(block[idx])
++        cells = []
++        for col in range(n_cols):
++            content = '---' if is_sep else r[col]
++            cells.append(' ' + content.ljust(widths[col]) + ' ')
++        out.append('|' + '|'.join(cells) + '|')
++    return out

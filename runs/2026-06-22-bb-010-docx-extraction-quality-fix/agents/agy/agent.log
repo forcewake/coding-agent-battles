@@ -1,0 +1,24 @@
+I will list the contents of the workspace directory to understand the project structure and locate the relevant files for fixing the DOCX text extraction.
+I will check the files inside the `bb010_docx` directory.
+I will view the verification script `verify.py` to see the requirements and test criteria.
+I will view the code in `bb010_docx/extract.py`.
+I will list the files in the `tests` directory to see the available test cases.
+I will view the content of `tests/test_extract.py`.
+I will view the `pyproject.toml` file to see if there are any dependencies defined.
+I will run the verify.py script to execute the existing tests and observe the current output/failure.
+I will wait for the test task to complete.
+I will view `bb010_docx/__init__.py` to check the exports.
+I will replace the contents of `bb010_docx/extract.py` with the new XML parsing logic.
+I will run `verify.py` to test the new implementation.
+I will check git status to verify only the necessary file has been modified.
+I will run `git diff` to review our changes before completing the task.
+I have fixed the OOXML/DOCX text extraction quality by replacing the regex-based extractor in [bb010_docx/extract.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/agy/workspace/bb010_docx/extract.py) with a robust XML parser using standard library `xml.etree.ElementTree`.
+
+### Summary of Changes
+- **XML Entity Decoding**: Used Python's standard `xml.etree.ElementTree` parser to parse `word/document.xml`, which automatically decodes XML entities (e.g., `&amp;` to `&`).
+- **Structure and Reading Order**: Recursively traversed the element hierarchy in document order.
+  - Correctly extracts paragraphs (`<w:p>`) inside and outside table cells.
+  - Handles nested elements such as textboxes (`<w:txbxContent>`) within paragraphs to extract them as separate paragraphs in correct order without duplicating text.
+  - Excludes markup fallback choices (`<mc:Fallback>`) to prevent content duplication.
+  - Processes soft line breaks (`<w:br>`) and tabs (`<w:tab>`) appropriately.
+- **Verification**: Ran `python3 verify.py`, which installs the requirements and runs the tests using pytest. All tests passed successfully.

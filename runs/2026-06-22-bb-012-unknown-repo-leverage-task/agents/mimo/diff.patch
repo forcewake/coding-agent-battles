@@ -1,0 +1,20 @@
+diff --git a/bb012_leverage/summary.py b/bb012_leverage/summary.py
+index fda9ed8..0a333d3 100644
+--- a/bb012_leverage/summary.py
++++ b/bb012_leverage/summary.py
+@@ -1,6 +1,11 @@
++from vendor.textkit import STOPWORDS, words
++
++
+ def summarize(text: str):
+-    # BUG: whitespace split keeps punctuation/case and stopwords.
+     counts = {}
+-    for token in text.split():
+-        counts[token] = counts.get(token, 0) + 1
+-    return [{'word': w, 'count': c} for w, c in counts.items()][:3]
++    for word in words(text):
++        if word in STOPWORDS:
++            continue
++        counts[word] = counts.get(word, 0) + 1
++    ordered = sorted(counts.items(), key=lambda wc: (-wc[1], wc[0]))
++    return [{'word': w, 'count': c} for w, c in ordered][:3]

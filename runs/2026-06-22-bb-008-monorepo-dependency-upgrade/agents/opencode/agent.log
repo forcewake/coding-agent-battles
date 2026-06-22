@@ -1,0 +1,105 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 28
+drwxr-xr-x 4 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:54 .git
+-rw-r--r-- 1 forcewake forcewake   14 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake   78 Jun 22 17:39 package.json
+drwxr-xr-x 4 forcewake forcewake 4096 Jun 22 17:39 packages
+-rw-r--r-- 1 forcewake forcewake  278 Jun 22 17:40 verify.py
+[0m
+[0m$ [0mls -la packages/ && cat package.json verify.py
+total 16
+drwxr-xr-x 4 forcewake forcewake 4096 Jun 22 17:39 .
+drwxr-xr-x 4 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:39 app
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 shared
+{"type":"module","scripts":{"test":"node --test packages/*/test/*.test.mjs"}}
+#!/usr/bin/env python3
+import subprocess, sys
+r = subprocess.run(['node', '--test', 'packages/app/test/app.test.mjs'], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+print(r.stdout, end='')
+if r.returncode:
+    sys.exit(r.returncode)
+print('[verify_exit_code] 0')
+[0m
+[0m$ [0mls -la packages/app packages/shared && find packages -type f | head -50
+packages/app:
+total 16
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:39 .
+drwxr-xr-x 4 forcewake forcewake 4096 Jun 22 17:39 ..
+-rw-r--r-- 1 forcewake forcewake  131 Jun 22 17:39 index.mjs
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 test
+
+packages/shared:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 .
+drwxr-xr-x 4 forcewake forcewake 4096 Jun 22 17:39 ..
+-rw-r--r-- 1 forcewake forcewake  217 Jun 22 17:39 index.mjs
+packages/app/index.mjs
+packages/app/test/app.test.mjs
+packages/shared/index.mjs
+[0m
+[0m→ [0mRead packages/shared/index.mjs
+[0m→ [0mRead packages/app/index.mjs
+[0m→ [0mRead packages/app/test/app.test.mjs
+[0m
+[0m$ [0mpython verify.py
+file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-008-monorepo-dependency-upgrade/agents/opencode/workspace/packages/app/index.mjs:1
+import { slugify } from '../shared/index.mjs';
+         ^^^^^^^
+SyntaxError: The requested module '../shared/index.mjs' does not provide an export named 'slugify'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:326:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:429:5)
+    at async node:internal/modules/esm/loader:639:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.15.0
+✖ packages/app/test/app.test.mjs (37.21467ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 44.648562
+
+✖ failing tests:
+
+test at packages/app/test/app.test.mjs:1:1
+✖ packages/app/test/app.test.mjs (37.21467ms)
+  'test failed'
+[0m
+Now I'll update the app to use the new `makeSlug` API. The test expects lowercase output, and `makeSlug` defaults to `lower: true`, so the default options work.
+[0m← [0mEdit packages/app/index.mjs
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-008-monorepo-dependency-upgrade/agents/opencode/workspace/packages/app/index.mjs
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-008-monorepo-dependency-upgrade/agents/opencode/workspace/packages/app/index.mjs
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-008-monorepo-dependency-upgrade/agents/opencode/workspace/packages/app/index.mjs
+@@ -1,4 +1,4 @@
+-import { slugify } from '../shared/index.mjs';
++import { makeSlug } from '../shared/index.mjs';
+ export function scenarioPath(name) {
+-  return `/scenarios/${slugify(name)}.html`;
++  return `/scenarios/${makeSlug(name)}.html`;
+ }
+
+[0m
+[0m$ [0mpython verify.py
+✔ scenario path uses upgraded shared slug API (0.858795ms)
+✔ old slugify API is not reintroduced (0.12594ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 57.585835
+[verify_exit_code] 0
+[0m
+Both tests pass and `python verify.py` exits 0. The app now imports `makeSlug` from the shared package (default options produce lowercase, trimmed, dash-collapsed slugs) without reintroducing `slugify`.

@@ -1,0 +1,23 @@
+I will list the contents of the workspace directory to understand the layout of the project and find `verify.py` and the source files.
+I will view the content of `verify.py` to see how verification runs and what code it is testing.
+I will list the files in `bb012_leverage` to find the source code we need to modify.
+I will list the files in the `vendor` directory to locate the `textkit` package.
+I will view the source of `bb012_leverage/summary.py`.
+I will view the source of `vendor/textkit.py` to see what helper functions and fields are provided.
+I will list the files in the `tests` directory.
+I will view the content of `tests/test_summary.py`.
+I will run `python verify.py` to see the current tests fail, which will confirm the environment works and pinpoint the failure mode.
+I will wait for the test task to complete and return its output.
+I will view the `pyproject.toml` file to see how the project is structured and packaged.
+I will view `vendor/__init__.py` to check if it's a Python package.
+I will replace the content of [summary.py](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/agy/workspace/bb012_leverage/summary.py) with the corrected implementation that uses `vendor.textkit`.
+I will run `python verify.py` to check if the tests now pass.
+I will run `git status` to make sure we only modified the necessary file and everything else is unchanged.
+I have fixed the benchmark fixture by leveraging the helper functions in the `vendor/textkit` module:
+
+1. **Tokenization & Case/Punctuation Handling:** Updated `summarize` to extract tokens using [vendor.textkit.words()](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/agy/workspace/vendor/textkit.py#L3-L4).
+2. **Stopwords Filtering:** Screened out any words found in [vendor.textkit.STOPWORDS](file:///home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/agy/workspace/vendor/textkit.py#L2).
+3. **Sorting:** Sorted the counts in descending order, resolving ties alphabetically (ascending order).
+4. **Output Format & Limit:** Kept the output format mapping each token to `{'word': word, 'count': count}` and capped the output at the top 3 results.
+
+Verification via `python verify.py` succeeded with exit code `0`.

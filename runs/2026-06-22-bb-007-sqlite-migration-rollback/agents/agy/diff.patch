@@ -1,0 +1,22 @@
+diff --git a/bb007_migrate/migration.py b/bb007_migrate/migration.py
+index bc24b4b..7a0b64d 100644
+--- a/bb007_migrate/migration.py
++++ b/bb007_migrate/migration.py
+@@ -1,8 +1,12 @@
+ def upgrade(conn):
+-    conn.execute('ALTER TABLE users ADD COLUMN email TEXT')
+-    conn.commit()
++    columns = [row[1] for row in conn.execute('PRAGMA table_info(users)').fetchall()]
++    if 'email' not in columns:
++        conn.execute('ALTER TABLE users ADD COLUMN email TEXT')
++        conn.commit()
+ 
+ def downgrade(conn):
+-    # BUG: destructive rollback loses data.
+-    conn.execute('DROP TABLE users')
+-    conn.commit()
++    columns = [row[1] for row in conn.execute('PRAGMA table_info(users)').fetchall()]
++    if 'email' in columns:
++        conn.execute('ALTER TABLE users DROP COLUMN email')
++        conn.commit()
++

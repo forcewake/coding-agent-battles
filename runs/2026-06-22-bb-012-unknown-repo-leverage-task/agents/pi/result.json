@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+  "task": "BB-012-unknown-repo-leverage-task",
+  "agent": "pi",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 86.329,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

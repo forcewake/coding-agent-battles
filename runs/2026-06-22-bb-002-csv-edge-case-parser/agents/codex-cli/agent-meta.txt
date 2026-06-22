@@ -1,0 +1,7 @@
+agent=codex-cli
+run_id=2026-06-22-bb-002-csv-edge-case-parser
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/codex-cli/workspace
+exit_code=0
+timed_out=False
+wall_seconds=101.812
+command=codex exec -C /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/codex-cli/workspace --sandbox danger-full-access --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check - <PROMPT_STDIN>

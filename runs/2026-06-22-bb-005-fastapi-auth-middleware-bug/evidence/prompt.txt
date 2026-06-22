@@ -1,0 +1,23 @@
+You are fixing a benchmark fixture in an isolated git workspace.
+
+# BB-005 — FastAPI auth middleware bug
+
+Fix the auth dependency so `/admin` requires `Authorization: Bearer secret-token` while `/healthz` stays public.
+
+## Requirements
+- No token => `/admin` returns 401.
+- Wrong token => `/admin` returns 403.
+- Correct token => 200 with `{"status":"ok","scope":"admin"}`.
+- `/healthz` remains 200 without auth.
+- `python verify.py` must pass.
+
+
+Rules:
+- Work only in the current workspace.
+- Do not use network unless package installation is already required by verify.py.
+- Run `python verify.py` before finishing.
+- Keep the patch minimal and focused on the requested behavior.
+- Do not edit tests unless the production code cannot reasonably satisfy them; if you edit tests, explain why in your final output.
+- Do not print secrets or local credentials.
+
+Expected final state: `python verify.py` exits 0.

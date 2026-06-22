@@ -1,0 +1,8 @@
+I will start by listing the contents of the workspace directory to understand the project structure.
+I'll list the files inside `bb005_authapi`.
+I will read `bb005_authapi/app.py` to examine the current implementation of the FastAPI app and its auth dependency.
+I will view the `verify.py` script to see what checks are run to verify correctness.
+I will list the files in the `tests` directory.
+I will view `tests/test_auth.py` to check the actual test cases that are executed.
+I will run the verification script to see the current tests failing.
+I will wait for the `verify.py` script to complete and output its results.

@@ -1,0 +1,7 @@
+agent=agy
+run_id=2026-06-22-bb-005-fastapi-auth-middleware-bug
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/agy/workspace
+exit_code=0
+timed_out=False
+wall_seconds=47.220
+command=agy --prompt <PROMPT> --model 'Gemini 3.5 Flash (Medium)' --dangerously-skip-permissions --print-timeout 15m --log-file /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/agy/agy-cli.log

@@ -1,0 +1,25 @@
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-012-unknown-repo-leverage-task/fixture/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/tasks/BB-012-unknown-repo-leverage-task/fixture/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-012-unknown-repo-leverage-task/fixture/.venv/bin/python -m pytest -q
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________________ test_uses_vendor_tokenization_and_stopwords __________________
+
+    def test_uses_vendor_tokenization_and_stopwords():
+        text = 'The agent, agent; AGENT! cost-of-change and process process to verify.'
+>       assert summarize(text) == [
+            {'word': 'agent', 'count': 3},
+            {'word': 'process', 'count': 2},
+            {'word': 'change', 'count': 1},
+        ]
+E       AssertionError: assert [{'word': 'Th..., 'count': 1}] == [{'word': 'ag..., 'count': 1}]
+E         
+E         At index 0 diff: {'word': 'The', 'count': 1} != {'word': 'agent', 'count': 3}
+E         Use -v to get more diff
+
+tests/test_summary.py:5: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_summary.py::test_uses_vendor_tokenization_and_stopwords - A...
+1 failed in 0.02s

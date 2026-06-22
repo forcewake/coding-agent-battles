@@ -1,0 +1,7 @@
+agent=agy
+run_id=2026-06-22-bb-010-docx-extraction-quality-fix
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/agy/workspace
+exit_code=0
+timed_out=False
+wall_seconds=103.864
+command=agy --prompt <PROMPT> --model 'Gemini 3.5 Flash (Medium)' --dangerously-skip-permissions --print-timeout 15m --log-file /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/agy/agy-cli.log

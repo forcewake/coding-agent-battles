@@ -1,0 +1,84 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 bb005_authapi
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:50 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  176 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 tests
+-rw-r--r-- 1 forcewake forcewake  958 Jun 22 17:39 verify.py
+[0m
+[0m→ [0mRead verify.py
+[0m→ [0mRead pyproject.toml
+[0m
+[0m$ [0mls -la bb005_authapi tests
+bb005_authapi:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  391 Jun 22 17:39 app.py
+-rw-r--r-- 1 forcewake forcewake    0 Jun 22 17:39 __init__.py
+
+tests:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:39 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  531 Jun 22 17:39 test_auth.py
+[0m
+[0m→ [0mRead bb005_authapi/app.py
+[0m→ [0mRead tests/test_auth.py
+Now I understand the bug. The `require_admin` always returns `True`. Let me fix it.
+[0m
+[0m← [0mEdit bb005_authapi/app.py
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/bb005_authapi/app.py
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/bb005_authapi/app.py
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/bb005_authapi/app.py
+@@ -2,9 +2,12 @@
+ 
+ app = FastAPI()
+ 
+ def require_admin(authorization: str | None = Header(default=None)):
+-    # BUG: accidentally accepts every request.
++    if authorization is None:
++        raise HTTPException(status_code=401, detail="Missing authorization header")
++    if authorization != "Bearer secret-token":
++        raise HTTPException(status_code=403, detail="Invalid token")
+     return True
+ 
+ @app.get("/healthz")
+ def healthz():
+
+[0m
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/.venv/bin/python -m pytest -q
+..                                                                       [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/fastapi/testclient.py:1
+  /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 1 warning in 0.34s
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/.venv/bin/python -c from fastapi.testclient import TestClient; from bb005_authapi.app import app; c=TestClient(app); print(c.get('/healthz').json())
+/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/opencode/workspace/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{'status': 'healthy'}
+[verify_exit_code] 0
+[0m
+`python verify.py` exits 0. Both tests pass and `/healthz` returns `{'status': 'healthy'}`.
+
+The fix in `bb005_authapi/app.py:5` makes `require_admin`:
+- Raise **401** when no `Authorization` header
+- Raise **403** when token isn't `Bearer secret-token`
+- Return `True` otherwise, so `/admin` returns 200 with `{"status":"ok","scope":"admin"}`
+
+`/healthz` is untouched and stays public.

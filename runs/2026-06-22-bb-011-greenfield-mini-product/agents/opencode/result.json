@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-011-greenfield-mini-product",
+  "task": "BB-011-greenfield-mini-product",
+  "agent": "opencode",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 47.141,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

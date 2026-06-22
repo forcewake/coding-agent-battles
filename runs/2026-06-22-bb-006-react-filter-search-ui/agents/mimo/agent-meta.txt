@@ -1,0 +1,7 @@
+agent=mimo
+run_id=2026-06-22-bb-006-react-filter-search-ui
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-006-react-filter-search-ui/agents/mimo/workspace
+exit_code=0
+timed_out=False
+wall_seconds=39.162
+command=mimo run --dir /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-006-react-filter-search-ui/agents/mimo/workspace --dangerously-skip-permissions <PROMPT>

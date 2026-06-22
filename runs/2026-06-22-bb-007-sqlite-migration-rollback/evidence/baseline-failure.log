@@ -1,0 +1,41 @@
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-007-sqlite-migration-rollback/fixture/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/tasks/BB-007-sqlite-migration-rollback/fixture/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-007-sqlite-migration-rollback/fixture/.venv/bin/python -m pytest -q
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+__________________ test_upgrade_idempotent_and_preserves_rows __________________
+
+    def test_upgrade_idempotent_and_preserves_rows():
+        conn = seed()
+>       upgrade(conn); upgrade(conn)
+                       ^^^^^^^^^^^^^
+
+tests/test_migration.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+conn = <sqlite3.Connection object at 0x7c40b6060130>
+
+    def upgrade(conn):
+>       conn.execute('ALTER TABLE users ADD COLUMN email TEXT')
+E       sqlite3.OperationalError: duplicate column name: email
+
+bb007_migrate/migration.py:2: OperationalError
+_________________ test_downgrade_removes_email_preserves_rows __________________
+
+    def test_downgrade_removes_email_preserves_rows():
+        conn = seed(); upgrade(conn)
+        conn.execute("UPDATE users SET email='ada@example.test' WHERE id=1")
+        downgrade(conn)
+>       assert cols(conn) == ['id', 'name']
+E       AssertionError: assert [] == ['id', 'name']
+E         
+E         Right contains 2 more items, first extra item: 'id'
+E         Use -v to get more diff
+
+tests/test_migration.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_migration.py::test_upgrade_idempotent_and_preserves_rows - ...
+FAILED tests/test_migration.py::test_downgrade_removes_email_preserves_rows
+2 failed in 0.02s

@@ -1,0 +1,29 @@
+diff --git a/bb009_observe/app.py b/bb009_observe/app.py
+index 94cfdb9..144772c 100644
+--- a/bb009_observe/app.py
++++ b/bb009_observe/app.py
+@@ -1,7 +1,23 @@
+-from fastapi import FastAPI
++import time, uuid
++from fastapi import FastAPI, Request
++
+ app = FastAPI()
+ app.state.events = []
+ 
++@app.middleware('http')
++async def log_request(request: Request, call_next):
++    correlation_id = request.headers.get('x-correlation-id') or uuid.uuid4().hex
++    start = time.perf_counter()
++    response = await call_next(request)
++    app.state.events.append({
++        'method': request.method,
++        'path': request.url.path,
++        'status_code': response.status_code,
++        'duration_ms': (time.perf_counter() - start) * 1000,
++        'correlation_id': correlation_id,
++    })
++    return response
++
+ @app.get('/items/{item_id}')
+ def get_item(item_id: str):
+     return {'item_id': item_id}

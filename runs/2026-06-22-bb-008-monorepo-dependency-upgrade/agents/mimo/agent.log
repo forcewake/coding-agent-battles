@@ -1,0 +1,54 @@
+[0m
+> build · glm-5.2
+[0m
+I'll explore the workspace structure first.
+[0m$ [0mls -la
+total 28
+drwxr-xr-x 4 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:54 .git
+-rw-r--r-- 1 forcewake forcewake   14 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake   78 Jun 22 17:39 package.json
+drwxr-xr-x 4 forcewake forcewake 4096 Jun 22 17:39 packages
+-rw-r--r-- 1 forcewake forcewake  278 Jun 22 17:40 verify.py
+[0m
+[0m→ [0mRead verify.py
+[0m
+[0m$ [0mfind packages -type f | sort
+packages/app/index.mjs
+packages/app/test/app.test.mjs
+packages/shared/index.mjs
+[0m
+[0m→ [0mRead packages/shared/index.mjs
+[0m→ [0mRead packages/app/index.mjs
+[0m→ [0mRead packages/app/test/app.test.mjs
+Now I'll update the app to use `makeSlug`.
+[0m
+[0m← [0mEdit packages/app/index.mjs
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-008-monorepo-dependency-upgrade/agents/mimo/workspace/packages/app/index.mjs
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-008-monorepo-dependency-upgrade/agents/mimo/workspace/packages/app/index.mjs
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-008-monorepo-dependency-upgrade/agents/mimo/workspace/packages/app/index.mjs
+@@ -1,4 +1,4 @@
+-import { slugify } from '../shared/index.mjs';
++import { makeSlug } from '../shared/index.mjs';
+ export function scenarioPath(name) {
+-  return `/scenarios/${slugify(name)}.html`;
++  return `/scenarios/${makeSlug(name)}.html`;
+ }
+
+[0m
+[0m$ [0mpython verify.py
+✔ scenario path uses upgraded shared slug API (0.834918ms)
+✔ old slugify API is not reintroduced (0.119671ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 51.28531
+[verify_exit_code] 0
+[0m
+Tests pass. The app now imports and uses `makeSlug` from the shared package, and the old `slugify` export is not reintroduced.

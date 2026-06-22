@@ -1,0 +1,49 @@
+from __future__ import annotations
+import re
+
+_SEP_CELL_RE = re.compile(r"^:?-+:?$")
+
+
+def _split_row(line: str) -> list[str]:
+    parts = line.split("|")
+    if parts and parts[0].strip() == "":
+        parts = parts[1:]
+    if parts and parts[-1].strip() == "":
+        parts = parts[:-1]
+    return [p.strip() for p in parts]
+
+
+def _is_separator_row(cells: list[str]) -> bool:
+    return bool(cells) and all(_SEP_CELL_RE.match(c) for c in cells)
+
+
+def normalize_markdown_tables(markdown: str) -> str:
+    lines = markdown.split("\n")
+    result: list[str] = []
+    i = 0
+    n = len(lines)
+    while i < n:
+        line = lines[i]
+        header_cells = _split_row(line) if "|" in line else []
+        next_cells = _split_row(lines[i + 1]) if (i + 1 < n and "|" in lines[i + 1]) else []
+        if header_cells and _is_separator_row(next_cells):
+            rows: list[list[str]] = [header_cells, ["---"] * len(next_cells)]
+            j = i + 2
+            while j < n and "|" in lines[j]:
+                body_cells = _split_row(lines[j])
+                if not body_cells:
+                    break
+                rows.append(body_cells)
+                j += 1
+            num_cols = max(len(r) for r in rows)
+            rows[1] = ["---"] * num_cols
+            padded = [r + [""] * (num_cols - len(r)) for r in rows]
+            widths = [max(len(r[c]) for r in padded) for c in range(num_cols)]
+            for r in padded:
+                cell_strs = [" " + r[c].ljust(widths[c]) + " " for c in range(num_cols)]
+                result.append("|" + "|".join(cell_strs) + "|")
+            i = j
+            continue
+        result.append(line)
+        i += 1
+    return "\n".join(result)

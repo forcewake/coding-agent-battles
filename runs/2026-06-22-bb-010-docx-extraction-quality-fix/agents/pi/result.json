@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+  "task": "BB-010-docx-extraction-quality-fix",
+  "agent": "pi",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 79.757,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

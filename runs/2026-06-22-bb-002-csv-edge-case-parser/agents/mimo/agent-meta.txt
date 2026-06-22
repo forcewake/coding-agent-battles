@@ -1,0 +1,7 @@
+agent=mimo
+run_id=2026-06-22-bb-002-csv-edge-case-parser
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/mimo/workspace
+exit_code=0
+timed_out=False
+wall_seconds=66.505
+command=mimo run --dir /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-002-csv-edge-case-parser/agents/mimo/workspace --dangerously-skip-permissions <PROMPT>

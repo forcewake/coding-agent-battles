@@ -1,0 +1,65 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 bb004_mdtable
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:48 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  158 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 tests
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+[0m
+[0m→ [0mRead verify.py
+[0m
+[0m$ [0mls -la bb004_mdtable tests
+bb004_mdtable:
+total 16
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake   90 Jun 22 17:39 __init__.py
+-rw-r--r-- 1 forcewake forcewake   73 Jun 22 17:39 normalizer.py
+
+tests:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  474 Jun 22 17:42 test_normalizer.py
+[0m
+[0m→ [0mRead bb004_mdtable/__init__.py
+[0m→ [0mRead bb004_mdtable/normalizer.py
+[0m→ [0mRead tests/test_normalizer.py
+[0m→ [0mRead pyproject.toml
+Now I understand the structure. Let me analyze the expected behavior from the test:
+
+- Split table rows by `|`, strip cell contents
+- Compute column widths as max content width across all rows (including the `---` separator)
+- Output each row as `| cell.ljust(width) | ...` with single-space padding
+- Normalize separator row cells to `---`
+- Idempotency comes from stripping padding on re-parse
+
+Let me write the normalizer:
+[0m
+[0m← [0mWrite bb004_mdtable/normalizer.py
+Wrote file successfully.
+[0m
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-004-markdown-table-normalizer/agents/opencode/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-004-markdown-table-normalizer/agents/opencode/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-004-markdown-table-normalizer/agents/opencode/workspace/.venv/bin/python -m pytest -q
+..                                                                       [100%]
+2 passed in 0.01s
+[verify_exit_code] 0
+[0m
+Both tests pass and `python verify.py` exits 0.
+
+The implementation in `bb004_mdtable/normalizer.py`:
+- Detects a pipe table as a header line followed by a separator line (cells matching `:?-+:?`)
+- Splits rows by `|`, strips cell contents (so padding is removed on re-parse → idempotent)
+- Computes per-column width as the max content width across all rows
+- Normalizes the separator row to `---` per column
+- Emits each row as `| cell.ljust(width) | ...` with single-space gutters

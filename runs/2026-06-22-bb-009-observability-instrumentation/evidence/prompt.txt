@@ -1,0 +1,23 @@
+You are fixing a benchmark fixture in an isolated git workspace.
+
+# BB-009 — Observability instrumentation
+
+Add request logging middleware with safe structured logs.
+
+## Requirements
+- Every request appends one JSON line to `app.state.events`.
+- Event fields: `method`, `path`, `status_code`, `duration_ms`, `correlation_id`.
+- Use incoming `x-correlation-id` when present; otherwise generate a non-empty id.
+- Do not log authorization headers or request bodies.
+- `python verify.py` must pass.
+
+
+Rules:
+- Work only in the current workspace.
+- Do not use network unless package installation is already required by verify.py.
+- Run `python verify.py` before finishing.
+- Keep the patch minimal and focused on the requested behavior.
+- Do not edit tests unless the production code cannot reasonably satisfy them; if you edit tests, explain why in your final output.
+- Do not print secrets or local credentials.
+
+Expected final state: `python verify.py` exits 0.

@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+  "task": "BB-008-monorepo-dependency-upgrade",
+  "agent": "claude-code",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 34.085,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

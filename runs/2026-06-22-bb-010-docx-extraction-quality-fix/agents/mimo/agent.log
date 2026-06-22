@@ -1,0 +1,60 @@
+[0m
+> build · glm-5.2
+[0m
+I'll explore the workspace to understand the task.
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:44 bb010_docx
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:57 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  152 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 tests
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+[0m
+[0m→ [0mRead verify.py
+[0m→ [0mRead pyproject.toml
+[0m
+[0m$ [0mls -la bb010_docx tests
+bb010_docx:
+total 16
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:44 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  373 Jun 22 17:44 extract.py
+-rw-r--r-- 1 forcewake forcewake   71 Jun 22 17:39 __init__.py
+
+tests:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:42 .
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  737 Jun 22 17:42 test_extract.py
+[0m
+[0m→ [0mRead bb010_docx/extract.py
+[0m→ [0mRead tests/test_extract.py
+[0m→ [0mRead bb010_docx/__init__.py
+Now I understand the bug. The current code uses a broken regex that doesn't handle XML entities, tables, or multiple `<w:t>` runs. The expected output is `'Intro & overview\nCell A\nCell B\nDone'` — paragraphs and cell paragraphs in document order, joined with `\n`. I'll rewrite using a proper XML parser which auto-decodes entities and walks in document order.
+[0m
+[0m← [0mWrite bb010_docx/extract.py
+Wrote file successfully.
+[0m
+Now let me run the verification.
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/mimo/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/mimo/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-010-docx-extraction-quality-fix/agents/mimo/workspace/.venv/bin/python -m pytest -q
+.                                                                        [100%]
+1 passed in 0.01s
+[verify_exit_code] 0
+[0m
+`verify.py` exits 0 — test passes.
+
+The fix rewrites `extract.py` to use `xml.etree.ElementTree`, which:
+- Walks all `<w:p>` elements in **document order** (covers body paragraphs and paragraphs nested inside table cells, preserving reading order).
+- Concatenates all `<w:t>` runs within each paragraph.
+- **Auto-decodes XML entities** (`&amp;` → `&`) via the parser.
+- Joins lines with `\n`.
+
+No tests were edited.

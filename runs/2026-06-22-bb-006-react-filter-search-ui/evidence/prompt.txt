@@ -1,0 +1,24 @@
+You are fixing a benchmark fixture in an isolated git workspace.
+
+# BB-006 — React filter/search UI
+
+Fix the browser-visible search/filter state model. The UI is represented by a small dependency-free module to keep the benchmark reproducible.
+
+## Requirements
+- `filterItems(items, query, tag)` must be case-insensitive.
+- Query searches title and description.
+- Tag `all` disables tag filtering.
+- Result order is stable by original input order.
+- Empty result state text must be `No matching agents`.
+- `python verify.py` must pass.
+
+
+Rules:
+- Work only in the current workspace.
+- Do not use network unless package installation is already required by verify.py.
+- Run `python verify.py` before finishing.
+- Keep the patch minimal and focused on the requested behavior.
+- Do not edit tests unless the production code cannot reasonably satisfy them; if you edit tests, explain why in your final output.
+- Do not print secrets or local credentials.
+
+Expected final state: `python verify.py` exits 0.

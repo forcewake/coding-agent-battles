@@ -1,0 +1,24 @@
+You are fixing a benchmark fixture in an isolated git workspace.
+
+# BB-011 — Long-horizon greenfield mini-product
+
+Build a tiny benchmark registry API from tests/spec.
+
+## Requirements
+- Provide `create_app()` in `bb011_miniproduct.app` returning a FastAPI app.
+- `POST /scenarios` accepts `{id,name,level}` and stores it in memory.
+- Duplicate id returns 409.
+- `GET /scenarios` returns scenarios sorted by level then id.
+- `GET /healthz` returns `{"status":"ok"}`.
+- `python verify.py` must pass.
+
+
+Rules:
+- Work only in the current workspace.
+- Do not use network unless package installation is already required by verify.py.
+- Run `python verify.py` before finishing.
+- Keep the patch minimal and focused on the requested behavior.
+- Do not edit tests unless the production code cannot reasonably satisfy them; if you edit tests, explain why in your final output.
+- Do not print secrets or local credentials.
+
+Expected final state: `python verify.py` exits 0.

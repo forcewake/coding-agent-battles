@@ -1,0 +1,115 @@
+diff --git a/bb004_mdtable/normalizer.py b/bb004_mdtable/normalizer.py
+index 6f97e16..dc65884 100644
+--- a/bb004_mdtable/normalizer.py
++++ b/bb004_mdtable/normalizer.py
+@@ -1,2 +1,109 @@
++from __future__ import annotations
++
++import re
++
++
++_SEPARATOR_RE = re.compile(r":?-+:?")
++_FENCE_RE = re.compile(r"^(\s*)(`{3,}|~{3,})")
++
++
+ def normalize_markdown_tables(markdown: str) -> str:
+-    return markdown
++    lines = markdown.splitlines(keepends=True)
++    normalized: list[str] = []
++    i = 0
++    fence: tuple[str, int] | None = None
++
++    while i < len(lines):
++        text, newline = _split_newline(lines[i])
++        marker = _fence_marker(text)
++        if marker is not None:
++            char, count = marker
++            if fence is None:
++                fence = (char, count)
++            elif char == fence[0] and count >= fence[1]:
++                fence = None
++            normalized.append(lines[i])
++            i += 1
++            continue
++
++        if fence is None and i + 1 < len(lines):
++            row = _parse_row(text)
++            next_text, _ = _split_newline(lines[i + 1])
++            separator = _parse_row(next_text)
++            if row is not None and separator is not None and _is_separator(separator):
++                table_rows: list[tuple[list[str], str, bool]] = [(row, newline, False)]
++                table_rows.append((separator, _split_newline(lines[i + 1])[1], True))
++                j = i + 2
++
++                while j < len(lines):
++                    row_text, row_newline = _split_newline(lines[j])
++                    if _fence_marker(row_text) is not None:
++                        break
++                    parsed = _parse_row(row_text)
++                    if parsed is None:
++                        break
++                    table_rows.append((parsed, row_newline, False))
++                    j += 1
++
++                normalized.extend(_format_table(table_rows))
++                i = j
++                continue
++
++        normalized.append(lines[i])
++        i += 1
++
++    return "".join(normalized)
++
++
++def _split_newline(line: str) -> tuple[str, str]:
++    if line.endswith("\r\n"):
++        return line[:-2], "\r\n"
++    if line.endswith("\n") or line.endswith("\r"):
++        return line[:-1], line[-1]
++    return line, ""
++
++
++def _fence_marker(line: str) -> tuple[str, int] | None:
++    match = _FENCE_RE.match(line)
++    if match is None:
++        return None
++    marker = match.group(2)
++    return marker[0], len(marker)
++
++
++def _parse_row(line: str) -> list[str] | None:
++    stripped = line.strip()
++    if "|" not in stripped:
++        return None
++    if stripped.startswith("|"):
++        stripped = stripped[1:]
++    if stripped.endswith("|"):
++        stripped = stripped[:-1]
++    return [cell.strip() for cell in stripped.split("|")]
++
++
++def _is_separator(cells: list[str]) -> bool:
++    return bool(cells) and all(_SEPARATOR_RE.fullmatch(cell) for cell in cells)
++
++
++def _format_table(rows: list[tuple[list[str], str, bool]]) -> list[str]:
++    column_count = max(len(cells) for cells, _, _ in rows)
++    normalized_rows = [
++        (_normalize_cells(cells, column_count, is_separator), newline)
++        for cells, newline, is_separator in rows
++    ]
++    widths = [
++        max(len(cells[index]) for cells, _ in normalized_rows)
++        for index in range(column_count)
++    ]
++
++    return [
++        "| " + " | ".join(cell.ljust(widths[index]) for index, cell in enumerate(cells)) + " |" + newline
++        for cells, newline in normalized_rows
++    ]
++
++
++def _normalize_cells(cells: list[str], column_count: int, is_separator: bool) -> list[str]:
++    if is_separator:
++        return ["---"] * column_count
++    return cells + [""] * (column_count - len(cells))

@@ -1,0 +1,7 @@
+agent=mimo
+run_id=2026-06-22-bb-005-fastapi-auth-middleware-bug
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/mimo/workspace
+exit_code=0
+timed_out=False
+wall_seconds=46.894
+command=mimo run --dir /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-005-fastapi-auth-middleware-bug/agents/mimo/workspace --dangerously-skip-permissions <PROMPT>

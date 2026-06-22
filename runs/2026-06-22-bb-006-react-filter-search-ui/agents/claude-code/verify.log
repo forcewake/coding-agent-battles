@@ -1,0 +1,12 @@
+✔ query searches title and description case-insensitively (1.203388ms)
+✔ tag filter combines with query and keeps order (0.163026ms)
+✔ empty state copy is product quality (0.141372ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 54.870821
+[verify_exit_code] 0

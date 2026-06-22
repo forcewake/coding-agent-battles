@@ -1,0 +1,24 @@
+diff --git a/src/filter.mjs b/src/filter.mjs
+index 5980301..a4ed195 100644
+--- a/src/filter.mjs
++++ b/src/filter.mjs
+@@ -1,5 +1,16 @@
+ export function filterItems(items, query = '', tag = 'all') {
+-  // BUG: title-only, case-sensitive, ignores tag.
+-  return items.filter(item => item.title.includes(query));
++  const lowerQuery = (query || '').toLowerCase();
++  return items.filter(item => {
++    // Tag filtering
++    if (tag && tag !== 'all') {
++      if (!item.tags || !item.tags.includes(tag)) {
++        return false;
++      }
++    }
++    // Search query filtering (searches title and description case-insensitively)
++    const title = (item.title || '').toLowerCase();
++    const description = (item.description || '').toLowerCase();
++    return title.includes(lowerQuery) || description.includes(lowerQuery);
++  });
+ }
+-export function emptyStateText() { return 'Nothing here'; }
++export function emptyStateText() { return 'No matching agents'; }

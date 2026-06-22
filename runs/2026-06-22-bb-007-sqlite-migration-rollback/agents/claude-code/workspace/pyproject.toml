@@ -1,0 +1,8 @@
+[project]
+name = "bb007-migrate"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["bb007_migrate*"]

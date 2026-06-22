@@ -1,0 +1,24 @@
+diff --git a/bb007_migrate/migration.py b/bb007_migrate/migration.py
+index bc24b4b..7e87593 100644
+--- a/bb007_migrate/migration.py
++++ b/bb007_migrate/migration.py
+@@ -1,8 +1,16 @@
++def _columns(conn):
++    return [r[1] for r in conn.execute('PRAGMA table_info(users)')]
++
++
+ def upgrade(conn):
+-    conn.execute('ALTER TABLE users ADD COLUMN email TEXT')
++    # Add a nullable email column; idempotent so running twice is safe.
++    if 'email' not in _columns(conn):
++        conn.execute('ALTER TABLE users ADD COLUMN email TEXT')
+     conn.commit()
+ 
++
+ def downgrade(conn):
+-    # BUG: destructive rollback loses data.
+-    conn.execute('DROP TABLE users')
++    # Remove only the email column; preserves id/name rows and is idempotent.
++    if 'email' in _columns(conn):
++        conn.execute('ALTER TABLE users DROP COLUMN email')
+     conn.commit()

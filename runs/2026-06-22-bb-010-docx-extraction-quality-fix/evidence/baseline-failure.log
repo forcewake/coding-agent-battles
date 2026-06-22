@@ -1,0 +1,28 @@
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-010-docx-extraction-quality-fix/fixture/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/tasks/BB-010-docx-extraction-quality-fix/fixture/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-010-docx-extraction-quality-fix/fixture/.venv/bin/python -m pytest -q
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_extracts_paragraphs_and_table_cells ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-forcewake/pytest-41/test_extracts_paragraphs_and_t0')
+
+    def test_extracts_paragraphs_and_table_cells(tmp_path):
+        p = tmp_path / 'sample.docx'
+        make_docx(p)
+>       assert extract_docx_text(p) == 'Intro & overview\nCell A\nCell B\nDone'
+E       AssertionError: assert 'Intro &amp; ...nCell B\nDone' == 'Intro & over...nCell B\nDone'
+E         
+E         - Intro & overview
+E         + Intro &amp; overview
+E         ?        ++++
+E           Cell A
+E           Cell B
+E           Done
+
+tests/test_extract.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_extract.py::test_extracts_paragraphs_and_table_cells - Asse...
+1 failed in 0.02s

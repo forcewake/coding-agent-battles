@@ -1,0 +1,28 @@
+diff --git a/bb002_csvedge/parser.py b/bb002_csvedge/parser.py
+index db4d958..1cc7184 100644
+--- a/bb002_csvedge/parser.py
++++ b/bb002_csvedge/parser.py
+@@ -1,9 +1,17 @@
++import csv
++import io
++
++
+ def summarize_people_csv(text: str) -> dict:
+-    lines = [line for line in text.splitlines() if line.strip()]
+-    header = lines[0].split(",")
+-    rows = [dict(zip(header, line.split(","))) for line in lines[1:]]
++    reader = csv.DictReader(io.StringIO(text))
+     by_city = {}
+-    for row in rows:
+-        city = row.get("city", "").strip()
++    rows = 0
++    for row in reader:
++        if row is None:
++            continue
++        if not any((value or "").strip() for value in row.values()):
++            continue
++        rows += 1
++        city = (row.get("city") or "").strip()
+         by_city[city] = by_city.get(city, 0) + 1
+-    return {"rows": len(rows), "by_city": dict(sorted(by_city.items()))}
++    return {"rows": rows, "by_city": dict(sorted(by_city.items()))}

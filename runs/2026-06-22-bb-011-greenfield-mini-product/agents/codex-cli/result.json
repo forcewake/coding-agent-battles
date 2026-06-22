@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-011-greenfield-mini-product",
+  "task": "BB-011-greenfield-mini-product",
+  "agent": "codex-cli",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 101.535,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+  "task": "BB-002-csv-edge-case-parser",
+  "agent": "opencode",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 80.638,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

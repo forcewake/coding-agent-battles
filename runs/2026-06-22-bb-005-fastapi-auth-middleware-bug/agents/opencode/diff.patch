@@ -1,0 +1,16 @@
+diff --git a/bb005_authapi/app.py b/bb005_authapi/app.py
+index b05eecc..ea3e0ac 100644
+--- a/bb005_authapi/app.py
++++ b/bb005_authapi/app.py
+@@ -3,7 +3,10 @@ from fastapi import Depends, FastAPI, Header, HTTPException
+ app = FastAPI()
+ 
+ def require_admin(authorization: str | None = Header(default=None)):
+-    # BUG: accidentally accepts every request.
++    if authorization is None:
++        raise HTTPException(status_code=401, detail="Missing authorization header")
++    if authorization != "Bearer secret-token":
++        raise HTTPException(status_code=403, detail="Invalid token")
+     return True
+ 
+ @app.get("/healthz")

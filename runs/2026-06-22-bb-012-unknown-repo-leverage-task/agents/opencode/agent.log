@@ -1,0 +1,59 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 36
+drwxr-xr-x 6 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 bb012_leverage
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 18:00 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  160 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 tests
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:44 vendor
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+[0m
+[0m$ [0mls -la bb012_leverage tests vendor
+bb012_leverage:
+total 16
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 .
+drwxr-xr-x 6 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake   55 Jun 22 17:39 __init__.py
+-rw-r--r-- 1 forcewake forcewake  256 Jun 22 17:39 summary.py
+
+tests:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 .
+drwxr-xr-x 6 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake  331 Jun 22 17:39 test_summary.py
+
+vendor:
+total 12
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:44 .
+drwxr-xr-x 6 forcewake forcewake 4096 Jun 22 17:46 ..
+-rw-r--r-- 1 forcewake forcewake    0 Jun 22 17:39 __init__.py
+-rw-r--r-- 1 forcewake forcewake  139 Jun 22 17:39 textkit.py
+[0m
+[0m→ [0mRead verify.py
+[0m→ [0mRead pyproject.toml
+[0m→ [0mRead vendor/__init__.py
+[0m→ [0mRead bb012_leverage/__init__.py
+[0m→ [0mRead bb012_leverage/summary.py
+[0m→ [0mRead tests/test_summary.py
+[0m→ [0mRead vendor/textkit.py
+I have enough understanding. Now I'll rewrite `summary.py` to use the vendor helper.
+[0m
+[0m← [0mWrite bb012_leverage/summary.py
+Wrote file successfully.
+[0m
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/opencode/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/opencode/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-012-unknown-repo-leverage-task/agents/opencode/workspace/.venv/bin/python -m pytest -q
+.                                                                        [100%]
+1 passed in 0.01s
+[verify_exit_code] 0
+[0m
+`python verify.py` exits 0. The fix replaces the buggy whitespace split with `vendor.textkit.words` (handles lowercase + `[a-z0-9]+` punctuation stripping, so `cost-of-change` → `cost`, `of`, `change`), filters via `vendor.textkit.STOPWORDS` (dropping `the`/`and`/`of`/`to`), and sorts by `(-count, word)` before taking the top 3.

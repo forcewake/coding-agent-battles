@@ -1,0 +1,40 @@
+[0m
+> build · glm-5.2
+[0m
+I'll explore the workspace to understand the current state.
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 bb007_migrate
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:53 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  158 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 tests
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+[0m
+[0m→ [0mRead bb007_migrate
+[0m→ [0mRead bb007_migrate/migration.py
+[0m→ [0mRead verify.py
+[0m→ [0mRead tests
+[0m→ [0mRead tests/test_migration.py
+Now I understand. The current code has two bugs: `upgrade` fails on second run (column already exists), and `downgrade` destructively drops the whole table. Let me fix both.
+[0m
+[0m← [0mWrite bb007_migrate/migration.py
+Wrote file successfully.
+[0m
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/mimo/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/mimo/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/mimo/workspace/.venv/bin/python -m pytest -q
+..                                                                       [100%]
+2 passed in 0.01s
+[verify_exit_code] 0
+[0m
+Both tests pass, `verify.py` exits 0.
+
+**Changes to `bb007_migrate/migration.py`:**
+- `upgrade`: now idempotent — checks `PRAGMA table_info` before adding the `email` column, so running twice doesn't fail.
+- `downgrade`: replaced the destructive `DROP TABLE users` with a safe table-rebuild (create `users_new` without `email`, copy `id/name`, drop old, rename) — preserves rows and works across all SQLite versions (avoids relying on the newer `ALTER TABLE … DROP COLUMN`).

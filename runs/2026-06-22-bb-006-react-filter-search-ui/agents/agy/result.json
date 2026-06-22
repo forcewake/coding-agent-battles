@@ -1,0 +1,10 @@
+{
+  "runId": "2026-06-22-bb-006-react-filter-search-ui",
+  "task": "BB-006-react-filter-search-ui",
+  "agent": "agy",
+  "agentExit": 0,
+  "agentTimedOut": false,
+  "wall": 37.526,
+  "verifyExit": 0,
+  "verdict": "PASS"
+}

@@ -1,0 +1,7 @@
+agent=claude-code
+run_id=2026-06-22-bb-009-observability-instrumentation
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/claude-code/workspace
+exit_code=0
+timed_out=False
+wall_seconds=89.627
+command=claude --print --output-format json --dangerously-skip-permissions --no-session-persistence --max-budget-usd 3.00 <PROMPT>

@@ -1,0 +1,7 @@
+agent=claude-code
+run_id=2026-06-22-bb-006-react-filter-search-ui
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-006-react-filter-search-ui/agents/claude-code/workspace
+exit_code=0
+timed_out=False
+wall_seconds=93.299
+command=claude --print --output-format json --dangerously-skip-permissions --no-session-persistence --max-budget-usd 3.00 <PROMPT>

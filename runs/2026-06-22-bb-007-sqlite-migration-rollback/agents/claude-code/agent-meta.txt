@@ -1,0 +1,7 @@
+agent=claude-code
+run_id=2026-06-22-bb-007-sqlite-migration-rollback
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-007-sqlite-migration-rollback/agents/claude-code/workspace
+exit_code=0
+timed_out=False
+wall_seconds=86.768
+command=claude --print --output-format json --dangerously-skip-permissions --no-session-persistence --max-budget-usd 3.00 <PROMPT>

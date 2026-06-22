@@ -1,0 +1,93 @@
+[0m
+> build · glm-5.2
+[0m
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 17:46 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 17:46 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 bb009_observe
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 17:55 .git
+-rw-r--r-- 1 forcewake forcewake   67 Jun 22 17:39 .gitignore
+-rw-r--r-- 1 forcewake forcewake  176 Jun 22 17:39 pyproject.toml
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 17:40 tests
+-rw-r--r-- 1 forcewake forcewake  736 Jun 22 17:39 verify.py
+[0m
+[0m→ [0mRead verify.py
+[0m→ [0mRead pyproject.toml
+[0m
+[0m$ [0mls bb009_observe tests
+bb009_observe:
+app.py
+__init__.py
+
+tests:
+test_observe.py
+[0m
+[0m→ [0mRead bb009_observe/app.py
+[0m→ [0mRead tests/test_observe.py
+[0m→ [0mRead bb009_observe/__init__.py
+Now I'll add request logging middleware.
+[0m
+[0m← [0mWrite bb009_observe/app.py
+Wrote file successfully.
+[0m
+The tests index events like dicts, so I should append dicts (the "JSON line" is the structured representation), not strings.
+[0m← [0mEdit bb009_observe/app.py
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/bb009_observe/app.py
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/bb009_observe/app.py
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/bb009_observe/app.py
+@@ -1,5 +1,4 @@
+-import json
+ import time
+ import uuid
+ 
+ from fastapi import FastAPI, Request
+
+[0m
+[0m← [0mEdit bb009_observe/app.py
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/bb009_observe/app.py
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/bb009_observe/app.py
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/bb009_observe/app.py
+@@ -26,9 +26,9 @@
+                 "status_code": status_code,
+                 "duration_ms": duration_ms,
+                 "correlation_id": correlation_id,
+             }
+-            app.state.events.append(json.dumps(event))
++            app.state.events.append(event)
+         return response
+ 
+ 
+ app.add_middleware(RequestLoggingMiddleware)
+
+[0m
+[0m→ [0mRead bb009_observe/app.py
+Now let me run the verifier.
+[0m
+[0m$ [0mpython verify.py
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/.venv/bin/python -m pytest -q
+..                                                                       [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/fastapi/testclient.py:1
+  /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-009-observability-instrumentation/agents/mimo/workspace/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 1 warning in 0.27s
+[verify_exit_code] 0
+[0m
+Verify passes (2/2 tests, exit 0).
+
+Added `RequestLoggingMiddleware` in `bb009_observe/app.py:11` that:
+- Reads `x-correlation-id` from headers, or generates `uuid4().hex` if absent
+- Measures `duration_ms` via `time.perf_counter()`
+- Appends one event dict with `method`, `path`, `status_code`, `duration_ms`, `correlation_id` to `app.state.events`
+- Logs nothing but those fields — no headers or bodies
+
+Note: I appended dicts (not JSON strings) because the tests index events as `event['method']`.
