@@ -38,7 +38,12 @@ All agents received the same prompt from `evidence/prompt.txt`.
 | MiMoCode | 0 | 129.528s | `pytest -q` + CLI smoke passed | 1 | PASS |
 | agy | 0 | 332.324s | `pytest -q` + CLI smoke passed | 1 | PASS |
 
-Cost/token data: not captured for this first smoke run; CLI logs did not expose a reliable per-run cost field in the collected artifacts.
+Cost/token/process/quality data has now been collected in:
+
+- [`metrics.md`](metrics.md) — human-readable scoreboard
+- [`metrics.json`](metrics.json) — machine-readable metrics
+
+Short version: OpenCode and MiMo expose GLM token counts via local SQLite; Codex exposes token/cost estimates via local JSONL + `ccusage`/Tokscale; Claude Code's original plain-text `--no-session-persistence` run is not recoverable for tokens/cost; agy's local transcript did not expose reliable cost/tokens.
 
 ## Independent verification command
 

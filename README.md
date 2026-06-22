@@ -19,8 +19,9 @@ Each battle should keep the task, constraints and verification identical across 
 | Task | Prompt, starting repo/commit, allowed tools, timebox |
 | Output | Final diff, branch/commit, generated artifacts |
 | Correctness | Tests, lint, typecheck, CLI/browser smoke, screenshots where useful |
-| Process | Wall-clock time, number of interventions, retries, failure mode |
-| Economics | Token/cost where available, local resources used |
+| Quality | Final patch score, process quality score, evidence transparency notes |
+| Efficiency | Wall-clock, messages/turns, tool calls, retries |
+| Economics | Input/output/reasoning/cache tokens, actual/estimated cost, cost-per-accepted-change |
 | Review | Hermes independent verification notes and final verdict |
 
 ## Repository layout
@@ -37,6 +38,8 @@ Suggested run folder format:
 runs/YYYY-MM-DD-task-slug/
   task.md
   results.md
+  metrics.md
+  metrics.json
   agents/
     mimo/
     opencode/
