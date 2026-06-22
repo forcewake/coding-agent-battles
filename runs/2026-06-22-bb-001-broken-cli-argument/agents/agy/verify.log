@@ -1,0 +1,11 @@
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+..                                                                       [100%]
+2 passed in 0.06s
+beta	2
+elephant	2
+alpha	1
+
+[verify_exit_code] 0
+[verify_wall_seconds] 5.720

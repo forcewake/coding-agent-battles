@@ -8,6 +8,7 @@ Public logbook for honest head-to-head comparisons of coding agents.
 - OpenCode / GLM-5.2
 - Antigravity `agy` / Google AI Pro
 - Claude Code
+- Codex CLI
 
 ## What gets compared
 

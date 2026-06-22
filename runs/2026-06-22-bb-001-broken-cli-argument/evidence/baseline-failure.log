@@ -1,0 +1,29 @@
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: pip install --upgrade pip
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+_____________________ test_min_length_filters_short_words ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-forcewake/pytest-22/test_min_length_filters_short_0')
+
+    def test_min_length_filters_short_words(tmp_path: Path) -> None:
+        sample = tmp_path / "sample.txt"
+        sample.write_text("alpha beta beta cat dog elephant elephant fox\n", encoding="utf-8")
+    
+        result = run_cli("--min-length", "4", str(sample))
+    
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: usage: wordfreq [-h] [--min-length] path
+E         wordfreq: error: unrecognized arguments: /tmp/pytest-of-forcewake/pytest-22/test_min_length_filters_short_0/sample.txt
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/home/forcewake/coding-agent-battles-init/tasks/BB-001-broken-cli-argument/fixture/.venv/bin/p...dfreq: error: unrecognized arguments: /tmp/pytest-of-forcewake/pytest-22/test_min_length_filters_short_0/sample.txt\n').returncode
+
+tests/test_cli.py:40: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_min_length_filters_short_words - AssertionErro...
+1 failed, 1 passed in 0.07s
+
+[baseline_exit_code] 1
+[baseline_wall_seconds] 5.607

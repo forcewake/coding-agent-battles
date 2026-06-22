@@ -1,0 +1,94 @@
+[0m
+> build · glm-5.2
+[0m
+I'll explore the repo structure first to understand the codebase.
+[0m$ [0mls -la
+total 32
+drwxr-xr-x 5 forcewake forcewake 4096 Jun 22 13:45 .
+drwxr-xr-x 3 forcewake forcewake 4096 Jun 22 13:44 ..
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 13:43 bb001_wordfreq
+drwxr-xr-x 8 forcewake forcewake 4096 Jun 22 13:46 .git
+-rw------- 1 forcewake forcewake   66 Jun 22 13:44 .gitignore
+-rw------- 1 forcewake forcewake  300 Jun 22 13:43 pyproject.toml
+-rw------- 1 forcewake forcewake   46 Jun 22 13:43 sample.txt
+drwxr-xr-x 2 forcewake forcewake 4096 Jun 22 13:43 tests
+[0m
+[0m→ [0mRead bb001_wordfreq
+[0m→ [0mRead bb001_wordfreq/cli.py
+Found the bug: `--min-length` uses `action="store_true"` which makes it a boolean flag instead of accepting an integer. Let me check the tests and other files.
+[0m→ [0mRead bb001_wordfreq/__main__.py
+[0m→ [0mRead bb001_wordfreq/__init__.py
+[0m→ [0mRead tests
+[0m→ [0mRead tests/test_cli.py
+Let me check the other config files and confirm the current test failure.
+[0m→ [0mRead pyproject.toml
+[0m
+[0m$ [0mcd /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument/agents/mimo/workspace && python -m pytest -q 2>&1 | tail -20
+tmp_path = PosixPath('/tmp/pytest-of-forcewake/pytest-9/test_min_length_filters_short_0')
+
+    def test_min_length_filters_short_words(tmp_path: Path) -> None:
+        sample = tmp_path / "sample.txt"
+        sample.write_text("alpha beta beta cat dog elephant elephant fox\n", encoding="utf-8")
+    
+        result = run_cli("--min-length", "4", str(sample))
+    
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: usage: wordfreq [-h] [--min-length] path
+E         wordfreq: error: unrecognized arguments: /tmp/pytest-of-forcewake/pytest-9/test_min_length_filters_short_0/sample.txt
+E         
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/home/forcewake/.hermes/hermes-agent/venv/bin/python', '-m', 'bb001_wordfreq', '--min-length',...rdfreq: error: unrecognized arguments: /tmp/pytest-of-forcewake/pytest-9/test_min_length_filters_short_0/sample.txt\n').returncode
+
+tests/test_cli.py:40: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_min_length_filters_short_words - AssertionErro...
+1 failed, 1 passed in 0.09s
+[0m
+Confirmed the bug. The fix is to change `action="store_true"` to `type=int` so `--min-length` accepts an integer value.
+[0m← [0mEdit bb001_wordfreq/cli.py
+Index: /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument/agents/mimo/workspace/bb001_wordfreq/cli.py
+===================================================================
+--- /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument/agents/mimo/workspace/bb001_wordfreq/cli.py
++++ /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument/agents/mimo/workspace/bb001_wordfreq/cli.py
+@@ -22,9 +22,9 @@
+ parser = argparse.ArgumentParser(prog="wordfreq")
+ parser.add_argument("path", help="Text file to analyze")
+ parser.add_argument(
+     "--min-length",
+-    action="store_true",
++    type=int,
+     default=0,
+     help="Only include words with at least this many characters",
+ )
+ return parser
+
+[0m
+[0m$ [0mcd /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument/agents/mimo/workspace && python -m pytest -q 2>&1 | tail -10
+..                                                                       [100%]
+2 passed in 0.08s
+[0m
+Both tests pass. Let me do a quick sanity check on default behavior preservation.
+[0m$ [0mcd /home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-001-broken-cli-argument/agents/mimo/workspace && echo "--- default ---" && python -m bb001_wordfreq sample.txt && echo "--- --min-length 4 ---" && python -m bb001_wordfreq --min-length 4 sample.txt
+--- default ---
+beta	2
+elephant	2
+alpha	1
+cat	1
+dog	1
+fox	1
+--- --min-length 4 ---
+beta	2
+elephant	2
+alpha	1
+[0m
+BB-001 fixed.
+
+**Changed files:**
+- `bb001_wordfreq/cli.py` — replaced `action="store_true"` with `type=int` on the `--min-length` argument so it accepts an integer value (default `0` unchanged, preserving omitted-flag behavior).
+
+**Verification (`pytest -q`):**
+```
+2 passed in 0.08s
+```
+
+No tests were modified; the existing `test_min_length_filters_short_words` and `test_default_counts_all_words` both pass, and manual runs confirm default output is unchanged while `--min-length 4` correctly filters short words.
