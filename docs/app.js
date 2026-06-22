@@ -99,10 +99,19 @@ function markdownToHtml(markdown) {
 }
 
 /* ── Data loader ────────────────────────────────────────────────────────── */
+const BUILD_VERSION = (() => {
+  try {
+    return new URL(import.meta.url).searchParams.get('v') || 'dev';
+  } catch (_) {
+    return 'dev';
+  }
+})();
+
 async function loadData() {
   const isScenarioPage = document.body.dataset.page === 'scenario';
   const dataPath = isScenarioPage ? '../site-data.json' : './site-data.json';
-  const res = await fetch(dataPath);
+  const sep = dataPath.includes('?') ? '&' : '?';
+  const res = await fetch(`${dataPath}${sep}v=${encodeURIComponent(BUILD_VERSION)}`, { cache: 'no-store' });
   if (!res.ok) throw new Error(`Failed to load site-data.json: ${res.status}`);
   return res.json();
 }
