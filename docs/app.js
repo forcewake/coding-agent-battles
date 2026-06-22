@@ -35,6 +35,31 @@ const AGENT_COLORS = {
 };
 const agentColor = (id) => AGENT_COLORS[id] || '#8a9ab8';
 
+function knownNumber(v) {
+  return typeof v === 'number' && Number.isFinite(v);
+}
+
+function renderEmptyState(containerId, title, body, meta = '') {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = `
+    <div class="viz-empty" role="note">
+      <div class="viz-empty-title">${safe(title)}</div>
+      <div class="viz-empty-body">${safe(body)}</div>
+      ${meta ? `<div class="viz-empty-meta">${safe(meta)}</div>` : ''}
+    </div>
+  `;
+}
+
+function bestProcessLabel(agents, fallbackId) {
+  const known = (agents || []).filter(a => knownNumber(a.process));
+  if (!known.length) return agentDisplay(fallbackId);
+  const max = Math.max(...known.map(a => a.process));
+  const tied = known.filter(a => a.process === max);
+  if (tied.length > 1) return `${tied.length} tied (${max})`;
+  return safe(tied[0].short, agentDisplay(tied[0].id));
+}
+
 /* ── Data loader ────────────────────────────────────────────────────────── */
 async function loadData() {
   const isScenarioPage = document.body.dataset.page === 'scenario';
@@ -203,6 +228,17 @@ function drawD3Scatter(svgId, points, xKey, yKey, opts = {}) {
   // Clear previous
   container.innerHTML = '';
 
+  const known = points.filter(p => knownNumber(p[xKey]) && knownNumber(p[yKey]));
+  if (!known.length) {
+    renderEmptyState(
+      svgId,
+      opts.emptyTitle || 'Telemetry unavailable',
+      opts.emptyBody || `No reliable ${opts.yLabel || yKey} data is available for this scenario yet.`,
+      opts.emptyMeta || 'The verified pass/fail and wall-clock evidence is still present in the cards and table.'
+    );
+    return;
+  }
+
   const W = container.clientWidth || 680;
   const defaultHeight = svgId === 'frontierChart' ? 260 : 340;
   const H = defaultHeight;
@@ -219,7 +255,6 @@ function drawD3Scatter(svgId, points, xKey, yKey, opts = {}) {
     .attr('viewBox', `0 0 ${W} ${H}`)
     .style('overflow', 'visible');
 
-  const known = points.filter(p => p[xKey] != null && p[yKey] != null);
   const maxX = known.length ? d3.max(known, d => d[xKey]) * 1.15 : 1;
   const maxY = known.length ? d3.max(known, d => d[yKey]) * 1.15 : 1;
   const minY = known.length ? d3.min(known, d => d[yKey]) * 0.9 : 0;
@@ -274,7 +309,7 @@ function drawD3Scatter(svgId, points, xKey, yKey, opts = {}) {
     .text(opts.yLabel || yKey);
 
   // Missing data points area
-  const missingPoints = points.filter(p => p[xKey] == null || p[yKey] == null);
+  const missingPoints = points.filter(p => !knownNumber(p[xKey]) || !knownNumber(p[yKey]));
   
   // Plot dots
   const allPoints = svg.selectAll('.dot')
@@ -283,31 +318,32 @@ function drawD3Scatter(svgId, points, xKey, yKey, opts = {}) {
     .append('g')
     .attr('class', 'dot')
     .attr('transform', d => {
-      const missing = d[xKey] == null || d[yKey] == null;
+      const missing = !knownNumber(d[xKey]) || !knownNumber(d[yKey]);
+      const missIndex = missingPoints.findIndex(p => p.id === d.id);
       const cx = missing ? pad.left + innerW + 15 : xScale(d[xKey]);
-      const cy = missing ? pad.top + innerH - 20 : yScale(d[yKey]);
+      const cy = missing ? pad.top + innerH - 20 - Math.max(0, missIndex) * 24 : yScale(d[yKey]);
       return `translate(${cx},${cy})`;
     });
 
   allPoints.append('circle')
-    .attr('r', d => (d[xKey] == null || d[yKey] == null) ? 7 : 10)
+    .attr('r', d => (!knownNumber(d[xKey]) || !knownNumber(d[yKey])) ? 7 : 10)
     .attr('fill', d => agentColor(d.id))
-    .attr('opacity', d => (d[xKey] == null || d[yKey] == null) ? 0.45 : 1)
+    .attr('opacity', d => (!knownNumber(d[xKey]) || !knownNumber(d[yKey])) ? 0.45 : 1)
     .attr('stroke', 'rgba(255,255,255,.25)')
     .attr('stroke-width', 1.5)
     // subtle hover effect
     .on('mouseover', function() { d3.select(this).attr('r', 12); })
-    .on('mouseout', function(e, d) { d3.select(this).attr('r', (d[xKey] == null || d[yKey] == null) ? 7 : 10); });
+    .on('mouseout', function(e, d) { d3.select(this).attr('r', (!knownNumber(d[xKey]) || !knownNumber(d[yKey])) ? 7 : 10); });
 
   allPoints.append('text')
-    .attr('x', d => (d[xKey] == null || d[yKey] == null) ? 12 : 15)
+    .attr('x', d => (!knownNumber(d[xKey]) || !knownNumber(d[yKey])) ? 12 : 15)
     .attr('y', 4)
     .attr('fill', '#e8edf8')
     .attr('font-size', '12px')
     .attr('font-weight', '700')
     .attr('font-family', 'var(--font-sans)')
     .text(d => {
-      const missing = d[xKey] == null || d[yKey] == null;
+      const missing = !knownNumber(d[xKey]) || !knownNumber(d[yKey]);
       return missing && opts.missingXLabel ? `${d.short} (${opts.missingXLabel})` : d.short;
     });
 }
@@ -355,9 +391,9 @@ function renderScenarioDetail(data, scenarioId) {
 
   // Winners
   const winnersHtml = [
-    { label: 'Fastest',      value: agentDisplay(s.fastest)     },
-    { label: 'Cheapest',     value: agentDisplay(s.cheapest)    },
-    { label: 'Best process', value: agentDisplay(s.processBest) },
+    { label: 'Fastest',      value: agentDisplay(s.fastest) },
+    { label: 'Cheapest',     value: s.cheapest ? agentDisplay(s.cheapest) : 'n/a — no cost telemetry' },
+    { label: 'Best process', value: bestProcessLabel(agents, s.processBest) },
   ].map(w => `
     <div class="winner-badge">
       <span class="winner-badge-label">${w.label}</span>
@@ -428,12 +464,31 @@ function renderScenarioDetail(data, scenarioId) {
   const maxWall  = Math.max(...agents.map(a => a.wall  || 0), 1);
   const maxCost  = Math.max(...agents.filter(a => a.cost != null).map(a => a.cost), 1);
 
-  renderBarList('timeBars',    agents, a => ({ label: safe(a.short, a.id), val: a.wall,    max: maxWall,  suffix: 's',  colorClass: 'bar-fill-time'    }));
+  renderBarList('timeBars', agents,
+    a => ({ label: safe(a.short, a.id), val: a.wall, max: maxWall, suffix: 's', colorClass: 'bar-fill-time' })
+  );
+
+  const knownProcess = agents.filter(a => knownNumber(a.process));
+  const processValues = [...new Set(knownProcess.map(a => a.process))];
   renderBarList('qualityBars', [...agents].sort((a,b) => (b.process||0)-(a.process||0)),
-                               a => ({ label: safe(a.short, a.id), val: a.process, max: 100,      suffix: '',   colorClass: 'bar-fill-quality' }));
+    a => ({ label: safe(a.short, a.id), val: a.process, max: 100, suffix: '', colorClass: 'bar-fill-quality' }),
+    {
+      emptyTitle: 'Process scores unavailable',
+      emptyBody: 'No process rubric values were recorded for this scenario.',
+      note: processValues.length === 1
+        ? `All ${knownProcess.length} agents share the same process score (${processValues[0]}). Compare wall-clock and evidence links instead.`
+        : ''
+    }
+  );
+
   renderBarList('costBars',
-    agents.filter(a => a.cost != null).sort((a,b) => a.cost - b.cost),
-    a => ({ label: safe(a.short, a.id), val: a.cost,    max: maxCost,  suffix: '',   colorClass: 'bar-fill-cost-d', format: moneyFull })
+    agents.filter(a => knownNumber(a.cost)).sort((a,b) => a.cost - b.cost),
+    a => ({ label: safe(a.short, a.id), val: a.cost, max: maxCost, suffix: '', colorClass: 'bar-fill-cost-d', format: moneyFull }),
+    {
+      emptyTitle: 'Cost telemetry not attributed yet',
+      emptyBody: 'No reliable token/cost attribution exists for this scenario. Verified pass/fail and wall-clock evidence are still shown above.',
+      emptyMeta: 'Next step: ccusage-first telemetry extraction, then normalized public cost calculation.'
+    }
   );
 
   // Scatter (wall vs tokens)
@@ -444,15 +499,27 @@ function renderScenarioDetail(data, scenarioId) {
     xLabel: 'Wall-clock (s)',
     yLabel: 'Total Tokens',
     missingXLabel: 'tokens n/a',
+    emptyTitle: 'Token telemetry not attributed yet',
+    emptyBody: 'This scenario has verified wall-clock and pass/fail evidence, but no reliable per-agent token totals yet.',
+    emptyMeta: 'The fake 0–1 axis has been removed; this panel will render a scatter plot once token data exists.',
   });
 
   // Score table
   renderScoreTable(agents, s.links || {});
 }
 
-function renderBarList(containerId, agents, mapper) {
+function renderBarList(containerId, agents, mapper, opts = {}) {
   const el = document.getElementById(containerId);
   if (!el) return;
+  if (!agents.length) {
+    renderEmptyState(
+      containerId,
+      opts.emptyTitle || 'No datapoints',
+      opts.emptyBody || 'There are no reliable datapoints for this panel yet.',
+      opts.emptyMeta || ''
+    );
+    return;
+  }
   el.innerHTML = agents.map(a => {
     const m = mapper(a);
     const pct = (m.val == null || !m.max) ? 0 : Math.max(3, (m.val / m.max) * 100);
@@ -472,7 +539,7 @@ function renderBarList(containerId, agents, mapper) {
         <span class="bar-row-value">${display}</span>
       </div>
     `;
-  }).join('');
+  }).join('') + (opts.note ? `<div class="bar-note">${safe(opts.note)}</div>` : '');
 }
 
 function renderScoreTable(agents, links) {
@@ -612,6 +679,9 @@ function initResizeHandler(data, page) {
             xLabel: 'Wall-clock (s)',
             yLabel: 'Total Tokens',
             missingXLabel: 'tokens n/a',
+            emptyTitle: 'Token telemetry not attributed yet',
+            emptyBody: 'This scenario has verified wall-clock and pass/fail evidence, but no reliable per-agent token totals yet.',
+            emptyMeta: 'The fake 0–1 axis has been removed; this panel will render a scatter plot once token data exists.',
           });
         }
       }
