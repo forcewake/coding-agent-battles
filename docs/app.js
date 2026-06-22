@@ -438,6 +438,55 @@ function drawLatencyProcessChart(data) {
   });
 }
 
+function renderScenarioNavigator(data, currentScenario) {
+  const scenarios = data.scenarios || [];
+  const idx = scenarios.findIndex(s => s.slug === currentScenario.slug || s.id === currentScenario.id);
+  const prev = scenarios[(idx - 1 + scenarios.length) % scenarios.length];
+  const next = scenarios[(idx + 1) % scenarios.length];
+  const rel = (s) => `../scenarios/${s.slug}.html`;
+  const status = (s) => `${safe(s.passCount, 0)}/${safe(s.agentCount, 0)} pass`;
+  const chips = scenarios.map((s, i) => `
+    <a class="scenario-rail-chip ${s.id === currentScenario.id ? 'is-active' : ''}" href="${rel(s)}" aria-label="Open ${s.id}: ${escapeHtml(s.name)}">
+      <span class="scenario-rail-index">${String(i + 1).padStart(2, '0')}</span>
+      <span class="scenario-rail-id">${s.id.replace('BB-', 'BB')}</span>
+    </a>
+  `).join('');
+  const cards = scenarios.map(s => `
+    <a class="scenario-map-card ${s.id === currentScenario.id ? 'is-active' : ''}" href="${rel(s)}">
+      <div class="scenario-map-top">
+        <span>${s.id}</span>
+        <span>${safe(s.difficulty)}</span>
+      </div>
+      <strong>${safe(s.name)}</strong>
+      <p>${safe(s.type)} · ${status(s)}</p>
+    </a>
+  `).join('');
+
+  return `
+    <nav class="scenario-switcher" aria-label="Scenario navigation">
+      <a class="scenario-step" href="${rel(prev)}" aria-label="Previous scenario">
+        <span class="scenario-step-kicker">← Previous</span>
+        <strong>${prev.id}</strong>
+      </a>
+      <div class="scenario-rail-wrap">
+        <div class="scenario-rail-head">
+          <span>Scenario rail</span>
+          <span>${idx + 1} / ${scenarios.length}</span>
+        </div>
+        <div class="scenario-rail" role="list">${chips}</div>
+      </div>
+      <a class="scenario-step scenario-step-next" href="${rel(next)}" aria-label="Next scenario">
+        <span class="scenario-step-kicker">Next →</span>
+        <strong>${next.id}</strong>
+      </a>
+      <details class="scenario-map">
+        <summary>Browse all scenarios</summary>
+        <div class="scenario-map-grid">${cards}</div>
+      </details>
+    </nav>
+  `;
+}
+
 /* ── Scenario Detail (For scenario pages) ──────────────────────────────── */
 function renderScenarioDetail(data, scenarioId) {
   const s = (data.scenarios || []).find(x => x.slug === scenarioId || x.id.toLowerCase() === scenarioId);
@@ -499,6 +548,7 @@ function renderScenarioDetail(data, scenarioId) {
   }).join('');
 
   const links = s.links || {};
+  const scenarioNavHtml = renderScenarioNavigator(data, s);
   const artifactButtons = [
     links.results ? { kind: 'results', label: 'Results', href: `../${links.results}` } : null,
     links.metrics ? { kind: 'metrics', label: 'Metrics', href: `../${links.metrics}` } : null,
@@ -509,6 +559,7 @@ function renderScenarioDetail(data, scenarioId) {
   `).join('');
 
   setHTML('scenario-panel', `
+    ${scenarioNavHtml}
     <div class="sp-header">
       <div class="sp-meta">
         <div class="sp-id">${s.id} · ${safe(s.type)} · ${safe(s.difficulty)}</div>
