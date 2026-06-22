@@ -1,13 +1,38 @@
 {
   "generated": "2026-06-22",
   "runId": "2026-06-22-bb-001-broken-cli-argument-telemetry-rerun",
-  "commit": "0be3b72f3e5ab63976ae5b7d8558b4ffadb7cbc0",
+  "commit": "857c8c924c19667a57aed2bb7e7dc6171e95587e",
   "repo": "forcewake/coding-agent-battles",
   "task": {
     "id": "BB-001",
     "name": "Broken CLI argument",
     "acceptedChangeCount": 1,
     "baselineExitCode": 1
+  },
+  "pricingBasis": {
+    "normalized_public_estimate_formula": "(input_tokens * input_price + cache_read_tokens * cached_input_price + (output_tokens + reasoning_tokens) * output_price) / 1,000,000",
+    "models": {
+      "glm-5.2": {
+        "source": "Z.AI official pricing",
+        "url": "https://docs.z.ai/guides/overview/pricing",
+        "input_per_mtok": 1.4,
+        "cached_input_per_mtok": 0.26,
+        "output_per_mtok": 4.4,
+        "notes": "GLM-5.2 prices per 1M tokens: input $1.40, cached input $0.26, output $4.40. Reasoning tokens, when separately reported, are treated as output tokens for normalized estimates."
+      },
+      "gpt-5.5": {
+        "source": "OpenAI official API pricing, standard short-context",
+        "url": "https://developers.openai.com/api/docs/pricing",
+        "input_per_mtok": 5.0,
+        "cached_input_per_mtok": 0.5,
+        "output_per_mtok": 30.0,
+        "notes": "gpt-5.5 standard short-context prices per 1M tokens: input $5.00, cached input $0.50, output $30.00. Reasoning tokens are treated as output tokens."
+      }
+    },
+    "limitations": [
+      "Estimates are not invoices; subscriptions, routing, discounts, regional uplift, long-context tiers, and provider billing may differ.",
+      "agy remains unavailable because no reliable token counts were exported."
+    ]
   },
   "agents": [
     {
@@ -23,8 +48,8 @@
       "output": 917,
       "reasoning": 171,
       "cacheRead": 59520,
-      "cost": 0.0,
-      "costLabel": "$0 vendor-reported (plan-attributed)",
+      "cost": 0.025004,
+      "costLabel": "~$0.0250 public est. ($0 plan log)",
       "patch": 100,
       "process": 88,
       "messageCount": 7,
@@ -47,8 +72,8 @@
       "output": 851,
       "reasoning": null,
       "cacheRead": 119232,
-      "cost": 0.110516,
-      "costLabel": "$0.110516 vendor-reported",
+      "cost": 0.04304,
+      "costLabel": "~$0.0430 public est. / $0.1105 reported",
       "patch": 100,
       "process": 74,
       "messageCount": 7,
@@ -71,8 +96,8 @@
       "output": 820,
       "reasoning": 137,
       "cacheRead": 105152,
-      "cost": 0.0,
-      "costLabel": "$0 vendor-reported (plan-attributed)",
+      "cost": 0.063052,
+      "costLabel": "~$0.0631 public est. ($0 plan log)",
       "patch": 100,
       "process": 78,
       "messageCount": 6,
@@ -95,8 +120,8 @@
       "output": 1058,
       "reasoning": 0,
       "cacheRead": 20736,
-      "cost": 0.01580896,
-      "costLabel": "~$0.0158 Tokscale estimate",
+      "cost": 0.015809,
+      "costLabel": "~$0.0158 public est.",
       "patch": 100,
       "process": 96,
       "messageCount": 8,
@@ -119,8 +144,8 @@
       "output": 4025,
       "reasoning": 1404,
       "cacheRead": 272512,
-      "cost": 0.467001,
-      "costLabel": "~$0.467 ccusage estimate",
+      "cost": 0.509121,
+      "costLabel": "~$0.5091 public est. ($0.4670 ccusage)",
       "patch": 100,
       "process": 87,
       "messageCount": 15,
@@ -144,7 +169,7 @@
       "reasoning": null,
       "cacheRead": null,
       "cost": null,
-      "costLabel": "unavailable",
+      "costLabel": "unavailable \u2014 no token export",
       "patch": 100,
       "process": 80,
       "messageCount": 13,

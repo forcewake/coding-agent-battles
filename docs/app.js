@@ -10,7 +10,7 @@ function bar(container, data, key, max, suffix=''){
   container.innerHTML = data.map(a => {
     const value = a[key];
     const pct = value == null ? 0 : Math.max(3, (value/max)*100);
-    const label = key === 'tokens' ? tokenLabel(value) : `${value}${suffix}`;
+    const label = key === 'tokens' ? tokenLabel(value) : key === 'cost' ? money(value) : `${value}${suffix}`;
     return `<div class="bar-row"><span>${a.short}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><div class="bar-value">${label}</div></div>`;
   }).join('');
 }
@@ -65,6 +65,8 @@ loadData().then(data => {
   const agents = data.agents;
   bar(document.getElementById('timeBars'), agents, 'wall', Math.max(...agents.map(a=>a.wall)), 's');
   bar(document.getElementById('qualityBars'), [...agents].sort((a,b)=>b.process-a.process), 'process', 100, '');
+  const costed = agents.filter(a => a.cost != null).sort((a,b)=>a.cost-b.cost);
+  bar(document.getElementById('costBars'), costed, 'cost', Math.max(...costed.map(a=>a.cost)), '');
   renderTable(agents);
   renderTelemetry(agents);
   drawScatter(agents);
