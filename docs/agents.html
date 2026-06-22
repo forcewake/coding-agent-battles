@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Profiles — Coding Agent Battles</title>
+  <meta name="description" content="Detailed comparisons of agent performance across all scenarios." />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./vendor/d3.v7.min.js"></script>
+</head>
+<body data-page="agents">
+
+  <!-- ══ NAV ══════════════════════════════════════════════════════════════ -->
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="brand" href="./" aria-label="Coding Agent Battles home">
+        <span class="brand-badge">CAB</span>
+        <span class="brand-name">Coding Agent Battles</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="./">Home</a></li>
+        <li><a href="./agents.html" class="active">Agents</a></li>
+        <li><a href="./#method">Method</a></li>
+        <li><a href="https://github.com/forcewake/coding-agent-battles" class="nav-gh" target="_blank" rel="noopener">GitHub ↗</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ══ AGENTS OVERVIEW ═════════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <div>
+          <p class="label-overline">Agent profiles</p>
+          <h2 class="section-title">Pass rate is tied. Operating profile is not.</h2>
+        </div>
+        <p class="section-desc">
+          Aggregate across all scenarios. Speed, process discipline, token burn, and cost coverage differentiate what a 100% pass rate conceals.
+        </p>
+      </div>
+      
+      <div id="agent-table" class="agent-table-wrap">
+        <!-- filled by JS -->
+      </div>
+    </section>
+
+    <!-- ══ COMPARATIVE CHARTS ═════════════════════════════════════════════ -->
+    <section class="content-section">
+      <div class="section-header">
+        <div>
+          <p class="label-overline">Comparative View</p>
+          <h2 class="section-title">Latency vs. Process Score</h2>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div id="latencyProcessChart" role="img" aria-label="Scatter plot of average wall clock vs average process score"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>Built from committed benchmark artifacts.</span>
+    <a href="https://github.com/forcewake/coding-agent-battles" target="_blank" rel="noopener">forcewake/coding-agent-battles ↗</a>
+  </footer>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>

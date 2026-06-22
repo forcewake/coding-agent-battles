@@ -4,10 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Coding Agent Battles — Benchmark Briefing</title>
-  <meta name="description" content="Evidence-first coding-agent benchmark results. Six agents, two scenarios, all claims traceable to committed logs." />
+  <meta name="description" content="Evidence-first coding-agent benchmark results." />
   <link rel="stylesheet" href="./styles.css" />
+  <script src="./vendor/d3.v7.min.js"></script>
 </head>
-<body>
+<body data-page="home">
 
   <!-- ══ NAV ══════════════════════════════════════════════════════════════ -->
   <header class="site-header">
@@ -17,9 +18,8 @@
         <span class="brand-name">Coding Agent Battles</span>
       </a>
       <ul class="nav-links" role="list">
-        <li><a href="#decision">Decision</a></li>
-        <li><a href="#scenarios">Scenarios</a></li>
-        <li><a href="#agents">Agents</a></li>
+        <li><a href="./" class="active">Home</a></li>
+        <li><a href="./agents.html">Agents</a></li>
         <li><a href="#method">Method</a></li>
         <li><a href="https://github.com/forcewake/coding-agent-battles" class="nav-gh" target="_blank" rel="noopener">GitHub ↗</a></li>
       </ul>
@@ -27,13 +27,6 @@
         <span></span><span></span><span></span>
       </button>
     </nav>
-    <div id="mobile-nav" class="mobile-nav" hidden>
-      <a href="#decision">Decision</a>
-      <a href="#scenarios">Scenarios</a>
-      <a href="#agents">Agents</a>
-      <a href="#method">Method</a>
-      <a href="https://github.com/forcewake/coding-agent-battles" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
   </header>
 
   <!-- ══ ABOVE THE FOLD ════════════════════════════════════════════════════ -->
@@ -47,7 +40,7 @@
       </p>
       <div class="atf-ctas">
         <a class="btn-primary" href="#scenarios">Explore scenarios</a>
-        <a class="btn-ghost" href="https://github.com/forcewake/coding-agent-battles/tree/main/runs" target="_blank" rel="noopener">Raw runs ↗</a>
+        <a class="btn-ghost" href="./agents.html">Compare agents</a>
       </div>
     </div>
     <div class="atf-right">
@@ -90,7 +83,7 @@
 
   <main>
 
-    <!-- ══ SCENARIOS ═══════════════════════════════════════════════════════ -->
+    <!-- ══ SCENARIOS OVERVIEW ══════════════════════════════════════════════ -->
     <section class="content-section" id="scenarios">
       <div class="section-header">
         <div>
@@ -98,39 +91,17 @@
           <h2 class="section-title">Agent × Scenario results</h2>
         </div>
         <p class="section-desc">
-          All six agents attempted every scenario in isolated workspaces. Pass/fail is binary, verified by Hermes. Cost is normalized public-price estimate.
+          All six agents attempted every scenario in isolated workspaces. Pass/fail is binary, verified by Hermes.
         </p>
       </div>
 
-      <!-- Scenario tabs -->
-      <div class="tab-bar" role="tablist" aria-label="Scenario selector" id="scenario-tabs">
-        <!-- filled by JS -->
-      </div>
-
-      <!-- Scenario detail panel (swapped by JS) -->
-      <div id="scenario-panel" class="scenario-panel">
-        <!-- filled by JS -->
-      </div>
-    </section>
-
-    <!-- ══ AGENTS ═══════════════════════════════════════════════════════════ -->
-    <section class="content-section" id="agents">
-      <div class="section-header">
-        <div>
-          <p class="label-overline">Agent profiles</p>
-          <h2 class="section-title">Pass rate is tied. Operating profile is not.</h2>
-        </div>
-        <p class="section-desc">
-          Aggregate across all scenarios. Speed, process discipline, token burn, and cost coverage differentiate what a 100% pass rate conceals.
-        </p>
-      </div>
-      <div id="agent-table" class="agent-table-wrap">
+      <div id="scenario-cards" class="scenario-cards-grid">
         <!-- filled by JS -->
       </div>
     </section>
 
     <!-- ══ PARETO ════════════════════════════════════════════════════════════ -->
-    <section class="content-section">
+    <section class="content-section" id="decision-lens">
       <div class="section-header">
         <div>
           <p class="label-overline">Decision lens</p>
@@ -141,60 +112,8 @@
         </p>
       </div>
       <div class="chart-card">
-        <svg id="paretoChart" role="img" aria-label="Scatter plot of average cost versus average process score"></svg>
+        <div id="paretoChart" role="img" aria-label="Scatter plot of average cost versus average process score"></div>
       </div>
-    </section>
-
-    <!-- ══ LATEST DETAIL ═════════════════════════════════════════════════════ -->
-    <section class="content-section" id="latest-detail">
-      <div class="section-header">
-        <div>
-          <p class="label-overline">Latest scenario detail</p>
-          <h2 class="section-title" id="detail-title">—</h2>
-        </div>
-        <p class="section-desc" id="detail-summary">—</p>
-      </div>
-      <div class="detail-grid">
-        <div class="detail-chart-card wide">
-          <p class="chart-label">Latency vs token burn</p>
-          <svg id="frontierChart" role="img" aria-label="Scatter plot of wall-clock seconds versus token count"></svg>
-        </div>
-        <div class="detail-bars-group">
-          <div class="detail-chart-card">
-            <p class="chart-label">Wall-clock <span class="chart-unit">seconds</span></p>
-            <div id="timeBars" class="bar-list"></div>
-          </div>
-          <div class="detail-chart-card">
-            <p class="chart-label">Process quality <span class="chart-unit">0–100 rubric</span></p>
-            <div id="qualityBars" class="bar-list"></div>
-          </div>
-          <div class="detail-chart-card">
-            <p class="chart-label">Normalized public cost <span class="chart-unit">USD estimate</span></p>
-            <div id="costBars" class="bar-list"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Full results table -->
-      <details class="evidence-details" id="score-table-details">
-        <summary class="evidence-summary">Full metrics table</summary>
-        <div class="table-wrap">
-          <table id="scoreTable" aria-label="Full metrics for latest scenario">
-            <thead>
-              <tr>
-                <th>Agent</th>
-                <th>Wall (s)</th>
-                <th>Tokens</th>
-                <th>Cost</th>
-                <th>Patch %</th>
-                <th>Process</th>
-                <th>Evidence</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </details>
     </section>
 
     <!-- ══ METHOD ════════════════════════════════════════════════════════════ -->
@@ -261,6 +180,6 @@
     <a href="https://github.com/forcewake/coding-agent-battles" target="_blank" rel="noopener">forcewake/coding-agent-battles ↗</a>
   </footer>
 
-  <script src="./app.js" defer></script>
+  <script src="./app.js" type="module"></script>
 </body>
 </html>

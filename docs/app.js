@@ -25,11 +25,34 @@ const AGENT_DISPLAY = {
 };
 const agentDisplay = (id) => AGENT_DISPLAY[id] || id;
 
+const AGENT_COLORS = {
+  'pi':         '#34d17a',
+  'opencode':   '#4f8ef7',
+  'claude-code':'#a78bfa',
+  'mimo':       '#f5a623',
+  'codex-cli':  '#f87171',
+  'agy':        '#22d3ee',
+};
+const agentColor = (id) => AGENT_COLORS[id] || '#8a9ab8';
+
 /* ── Data loader ────────────────────────────────────────────────────────── */
 async function loadData() {
-  const res = await fetch('./site-data.json');
+  const isScenarioPage = document.body.dataset.page === 'scenario';
+  const dataPath = isScenarioPage ? '../site-data.json' : './site-data.json';
+  const res = await fetch(dataPath);
   if (!res.ok) throw new Error(`Failed to load site-data.json: ${res.status}`);
   return res.json();
+}
+
+/* ── DOM helpers ────────────────────────────────────────────────────────── */
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+function setHTML(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
 }
 
 /* ── KPI Strip ──────────────────────────────────────────────────────────── */
@@ -51,7 +74,6 @@ function renderVerdict(data) {
     `${pct(k.costCoverage)} cost coverage from reliable token telemetry`
   );
 
-  // compute winners from profiles
   const profiles = data.agentProfiles || [];
   const fastest  = [...profiles].sort((a, b) => (a.avgWall || 9e9) - (b.avgWall || 9e9))[0];
   const cheapest = [...profiles].filter(a => a.avgCost != null).sort((a, b) => a.avgCost - b.avgCost)[0];
@@ -72,119 +94,26 @@ function renderVerdict(data) {
   `).join(''));
 }
 
-/* ── Scenario tabs ─────────────────────────────────────────────────────── */
-let currentScenarioIdx = 0;
-let scenariosData = [];
-
-function renderScenarioTabs(data) {
-  scenariosData = data.scenarios || [];
-  const tabBar = document.getElementById('scenario-tabs');
-  if (!tabBar) return;
-
-  tabBar.innerHTML = scenariosData.map((s, i) => `
-    <button
-      class="tab-btn"
-      role="tab"
-      id="tab-${s.id}"
-      aria-selected="${i === 0 ? 'true' : 'false'}"
-      aria-controls="scenario-panel"
-      data-idx="${i}"
-    >
-      ${s.id}: ${s.name}
-    </button>
-  `).join('');
-
-  tabBar.addEventListener('click', (e) => {
-    const btn = e.target.closest('.tab-btn');
-    if (!btn) return;
-    const idx = parseInt(btn.dataset.idx, 10);
-    activateScenarioTab(idx);
-  });
-
-  activateScenarioTab(0);
-}
-
-function activateScenarioTab(idx) {
-  currentScenarioIdx = idx;
-  // update aria-selected
-  document.querySelectorAll('#scenario-tabs .tab-btn').forEach((btn, i) => {
-    btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
-  });
-  renderScenarioPanel(scenariosData[idx]);
-}
-
-function renderScenarioPanel(s) {
-  if (!s) return;
-  const agents = s.agents || [];
-
-  const winnersHtml = [
-    { label: 'Fastest',      value: agentDisplay(s.fastest)     },
-    { label: 'Cheapest',     value: agentDisplay(s.cheapest)    },
-    { label: 'Best process', value: agentDisplay(s.processBest) },
-  ].map(w => `
-    <div class="winner-badge">
-      <span class="winner-badge-label">${w.label}</span>
-      <span class="winner-badge-value">${safe(w.value)}</span>
-    </div>
-  `).join('');
-
-  const agentCardsHtml = agents.map(a => {
-    const pills = [
-      a.verdict ? `<span class="pill ${a.verdict === 'PASS' ? 'pill-pass' : 'pill-fail'}">${a.verdict}</span>` : '',
-      a.red   ? `<span class="pill pill-red">red✓</span>` : '',
-      a.smoke ? `<span class="pill pill-smoke">smoke✓</span>` : '',
-    ].filter(Boolean).join('');
-
+/* ── Scenario Cards (Home Page) ────────────────────────────────────────── */
+function renderScenarioCards(data) {
+  const scenarios = data.scenarios || [];
+  const html = scenarios.map(s => {
     return `
-      <div class="sp-agent-card">
-        <div class="spa-name">${safe(a.short, a.id)}</div>
-        <div class="spa-model">${safe(a.model)}</div>
-        <div class="spa-metrics">
-          <div class="spa-metric">
-            <span class="spa-metric-label">Wall</span>
-            <span class="spa-metric-value">${sec(a.wall)}</span>
+      <a href="./scenarios/${s.slug}.html" class="scenario-card-link">
+        <div class="scenario-card">
+          <div class="sp-meta">
+            <div class="sp-id">${s.id} · ${safe(s.type)}</div>
+            <div class="sp-name">${safe(s.name)}</div>
+            <div class="sp-summary">${safe(s.summary)}</div>
           </div>
-          <div class="spa-metric">
-            <span class="spa-metric-label">Process</span>
-            <span class="spa-metric-value">${safe(a.process, 'n/a')}</span>
-          </div>
-          <div class="spa-metric">
-            <span class="spa-metric-label">Cost</span>
-            <span class="spa-metric-value">${moneyFull(a.cost)}</span>
-          </div>
-          <div class="spa-metric">
-            <span class="spa-metric-label">Tokens</span>
-            <span class="spa-metric-value">${toks(a.tokens)}</span>
+          <div class="scenario-card-footer">
+            <span>View scenario details →</span>
           </div>
         </div>
-        <div class="spa-pills">${pills}</div>
-      </div>
+      </a>
     `;
   }).join('');
-
-  const links = s.links || {};
-  const linksHtml = [
-    links.results ? `<a class="sp-link" href="../${links.results}">Results →</a>` : '',
-    links.metrics ? `<a class="sp-link" href="../${links.metrics}">Metrics →</a>` : '',
-    links.json    ? `<a class="sp-link" href="../${links.json}">JSON →</a>` : '',
-  ].filter(Boolean).join('');
-
-  setHTML('scenario-panel', `
-    <div class="sp-header">
-      <div class="sp-meta">
-        <div class="sp-id">${s.id} · ${safe(s.type)} · ${safe(s.difficulty)}</div>
-        <div class="sp-name">${safe(s.name)}</div>
-        <div class="sp-summary">${safe(s.summary)}</div>
-      </div>
-      <div class="sp-winners">${winnersHtml}</div>
-    </div>
-    <div class="sp-agents">${agentCardsHtml}</div>
-    <div class="badge-legend" aria-label="Scenario badge legend">
-      <span><b class="pill pill-red">red✓</b> agent captured failing baseline</span>
-      <span><b class="pill pill-smoke">smoke✓</b> agent ran user-visible smoke</span>
-    </div>
-    <div class="sp-links">${linksHtml}</div>
-  `);
+  setHTML('scenario-cards', html);
 }
 
 /* ── Agent profiles table ──────────────────────────────────────────────── */
@@ -266,7 +195,123 @@ function renderAgentTable(data) {
   `);
 }
 
-/* ── Pareto scatter chart ───────────────────────────────────────────────── */
+/* ── D3 Scatter charts ──────────────────────────────────────────────────── */
+function drawD3Scatter(svgId, points, xKey, yKey, opts = {}) {
+  const container = document.getElementById(svgId);
+  if (!container || !window.d3) return;
+  
+  // Clear previous
+  container.innerHTML = '';
+
+  const W = container.clientWidth || 680;
+  const defaultHeight = svgId === 'frontierChart' ? 260 : 340;
+  const H = defaultHeight;
+  // Keep generous right gutter: D3 point labels are part of the story,
+  // and unavailable-cost agents are deliberately shown as an explicit
+  // "n/a" lane rather than clipped outside the plot.
+  const pad = { top: 20, right: 145, bottom: 50, left: 60 };
+  const innerW = W - pad.left - pad.right;
+  const innerH = H - pad.top - pad.bottom;
+
+  const svg = d3.select(container).append('svg')
+    .attr('width', '100%')
+    .attr('height', H)
+    .attr('viewBox', `0 0 ${W} ${H}`)
+    .style('overflow', 'visible');
+
+  const known = points.filter(p => p[xKey] != null && p[yKey] != null);
+  const maxX = known.length ? d3.max(known, d => d[xKey]) * 1.15 : 1;
+  const maxY = known.length ? d3.max(known, d => d[yKey]) * 1.15 : 1;
+  const minY = known.length ? d3.min(known, d => d[yKey]) * 0.9 : 0;
+
+  const xScale = d3.scaleLinear()
+    .domain([0, maxX])
+    .range([pad.left, pad.left + innerW]);
+
+  const yScale = d3.scaleLinear()
+    .domain([minY, maxY])
+    .range([pad.top + innerH, pad.top]);
+
+  const axisColor = '#2a3a58';
+  const textColor = '#5a6a88';
+
+  // Axes
+  const xAxis = d3.axisBottom(xScale).ticks(5).tickSizeOuter(0);
+  const yAxis = d3.axisLeft(yScale).ticks(5).tickSizeOuter(0);
+
+  svg.append('g')
+    .attr('transform', `translate(0,${pad.top + innerH})`)
+    .call(xAxis)
+    .call(g => g.select('.domain').attr('stroke', axisColor))
+    .call(g => g.selectAll('line').attr('stroke', axisColor))
+    .call(g => g.selectAll('text').attr('fill', textColor).attr('font-family', 'var(--font-sans)'));
+
+  svg.append('g')
+    .attr('transform', `translate(${pad.left},0)`)
+    .call(yAxis)
+    .call(g => g.select('.domain').attr('stroke', axisColor))
+    .call(g => g.selectAll('line').attr('stroke', axisColor))
+    .call(g => g.selectAll('text').attr('fill', textColor).attr('font-family', 'var(--font-sans)'));
+
+  // Labels
+  svg.append('text')
+    .attr('x', pad.left + innerW / 2)
+    .attr('y', H - 10)
+    .attr('fill', textColor)
+    .attr('font-size', '12px')
+    .attr('text-anchor', 'middle')
+    .attr('font-family', 'var(--font-sans)')
+    .text(opts.xLabel || xKey);
+
+  svg.append('text')
+    .attr('transform', `rotate(-90)`)
+    .attr('x', -(pad.top + innerH / 2))
+    .attr('y', 15)
+    .attr('fill', textColor)
+    .attr('font-size', '12px')
+    .attr('text-anchor', 'middle')
+    .attr('font-family', 'var(--font-sans)')
+    .text(opts.yLabel || yKey);
+
+  // Missing data points area
+  const missingPoints = points.filter(p => p[xKey] == null || p[yKey] == null);
+  
+  // Plot dots
+  const allPoints = svg.selectAll('.dot')
+    .data(points)
+    .enter()
+    .append('g')
+    .attr('class', 'dot')
+    .attr('transform', d => {
+      const missing = d[xKey] == null || d[yKey] == null;
+      const cx = missing ? pad.left + innerW + 15 : xScale(d[xKey]);
+      const cy = missing ? pad.top + innerH - 20 : yScale(d[yKey]);
+      return `translate(${cx},${cy})`;
+    });
+
+  allPoints.append('circle')
+    .attr('r', d => (d[xKey] == null || d[yKey] == null) ? 7 : 10)
+    .attr('fill', d => agentColor(d.id))
+    .attr('opacity', d => (d[xKey] == null || d[yKey] == null) ? 0.45 : 1)
+    .attr('stroke', 'rgba(255,255,255,.25)')
+    .attr('stroke-width', 1.5)
+    // subtle hover effect
+    .on('mouseover', function() { d3.select(this).attr('r', 12); })
+    .on('mouseout', function(e, d) { d3.select(this).attr('r', (d[xKey] == null || d[yKey] == null) ? 7 : 10); });
+
+  allPoints.append('text')
+    .attr('x', d => (d[xKey] == null || d[yKey] == null) ? 12 : 15)
+    .attr('y', 4)
+    .attr('fill', '#e8edf8')
+    .attr('font-size', '12px')
+    .attr('font-weight', '700')
+    .attr('font-family', 'var(--font-sans)')
+    .text(d => {
+      const missing = d[xKey] == null || d[yKey] == null;
+      return missing && opts.missingXLabel ? `${d.short} (${opts.missingXLabel})` : d.short;
+    });
+}
+
 function drawPareto(data) {
   const points = (data.agentProfiles || []).map(a => ({
     id:      a.id,
@@ -274,22 +319,110 @@ function drawPareto(data) {
     cost:    a.avgCost,
     process: a.avgProcess || 0,
   }));
-  drawScatter('paretoChart', points, 'cost', 'process', {
-    xLabel: 'avg normalized public cost (USD)',
-    yLabel: 'avg process score (0–100)',
+  drawD3Scatter('paretoChart', points, 'cost', 'process', {
+    xLabel: 'Avg Normalized Public Cost (USD)',
+    yLabel: 'Avg Process Score (0–100)',
     missingXLabel: 'cost n/a',
   });
 }
 
-/* ── Latest scenario detail ─────────────────────────────────────────────── */
-function renderLatestDetail(data) {
-  const latest = data.latestScenario;
-  if (!latest) return;
+function drawLatencyProcessChart(data) {
+  const points = (data.agentProfiles || []).map(a => ({
+    id:      a.id,
+    short:   a.short || a.id,
+    wall:    a.avgWall,
+    process: a.avgProcess || 0,
+  }));
+  drawD3Scatter('latencyProcessChart', points, 'wall', 'process', {
+    xLabel: 'Avg Wall-Clock Time (s)',
+    yLabel: 'Avg Process Score (0–100)',
+    missingXLabel: 'wall n/a',
+  });
+}
 
-  setText('detail-title',   `${latest.id}: ${safe(latest.name)}`);
-  setText('detail-summary', safe(latest.summary));
+/* ── Scenario Detail (For scenario pages) ──────────────────────────────── */
+function renderScenarioDetail(data, scenarioId) {
+  const s = (data.scenarios || []).find(x => x.slug === scenarioId || x.id.toLowerCase() === scenarioId);
+  if (!s) {
+    setText('detail-title', 'Scenario not found');
+    return;
+  }
 
-  const agents = latest.agents || [];
+  setText('detail-title', `${s.id}: ${safe(s.name)}`);
+  setText('detail-summary', safe(s.summary));
+
+  const agents = s.agents || [];
+
+  // Winners
+  const winnersHtml = [
+    { label: 'Fastest',      value: agentDisplay(s.fastest)     },
+    { label: 'Cheapest',     value: agentDisplay(s.cheapest)    },
+    { label: 'Best process', value: agentDisplay(s.processBest) },
+  ].map(w => `
+    <div class="winner-badge">
+      <span class="winner-badge-label">${w.label}</span>
+      <span class="winner-badge-value">${safe(w.value)}</span>
+    </div>
+  `).join('');
+
+  // Agent Cards
+  const agentCardsHtml = agents.map(a => {
+    const pills = [
+      a.verdict ? `<span class="pill ${a.verdict === 'PASS' ? 'pill-pass' : 'pill-fail'}">${a.verdict}</span>` : '',
+      a.red   ? `<span class="pill pill-red">red✓</span>` : '',
+      a.smoke ? `<span class="pill pill-smoke">smoke✓</span>` : '',
+    ].filter(Boolean).join('');
+
+    return `
+      <div class="sp-agent-card">
+        <div class="spa-name">${safe(a.short, a.id)}</div>
+        <div class="spa-model">${safe(a.model)}</div>
+        <div class="spa-metrics">
+          <div class="spa-metric">
+            <span class="spa-metric-label">Wall</span>
+            <span class="spa-metric-value">${sec(a.wall)}</span>
+          </div>
+          <div class="spa-metric">
+            <span class="spa-metric-label">Process</span>
+            <span class="spa-metric-value">${safe(a.process, 'n/a')}</span>
+          </div>
+          <div class="spa-metric">
+            <span class="spa-metric-label">Cost</span>
+            <span class="spa-metric-value">${moneyFull(a.cost)}</span>
+          </div>
+          <div class="spa-metric">
+            <span class="spa-metric-label">Tokens</span>
+            <span class="spa-metric-value">${toks(a.tokens)}</span>
+          </div>
+        </div>
+        <div class="spa-pills">${pills}</div>
+      </div>
+    `;
+  }).join('');
+
+  const links = s.links || {};
+  const linksHtml = [
+    links.results ? `<a class="sp-link" href="../${links.results}">Results →</a>` : '',
+    links.metrics ? `<a class="sp-link" href="../${links.metrics}">Metrics →</a>` : '',
+    links.json    ? `<a class="sp-link" href="../${links.json}">JSON →</a>` : '',
+  ].filter(Boolean).join('');
+
+  setHTML('scenario-panel', `
+    <div class="sp-header">
+      <div class="sp-meta">
+        <div class="sp-id">${s.id} · ${safe(s.type)} · ${safe(s.difficulty)}</div>
+        <div class="sp-name">${safe(s.name)}</div>
+        <div class="sp-summary">${safe(s.summary)}</div>
+      </div>
+      <div class="sp-winners">${winnersHtml}</div>
+    </div>
+    <div class="sp-agents">${agentCardsHtml}</div>
+    <div class="badge-legend" aria-label="Scenario badge legend">
+      <span><b class="pill pill-red">red✓</b> agent captured failing baseline</span>
+      <span><b class="pill pill-smoke">smoke✓</b> agent ran user-visible smoke</span>
+    </div>
+    <div class="sp-links">${linksHtml}</div>
+  `);
 
   // Bar charts
   const maxWall  = Math.max(...agents.map(a => a.wall  || 0), 1);
@@ -307,14 +440,14 @@ function renderLatestDetail(data) {
   const scatterPoints = agents.map(a => ({
     id: a.id, short: safe(a.short, a.id), wall: a.wall, tokens: a.tokens
   }));
-  drawScatter('frontierChart', scatterPoints, 'wall', 'tokens', {
-    xLabel: 'wall-clock (s)',
-    yLabel: 'total tokens',
-    missingXLabel: null,
+  drawD3Scatter('frontierChart', scatterPoints, 'wall', 'tokens', {
+    xLabel: 'Wall-clock (s)',
+    yLabel: 'Total Tokens',
+    missingXLabel: 'tokens n/a',
   });
 
   // Score table
-  renderScoreTable(agents, latest.links || {});
+  renderScoreTable(agents, s.links || {});
 }
 
 function renderBarList(containerId, agents, mapper) {
@@ -324,11 +457,17 @@ function renderBarList(containerId, agents, mapper) {
     const m = mapper(a);
     const pct = (m.val == null || !m.max) ? 0 : Math.max(3, (m.val / m.max) * 100);
     const display = m.format ? m.format(m.val) : (m.val == null ? 'n/a' : `${m.val}${m.suffix}`);
+    // Reuse some existing classes
+    let colorCls = m.colorClass;
+    if (colorCls === 'bar-fill-time') colorCls = 'bar-fill-speed';
+    if (colorCls === 'bar-fill-quality') colorCls = 'bar-fill-process';
+    if (colorCls === 'bar-fill-cost-d') colorCls = 'bar-fill-cost';
+
     return `
       <div class="bar-row">
         <span class="bar-row-label">${m.label}</span>
         <div class="bar-track">
-          <div class="bar-fill ${m.colorClass}" style="width:${pct.toFixed(1)}%"></div>
+          <div class="bar-fill ${colorCls}" style="width:${pct.toFixed(1)}%; height: 100%; border-radius: 999px;"></div>
         </div>
         <span class="bar-row-value">${display}</span>
       </div>
@@ -361,82 +500,6 @@ function renderScoreTable(agents, links) {
       </tr>
     `;
   }).join('');
-}
-
-/* ── Generic SVG scatter ─────────────────────────────────────────────────── */
-const AGENT_COLORS = {
-  'pi':         '#34d17a',
-  'opencode':   '#4f8ef7',
-  'claude-code':'#a78bfa',
-  'mimo':       '#f5a623',
-  'codex-cli':  '#f87171',
-  'agy':        '#22d3ee',
-};
-const agentColor = (id) => AGENT_COLORS[id] || '#8a9ab8';
-
-function drawScatter(svgId, points, xKey, yKey, opts = {}) {
-  const svg = document.getElementById(svgId);
-  if (!svg) return;
-  const W = svg.clientWidth || 680;
-  const H = parseInt(svg.getAttribute('height') || svg.style.height) || (svgId === 'frontierChart' ? 260 : 340);
-  const pad = { top: 30, right: 30, bottom: 48, left: 64 };
-  const innerW = W - pad.left - pad.right;
-  const innerH = H - pad.top  - pad.bottom;
-
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  svg.style.height = `${H}px`;
-
-  const known = points.filter(p => p[xKey] != null && p[yKey] != null);
-  const maxX  = known.length ? Math.max(...known.map(p => p[xKey])) * 1.18 : 1;
-  const maxY  = known.length ? Math.max(...known.map(p => p[yKey])) * 1.15 : 1;
-  const minY  = known.length ? Math.min(...known.map(p => p[yKey])) * 0.9 : 0;
-
-  const px = (v) => pad.left + (v / maxX) * innerW;
-  const py = (v) => pad.top  + innerH - ((v - minY) / (maxY - minY || 1)) * innerH;
-
-  /* axes */
-  const axisColor = '#2a3a58';
-  const textColor = '#5a6a88';
-  const fontSize  = 11;
-
-  let svgContent = `
-    <line x1="${pad.left}" x2="${pad.left + innerW}" y1="${pad.top + innerH}" y2="${pad.top + innerH}" stroke="${axisColor}" stroke-width="1"/>
-    <line x1="${pad.left}" x2="${pad.left}"           y1="${pad.top}"         y2="${pad.top + innerH}" stroke="${axisColor}" stroke-width="1"/>
-    <text x="${pad.left + innerW / 2}" y="${H - 8}" fill="${textColor}" font-size="${fontSize}" text-anchor="middle" font-family="system-ui,sans-serif">${opts.xLabel || xKey}</text>
-    <text transform="translate(${fontSize + 2} ${pad.top + innerH / 2}) rotate(-90)" fill="${textColor}" font-size="${fontSize}" text-anchor="middle" font-family="system-ui,sans-serif">${opts.yLabel || yKey}</text>
-  `;
-
-  /* x-axis ticks */
-  const nTicks = 4;
-  for (let i = 0; i <= nTicks; i++) {
-    const val = (maxX / nTicks) * i;
-    const tx  = px(val);
-    const label = val < 0.01 ? val.toFixed(4) : val < 1 ? val.toFixed(2) : val.toFixed(1);
-    svgContent += `
-      <line x1="${tx}" x2="${tx}" y1="${pad.top + innerH}" y2="${pad.top + innerH + 4}" stroke="${axisColor}" stroke-width="1"/>
-      <text x="${tx}" y="${pad.top + innerH + 14}" fill="${textColor}" font-size="${fontSize - 1}" text-anchor="middle" font-family="system-ui,sans-serif">${label}</text>
-    `;
-  }
-
-  /* points */
-  points.forEach(p => {
-    const missing = p[xKey] == null || p[yKey] == null;
-    const cx = missing ? pad.left + innerW + 16 : px(p[xKey]);
-    const cy = missing ? pad.top + innerH - 20 : py(p[yKey]);
-    const r  = missing ? 7 : 10;
-    const color = agentColor(p.id);
-    const opacity = missing ? 0.45 : 1;
-    const labelText = missing && opts.missingXLabel
-      ? `${p.short} (${opts.missingXLabel})`
-      : p.short;
-
-    svgContent += `
-      <circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}" opacity="${opacity}" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
-      <text x="${cx + r + 5}" y="${cy + 4}" fill="#e8edf8" font-size="12" font-weight="700" font-family="system-ui,sans-serif">${labelText}</text>
-    `;
-  });
-
-  svg.innerHTML = svgContent;
 }
 
 /* ── ccusage / Method body ───────────────────────────────────────────────── */
@@ -489,13 +552,15 @@ function renderMethodBody(data) {
 
 /* ── Evidence artifacts ──────────────────────────────────────────────────── */
 function renderArtifacts(data) {
+  const isScenarioPage = document.body.dataset.page === 'scenario';
+  const prefix = isScenarioPage ? '../' : './';
   const scenarios = data.scenarios || [];
   const links = scenarios.flatMap(s => {
     const l = s.links || {};
     return [
-      l.results ? { id: s.id, title: `${s.id} Results`,      sub: s.name,                         href: `../${l.results}` } : null,
-      l.json    ? { id: s.id, title: `${s.id} Metrics JSON`, sub: 'machine-readable run facts',    href: `../${l.json}` }    : null,
-      l.metrics ? { id: s.id, title: `${s.id} Metrics MD`,   sub: 'human-readable run summary',   href: `../${l.metrics}` } : null,
+      l.results ? { id: s.id, title: `${s.id} Results`,      sub: s.name,                         href: `${prefix}${l.results}` } : null,
+      l.json    ? { id: s.id, title: `${s.id} Metrics JSON`, sub: 'machine-readable run facts',    href: `${prefix}${l.json}` }    : null,
+      l.metrics ? { id: s.id, title: `${s.id} Metrics MD`,   sub: 'human-readable run summary',   href: `${prefix}${l.metrics}` } : null,
     ].filter(Boolean);
   });
 
@@ -520,7 +585,6 @@ function initMobileNav() {
     mobileNav.hidden = expanded;
   });
 
-  // close on link click
   mobileNav.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       toggle.setAttribute('aria-expanded', 'false');
@@ -530,54 +594,58 @@ function initMobileNav() {
 }
 
 /* ── Resize handler for SVG charts ─────────────────────────────────────── */
-function initResizeHandler(data) {
+function initResizeHandler(data, page) {
   let raf;
   window.addEventListener('resize', () => {
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(() => {
-      drawPareto(data);
-      const latest = data.latestScenario;
-      if (latest) {
-        const agents = latest.agents || [];
-        drawScatter('frontierChart', agents.map(a => ({
-          id: a.id, short: safe(a.short, a.id), wall: a.wall, tokens: a.tokens
-        })), 'wall', 'tokens', {
-          xLabel: 'wall-clock (s)',
-          yLabel: 'total tokens',
-        });
+      if (page === 'home') drawPareto(data);
+      if (page === 'agents') drawLatencyProcessChart(data);
+      if (page === 'scenario') {
+        const scenarioId = document.body.dataset.scenarioId;
+        const s = (data.scenarios || []).find(x => x.slug === scenarioId || x.id.toLowerCase() === scenarioId);
+        if (s) {
+          const agents = s.agents || [];
+          drawD3Scatter('frontierChart', agents.map(a => ({
+            id: a.id, short: safe(a.short, a.id), wall: a.wall, tokens: a.tokens
+          })), 'wall', 'tokens', {
+            xLabel: 'Wall-clock (s)',
+            yLabel: 'Total Tokens',
+            missingXLabel: 'tokens n/a',
+          });
+        }
       }
     });
   });
 }
 
-/* ── DOM helpers ────────────────────────────────────────────────────────── */
-function setText(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
-}
-
-function setHTML(id, html) {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = html;
-}
-
 /* ── Main ────────────────────────────────────────────────────────────────── */
 loadData()
   .then(data => {
-    renderKPIs(data);
-    renderVerdict(data);
-    renderScenarioTabs(data);
-    renderAgentTable(data);
-    renderLatestDetail(data);
-    renderMethodBody(data);
-    renderArtifacts(data);
-    drawPareto(data);
+    const page = document.body.dataset.page;
+    
+    if (page === 'home') {
+      renderKPIs(data);
+      renderVerdict(data);
+      renderScenarioCards(data);
+      drawPareto(data);
+      renderMethodBody(data);
+      renderArtifacts(data);
+    } 
+    else if (page === 'agents') {
+      renderAgentTable(data);
+      drawLatencyProcessChart(data);
+    }
+    else if (page === 'scenario') {
+      const scenarioId = document.body.dataset.scenarioId;
+      renderScenarioDetail(data, scenarioId);
+    }
+
     initMobileNav();
-    initResizeHandler(data);
+    initResizeHandler(data, page);
   })
   .catch(err => {
     console.error('CAB dashboard failed to load:', err);
-    // Show graceful error in main areas
     ['verdict-score', 'kpi-scenarios', 'kpi-runs', 'kpi-pass', 'kpi-cost'].forEach(id => {
       setText(id, '—');
     });

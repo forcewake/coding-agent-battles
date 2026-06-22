@@ -140,7 +140,8 @@
         "results": "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/results.md",
         "metrics": "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.md",
         "json": "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/metrics.json"
-      }
+      },
+      "slug": "bb-001"
     },
     {
       "id": "BB-003",
@@ -244,7 +245,8 @@
         "results": "runs/2026-06-22-bb-003-json-export-cli/results.md",
         "metrics": "runs/2026-06-22-bb-003-json-export-cli/metrics.md",
         "json": "runs/2026-06-22-bb-003-json-export-cli/metrics.json"
-      }
+      },
+      "slug": "bb-003"
     }
   ],
   "agentProfiles": [
