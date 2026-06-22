@@ -17,10 +17,10 @@ This rerun adds **Pi Coding Agent**, fixes **Claude Code telemetry**, and re-tes
 
 | Agent | Input | Output | Reasoning | Cache read | Cache write | Total | Source |
 |---|---:|---:|---:|---:|---:|---:|---|
-| OpenCode | 3,387 | 917 | 171 | 59,520 | 0 | 63,995 | OpenCode SQLite + Tokscale cross-check |
+| OpenCode | 3,387 | 917 | 171 | 59,520 | 0 | 63,995 | `ccusage opencode` supported; committed attribution from OpenCode SQLite + Tokscale cross-check |
 | Claude Code | 5,925 | 851 | n/a | 119,232 | 0 | 126,008 | `claude --output-format json` / `modelUsage` |
 | MiMoCode | 22,501 | 820 | 137 | 105,152 | 0 | 128,610 | MiMoCode SQLite direct extraction |
-| Pi Coding Agent | 4,116 | 1,058 | 0 | 20,736 | 0 | 25,910 | Pi `--mode json` + Tokscale cross-check |
+| Pi Coding Agent | 4,116 | 1,058 | 0 | 20,736 | 0 | 25,910 | `ccusage pi` supported; Pi `--mode json` + Tokscale cross-check |
 | Codex CLI | 41,999 | 4,025 | 1,404 | 272,512 | 0 | 318,536 | `ccusage codex session --json`; Tokscale cross-check |
 | agy | n/a | n/a | n/a | n/a | n/a | n/a | No reliable usage fields exposed |
 
@@ -47,6 +47,10 @@ Public pricing basis:
 | Pi Coding Agent | $0.015809 | $0.0000 provider JSON / $0.015809 Tokscale | Public estimate matches Tokscale for Pi |
 | Codex CLI | $0.509121 | $0.467001 ccusage | Public estimate includes reasoning as output; ccusage local estimate is retained |
 | agy | n/a | n/a | No reliable token counts exported, so price cannot be computed from public rates |
+
+## ccusage collector correction
+
+`ccusage` supports focused sources for Claude, Codex, OpenCode, Hermes Agent, pi-agent, and Gemini CLI. Future runs should execute the relevant `ccusage <source> session --json` first. Direct JSON/JSONL/SQLite extraction remains a fallback/cross-check when the focused report cannot tie a row to the benchmark workspace/session or when the run deliberately disables persistence.
 
 ## agy telemetry finding
 

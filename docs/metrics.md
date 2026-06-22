@@ -41,12 +41,27 @@ Use two scores so we do not hide a perfect one-line patch behind bad/opaque proc
 
 ## Cost and token collection notes
 
-- **OpenCode** stores per-session tokens in `~/.local/share/opencode/opencode.db`; `opencode stats` is useful, but at the time of this run it has no JSON output, so direct SQLite extraction or tools such as Tokscale are better for automation.
-- **MiMoCode** stores compatible session data in `~/.local/share/mimocode/mimocode.db`; use direct SQLite extraction until a stable JSON stats endpoint exists.
-- **Codex CLI** stores JSONL under `~/.codex/sessions/`; `ccusage codex session --json` and Tokscale can estimate tokens/cost from those logs.
-- **Claude Code** can emit structured per-run JSON with `claude --print --output-format json`; if a run was executed as plain text with `--no-session-persistence`, per-run cost/tokens are not recoverable afterwards.
-- **Pi Coding Agent** can emit JSONL with `pi --mode json`; Tokscale recognizes Pi sessions under client `pi`, so use both Pi JSONL and Tokscale as cross-checks.
-- **Antigravity agy** currently exposes rich local transcripts under `~/.gemini/antigravity-cli/brain/...`, but this run did not expose reliable token/cost fields. `tokscale antigravity sync` returned zero sessions even when run repeatedly during an active CLI run; mark unavailable instead of estimating from transcript size.
+`ccusage` is the preferred first-pass collector for every supported local coding-agent data source. Use source-focused JSON reports such as:
+
+```bash
+npx --yes ccusage@latest claude session --json
+npx --yes ccusage@latest codex session --json
+npx --yes ccusage@latest opencode session --json
+npx --yes ccusage@latest hermes session --json
+npx --yes ccusage@latest pi session --json
+npx --yes ccusage@latest gemini session --json
+```
+
+Run attribution still matters: if a ccusage report aggregates a source/day but does not expose enough workspace/session metadata to tie a row to a specific benchmark run, save the ccusage output as cross-check evidence and fall back to the raw source that can be matched by workspace/session id.
+
+- **OpenCode**: primary `ccusage opencode session --json`; fallback/cross-check direct SQLite from `~/.local/share/opencode/opencode.db` matched by workspace directory.
+- **MiMoCode**: not currently a ccusage focused namespace; use direct SQLite from `~/.local/share/mimocode/mimocode.db` until a compatible ccusage/source adapter exists.
+- **Codex CLI**: primary `ccusage codex session --json`; fallback/cross-check Codex JSONL token events under `~/.codex/sessions/`.
+- **Claude Code**: primary `ccusage claude session --json` when persistent Claude project logs exist; fallback per-run `claude --print --output-format json` when the harness intentionally disables session persistence.
+- **Pi Coding Agent**: primary `ccusage pi session --json`; fallback/cross-check Pi `--mode json` JSONL and Tokscale.
+- **Hermes Agent**: `ccusage hermes session --json` can report Hermes controller-session usage from `$HERMES_HOME/state.db`; keep this separate from participant-agent economics unless explicitly measuring controller overhead.
+- **Gemini CLI**: `ccusage gemini session --json` supports Gemini CLI logs under `~/.gemini/tmp/*/chats/`. This is not the same as Antigravity `agy` transcripts under `~/.gemini/antigravity-cli/brain/...`.
+- **Antigravity agy**: current runs expose process transcripts, but no reliable token/cost fields via ccusage/Tokscale for this installed path; mark unavailable instead of estimating from transcript size.
 
 ## Source inspiration
 

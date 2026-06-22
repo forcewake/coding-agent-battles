@@ -32,7 +32,9 @@
     },
     "limitations": [
       "Estimates are not invoices; subscriptions, routing, discounts, regional uplift, long-context tiers, and provider billing may differ.",
-      "agy remains unavailable because no reliable token counts were exported."
+      "agy remains unavailable because no reliable token counts were exported.",
+      "ccusage is the preferred first-pass collector for supported local sources; direct extraction is fallback/cross-check when per-run attribution is missing.",
+      "ccusage gemini support applies to Gemini CLI logs, not the Antigravity agy transcript format used in these runs."
     ]
   },
   "scenarios": [
@@ -626,5 +628,27 @@
       "metrics": "runs/2026-06-22-bb-003-json-export-cli/metrics.md",
       "json": "runs/2026-06-22-bb-003-json-export-cli/metrics.json"
     }
+  },
+  "telemetryBasis": {
+    "preferred_collector": "ccusage focused source reports",
+    "verified_ccusage_version": "20.0.14",
+    "supported_sources_checked": [
+      "claude",
+      "codex",
+      "opencode",
+      "hermes",
+      "pi",
+      "gemini"
+    ],
+    "commands": [
+      "npx --yes ccusage@latest claude session --json",
+      "npx --yes ccusage@latest codex session --json",
+      "npx --yes ccusage@latest opencode session --json",
+      "npx --yes ccusage@latest hermes session --json",
+      "npx --yes ccusage@latest pi session --json",
+      "npx --yes ccusage@latest gemini session --json"
+    ],
+    "fallback_policy": "Use direct JSON/JSONL/SQLite extraction only when ccusage cannot attribute a row to the exact benchmark run/workspace/session, or when the agent did not persist ccusage-readable logs.",
+    "agy_note": "ccusage gemini supports Gemini CLI logs, not necessarily Antigravity agy transcripts under ~/.gemini/antigravity-cli/brain; agy token/cost remains unavailable in these runs."
   }
 }

@@ -4,6 +4,24 @@ Date: 2026-06-22
 
 This run was created to validate telemetry plumbing after the first BB-001 smoke run. It adds Pi Coding Agent, fixes Claude Code JSON telemetry, and re-tests agy / Antigravity token export.
 
+## ccusage support correction
+
+`ccusage 20.0.14` supports focused local-source reports for `claude`, `codex`, `opencode`, `hermes`, `pi`, and `gemini`. Benchmark telemetry should run these collectors first and then fall back to direct JSON/JSONL/SQLite extraction only when ccusage cannot attribute a row to a specific benchmark workspace/session.
+
+Relevant commands:
+
+```bash
+npx --yes ccusage@latest claude session --json
+npx --yes ccusage@latest codex session --json
+npx --yes ccusage@latest opencode session --json
+npx --yes ccusage@latest hermes session --json
+npx --yes ccusage@latest pi session --json
+npx --yes ccusage@latest gemini session --json
+```
+
+Important distinction: ccusage `gemini` targets Gemini CLI logs under `~/.gemini/tmp/*/chats/`; this does not make Antigravity `agy` transcripts under `~/.gemini/antigravity-cli/brain/...` reliable token/cost sources.
+
+
 ## Pi Coding Agent
 
 Installed package:
@@ -131,11 +149,11 @@ Conclusion: this installed agy path currently supports **process telemetry** but
 
 ## OpenCode / MiMoCode / Codex
 
-Extraction paths stayed the same as the first BB-001 run:
+Corrected source hierarchy:
 
-- OpenCode: direct SQLite extraction from `~/.local/share/opencode/opencode.db`, matched by workspace directory; session `ses_110a248a5ffeyCA5ziakXzEXoa`.
+- OpenCode: `ccusage opencode session --json` is supported and should be tried first. This committed run uses direct SQLite extraction from `~/.local/share/opencode/opencode.db` matched by workspace directory as deterministic per-run attribution; session `ses_110a248a5ffeyCA5ziakXzEXoa`.
 - MiMoCode: direct SQLite extraction from `~/.local/share/mimocode/mimocode.db`, matched by workspace directory; session `ses_110a24e54ffe8ylIFek2PowbW8`.
-- Codex CLI: `ccusage codex session --json` and Tokscale cross-check; session `019eef5d-c2f2-7a82-aa3f-c8c28edda010`.
+- Codex CLI: `ccusage codex session --json` is the primary supported collector; Codex JSONL token events and Tokscale are cross-checks. Session `019eef5d-c2f2-7a82-aa3f-c8c28edda010`.
 
 ## Redaction
 

@@ -25,6 +25,21 @@ Each battle should keep the task, constraints and verification identical across 
 | Economics | Input/output/reasoning/cache tokens, actual/estimated cost, cost-per-accepted-change |
 | Review | Hermes independent verification notes and final verdict |
 
+## Telemetry collection
+
+`ccusage` is the first-pass collector for supported local coding-agent sources:
+
+```bash
+npx --yes ccusage@latest claude session --json
+npx --yes ccusage@latest codex session --json
+npx --yes ccusage@latest opencode session --json
+npx --yes ccusage@latest hermes session --json
+npx --yes ccusage@latest pi session --json
+npx --yes ccusage@latest gemini session --json
+```
+
+Per-run reports may still use direct JSON/JSONL/SQLite extraction when ccusage cannot map a focused row back to the benchmark workspace/session. Those direct extracts are fallback/cross-check evidence, not a replacement for ccusage where ccusage has reliable run attribution.
+
 ## Live Pages
 
 - GitHub Pages dashboard: <https://forcewake.github.io/coding-agent-battles/>

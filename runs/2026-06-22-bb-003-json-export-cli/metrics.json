@@ -20,7 +20,7 @@
         "cache_read": 142528,
         "cache_write": 0,
         "total": 149488,
-        "source": "opencode SQLite direct extraction by workspace directory"
+        "source": "ccusage opencode supported; committed attribution from OpenCode SQLite matched by workspace directory"
       },
       "cost": {
         "normalized_public_estimate_usd": 0.051295,
@@ -62,7 +62,7 @@
         "cache_read": 132160,
         "cache_write": 0,
         "total": 156994,
-        "source": "direct JSON output"
+        "source": "ccusage claude supported when persistent logs exist; this run uses direct Claude JSON output because no ccusage-readable default-dir session was found"
       },
       "cost": {
         "normalized_public_estimate_usd": 0.072912,
@@ -146,7 +146,7 @@
         "cache_read": 4864,
         "cache_write": 0,
         "total": 5512,
-        "source": "Pi JSONL final assistant usage"
+        "source": "ccusage pi supported and found benchmark paths; committed attribution cross-checks Pi JSONL final assistant usage"
       },
       "cost": {
         "normalized_public_estimate_usd": 0.002751,
@@ -188,7 +188,7 @@
         "cache_read": 193280,
         "cache_write": 0,
         "total": 242829,
-        "source": "Codex JSONL token_count event"
+        "source": "ccusage codex supported; committed attribution cross-checks Codex JSONL token_count events"
       },
       "cost": {
         "normalized_public_estimate_usd": 1.430545,
@@ -288,5 +288,19 @@
       "Estimates are not invoices; subscriptions, routing, discounts, regional uplift, long-context tiers, and provider billing may differ.",
       "agy remains unavailable because no reliable token counts were exported."
     ]
+  },
+  "telemetry_strategy": {
+    "preferred_collector": "ccusage focused source reports",
+    "ccusage_version_verified": "20.0.14",
+    "commands_checked": [
+      "npx --yes ccusage@latest claude session --json --since 2026-06-22 --until 2026-06-22",
+      "npx --yes ccusage@latest codex session --json --since 2026-06-22 --until 2026-06-22",
+      "npx --yes ccusage@latest opencode session --json --since 2026-06-22 --until 2026-06-22",
+      "npx --yes ccusage@latest hermes session --json --since 2026-06-22 --until 2026-06-22",
+      "npx --yes ccusage@latest pi session --json --since 2026-06-22 --until 2026-06-22",
+      "npx --yes ccusage@latest gemini session --json --since 2026-06-22 --until 2026-06-22"
+    ],
+    "observed": "Pi ccusage output contains BB-001/BB-003 paths; Codex/OpenCode/Hermes returned same-day sessions/totals; Claude/Gemini returned zero sessions for this run through default dirs.",
+    "fallback_policy": "Committed per-agent metrics use the most attributable reliable source: ccusage when it maps to the run, otherwise direct JSON/JSONL/SQLite matched by workspace/session."
   }
 }

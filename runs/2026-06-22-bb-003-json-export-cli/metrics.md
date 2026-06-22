@@ -34,4 +34,11 @@ Every workspace produced valid JSON exactly matching the expected payload.
 - Machine metrics: `metrics.json`
 
 ## Telemetry caveat
-Token/cost was extracted where reliable local telemetry was available: OpenCode/MiMo SQLite, Claude JSON, Pi JSONL, Codex JSONL. agy still exposes process logs but no reliable token export.
+`ccusage` supports the relevant focused sources (`claude`, `codex`, `opencode`, `hermes`, `pi`, `gemini`) and is now the preferred first-pass collector. For this specific BB-003 run:
+
+- `ccusage pi session --json --since 2026-06-22 --until 2026-06-22` found the Pi session and benchmark path.
+- `ccusage codex ...` and `ccusage opencode ...` found same-day source totals, but the committed per-run metrics keep direct Codex JSONL / OpenCode SQLite workspace-matched extraction for deterministic attribution.
+- `ccusage claude ...` returned no default-dir sessions for this run because the harness used direct JSON output rather than persistent Claude project logs.
+- `ccusage gemini ...` supports Gemini CLI logs, but Antigravity `agy` stores different transcripts and still exposes no reliable token/cost export here.
+
+Therefore token/cost is recorded from the most attributable reliable source per agent, with ccusage as primary where it maps cleanly and fallback/cross-check extraction otherwise.
