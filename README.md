@@ -28,7 +28,9 @@ Each battle should keep the task, constraints and verification identical across 
 ## Live Pages
 
 - GitHub Pages dashboard: <https://forcewake.github.io/coding-agent-battles/>
-- Latest run visual: BB-001 telemetry rerun with charts, method, and raw evidence links.
+- Current view: aggregate home dashboard across BB-001 + BB-003, with Agent × Scenario matrix, agent profiles, Pareto lens, and latest-run detail.
+- Latest scenario: BB-003 JSON export for existing CLI — <runs/2026-06-22-bb-003-json-export-cli/results.md>
+- Previous calibration: BB-001 telemetry rerun — <runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/results.md>
 
 ## Repository layout
 

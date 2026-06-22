@@ -1,0 +1,292 @@
+{
+  "schema_version": "0.2",
+  "run_id": "2026-06-22-bb-003-json-export-cli",
+  "task_id": "BB-003",
+  "task_name": "JSON export for existing CLI",
+  "date": "2026-06-22",
+  "accepted_change_count": 1,
+  "baseline": {
+    "red_verified": true,
+    "exit_code": 1,
+    "evidence": "evidence/baseline-failure.log"
+  },
+  "agents": {
+    "opencode": {
+      "session_id": "ses_11055999bffeyubtu06cy2o711",
+      "tokens": {
+        "input": 5462,
+        "output": 1122,
+        "reasoning": 376,
+        "cache_read": 142528,
+        "cache_write": 0,
+        "total": 149488,
+        "source": "opencode SQLite direct extraction by workspace directory"
+      },
+      "cost": {
+        "normalized_public_estimate_usd": 0.051295,
+        "vendor_reported_usd": 0.0,
+        "availability": null
+      },
+      "process": {
+        "agent_red_test_evidence": false,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": true,
+        "human_interventions": 0
+      },
+      "model": "glm-5.2",
+      "provider": "zai-coding-plan",
+      "cli_version": "1.17.6",
+      "label": "OpenCode / GLM-5.2",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 86,
+        "notes": "Correct JSON export; process score based on red/green/smoke evidence in agent log and diff minimality."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 66.732,
+      "changed_files": 1,
+      "diff_added_lines": 11,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "json_smoke_passed": true
+      }
+    },
+    "claude-code": {
+      "session_id": null,
+      "tokens": {
+        "input": 23573,
+        "output": 1261,
+        "reasoning": null,
+        "cache_read": 132160,
+        "cache_write": 0,
+        "total": 156994,
+        "source": "direct JSON output"
+      },
+      "cost": {
+        "normalized_public_estimate_usd": 0.072912,
+        "vendor_reported_usd": 0.21547,
+        "availability": null
+      },
+      "process": {
+        "agent_red_test_evidence": false,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": true,
+        "human_interventions": 0
+      },
+      "model": "glm-5.2[1m]",
+      "provider": "Claude Code configured provider",
+      "cli_version": "2.1.177",
+      "label": "Claude Code / GLM-5.2",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 90,
+        "notes": "Correct JSON export; process score based on red/green/smoke evidence in agent log and diff minimality."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 52.901,
+      "changed_files": 1,
+      "diff_added_lines": 6,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "json_smoke_passed": true
+      }
+    },
+    "mimo": {
+      "session_id": "ses_110559e74ffeb8m4oKbKGnmIQN",
+      "tokens": {
+        "input": 15265,
+        "output": 1199,
+        "reasoning": 90,
+        "cache_read": 314176,
+        "cache_write": 0,
+        "total": 330730,
+        "source": "mimo SQLite direct extraction by workspace directory"
+      },
+      "cost": {
+        "normalized_public_estimate_usd": 0.108728,
+        "vendor_reported_usd": 0.0,
+        "availability": null
+      },
+      "process": {
+        "agent_red_test_evidence": false,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": true,
+        "human_interventions": 0
+      },
+      "model": "glm-5.2",
+      "provider": "zai-coding-plan",
+      "cli_version": "0.1.1",
+      "label": "MiMoCode / GLM-5.2",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 90,
+        "notes": "Correct JSON export; process score based on red/green/smoke evidence in agent log and diff minimality."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 94.151,
+      "changed_files": 1,
+      "diff_added_lines": 6,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "json_smoke_passed": true
+      }
+    },
+    "pi": {
+      "session_id": "019eefaa-7706-7fe8-b2ce-35cef05a4bfd",
+      "tokens": {
+        "input": 455,
+        "output": 193,
+        "reasoning": 0,
+        "cache_read": 4864,
+        "cache_write": 0,
+        "total": 5512,
+        "source": "Pi JSONL final assistant usage"
+      },
+      "cost": {
+        "normalized_public_estimate_usd": 0.002751,
+        "vendor_reported_usd": 0.0,
+        "availability": null
+      },
+      "process": {
+        "agent_red_test_evidence": false,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": true,
+        "human_interventions": 0
+      },
+      "model": "glm-5.2",
+      "provider": "zai-coding-cn",
+      "cli_version": "0.79.10",
+      "label": "Pi Coding Agent / GLM-5.2",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 90,
+        "notes": "Correct JSON export; process score based on red/green/smoke evidence in agent log and diff minimality."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 56.314,
+      "changed_files": 1,
+      "diff_added_lines": 6,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "json_smoke_passed": true
+      }
+    },
+    "codex-cli": {
+      "session_id": "2026-06-22T16-09-45-019eefaa-7390-7e01-a6ff-f3ec6f1303db",
+      "tokens": {
+        "input": 239277,
+        "output": 3552,
+        "reasoning": 1032,
+        "cache_read": 193280,
+        "cache_write": 0,
+        "total": 242829,
+        "source": "Codex JSONL token_count event"
+      },
+      "cost": {
+        "normalized_public_estimate_usd": 1.430545,
+        "vendor_reported_usd": null,
+        "availability": null
+      },
+      "process": {
+        "agent_red_test_evidence": true,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": true,
+        "human_interventions": 0
+      },
+      "model": "gpt-5.5",
+      "provider": "openai",
+      "cli_version": "0.137.0",
+      "label": "Codex CLI / GPT-5.5",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 100,
+        "notes": "Correct JSON export; process score based on red/green/smoke evidence in agent log and diff minimality."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 104.966,
+      "changed_files": 1,
+      "diff_added_lines": 7,
+      "diff_deleted_lines": 2,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "json_smoke_passed": true
+      }
+    },
+    "agy": {
+      "session_id": null,
+      "tokens": {
+        "input": null,
+        "output": null,
+        "reasoning": null,
+        "cache_read": null,
+        "cache_write": null,
+        "total": null,
+        "source": null
+      },
+      "cost": {
+        "normalized_public_estimate_usd": null,
+        "vendor_reported_usd": null,
+        "availability": "Not extracted for this run from committed artifacts; left unavailable rather than guessed."
+      },
+      "process": {
+        "agent_red_test_evidence": false,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": true,
+        "human_interventions": 0
+      },
+      "model": "Gemini 3.5 Flash Medium",
+      "provider": "Google AI Pro / Antigravity",
+      "cli_version": "1.0.10",
+      "label": "Antigravity agy / Gemini 3.5 Flash Medium",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 90,
+        "notes": "Correct JSON export; process score based on red/green/smoke evidence in agent log and diff minimality."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 147.78,
+      "changed_files": 1,
+      "diff_added_lines": 6,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "json_smoke_passed": true
+      }
+    }
+  },
+  "pricing_basis": {
+    "normalized_public_estimate_formula": "(input_tokens * input_price + cache_read_tokens * cached_input_price + (output_tokens + reasoning_tokens) * output_price) / 1,000,000",
+    "models": {
+      "glm-5.2": {
+        "source": "Z.AI official pricing",
+        "url": "https://docs.z.ai/guides/overview/pricing",
+        "input_per_mtok": 1.4,
+        "cached_input_per_mtok": 0.26,
+        "output_per_mtok": 4.4,
+        "notes": "GLM-5.2 prices per 1M tokens: input $1.40, cached input $0.26, output $4.40. Reasoning tokens, when separately reported, are treated as output tokens for normalized estimates."
+      },
+      "gpt-5.5": {
+        "source": "OpenAI official API pricing, standard short-context",
+        "url": "https://developers.openai.com/api/docs/pricing",
+        "input_per_mtok": 5.0,
+        "cached_input_per_mtok": 0.5,
+        "output_per_mtok": 30.0,
+        "notes": "gpt-5.5 standard short-context prices per 1M tokens: input $5.00, cached input $0.50, output $30.00. Reasoning tokens are treated as output tokens."
+      }
+    },
+    "limitations": [
+      "Estimates are not invoices; subscriptions, routing, discounts, regional uplift, long-context tiers, and provider billing may differ.",
+      "agy remains unavailable because no reliable token counts were exported."
+    ]
+  }
+}

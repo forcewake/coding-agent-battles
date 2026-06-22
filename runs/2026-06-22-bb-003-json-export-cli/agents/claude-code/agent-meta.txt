@@ -1,0 +1,6 @@
+agent=claude-code
+workspace=/home/forcewake/coding-agent-battles-init/runs/2026-06-22-bb-003-json-export-cli/agents/claude-code/workspace
+exit_code=0
+timed_out=False
+wall_seconds=52.901
+command=claude --print --output-format json --dangerously-skip-permissions --no-session-persistence --max-budget-usd 1.00 <PROMPT>
