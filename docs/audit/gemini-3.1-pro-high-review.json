@@ -1,0 +1,39 @@
+{
+  "verdict": "REQUEST_CHANGES",
+  "summary": {
+    "blockers": 1,
+    "major": 2,
+    "minor": 0
+  },
+  "issues": [
+    {
+      "severity": "blocker",
+      "claim": "Telemetry (token/cost) values are derived from exact per-run attribution.",
+      "location": "docs/site-data.json (telemetry_source fields)",
+      "expected_evidence": "Logs or JSON payloads containing actual token usage should be committed in the agent run directories to prove usage.",
+      "actual_evidence": "Telemetry sources point to uncommitted local/private tools like 'local MiMoCode SQLite store' and 'ccusage' databases, making the core cost/token claims completely unauditable from the repository.",
+      "recommendation": "Commit the subset of database records or local tool logs that prove these token counts, or clearly mark the runs as relying on unverifiable local telemetry."
+    },
+    {
+      "severity": "major",
+      "claim": "Normalized public cost formula treats reasoning tokens as output tokens.",
+      "location": "docs/site-data.json (pricingBasis and Codex CLI cost fields)",
+      "expected_evidence": "Codex CLI's cost should include reasoning tokens as stated. In BB-002, the formula evaluates to 0.3877 ((37184*5 + 122880*0.5 + (3260+1418)*30) / 1M).",
+      "actual_evidence": "Codex CLI's actual normalized cost is reported as 0.34516, which exactly matches the calculation when reasoning tokens (1418) are completely dropped. The data directly contradicts the claimed methodology.",
+      "recommendation": "Fix the pricing calculation to actually include reasoning tokens, or update the public methodology notes to explicitly state that reasoning tokens are excluded for certain agents/models."
+    },
+    {
+      "severity": "major",
+      "claim": "Execution quality 0-100 composite is transparent and fair.",
+      "location": "docs/site-data.json (agy processComponents.token_efficiency)",
+      "expected_evidence": "An agent with explicitly 'null' tokens and 'unavailable' telemetry should either receive 0 points or have the component omitted.",
+      "actual_evidence": "The 'agy' agent consistently receives a 'token_efficiency' score of 3.75 (exactly 25% of the 15 max) despite having no token data. This acts as a hidden fallback that artificially boosts its overall execution score without explanation.",
+      "recommendation": "Assign 0 points for missing data, or clearly document the 25% fallback rule in the UI methodology."
+    }
+  ],
+  "methodology_notes": [
+    "The 70 PASS / 2 FAIL split is accurate and supported by committed verification logs (e.g., agy failing BB-005 and BB-009).",
+    "Claude Code's vendorCost discrepancy accurately reflects its hardcoded Anthropic pricing logic operating over a GLM-5.2 endpoint rather than a data error.",
+    "Dashboard fastest/cheapest/best claims correctly map to the underlying JSON dataset."
+  ]
+}

@@ -13,6 +13,7 @@ DATE = "2026-06-22"
 BULK_IDS = {"BB-002", "BB-004", "BB-005", "BB-006", "BB-007", "BB-008", "BB-009", "BB-010", "BB-011", "BB-012"}
 
 ZAI_PRICING = {"input": 1.4, "cache": 0.26, "output": 4.4}
+GPT55_PRICING = {"input": 5.0, "cache": 0.5, "output": 30.0}
 
 
 def norm_cost_glm(input_tokens=0, cache_read_tokens=0, output_tokens=0, reasoning_tokens=0):
@@ -20,6 +21,14 @@ def norm_cost_glm(input_tokens=0, cache_read_tokens=0, output_tokens=0, reasonin
         input_tokens * ZAI_PRICING["input"]
         + cache_read_tokens * ZAI_PRICING["cache"]
         + (output_tokens + reasoning_tokens) * ZAI_PRICING["output"]
+    ) / 1_000_000, 6)
+
+
+def norm_cost_gpt55(input_tokens=0, cache_read_tokens=0, output_tokens=0, reasoning_tokens=0):
+    return round((
+        input_tokens * GPT55_PRICING["input"]
+        + cache_read_tokens * GPT55_PRICING["cache"]
+        + (output_tokens + reasoning_tokens) * GPT55_PRICING["output"]
     ) / 1_000_000, 6)
 
 
@@ -163,14 +172,20 @@ def from_ccusage_glm(sess, source: str, strategy: str, use_total_cost: bool = Tr
 
 
 def from_ccusage_codex(sess):
+    input_tokens = int(sess.get("inputTokens") or 0)
+    cache_read = int(sess.get("cacheReadTokens") or 0)
+    cache_creation = int(sess.get("cacheCreationTokens") or 0)
+    output_tokens = int(sess.get("outputTokens") or 0)
+    reasoning = int(sess.get("reasoningOutputTokens") or 0)
+    cc_cost = round(float(sess.get("costUSD") or 0), 6)
     return {
         "tokens": int(sess.get("totalTokens") or 0),
-        "cost": round(float(sess.get("costUSD") or 0), 6),
-        "vendorCost": round(float(sess.get("costUSD") or 0), 6),
-        "telemetry_strategy": "ccusage_codex_session_exact_log_session_id",
+        "cost": norm_cost_gpt55(input_tokens=input_tokens, cache_read_tokens=cache_read, output_tokens=output_tokens, reasoning_tokens=reasoning),
+        "vendorCost": cc_cost,
+        "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
         "telemetry_source": "ccusage codex session + agents/codex-cli/agent.log session id",
         "telemetry_session": sess.get("sessionId"),
-        "token_breakdown": {"input": int(sess.get("inputTokens") or 0), "cache_read": int(sess.get("cacheReadTokens") or 0), "cache_creation": int(sess.get("cacheCreationTokens") or 0), "output": int(sess.get("outputTokens") or 0), "reasoning": int(sess.get("reasoningOutputTokens") or 0)},
+        "token_breakdown": {"input": input_tokens, "cache_read": cache_read, "cache_creation": cache_creation, "output": output_tokens, "reasoning": reasoning},
     }
 
 
@@ -180,7 +195,7 @@ def from_mimo(t):
         "cost": norm_cost_glm(input_tokens=t["input"], cache_read_tokens=t["cache_read"], output_tokens=t["output"], reasoning_tokens=t["reasoning"]),
         "vendorCost": round(float(t.get("vendor_cost") or 0), 6),
         "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
-        "telemetry_source": "~/.local/share/mimocode/mimocode.db session.directory + message.tokens",
+        "telemetry_source": "local MiMoCode SQLite store session.directory + message.tokens",
         "telemetry_session": t.get("sessionId"),
         "token_breakdown": {"input": t["input"], "cache_read": t["cache_read"], "cache_creation": t["cache_write"], "output": t["output"], "reasoning": t["reasoning"]},
     }
@@ -311,7 +326,7 @@ def main():
         "updatedAgentRuns": updated,
         "coverage": "50/60 bulk runs; agy remains unavailable",
         "sources": [
-            "ccusage codex exact session id from agent.log",
+            "ccusage codex exact session id from agent.log; normalized public cost recomputed from input/cache/output/reasoning tokens, vendorCost preserves ccusage native cost",
             "ccusage opencode exact session id from opencode.log directory",
             "ccusage pi exact projectPath",
             "Claude Code agent-output.json usage",

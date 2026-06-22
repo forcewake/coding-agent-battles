@@ -1,0 +1,40 @@
+{
+  "verdict": "APPROVE_WITH_NOTES",
+  "summary": {
+    "blockers": 0,
+    "major": 2,
+    "minor": 1
+  },
+  "issues": [
+    {
+      "severity": "major",
+      "claim": "Execution quality assigns 0 token-efficiency points when token telemetry is unavailable; agy can still receive speed/baseline/exit points but not token-efficiency credit.",
+      "location": "docs/site-data.json (pricingBasis.limitations)",
+      "expected_evidence": "The Execution Quality formula must include a token-efficiency component if the methodology claims it penalizes agents (assigns 0 points) for missing token telemetry.",
+      "actual_evidence": "The Execution Quality score formula '40 correctness + 15 red-baseline + 15 smoke + 15 independent verify + 5 clean agent exit + 10 speed percentile' sums to exactly 100 with NO token-efficiency component. No agent receives token-efficiency points in this score, making the claim false and implying an unfair methodology penalty against runs with missing telemetry (such as agy).",
+      "recommendation": "Rewrite the limitation to transparently state that Execution Quality entirely excludes token-efficiency for all agents, removing the phrase about assigning '0 token-efficiency points'."
+    },
+    {
+      "severity": "major",
+      "claim": "Runs for early scenarios possess complete execution and telemetry evidence.",
+      "location": "docs/audit/claim-ledger.md, docs/site-data.json",
+      "expected_evidence": "result.json artifacts and per-row telemetry provenance should exist for all executed agent runs.",
+      "actual_evidence": "Legacy runs for BB-001 and BB-003 lack result.json and lack per-row telemetry provenance (as natively flagged by the claim ledger as major warnings). Their verdicts are supported only by secondary metrics/verify.log files.",
+      "recommendation": "Accept the legacy gap but ensure the UI explicitly flags these specific early runs as having incomplete artifact and telemetry provenance."
+    },
+    {
+      "severity": "minor",
+      "claim": "OpenCode total tokens equal the sum of its token breakdown components.",
+      "location": "docs/site-data.json, docs/audit/claim-ledger.md",
+      "expected_evidence": "The sum of input, cache_read, cache_creation, output, and reasoning tokens should exactly equal the reported total tokens.",
+      "actual_evidence": "OpenCode token breakdown does not sum exactly to total for scenarios BB-002 and BB-004 through BB-012 (e.g., in BB-002: 3419 + 101696 + 721 = 105836, but reported tokens is 105968).",
+      "recommendation": "Document this specific provider logging discrepancy in the UI or normalize the breakdown components so they sum to the published total."
+    }
+  ],
+  "methodology_notes": [
+    "PASS/FAIL representations are entirely accurate; both 'agy' failures (BB-005, BB-009) match verifyExit: 1 and verdict: FAIL in raw committed artifacts.",
+    "Fastest/cheapest/best claims per scenario correctly evaluate only passing agents, accurately placing 'opencode' as fastest passing in BB-009 despite 'agy' executing with a shorter wall time before failing.",
+    "Normalized public cost vs vendorCost is clearly separated where applicable (e.g., Codex reasoning token conversions).",
+    "Reliance on uncommitted sqlite/db files and private provider logs is strictly referenced through documented telemetry-provenance fields, adhering to the project's evidence hierarchy and explicit ledger rules."
+  ]
+}

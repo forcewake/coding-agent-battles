@@ -31,8 +31,8 @@
     "scenario": "BB-002",
     "agent": "codex-cli",
     "tokens": 163324,
-    "cost": 0.34516,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.3877,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-004",
@@ -66,8 +66,8 @@
     "scenario": "BB-004",
     "agent": "codex-cli",
     "tokens": 327859,
-    "cost": 0.757551,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.933381,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-005",
@@ -101,8 +101,8 @@
     "scenario": "BB-005",
     "agent": "codex-cli",
     "tokens": 252306,
-    "cost": 0.400477,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.431287,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-006",
@@ -136,8 +136,8 @@
     "scenario": "BB-006",
     "agent": "codex-cli",
     "tokens": 204192,
-    "cost": 0.260009,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.293369,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-007",
@@ -171,8 +171,8 @@
     "scenario": "BB-007",
     "agent": "codex-cli",
     "tokens": 176231,
-    "cost": 0.41806,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.5011,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-008",
@@ -206,8 +206,8 @@
     "scenario": "BB-008",
     "agent": "codex-cli",
     "tokens": 233649,
-    "cost": 0.356317,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.383047,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-009",
@@ -241,8 +241,8 @@
     "scenario": "BB-009",
     "agent": "codex-cli",
     "tokens": 197851,
-    "cost": 0.438998,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.479018,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-010",
@@ -276,8 +276,8 @@
     "scenario": "BB-010",
     "agent": "codex-cli",
     "tokens": 284455,
-    "cost": 0.496041,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.530691,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-011",
@@ -311,8 +311,8 @@
     "scenario": "BB-011",
     "agent": "codex-cli",
     "tokens": 204368,
-    "cost": 0.400817,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.438527,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   },
   {
     "scenario": "BB-012",
@@ -346,7 +346,7 @@
     "scenario": "BB-012",
     "agent": "codex-cli",
     "tokens": 167667,
-    "cost": 0.424154,
-    "strategy": "ccusage_codex_session_exact_log_session_id"
+    "cost": 0.451874,
+    "strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost"
   }
 ]

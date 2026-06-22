@@ -202,7 +202,7 @@ def write_scenario_pages(scenarios):
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scenario {sid} — Coding Agent Battles</title>
   <meta name="description" content="Scenario {sid} results for Coding Agent Battles." />
-  <link rel="stylesheet" href="../styles.css?v=20260622-scenario-nav" />
+  <link rel="stylesheet" href="../styles.css?v=20260622-audit-final" />
   <script src="../vendor/d3.v7.min.js"></script>
 </head>
 <body data-page="scenario" data-scenario-id="{slug}">
@@ -221,7 +221,7 @@ def write_scenario_pages(scenarios):
     </section>
   </main>
   <footer class="site-footer"><span>Built from committed benchmark artifacts.</span><a href="https://github.com/forcewake/coding-agent-battles" target="_blank" rel="noopener">forcewake/coding-agent-battles ↗</a></footer>
-  <script src="../app.js?v=20260622-scenario-nav" type="module"></script>
+  <script src="../app.js?v=20260622-audit-final" type="module"></script>
 </body>
 </html>
 '''

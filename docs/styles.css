@@ -590,6 +590,28 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .scenario-map-card strong { font-size: 13px; color: inherit; }
 .scenario-map-card p { margin: 0; font-size: 11px; color: var(--ink-dim); }
 
+.scenario-warnings {
+  display: grid;
+  gap: 8px;
+  margin: -8px 0 22px;
+}
+.scenario-warning {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(245,166,35,.28);
+  background: rgba(245,166,35,.08);
+  color: var(--ink-muted);
+  font-size: 12px;
+}
+.scenario-warning strong {
+  color: var(--warn);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
 /* Scenario header inside panel */
 .sp-header {
   display: flex;
@@ -706,6 +728,13 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-weight: 800;
   color: var(--ink);
   font-family: var(--font-mono);
+}
+.spa-metric-sub {
+  display: block;
+  margin-top: 2px;
+  font: 10px/1.2 var(--font-sans);
+  color: var(--ink-dim);
+  letter-spacing: .02em;
 }
 
 .spa-pills {

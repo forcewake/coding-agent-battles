@@ -1,0 +1,48 @@
+{
+  "verdict": "REQUEST_CHANGES",
+  "summary": {
+    "blockers": 0,
+    "major": 2,
+    "minor": 2
+  },
+  "issues": [
+    {
+      "severity": "major",
+      "claim": "Every number links to committed logs, diffs, and machine-readable metrics.",
+      "location": "docs/index.html",
+      "expected_evidence": "Raw databases/logs supporting token/cost numbers should be committed in the repository.",
+      "actual_evidence": "docs/audit/telemetry-provenance.md explicitly states that raw provider logs and ccusage databases are 'intentionally not committed' due to private data. Several agents rely on these uncommitted local extracts.",
+      "recommendation": "Reword the dashboard claim to acknowledge that cost metrics are sanitized local extracts, or restrict the 'committed logs' claim to pass/fail and wall-clock data."
+    },
+    {
+      "severity": "major",
+      "claim": "Agents without cost telemetry appear at the right edge at their actual execution score.",
+      "location": "docs/index.html",
+      "expected_evidence": "An 'actual execution score' should reflect the agent's task execution quality independently of benchmark tooling limitations.",
+      "actual_evidence": "docs/site-data.json processComponents shows agents without telemetry (e.g., agy) are penalized 20 points (0 for 'telemetry' and 'token_efficiency') simply because the benchmark tool cannot extract their tokens. This makes the 0-100 composite an unfair comparison.",
+      "recommendation": "Do not penalize agents 20 points for a benchmark tooling limitation. Normalize the execution score to exclude token/telemetry points for these agents, or add a prominent UI disclaimer that their score is artificially docked."
+    },
+    {
+      "severity": "minor",
+      "claim": "Normalized public cost is clearly separated from vendor/native cost.",
+      "location": "docs/app.js",
+      "expected_evidence": "The UI should display both the normalized public cost and vendor/native cost to ensure clear visual separation.",
+      "actual_evidence": "While docs/site-data.json contains both 'cost' and 'vendorCost', docs/app.js only renders the normalized 'cost'. The vendor/native cost is completely hidden from the visual dashboard and scenario detail cards.",
+      "recommendation": "Update docs/app.js to render 'vendorCost' alongside the normalized cost in the scenario detail cards, making the distinction transparent to users."
+    },
+    {
+      "severity": "minor",
+      "claim": "Exact per-run token telemetry breakdown sums to total tokens.",
+      "location": "docs/audit/claim-ledger.json",
+      "expected_evidence": "The sum of token_breakdown components (input + cache_read + output + reasoning) should exactly equal the reported total tokens.",
+      "actual_evidence": "The deterministic ledger flags 10 minor warnings where the token breakdown sum does not match the total (e.g., BB-002 OpenCode has candidates=[105836, 105836] but tokens=105968).",
+      "recommendation": "Investigate the parsing script to ensure all token types are accounted for, or add a methodology note explaining the discrepancy (e.g., missing system prompt tokens)."
+    }
+  ],
+  "methodology_notes": [
+    "The deterministic ledger correctly verified scenario counts (12), agent runs (72), and passes (70), but did not validate UI wording against the telemetry provenance file.",
+    "Merging benchmark tooling capabilities (telemetry extraction support) into the agent's 'Execution quality' score breaks cross-agent comparability.",
+    "PASS/FAIL is fairly represented as binary in the dashboard, matching the 70 PASS and 2 FAIL reality.",
+    "Codex normalized public cost appropriately includes reasoning tokens as output tokens."
+  ]
+}

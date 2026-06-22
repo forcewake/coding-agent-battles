@@ -9,7 +9,7 @@
   "agentCount": 6,
   "fastest": "claude-code",
   "cheapest": "pi",
-  "processBest": "pi",
+  "processBest": "codex-cli",
   "agents": [
     {
       "id": "opencode",
@@ -21,18 +21,16 @@
       "tokens": 149488,
       "cost": 0.051295,
       "patch": 100,
-      "process": 66,
+      "process": 64,
       "red": false,
       "smoke": true,
       "processComponents": {
-        "correctness": 30,
+        "correctness": 40,
         "baseline_red": 0,
-        "smoke": 10,
+        "smoke": 15,
         "independent_verify": 0,
         "agent_exit": 0,
-        "telemetry": 5,
-        "speed": 12.81,
-        "token_efficiency": 8.36
+        "speed": 8.54
       },
       "processLabel": "execution-quality composite"
     },
@@ -46,18 +44,16 @@
       "tokens": 156994,
       "cost": 0.072912,
       "patch": 100,
-      "process": 68,
+      "process": 65,
       "red": false,
       "smoke": true,
       "processComponents": {
-        "correctness": 30,
+        "correctness": 40,
         "baseline_red": 0,
-        "smoke": 10,
+        "smoke": 15,
         "independent_verify": 0,
         "agent_exit": 0,
-        "telemetry": 5,
-        "speed": 15.0,
-        "token_efficiency": 8.01
+        "speed": 10.0
       },
       "processLabel": "execution-quality composite"
     },
@@ -71,18 +67,16 @@
       "tokens": 330730,
       "cost": 0.108728,
       "patch": 100,
-      "process": 53,
+      "process": 61,
       "red": false,
       "smoke": true,
       "processComponents": {
-        "correctness": 30,
+        "correctness": 40,
         "baseline_red": 0,
-        "smoke": 10,
+        "smoke": 15,
         "independent_verify": 0,
         "agent_exit": 0,
-        "telemetry": 5,
-        "speed": 8.48,
-        "token_efficiency": 0.0
+        "speed": 5.65
       },
       "processLabel": "execution-quality composite"
     },
@@ -96,18 +90,16 @@
       "tokens": 5512,
       "cost": 0.002751,
       "patch": 100,
-      "process": 74,
+      "process": 65,
       "red": false,
       "smoke": true,
       "processComponents": {
-        "correctness": 30,
+        "correctness": 40,
         "baseline_red": 0,
-        "smoke": 10,
+        "smoke": 15,
         "independent_verify": 0,
         "agent_exit": 0,
-        "telemetry": 5,
-        "speed": 14.46,
-        "token_efficiency": 15.0
+        "speed": 9.64
       },
       "processLabel": "execution-quality composite"
     },
@@ -121,18 +113,16 @@
       "tokens": 242829,
       "cost": 1.430545,
       "patch": 100,
-      "process": 66,
+      "process": 75,
       "red": true,
       "smoke": true,
       "processComponents": {
-        "correctness": 30,
-        "baseline_red": 10,
-        "smoke": 10,
+        "correctness": 40,
+        "baseline_red": 15,
+        "smoke": 15,
         "independent_verify": 0,
         "agent_exit": 0,
-        "telemetry": 5,
-        "speed": 6.77,
-        "token_efficiency": 4.05
+        "speed": 4.51
       },
       "processLabel": "execution-quality composite"
     },
@@ -146,18 +136,16 @@
       "tokens": null,
       "cost": null,
       "patch": 100,
-      "process": 44,
+      "process": 55,
       "red": false,
       "smoke": true,
       "processComponents": {
-        "correctness": 30,
+        "correctness": 40,
         "baseline_red": 0,
-        "smoke": 10,
+        "smoke": 15,
         "independent_verify": 0,
         "agent_exit": 0,
-        "telemetry": 0,
-        "speed": 0.0,
-        "token_efficiency": 3.75
+        "speed": 0.0
       },
       "processLabel": "execution-quality composite"
     }
@@ -167,5 +155,11 @@
     "metrics": "runs/2026-06-22-bb-003-json-export-cli/metrics.md",
     "json": "runs/2026-06-22-bb-003-json-export-cli/metrics.json"
   },
-  "slug": "bb-003"
+  "slug": "bb-003",
+  "provenanceWarnings": [
+    {
+      "label": "Legacy evidence gap",
+      "detail": "This early run predates row-level result.json and telemetry provenance. Verdicts are backed by metrics/results/verify logs; token/cost rows are legacy published metrics without per-row provenance."
+    }
+  ]
 }

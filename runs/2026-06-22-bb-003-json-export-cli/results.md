@@ -6,12 +6,12 @@ Feature addition: add stable JSON export while preserving text UX; differentiate
 
 | Agent | Verdict | Wall | Agent exit | Verify exit | Patch | Execution |
 |---|---:|---:|---:|---:|---:|---:|
-| OpenCode | PASS | 66.732s | n/a | n/a | 100 | 66 |
-| Claude | PASS | 52.901s | n/a | n/a | 100 | 68 |
-| MiMo | PASS | 94.151s | n/a | n/a | 100 | 53 |
-| Pi | PASS | 56.314s | n/a | n/a | 100 | 74 |
-| Codex | PASS | 104.966s | n/a | n/a | 100 | 66 |
-| agy | PASS | 147.780s | n/a | n/a | 100 | 44 |
+| OpenCode | PASS | 66.732s | n/a | n/a | 100 | 64 |
+| Claude | PASS | 52.901s | n/a | n/a | 100 | 65 |
+| MiMo | PASS | 94.151s | n/a | n/a | 100 | 61 |
+| Pi | PASS | 56.314s | n/a | n/a | 100 | 65 |
+| Codex | PASS | 104.966s | n/a | n/a | 100 | 75 |
+| agy | PASS | 147.780s | n/a | n/a | 100 | 55 |
 
 ## Evidence
 

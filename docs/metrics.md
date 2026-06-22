@@ -33,16 +33,14 @@ Use two scores so we do not hide a perfect one-line patch behind bad/opaque proc
 
 | Dimension | Weight |
 |---|---:|
-| Correct final result (`PASS`) | 30 |
-| Captured failing baseline (`red✓`) | 10 |
-| Ran scenario smoke / user-visible proof (`smoke✓`) | 10 |
-| Independent verifier passed | 10 |
+| Correct final result (`PASS`) | 40 |
+| Captured failing baseline (`red✓`) | 15 |
+| Ran scenario smoke / user-visible proof (`smoke✓`) | 15 |
+| Independent verifier passed | 15 |
 | Agent process exited cleanly | 5 |
-| Token/cost telemetry attributed | 5 |
-| Scenario-local speed percentile | 15 |
-| Scenario-local token-efficiency percentile | 15 |
+| Scenario-local speed percentile | 10 |
 
-This replaces the old placeholder `PASS=90 / FAIL=25` score. Speed and token efficiency are normalized within each scenario, so the score separates agents that all passed the same task without pretending different task sizes are directly comparable.
+Execution quality deliberately excludes token/cost telemetry. Efficiency is shown separately in token and cost panels so agents are not penalized for benchmark tooling gaps such as unavailable Antigravity telemetry.
 
 ## Cost and token collection notes
 
@@ -59,9 +57,9 @@ npx --yes ccusage@latest gemini session --json
 
 Run attribution still matters: if a ccusage report aggregates a source/day but does not expose enough workspace/session metadata to tie a row to a specific benchmark run, save the ccusage output as cross-check evidence and fall back to the raw source that can be matched by workspace/session id.
 
-- **OpenCode**: primary `ccusage opencode session --json`; fallback/cross-check direct SQLite from `~/.local/share/opencode/opencode.db` matched by workspace directory.
-- **MiMoCode**: not currently a ccusage focused namespace; use direct SQLite from `~/.local/share/mimocode/mimocode.db` until a compatible ccusage/source adapter exists.
-- **Codex CLI**: primary `ccusage codex session --json`; fallback/cross-check Codex JSONL token events under `~/.codex/sessions/`.
+- **OpenCode**: primary `ccusage opencode session --json`; fallback/cross-check direct local OpenCode store matched by workspace directory.
+- **MiMoCode**: not currently a ccusage focused namespace; use direct local MiMoCode SQLite extraction until a compatible ccusage/source adapter exists.
+- **Codex CLI**: primary `ccusage codex session --json`; fallback/cross-check local Codex JSONL token events when available.
 - **Claude Code**: primary `ccusage claude session --json` when persistent Claude project logs exist; fallback per-run `claude --print --output-format json` when the harness intentionally disables session persistence.
 - **Pi Coding Agent**: primary `ccusage pi session --json`; fallback/cross-check Pi `--mode json` JSONL and Tokscale.
 - **Hermes Agent**: `ccusage hermes session --json` can report Hermes controller-session usage from `$HERMES_HOME/state.db`; keep this separate from participant-agent economics unless explicitly measuring controller overhead.

@@ -6,12 +6,12 @@ Safe SQLite upgrade/downgrade preserving rows and idempotent upgrade behavior.
 
 | Agent | Verdict | Wall | Agent exit | Verify exit | Patch | Execution |
 |---|---:|---:|---:|---:|---:|---:|
-| OpenCode | PASS | 48.124s | 0 | 0 | 100 | 98 |
-| Claude | PASS | 86.768s | 0 | 0 | 100 | 79 |
-| MiMo | PASS | 82.405s | 0 | 0 | 100 | 79 |
-| Pi | PASS | 137.179s | 0 | 0 | 100 | 85 |
-| Codex | PASS | 122.860s | 0 | 0 | 100 | 74 |
-| agy | PASS | 74.759s | 0 | 0 | 100 | 79 |
+| OpenCode | PASS | 48.124s | 0 | 0 | 100 | 100 |
+| Claude | PASS | 86.768s | 0 | 0 | 100 | 96 |
+| MiMo | PASS | 82.405s | 0 | 0 | 100 | 96 |
+| Pi | PASS | 137.179s | 0 | 0 | 100 | 90 |
+| Codex | PASS | 122.860s | 0 | 0 | 100 | 92 |
+| agy | PASS | 74.759s | 0 | 0 | 100 | 97 |
 
 ## Evidence
 

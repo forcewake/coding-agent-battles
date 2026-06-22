@@ -39,17 +39,15 @@ def compute_scenario_scores(s: dict) -> None:
         tokens_known = isinstance(a.get("tokens"), (int, float))
         cost_known = isinstance(a.get("cost"), (int, float))
         speed_norm = norm_low_better(a.get("wall"), wall_values)
-        token_norm = norm_low_better(a.get("tokens"), token_values) if tokens_known else 0.25
+        token_norm = norm_low_better(a.get("tokens"), token_values) if tokens_known else 0.0
 
         components = {
-            "correctness": 30 if verdict_pass else 0,
-            "baseline_red": 10 if a.get("red") else 0,
-            "smoke": 10 if a.get("smoke") else 0,
-            "independent_verify": 10 if verify_exit_ok else 0,
+            "correctness": 40 if verdict_pass else 0,
+            "baseline_red": 15 if a.get("red") else 0,
+            "smoke": 15 if a.get("smoke") else 0,
+            "independent_verify": 15 if verify_exit_ok else 0,
             "agent_exit": 5 if agent_exit_ok else 0,
-            "telemetry": (3 if tokens_known else 0) + (2 if cost_known else 0),
-            "speed": round(15 * speed_norm, 2),
-            "token_efficiency": round(15 * token_norm, 2),
+            "speed": round(10 * speed_norm, 2),
         }
         a["process"] = int(round(min(100, sum(components.values()))))
         a["processComponents"] = components
@@ -164,12 +162,11 @@ def main() -> None:
     data["agentProfiles"] = profiles
     data.setdefault("scoreBasis", {})["executionQualityComposite"] = {
         "label": "Execution quality 0–100 composite",
-        "formula": "30 correctness + 10 red-baseline + 10 smoke + 10 independent verify + 5 clean agent exit + 5 telemetry + 15 speed percentile + 15 token-efficiency percentile",
+        "formula": "40 correctness + 15 red-baseline + 15 smoke + 15 independent verify + 5 clean agent exit + 10 speed percentile",
         "notes": [
-            "Speed and token-efficiency are normalized within each scenario so scores are comparable inside a task, not across unrelated task sizes.",
-            "Missing token telemetry receives a conservative token-efficiency floor of 25% rather than pretending tokens are zero.",
-            "This replaces the old pass=90/fail=25 placeholder score used by the bulk generator."
-        ]
+            "Speed is normalized within each scenario so scores are comparable inside a task, not across unrelated task sizes.",
+            "Token/cost telemetry is intentionally excluded from execution quality; efficiency is shown separately in token and cost panels."
+        ],
     }
     data_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     print("recomputed execution scores for", len(data.get("scenarios", [])), "scenarios")

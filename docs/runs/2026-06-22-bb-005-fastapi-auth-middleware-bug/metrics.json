@@ -21,7 +21,7 @@
       "tokens": 53635,
       "cost": 0.023405,
       "patch": 100,
-      "process": 99,
+      "process": 100,
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -38,14 +38,12 @@
       "vendorCost": 0.023405,
       "telemetry_session": "ses_10ff8e1ecffeargVXb45iNqSOv",
       "processComponents": {
-        "correctness": 30,
-        "baseline_red": 10,
-        "smoke": 10,
-        "independent_verify": 10,
+        "correctness": 40,
+        "baseline_red": 15,
+        "smoke": 15,
+        "independent_verify": 15,
         "agent_exit": 5,
-        "telemetry": 5,
-        "speed": 15.0,
-        "token_efficiency": 13.65
+        "speed": 10.0
       },
       "processLabel": "execution-quality composite"
     },
@@ -59,7 +57,7 @@
       "tokens": 153526,
       "cost": 0.050461,
       "patch": 100,
-      "process": 91,
+      "process": 99,
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -75,14 +73,12 @@
       },
       "vendorCost": 0.12447,
       "processComponents": {
-        "correctness": 30,
-        "baseline_red": 10,
-        "smoke": 10,
-        "independent_verify": 10,
+        "correctness": 40,
+        "baseline_red": 15,
+        "smoke": 15,
+        "independent_verify": 15,
         "agent_exit": 5,
-        "telemetry": 5,
-        "speed": 13.85,
-        "token_efficiency": 6.79
+        "speed": 9.24
       },
       "processLabel": "execution-quality composite"
     },
@@ -96,13 +92,13 @@
       "tokens": 128828,
       "cost": 0.041709,
       "patch": 100,
-      "process": 93,
+      "process": 99,
       "red": true,
       "smoke": true,
       "agentExit": 0,
       "verifyExit": 0,
       "telemetry_strategy": "mimocode_sqlite_session_exact_directory_normalized_public_cost",
-      "telemetry_source": "~/.local/share/mimocode/mimocode.db session.directory + message.tokens",
+      "telemetry_source": "local MiMoCode SQLite store session.directory + message.tokens",
       "token_breakdown": {
         "input": 4852,
         "cache_read": 123328,
@@ -113,14 +109,12 @@
       "vendorCost": 0.0,
       "telemetry_session": "ses_10ff98254ffetylkuzstqCDzNl",
       "processComponents": {
-        "correctness": 30,
-        "baseline_red": 10,
-        "smoke": 10,
-        "independent_verify": 10,
+        "correctness": 40,
+        "baseline_red": 15,
+        "smoke": 15,
+        "independent_verify": 15,
         "agent_exit": 5,
-        "telemetry": 5,
-        "speed": 14.14,
-        "token_efficiency": 8.49
+        "speed": 9.43
       },
       "processLabel": "execution-quality composite"
     },
@@ -134,7 +128,7 @@
       "tokens": 34046,
       "cost": 0.01722,
       "patch": 100,
-      "process": 88,
+      "process": 92,
       "red": true,
       "smoke": true,
       "agentExit": 0,
@@ -151,14 +145,12 @@
       "vendorCost": 0.0,
       "telemetry_session": "019ef007-ecdd-7ee6-aa9a-7d5208d4742a",
       "processComponents": {
-        "correctness": 30,
-        "baseline_red": 10,
-        "smoke": 10,
-        "independent_verify": 10,
+        "correctness": 40,
+        "baseline_red": 15,
+        "smoke": 15,
+        "independent_verify": 15,
         "agent_exit": 5,
-        "telemetry": 5,
-        "speed": 3.32,
-        "token_efficiency": 15.0
+        "speed": 2.22
       },
       "processLabel": "execution-quality composite"
     },
@@ -170,14 +162,14 @@
       "verdict": "PASS",
       "wall": 100.38,
       "tokens": 252306,
-      "cost": 0.400477,
+      "cost": 0.431287,
       "patch": 100,
-      "process": 70,
+      "process": 90,
       "red": true,
       "smoke": true,
       "agentExit": 0,
       "verifyExit": 0,
-      "telemetry_strategy": "ccusage_codex_session_exact_log_session_id",
+      "telemetry_strategy": "ccusage_codex_session_exact_log_session_id_normalized_public_cost",
       "telemetry_source": "ccusage codex session + agents/codex-cli/agent.log session id",
       "token_breakdown": {
         "input": 40855,
@@ -189,14 +181,12 @@
       "vendorCost": 0.400477,
       "telemetry_session": "2026/06/22/rollout-2026-06-22T17-51-20-019ef007-72d9-7a73-a570-4446e6c0d676",
       "processComponents": {
-        "correctness": 30,
-        "baseline_red": 10,
-        "smoke": 10,
-        "independent_verify": 10,
+        "correctness": 40,
+        "baseline_red": 15,
+        "smoke": 15,
+        "independent_verify": 15,
         "agent_exit": 5,
-        "telemetry": 5,
-        "speed": 0.0,
-        "token_efficiency": 0.0
+        "speed": 0.0
       },
       "processLabel": "execution-quality composite"
     },
@@ -210,7 +200,7 @@
       "tokens": null,
       "cost": null,
       "patch": 0,
-      "process": 33,
+      "process": 29,
       "red": true,
       "smoke": false,
       "agentExit": 0,
@@ -218,13 +208,11 @@
       "telemetry_strategy": "unavailable",
       "processComponents": {
         "correctness": 0,
-        "baseline_red": 10,
+        "baseline_red": 15,
         "smoke": 0,
         "independent_verify": 0,
         "agent_exit": 5,
-        "telemetry": 0,
-        "speed": 14.05,
-        "token_efficiency": 3.75
+        "speed": 9.37
       },
       "processLabel": "execution-quality composite"
     }

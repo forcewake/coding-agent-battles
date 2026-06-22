@@ -31,6 +31,12 @@ const AGENT_DISPLAY = {
 };
 const agentDisplay = (id) => AGENT_DISPLAY[id] || id;
 
+function vendorCostNote(a) {
+  if (!knownNumber(a?.vendorCost) || !knownNumber(a?.cost)) return '';
+  if (Math.abs(Number(a.vendorCost) - Number(a.cost)) < 0.000001) return '';
+  return `<span class="spa-metric-sub">native ${moneyFull(a.vendorCost)}</span>`;
+}
+
 const AGENT_COLORS = {
   'pi':         '#34d17a',
   'opencode':   '#4f8ef7',
@@ -535,7 +541,7 @@ function renderScenarioDetail(data, scenarioId) {
           </div>
           <div class="spa-metric">
             <span class="spa-metric-label">Cost</span>
-            <span class="spa-metric-value">${moneyFull(a.cost)}</span>
+            <span class="spa-metric-value">${moneyFull(a.cost)}${vendorCostNote(a)}</span>
           </div>
           <div class="spa-metric">
             <span class="spa-metric-label">Tokens</span>
@@ -558,8 +564,13 @@ function renderScenarioDetail(data, scenarioId) {
     <button class="sp-link sp-link-button" type="button" data-artifact-kind="${b.kind}" data-artifact-href="${b.href}" aria-pressed="${i === 0 ? 'true' : 'false'}">${b.label}</button>
   `).join('');
 
+  const warningsHtml = (s.provenanceWarnings || []).length
+    ? `<div class="scenario-warnings">${s.provenanceWarnings.map(w => `<div class="scenario-warning"><strong>${safe(w.label || 'Provenance note')}</strong><span>${safe(w.detail || w)}</span></div>`).join('')}</div>`
+    : '';
+
   setHTML('scenario-panel', `
     ${scenarioNavHtml}
+    ${warningsHtml}
     <div class="sp-header">
       <div class="sp-meta">
         <div class="sp-id">${s.id} · ${safe(s.type)} · ${safe(s.difficulty)}</div>

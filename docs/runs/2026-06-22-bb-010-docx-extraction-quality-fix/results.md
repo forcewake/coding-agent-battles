@@ -6,12 +6,12 @@ Improve OOXML/DOCX extraction to preserve paragraph/table order and XML entity d
 
 | Agent | Verdict | Wall | Agent exit | Verify exit | Patch | Execution |
 |---|---:|---:|---:|---:|---:|---:|
-| OpenCode | PASS | 67.775s | 0 | 0 | 100 | 97 |
-| Claude | PASS | 69.886s | 0 | 0 | 100 | 92 |
-| MiMo | PASS | 336.866s | 0 | 0 | 100 | 74 |
-| Pi | PASS | 79.757s | 0 | 0 | 100 | 99 |
-| Codex | PASS | 129.014s | 0 | 0 | 100 | 82 |
-| agy | PASS | 103.864s | 0 | 0 | 100 | 82 |
+| OpenCode | PASS | 67.775s | 0 | 0 | 100 | 100 |
+| Claude | PASS | 69.886s | 0 | 0 | 100 | 100 |
+| MiMo | PASS | 336.866s | 0 | 0 | 100 | 90 |
+| Pi | PASS | 79.757s | 0 | 0 | 100 | 100 |
+| Codex | PASS | 129.014s | 0 | 0 | 100 | 98 |
+| agy | PASS | 103.864s | 0 | 0 | 100 | 99 |
 
 ## Evidence
 

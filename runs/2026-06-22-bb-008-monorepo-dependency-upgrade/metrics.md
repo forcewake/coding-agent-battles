@@ -11,9 +11,9 @@
 
 | Agent | Verdict | Wall | Tokens | Normalized public cost | Patch | Execution score | Notes |
 |---|---:|---:|---:|---:|---:|---:|---|
-| OpenCode | PASS | 42.590s | 86,204 | $0.035012 | 100 | 93 | execution-quality composite |
-| Claude | PASS | 34.085s | 124,808 | $0.060092 | 100 | 93 | execution-quality composite |
-| MiMo | PASS | 42.267s | 187,931 | $0.055319 | 100 | 86 | execution-quality composite |
-| Pi | PASS | 54.993s | 22,078 | $0.011694 | 100 | 94 | execution-quality composite |
-| Codex | PASS | 82.653s | 233,649 | $0.356317 | 100 | 70 | execution-quality composite |
-| agy | PASS | 34.446s | n/a | n/a | 100 | 84 | execution-quality composite |
+| OpenCode | PASS | 42.590s | 86,204 | $0.035012 | 100 | 98 | execution-quality composite |
+| Claude | PASS | 34.085s | 124,808 | $0.060092 | 100 | 100 | execution-quality composite |
+| MiMo | PASS | 42.267s | 187,931 | $0.055319 | 100 | 98 | execution-quality composite |
+| Pi | PASS | 54.993s | 22,078 | $0.011694 | 100 | 96 | execution-quality composite |
+| Codex | PASS | 82.653s | 233,649 | $0.383047 | 100 | 90 | execution-quality composite |
+| agy | PASS | 34.446s | n/a | n/a | 100 | 100 | execution-quality composite |

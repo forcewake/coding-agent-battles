@@ -1,0 +1,49 @@
+{
+  "verdict": "APPROVE_WITH_NOTES",
+  "summary": {
+    "blockers": 0,
+    "major": 2,
+    "minor": 2
+  },
+  "issues": [
+    {
+      "severity": "major",
+      "claim": "All agent runs have complete standard artifacts including result.json",
+      "location": "runs/2026-06-22-bb-001-broken-cli-argument-telemetry-rerun/agents/*/result.json and runs/2026-06-22-bb-003-json-export-cli/agents/*/result.json",
+      "expected_evidence": "result.json files present for all agents in these scenarios",
+      "actual_evidence": "Missing result.json for legacy runs; verdict is supported by verify.log and metrics instead",
+      "recommendation": "Accept as legacy artifact gap, or rerun BB-001 and BB-003 to match the standard artifact schema."
+    },
+    {
+      "severity": "major",
+      "claim": "All token/cost values have per-row telemetry provenance",
+      "location": "docs/site-data.json (BB-001 and BB-003 scenarios)",
+      "expected_evidence": "telemetry_strategy and telemetry_source populated for every agent run with cost data",
+      "actual_evidence": "Strategy and source are null for BB-001 and BB-003; they are legacy published metrics without row-level provenance",
+      "recommendation": "Accept legacy caveat as documented, or rerun the scenarios to capture full telemetry."
+    },
+    {
+      "severity": "minor",
+      "claim": "Token breakdowns sum exactly to total tokens",
+      "location": "docs/site-data.json (OpenCode runs in BB-002, BB-004 through BB-012)",
+      "expected_evidence": "Sum of token_breakdown components exactly equals the total tokens field",
+      "actual_evidence": "Slight mismatches (e.g. breakdown sum 105836 vs total 105968) due to unexposed provider accounting categories",
+      "recommendation": "The limitation is already documented in docs/site-data.json limitations; no code fix required."
+    },
+    {
+      "severity": "minor",
+      "claim": "All telemetry evidence is fully raw-replayable from committed files",
+      "location": "docs/audit/telemetry-provenance.json",
+      "expected_evidence": "Committed raw agent logs or telemetry databases for all rows claiming token costs",
+      "actual_evidence": "Several runs reference private/local paths (e.g., local MiMoCode SQLite store or local ccusage sessions) that are not committed, categorized as *_not_raw_committed",
+      "recommendation": "Provide sanitized JSON exports of these local telemetry databases within the repository to allow full third-party validation without leaking private paths."
+    }
+  ],
+  "methodology_notes": [
+    "Dashboard correctly claims 12 scenarios, 72 runs, 70 passes, and 2 fails (verified in site-data.json and raw runs).",
+    "Fastest, cheapest, and best execution claims are correctly aggregated from the underlying wall-clock, cost, and process scores.",
+    "Execution quality is fully transparent and explicitly excludes token/cost efficiency, which are evaluated separately.",
+    "Normalized public cost is clearly separated from vendorCost throughout the dataset.",
+    "The UI is careful not to overclaim, explicitly pointing users to the audit pack for provenance caveats instead of claiming fully raw-backed telemetry for all rows."
+  ]
+}
