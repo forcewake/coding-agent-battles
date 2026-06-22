@@ -42,6 +42,7 @@ runs/YYYY-MM-DD-task-slug/
     opencode/
     agy/
     claude-code/
+    codex-cli/
   evidence/
 ```
 
