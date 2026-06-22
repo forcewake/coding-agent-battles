@@ -1,0 +1,86 @@
+✖ query searches title and description case-insensitively (1.776282ms)
+✖ tag filter combines with query and keeps order (0.28493ms)
+✖ empty state copy is product quality (0.329357ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 54.275216
+
+✖ failing tests:
+
+test at tests/filter.test.mjs:11:1
+✖ query searches title and description case-insensitively (1.776282ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   'OpenCode'
+  - ]
+  
+      at TestContext.<anonymous> (file:///home/forcewake/coding-agent-battles-init/tasks/BB-006-react-filter-search-ui/fixture/tests/filter.test.mjs:12:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ 'OpenCode' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/filter.test.mjs:16:1
+✖ tag filter combines with query and keeps order (0.28493ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      'OpenCode',
+  +   'Codex',
+      'Pi'
+    ]
+  
+      at TestContext.<anonymous> (file:///home/forcewake/coding-agent-battles-init/tasks/BB-006-react-filter-search-ui/fixture/tests/filter.test.mjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'OpenCode', 'Codex', 'Pi' ],
+    expected: [ 'OpenCode', 'Pi' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/filter.test.mjs:21:1
+✖ empty state copy is product quality (0.329357ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'Nothing here'
+  - 'No matching agents'
+       ^
+  
+      at TestContext.<anonymous> (file:///home/forcewake/coding-agent-battles-init/tasks/BB-006-react-filter-search-ui/fixture/tests/filter.test.mjs:22:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Nothing here',
+    expected: 'No matching agents',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

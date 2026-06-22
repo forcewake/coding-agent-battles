@@ -1,0 +1,396 @@
+{
+  "schema_version": "0.2",
+  "run_id": "2026-06-22-bb-001-broken-cli-argument-telemetry-rerun",
+  "task_id": "BB-001",
+  "task_name": "Broken CLI argument",
+  "date": "2026-06-22",
+  "accepted_change_count": 1,
+  "baseline": {
+    "red_verified": true,
+    "exit_code": 1,
+    "evidence": "evidence/baseline-failure.log"
+  },
+  "sources": {
+    "methodology": [
+      "https://artificialanalysis.ai/methodology/coding-agents-benchmarking",
+      "https://www.swebench.com",
+      "https://arxiv.org/html/2602.14337v2",
+      "https://arxiv.org/html/2508.18993v1",
+      "https://github.com/junhoyeo/tokscale",
+      "https://pi.dev/docs/latest/usage",
+      "https://github.com/google-antigravity/antigravity-cli/issues/366"
+    ],
+    "local_extractors": [
+      "OpenCode SQLite: ~/.local/share/opencode/opencode.db",
+      "MiMoCode SQLite: ~/.local/share/mimocode/mimocode.db",
+      "Codex JSONL + ccusage + Tokscale",
+      "Claude Code --output-format json",
+      "Pi --mode json + Tokscale",
+      "Antigravity transcript + Tokscale active sync attempts"
+    ]
+  },
+  "agents": {
+    "opencode": {
+      "session_id": "ses_110a248a5ffeyCA5ziakXzEXoa",
+      "tokens": {
+        "input": 3387,
+        "output": 917,
+        "reasoning": 171,
+        "cache_read": 59520,
+        "cache_write": 0,
+        "total": 63995,
+        "source": "OpenCode SQLite + Tokscale cross-check"
+      },
+      "cost": {
+        "vendor_reported_usd": 0.0,
+        "estimated_usd": null,
+        "note": "Vendor logs report $0 because this is plan/subscription-attributed; normalized public API estimate added for apples-to-apples comparison.",
+        "normalized_public_estimate_usd": 0.025004,
+        "normalized_public_pricing_basis": {
+          "source": "Z.AI official pricing",
+          "url": "https://docs.z.ai/guides/overview/pricing",
+          "input_per_mtok": 1.4,
+          "cached_input_per_mtok": 0.26,
+          "output_per_mtok": 4.4,
+          "notes": "GLM-5.2 prices per 1M tokens: input $1.40, cached input $0.26, output $4.40. Reasoning tokens, when separately reported, are treated as output tokens for normalized estimates."
+        },
+        "cost_per_accepted_change_usd": 0.025004
+      },
+      "process": {
+        "message_count": 7,
+        "tool_calls": {
+          "read": 9,
+          "edit": 1,
+          "bash": 2
+        },
+        "agent_red_test_evidence": false,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": true,
+        "human_interventions": 0
+      },
+      "model": "glm-5.2",
+      "provider": "zai-coding-plan",
+      "cli_version": "1.17.6",
+      "label": "OpenCode / GLM-5.2",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 88,
+        "notes": "Fastest rerun; pytest + CLI smoke; still edited before capturing a red run."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 35.587,
+      "changed_files": 1,
+      "diff_added_lines": 1,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "cli_smoke_passed": true
+      }
+    },
+    "claude-code": {
+      "session_id": "7fa30c93-8dac-4836-b2a5-9cf736514b24",
+      "tokens": {
+        "input": 5925,
+        "output": 851,
+        "reasoning": null,
+        "cache_read": 119232,
+        "cache_write": 0,
+        "total": 126008,
+        "source": "Claude Code --output-format json modelUsage"
+      },
+      "cost": {
+        "vendor_reported_usd": 0.110516,
+        "estimated_usd": null,
+        "note": "Claude JSON reports total_cost_usd for its configured provider; normalized GLM-5.2 public API estimate added for apples-to-apples comparison.",
+        "normalized_public_estimate_usd": 0.04304,
+        "normalized_public_pricing_basis": {
+          "source": "Z.AI official pricing",
+          "url": "https://docs.z.ai/guides/overview/pricing",
+          "input_per_mtok": 1.4,
+          "cached_input_per_mtok": 0.26,
+          "output_per_mtok": 4.4,
+          "notes": "GLM-5.2 prices per 1M tokens: input $1.40, cached input $0.26, output $4.40. Reasoning tokens, when separately reported, are treated as output tokens for normalized estimates."
+        },
+        "cost_per_accepted_change_usd": 0.04304
+      },
+      "process": {
+        "message_count": 7,
+        "tool_calls": null,
+        "agent_red_test_evidence": false,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": false,
+        "human_interventions": 0
+      },
+      "model": "glm-5.2[1m]",
+      "provider": "Claude Code configured provider",
+      "cli_version": "2.1.177",
+      "label": "Claude Code / GLM-5.2",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 74,
+        "notes": "Telemetry fixed via JSON; correct minimal patch, but raw step/tool trace is still opaque and no CLI smoke in agent log."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 40.68,
+      "changed_files": 1,
+      "diff_added_lines": 1,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "cli_smoke_passed": true
+      }
+    },
+    "mimo": {
+      "session_id": "ses_110a24e54ffe8ylIFek2PowbW8",
+      "tokens": {
+        "input": 22501,
+        "output": 820,
+        "reasoning": 137,
+        "cache_read": 105152,
+        "cache_write": 0,
+        "total": 128610,
+        "source": "MiMoCode SQLite direct extraction"
+      },
+      "cost": {
+        "vendor_reported_usd": 0.0,
+        "estimated_usd": null,
+        "note": "Vendor logs report $0 because this is plan/subscription-attributed; normalized public API estimate added for apples-to-apples comparison.",
+        "normalized_public_estimate_usd": 0.063052,
+        "normalized_public_pricing_basis": {
+          "source": "Z.AI official pricing",
+          "url": "https://docs.z.ai/guides/overview/pricing",
+          "input_per_mtok": 1.4,
+          "cached_input_per_mtok": 0.26,
+          "output_per_mtok": 4.4,
+          "notes": "GLM-5.2 prices per 1M tokens: input $1.40, cached input $0.26, output $4.40. Reasoning tokens, when separately reported, are treated as output tokens for normalized estimates."
+        },
+        "cost_per_accepted_change_usd": 0.063052
+      },
+      "process": {
+        "message_count": 6,
+        "tool_calls": {
+          "read": 8,
+          "edit": 1,
+          "bash": 1
+        },
+        "agent_red_test_evidence": false,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": false,
+        "human_interventions": 0
+      },
+      "model": "glm-5.2",
+      "provider": "zai-coding-plan",
+      "cli_version": "0.1.1",
+      "label": "MiMoCode / GLM-5.2",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 78,
+        "notes": "Correct and faster than previous run, but no red-test capture and no agent-owned smoke in this rerun."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 63.621,
+      "changed_files": 1,
+      "diff_added_lines": 1,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "cli_smoke_passed": true
+      }
+    },
+    "pi": {
+      "session_id": "019eef5d-c7b6-72e2-85b0-2b1ed456265b",
+      "tokens": {
+        "input": 4116,
+        "output": 1058,
+        "reasoning": 0,
+        "cache_read": 20736,
+        "cache_write": 0,
+        "total": 25910,
+        "source": "Pi JSON mode + Tokscale cross-check"
+      },
+      "cost": {
+        "vendor_reported_usd": 0.0,
+        "estimated_usd_tokscale": 0.01580896,
+        "note": "Provider JSON reports zero plan cost; normalized public GLM-5.2 estimate matches Tokscale estimate.",
+        "normalized_public_estimate_usd": 0.015809,
+        "normalized_public_pricing_basis": {
+          "source": "Z.AI official pricing",
+          "url": "https://docs.z.ai/guides/overview/pricing",
+          "input_per_mtok": 1.4,
+          "cached_input_per_mtok": 0.26,
+          "output_per_mtok": 4.4,
+          "notes": "GLM-5.2 prices per 1M tokens: input $1.40, cached input $0.26, output $4.40. Reasoning tokens, when separately reported, are treated as output tokens for normalized estimates."
+        },
+        "cost_per_accepted_change_usd": 0.015809
+      },
+      "process": {
+        "message_count": 8,
+        "tool_calls": {
+          "ls": 3,
+          "read": 6,
+          "bash": 3,
+          "edit": 1
+        },
+        "agent_red_test_evidence": true,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": true,
+        "human_interventions": 0
+      },
+      "model": "glm-5.2",
+      "provider": "zai-coding-cn",
+      "cli_version": "0.79.10",
+      "label": "Pi Coding Agent / GLM-5.2",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 96,
+        "notes": "Best telemetry/process mix: JSONL usage, red test, green test, and manual CLI smoke with low token count."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 70.733,
+      "changed_files": 1,
+      "diff_added_lines": 1,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "cli_smoke_passed": true
+      }
+    },
+    "codex-cli": {
+      "session_id": "019eef5d-c2f2-7a82-aa3f-c8c28edda010",
+      "tokens": {
+        "input": 41999,
+        "output": 4025,
+        "reasoning": 1404,
+        "cache_read": 272512,
+        "cache_write": 0,
+        "total": 318536,
+        "source": "ccusage codex session --json; Tokscale cross-check"
+      },
+      "cost": {
+        "estimated_usd_ccusage": 0.467001,
+        "estimated_usd_tokscale": 0.509121,
+        "actual_bill_usd": null,
+        "note": "Normalized estimate uses OpenAI public GPT-5.5 standard pricing and bills reasoning as output; ccusage local estimate is retained separately.",
+        "normalized_public_estimate_usd": 0.509121,
+        "normalized_public_pricing_basis": {
+          "source": "OpenAI official API pricing, standard short-context",
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "input_per_mtok": 5.0,
+          "cached_input_per_mtok": 0.5,
+          "output_per_mtok": 30.0,
+          "notes": "gpt-5.5 standard short-context prices per 1M tokens: input $5.00, cached input $0.50, output $30.00. Reasoning tokens are treated as output tokens."
+        },
+        "cost_per_accepted_change_usd": 0.509121
+      },
+      "process": {
+        "message_count": 15,
+        "tool_calls": {
+          "exec_command": null
+        },
+        "agent_red_test_evidence": true,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": false,
+        "human_interventions": 0
+      },
+      "model": "gpt-5.5",
+      "provider": "openai",
+      "cli_version": "0.137.0",
+      "label": "Codex CLI / GPT-5.5",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 87,
+        "notes": "Strong red-green transcript; highest total tokens and no agent-owned CLI smoke."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 114.752,
+      "changed_files": 1,
+      "diff_added_lines": 1,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "cli_smoke_passed": true
+      }
+    },
+    "agy": {
+      "session_id": "19b87b1e-f3a8-4ca6-af52-861e73175fd4",
+      "tokens": {
+        "input": null,
+        "output": null,
+        "reasoning": null,
+        "cache_read": null,
+        "cache_write": null,
+        "total": null,
+        "source": null,
+        "availability": "No reliable token export found. agy transcript has process data, but no usage fields; Tokscale antigravity sync returned 0 sessions while the CLI run was active."
+      },
+      "cost": {
+        "vendor_reported_usd": null,
+        "estimated_usd": null,
+        "availability": "Not available from local artifacts."
+      },
+      "process": {
+        "message_count": 13,
+        "tool_calls": {
+          "list_dir": 3,
+          "view_file": 3,
+          "run_command": 3,
+          "replace_file_content": 1
+        },
+        "agent_red_test_evidence": true,
+        "agent_pytest_evidence": true,
+        "agent_cli_smoke_evidence": false,
+        "human_interventions": 0,
+        "internal_errors": 1
+      },
+      "model": "Gemini 3.5 Flash Medium",
+      "provider": "Google AI Pro / Antigravity",
+      "cli_version": "1.0.10",
+      "label": "Antigravity agy / Gemini 3.5 Flash Medium",
+      "quality": {
+        "final_patch_score": 100,
+        "process_quality_score": 80,
+        "notes": "Correct and red-green; token/cost still unavailable despite active Tokscale sync attempts; one internal model error observed."
+      },
+      "agent_exit_code": 0,
+      "wall_seconds": 191.826,
+      "changed_files": 1,
+      "diff_added_lines": 1,
+      "diff_deleted_lines": 1,
+      "verification": {
+        "hermes_exit_code": 0,
+        "pytest_passed": true,
+        "cli_smoke_passed": true
+      }
+    }
+  },
+  "pricing_basis": {
+    "normalized_public_estimate_formula": "(input_tokens * input_price + cache_read_tokens * cached_input_price + (output_tokens + reasoning_tokens) * output_price) / 1,000,000",
+    "models": {
+      "glm-5.2": {
+        "source": "Z.AI official pricing",
+        "url": "https://docs.z.ai/guides/overview/pricing",
+        "input_per_mtok": 1.4,
+        "cached_input_per_mtok": 0.26,
+        "output_per_mtok": 4.4,
+        "notes": "GLM-5.2 prices per 1M tokens: input $1.40, cached input $0.26, output $4.40. Reasoning tokens, when separately reported, are treated as output tokens for normalized estimates."
+      },
+      "gpt-5.5": {
+        "source": "OpenAI official API pricing, standard short-context",
+        "url": "https://developers.openai.com/api/docs/pricing",
+        "input_per_mtok": 5.0,
+        "cached_input_per_mtok": 0.5,
+        "output_per_mtok": 30.0,
+        "notes": "gpt-5.5 standard short-context prices per 1M tokens: input $5.00, cached input $0.50, output $30.00. Reasoning tokens are treated as output tokens."
+      }
+    },
+    "limitations": [
+      "Estimates are not invoices; subscriptions, routing, discounts, regional uplift, long-context tiers, and provider billing may differ.",
+      "agy remains unavailable because no reliable token counts were exported."
+    ]
+  }
+}

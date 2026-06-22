@@ -1,0 +1,29 @@
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-002-csv-edge-case-parser/fixture/.venv/bin/python -m pip install -q -e . pytest
+
+[notice] A new release of pip is available: 24.0 -> 26.1.2
+[notice] To update, run: /home/forcewake/coding-agent-battles-init/tasks/BB-002-csv-edge-case-parser/fixture/.venv/bin/python -m pip install --upgrade pip
+[run] /home/forcewake/coding-agent-battles-init/tasks/BB-002-csv-edge-case-parser/fixture/.venv/bin/python -m pytest -q
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________________ test_quoted_commas_and_escaped_quotes _____________________
+
+    def test_quoted_commas_and_escaped_quotes():
+        data = (
+            'name,city,note\n'
+            '"Doe, Jane",Amsterdam,"likes ""quoted"" text"\n'
+            'John,Rotterdam,plain\n'
+            '\n'
+            'Alice,Amsterdam,"x,y"\n'
+        )
+>       assert summarize_people_csv(data) == {"rows": 3, "by_city": {"Amsterdam": 2, "Rotterdam": 1}}
+E       assert {'rows': 3, '...otterdam': 1}} == {'rows': 3, '...otterdam': 1}}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'by_city': {'Amsterdam': 1, 'Jane"': 1, 'Rotterdam': 1}} != {'by_city': {'Amsterdam': 2, 'Rotterdam': 1}}
+E         Use -v to get more diff
+
+tests/test_parser.py:12: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_parser.py::test_quoted_commas_and_escaped_quotes - assert {...
+1 failed in 0.02s

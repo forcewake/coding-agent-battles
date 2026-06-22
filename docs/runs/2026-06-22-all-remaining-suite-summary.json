@@ -1,0 +1,610 @@
+{
+  "tasks": 10,
+  "agents": 6,
+  "runs": 60,
+  "passes": 58,
+  "fails": 2,
+  "errors": 0,
+  "results": [
+    {
+      "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+      "task": "BB-002-csv-edge-case-parser",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 66.505,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+      "task": "BB-002-csv-edge-case-parser",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 80.638,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+      "task": "BB-002-csv-edge-case-parser",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 93.744,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+      "task": "BB-002-csv-edge-case-parser",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 101.812,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+      "task": "BB-002-csv-edge-case-parser",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 125.715,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-002-csv-edge-case-parser",
+      "task": "BB-002-csv-edge-case-parser",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 202.767,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+      "task": "BB-004-markdown-table-normalizer",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 113.3,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+      "task": "BB-004-markdown-table-normalizer",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 167.03,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+      "task": "BB-004-markdown-table-normalizer",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 190.22,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+      "task": "BB-005-fastapi-auth-middleware-bug",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 46.894,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+      "task": "BB-004-markdown-table-normalizer",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 169.013,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+      "task": "BB-005-fastapi-auth-middleware-bug",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 43.633,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+      "task": "BB-005-fastapi-auth-middleware-bug",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 47.22,
+      "verifyExit": 1,
+      "verdict": "FAIL"
+    },
+    {
+      "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+      "task": "BB-005-fastapi-auth-middleware-bug",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 47.969,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+      "task": "BB-004-markdown-table-normalizer",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 219.382,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-006-react-filter-search-ui",
+      "task": "BB-006-react-filter-search-ui",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 39.162,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-006-react-filter-search-ui",
+      "task": "BB-006-react-filter-search-ui",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 34.886,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+      "task": "BB-005-fastapi-auth-middleware-bug",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 100.38,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-006-react-filter-search-ui",
+      "task": "BB-006-react-filter-search-ui",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 37.526,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-005-fastapi-auth-middleware-bug",
+      "task": "BB-005-fastapi-auth-middleware-bug",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 87.805,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-006-react-filter-search-ui",
+      "task": "BB-006-react-filter-search-ui",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 54.147,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-006-react-filter-search-ui",
+      "task": "BB-006-react-filter-search-ui",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 79.096,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-006-react-filter-search-ui",
+      "task": "BB-006-react-filter-search-ui",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 93.299,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-004-markdown-table-normalizer",
+      "task": "BB-004-markdown-table-normalizer",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 247.114,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+      "task": "BB-007-sqlite-migration-rollback",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 48.124,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+      "task": "BB-007-sqlite-migration-rollback",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 82.405,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+      "task": "BB-008-monorepo-dependency-upgrade",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 42.267,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+      "task": "BB-008-monorepo-dependency-upgrade",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 42.59,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+      "task": "BB-007-sqlite-migration-rollback",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 74.759,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+      "task": "BB-007-sqlite-migration-rollback",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 86.768,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+      "task": "BB-008-monorepo-dependency-upgrade",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 34.446,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+      "task": "BB-008-monorepo-dependency-upgrade",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 34.085,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+      "task": "BB-007-sqlite-migration-rollback",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 122.86,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+      "task": "BB-008-monorepo-dependency-upgrade",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 54.993,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-007-sqlite-migration-rollback",
+      "task": "BB-007-sqlite-migration-rollback",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 137.179,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-008-monorepo-dependency-upgrade",
+      "task": "BB-008-monorepo-dependency-upgrade",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 82.653,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-009-observability-instrumentation",
+      "task": "BB-009-observability-instrumentation",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 58.357,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-009-observability-instrumentation",
+      "task": "BB-009-observability-instrumentation",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 43.784,
+      "verifyExit": 1,
+      "verdict": "FAIL"
+    },
+    {
+      "runId": "2026-06-22-bb-009-observability-instrumentation",
+      "task": "BB-009-observability-instrumentation",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 91.989,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-009-observability-instrumentation",
+      "task": "BB-009-observability-instrumentation",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 68.88,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-009-observability-instrumentation",
+      "task": "BB-009-observability-instrumentation",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 89.627,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+      "task": "BB-010-docx-extraction-quality-fix",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 67.775,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-009-observability-instrumentation",
+      "task": "BB-009-observability-instrumentation",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 100.717,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+      "task": "BB-010-docx-extraction-quality-fix",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 103.864,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+      "task": "BB-010-docx-extraction-quality-fix",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 69.886,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-011-greenfield-mini-product",
+      "task": "BB-011-greenfield-mini-product",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 49.366,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+      "task": "BB-010-docx-extraction-quality-fix",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 79.757,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-011-greenfield-mini-product",
+      "task": "BB-011-greenfield-mini-product",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 47.141,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-011-greenfield-mini-product",
+      "task": "BB-011-greenfield-mini-product",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 50.5,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+      "task": "BB-010-docx-extraction-quality-fix",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 129.014,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-011-greenfield-mini-product",
+      "task": "BB-011-greenfield-mini-product",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 95.167,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+      "task": "BB-012-unknown-repo-leverage-task",
+      "agent": "opencode",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 52.259,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-011-greenfield-mini-product",
+      "task": "BB-011-greenfield-mini-product",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 71.199,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+      "task": "BB-012-unknown-repo-leverage-task",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 64.967,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-011-greenfield-mini-product",
+      "task": "BB-011-greenfield-mini-product",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 101.535,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+      "task": "BB-012-unknown-repo-leverage-task",
+      "agent": "claude-code",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 43.71,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-010-docx-extraction-quality-fix",
+      "task": "BB-010-docx-extraction-quality-fix",
+      "agent": "mimo",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 336.866,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+      "task": "BB-012-unknown-repo-leverage-task",
+      "agent": "codex-cli",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 90.124,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+      "task": "BB-012-unknown-repo-leverage-task",
+      "agent": "agy",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 102.463,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    },
+    {
+      "runId": "2026-06-22-bb-012-unknown-repo-leverage-task",
+      "task": "BB-012-unknown-repo-leverage-task",
+      "agent": "pi",
+      "agentExit": 0,
+      "agentTimedOut": false,
+      "wall": 86.329,
+      "verifyExit": 0,
+      "verdict": "PASS"
+    }
+  ]
+}
