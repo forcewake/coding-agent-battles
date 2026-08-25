@@ -2,6 +2,8 @@
 
 Public logbook for honest head-to-head comparisons of coding-agent **scaffold + model** configurations.
 
+Want to see the winning lane run by a controller in production? The patterns live in [hermes-conductor](https://github.com/forcewake/hermes-conductor).
+
 ## Current corpus
 
 - Live dashboard: <https://forcewake.github.io/coding-agent-battles/>
